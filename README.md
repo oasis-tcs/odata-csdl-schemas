@@ -26,12 +26,16 @@
 
 <div>
 <h3>Further Description of this Repository</h3>
-
-<p>[Any narrative content may be provided here by the TC, for example, if the Members wish to provide an extended statement of purpose.]</p>
+<p>This repository contains JSON schemas for validating CSDL JSON documents and XML schemas for validating CSDL XML documents:</p>
 </div>
 
-<div>
+* [csdl.schema.json](schemas/csdl.schema.json) - for CSDL JSON documents
+* [edmx.xsd](schemas/edmx.xsd) - root schema for CSDL XML documents
+* [edm.xsd](schemas/edm.xsd) - sub-schema for CSDL XML documents
 
+
+
+<div>
 <h3>Contact</h3>
 <p>Please send questions or comments about <a href="https://www.oasis-open.org/resources/tcadmin/github-repositories-for-oasis-tc-members-chartered-work">OASIS TC GitHub repositories</a> to <a href="mailto:robin@oasis-open.org">Robin Cover</a> and <a href="mailto:chet.ensign@oasis-open.org">Chet Ensign</a>.  For questions about content in this repository, please contact the TC Chair or Co-Chairs as listed on the the OData TC's <a href="https://www.oasis-open.org/committees/odata/">home page</a>.</p>
 </div>
