@@ -820,6 +820,9 @@
                 },
                 "@UI.FloatWidth": 3.14,
                 "@UI.FloatWidth#element": 3.14,
+                "@UI.FloatWidth#INF": {
+                    "$Float": "INF"
+                },
                 "@UI.Id": {
                     "$Guid": "21EC2020-3AEA-1069-A2DD-08002B30309D"
                 },
@@ -1110,7 +1113,7 @@
                         {
                             "$Path": "Available/Quantity"
                         },
-                        "\n            ",
+                        " ",
                         {
                             "$Path": "Available/Unit"
                         },

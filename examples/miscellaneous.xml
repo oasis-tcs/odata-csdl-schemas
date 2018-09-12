@@ -574,6 +574,9 @@
         <Annotation Term="org.example.display.FloatWidth" Qualifier="element">
           <Float>3.14</Float>
         </Annotation>
+        <Annotation Term="org.example.display.FloatWidth" Qualifier="INF">
+          <Float>INF</Float>
+        </Annotation>
 
         <!-- Example 53 -->
         <Annotation Term="org.example.display.Id" Guid="21EC2020-3AEA-1069-A2DD-08002B30309D" />
@@ -772,8 +775,7 @@
             <Path>ProductName</Path>
             <String> (</String>
             <Path>Available/Quantity</Path>
-            <String>
-            </String>
+            <String> </String>
             <Path>Available/Unit</Path>
             <String> available)</String>
           </Apply>
