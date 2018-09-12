@@ -737,7 +737,16 @@
             "self.MyAction": {
                 "@self.Dummy": true
             },
+            "self.MyAction(self.MyBindingType)": {
+                "@self.Dummy": true
+            },
             "self.MyFunction": {
+                "@self.Dummy": true
+            },
+            "self.MyFunction(self.MyBindingParamType,NonBindingParamName1)": {
+                "@self.Dummy": true
+            },
+            "self.MyFunction(NonBindingParamName1,NonBindingParamName2)": {
                 "@self.Dummy": true
             },
             "self.MyFunction/MyParameter": {

@@ -479,7 +479,16 @@
       <Annotations Target="self.MyAction">
         <Annotation Term="self.Dummy" />
       </Annotations>
+      <Annotations Target="org.example.MyAction(org.example.MyBindingType)">
+        <Annotation Term="self.Dummy" />
+      </Annotations>
       <Annotations Target="self.MyFunction">
+        <Annotation Term="self.Dummy" />
+      </Annotations>
+      <Annotations Target="org.example.MyFunction(org.example.MyBindingParamType,NonBindingParamName1)">
+        <Annotation Term="self.Dummy" />
+      </Annotations>
+      <Annotations Target="self.MyFunction(NonBindingParamName1,NonBindingParamName2)">
         <Annotation Term="self.Dummy" />
       </Annotations>
       <Annotations Target="self.MyFunction/MyParameter">
