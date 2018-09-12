@@ -224,7 +224,7 @@
     <xs:sequence>
       <xs:element ref="edm:Annotation" minOccurs="1" maxOccurs="unbounded" />
     </xs:sequence>
-    <xs:attribute name="Target" type="edm:TPath" use="required" />
+    <xs:attribute name="Target" type="edm:TTarget" use="required" />
     <xs:attribute name="Qualifier" type="edm:TSimpleIdentifier" use="optional" />
   </xs:complexType>
   <xs:element name="Annotation">
@@ -623,6 +623,14 @@
         the '.' for namespace qualification inside the segments. -->
       <xs:pattern
         value="/?@?[\p{L}\p{Nl}_][\p{L}\p{Nl}\p{Nd}\p{Mn}\p{Mc}\p{Pc}\p{Cf}]{0,}(([\./#@]|/@)[\p{L}\p{Nl}_][\p{L}\p{Nl}\p{Nd}\p{Mn}\p{Mc}\p{Pc}\p{Cf}]{0,}){0,}(/$count)?" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TTarget">
+    <xs:restriction base="xs:string">
+      <!-- The below pattern represents the allowed identifiers in the ECMAScript specification plus the '.' for namespace qualification,
+      the '/' for path segment separation, and parentheses and comma for overload targeting -->
+      <xs:pattern
+        value="[\p{L}\p{Nl}_][\p{L}\p{Nl}\p{Nd}\p{Mn}\p{Mc}\p{Pc}\p{Cf}]{0,}([\./\(,][\p{L}\p{Nl}_][\p{L}\p{Nl}\p{Nd}\p{Mn}\p{Mc}\p{Pc}\p{Cf}]{0,}){0,}\)?" />
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name="TClientFunction">

@@ -1,0 +1,2231 @@
+{
+    "$Version": "4.01",
+    "$EntityContainer": "org.example.DemoService",
+    "$Reference": {
+        "http://tinyurl.com/Org-OData-Measures-V1": {
+            "@Some.Term": true,
+            "$Include": [
+                {
+                    "$Alias": "Measures",
+                    "$Namespace": "Org.OData.Measures.V1"
+                }
+            ]
+        },
+        "http://docs.oasis-open.org/odata/odata/v4.0/errata02/os/complete/vocabularies/Org.OData.Validation.V1.xml": {
+            "$Include": [
+                {
+                    "$Alias": "Validation",
+                    "$Namespace": "Org.OData.Validation.V1"
+                }
+            ]
+        },
+        "http://somewhere/Vocabulary/V1": {
+            "$IncludeAnnotations": [
+                {
+                    "$TermNamespace": "Name.Space",
+                    "$TargetNamespace": "Target.Space"
+                },
+                {
+                    "$TermNamespace": "Name.Space",
+                    "$TargetNamespace": "Target.Space",
+                    "$Qualifier": "SomeName"
+                },
+                {
+                    "$TermNamespace": "Name.Space",
+                    "$Qualifier": "SomeName"
+                },
+                {
+                    "$TermNamespace": "Name.Space"
+                }
+            ]
+        },
+        "/dev/null": {
+            "$Include": [
+                {
+                    "$Namespace": "Dummy.Namespace1",
+                    "$Alias": "Some"
+                },
+                {
+                    "$Namespace": "Dummy.Namespace2",
+                    "$Alias": "custom"
+                },
+                {
+                    "$Namespace": "Dummy.Namespace3",
+                    "$Alias": "A"
+                },
+                {
+                    "$Namespace": "Dummy.Namespace4",
+                    "$Alias": "An"
+                },
+                {
+                    "$Namespace": "Dummy.Namespace5",
+                    "$Alias": "Is"
+                },
+                {
+                    "$Namespace": "Dummy.Namespace6",
+                    "$Alias": "SomeModel"
+                },
+                {
+                    "$Namespace": "Dummy.Namespace7",
+                    "$Alias": "SearchVocabulary"
+                },
+                {
+                    "$Namespace": "Org.OData.Communication.V1",
+                    "$Alias": "Communication"
+                },
+                {
+                    "$Namespace": "org.example.seo",
+                    "$Alias": "seo"
+                },
+                {
+                    "$Namespace": "org.example.person",
+                    "$Alias": "person"
+                }
+            ]
+        },
+        "http://vocabs.odata.org/capabilities/v1": {
+            "$Include": [
+                {
+                    "$Namespace": "Org.OData.Capabilities.V1",
+                    "$Alias": "Capabilities"
+                }
+            ]
+        },
+        "http://vocabs.odata.org/core/v1": {
+            "$Include": [
+                {
+                    "$Namespace": "Org.OData.Core.V1",
+                    "$Alias": "Core",
+                    "@Core.DefaultNamespace": true
+                }
+            ]
+        },
+        "http://example.org/display/v1": {
+            "$Include": [
+                {
+                    "$Alias": "UI",
+                    "$Namespace": "org.example.display"
+                },
+                {
+                    "$Alias": "task",
+                    "$Namespace": "org.example.task"
+                },
+                {
+                    "$Alias": "vCard",
+                    "$Namespace": "org.example.vCard"
+                },
+                {
+                    "$Namespace": "anotherOne"
+                }
+            ]
+        },
+        "http://odata.org/ann/b": {
+            "$IncludeAnnotations": [
+                {
+                    "$TermNamespace": "org.example.validation"
+                },
+                {
+                    "$TermNamespace": "org.example.display",
+                    "$Qualifier": "Tablet"
+                },
+                {
+                    "$TermNamespace": "org.example.hcm",
+                    "$TargetNamespace": "com.example.Sales"
+                },
+                {
+                    "$TermNamespace": "org.example.hcm",
+                    "$Qualifier": "Tablet",
+                    "$TargetNamespace": "com.example.Person"
+                }
+            ]
+        }
+    },
+    "First": {
+
+    },
+    "org.example": {
+        "$Alias": "self",
+        "@Core.Description": "Example schema",
+        "Employee": {
+            "$Kind": "EntityType",
+            "$Key": [
+                "ID"
+            ],
+            "ID": {
+
+            },
+            "FirstName": {
+
+            },
+            "LastName": {
+
+            },
+            "Manager": {
+                "$Kind": "NavigationProperty",
+                "$Nullable": true,
+                "$Type": "self.Manager"
+            }
+        },
+        "Manager": {
+            "$Kind": "EntityType",
+            "$BaseType": "self.Employee",
+            "AnnualBudget": {
+                "$Nullable": true,
+                "$Type": "Edm.Decimal",
+                "$Scale": 0
+            },
+            "Employees": {
+                "$Kind": "NavigationProperty",
+                "$Collection": true,
+                "$Type": "self.Employee"
+            }
+        },
+        "Nothing": {
+            "$Kind": "EntityType",
+            "$Abstract": true
+        },
+        "NotMuch": {
+            "$Kind": "EntityType",
+            "$OpenType": true,
+            "$HasStream": true
+        },
+        "Category10": {
+            "$Kind": "EntityType",
+            "$Key": [
+                "ID"
+            ],
+            "ID": {
+                "$Type": "Edm.Int32"
+            },
+            "Name": {
+                "$Nullable": true,
+                "@Core.IsLanguageDependent": true
+            }
+        },
+        "Category11": {
+            "$Kind": "EntityType",
+            "$Key": [
+                {
+                    "EntityInfoID": "Info/ID"
+                }
+            ],
+            "Info": {
+                "$Type": "self.EntityInfo"
+            },
+            "Name": {
+                "$Nullable": true
+            }
+        },
+        "EntityInfo": {
+            "$Kind": "ComplexType",
+            "ID": {
+                "$Type": "Edm.Int32"
+            },
+            "Created": {
+                "$Nullable": true,
+                "$Type": "Edm.DateTimeOffset",
+                "$Precision": 0
+            }
+        },
+        "OrderLine": {
+            "$Kind": "EntityType",
+            "$Key": [
+                "OrderID",
+                "LineNumber"
+            ],
+            "OrderID": {
+                "$Type": "Edm.Int32"
+            },
+            "LineNumber": {
+                "$Type": "Edm.Int32"
+            }
+        },
+        "Measurement": {
+            "$Kind": "ComplexType",
+            "Dimension": {
+                "$MaxLength": 50,
+                "$DefaultValue": "Unspecified"
+            },
+            "Length": {
+                "$Type": "Edm.Decimal",
+                "$Precision": 18,
+                "$Scale": 2
+            }
+        },
+        "Example16to21": {
+            "$Kind": "ComplexType",
+            "Units": {
+                "$Collection": true
+            },
+            "SuggestedTimes": {
+                "$Collection": true,
+                "$Type": "Edm.DateTimeOffset",
+                "$Precision": 6
+            },
+            "Amount32": {
+                "$Nullable": true,
+                "$Type": "Edm.Decimal",
+                "$Precision": 3,
+                "$Scale": 2
+            },
+            "Amount22": {
+                "$Nullable": true,
+                "$Type": "Edm.Decimal",
+                "$Precision": 2,
+                "$Scale": 2
+            },
+            "Amount3v": {
+                "$Nullable": true,
+                "$Type": "Edm.Decimal",
+                "$Precision": 3
+            },
+            "Amount7f": {
+                "$Nullable": true,
+                "$Type": "Edm.Decimal",
+                "$Precision": 7,
+                "$Scale": "floating"
+            }
+        },
+        "Product": {
+            "$Kind": "EntityType",
+            "$Key": [
+                "ID"
+            ],
+            "ID": {
+
+            },
+            "CategoryID": {
+
+            },
+            "CategoryKind": {
+                "$Nullable": true
+            },
+            "Category": {
+                "$Kind": "NavigationProperty",
+                "$Type": "self.Category",
+                "$Partner": "Products",
+                "$ReferentialConstraint": {
+                    "CategoryID": "ID",
+                    "CategoryKind": "Kind",
+                    "CategoryKind@Core.Description": "Referential Constraint to non-key property"
+                }
+            },
+            "Supplier": {
+                "$Kind": "NavigationProperty",
+                "$Nullable": true,
+                "$Type": "self.Supplier"
+            }
+        },
+        "Supplier": {
+            "$Kind": "EntityType",
+            "$Key": [
+                "ID"
+            ],
+            "ID": {
+
+            }
+        },
+        "Customer": {
+            "$Kind": "EntityType",
+            "$Key": [
+                "ID"
+            ],
+            "ID": {
+                "$Unicode": false
+            }
+        },
+        "Order": {
+            "$Kind": "EntityType",
+            "$Key": [
+                "ID"
+            ],
+            "ID": {
+                "$Type": "Edm.Int64"
+            }
+        },
+        "Category": {
+            "$Kind": "EntityType",
+            "$Key": [
+                "ID"
+            ],
+            "ID": {
+
+            },
+            "Kind": {
+                "$Nullable": true
+            },
+            "Products": {
+                "$Kind": "NavigationProperty",
+                "$Collection": true,
+                "$Type": "self.Product",
+                "$Partner": "Category",
+                "$OnDelete": "Cascade",
+                "$OnDelete@Core.Description": "Delete all products in this category"
+            }
+        },
+        "Dimensions": {
+            "$Kind": "ComplexType",
+            "Height": {
+                "$Type": "Edm.Decimal",
+                "$Scale": 0
+            },
+            "Weight": {
+                "$Type": "Edm.Decimal",
+                "$Scale": 0
+            },
+            "Length": {
+                "$Type": "Edm.Decimal",
+                "$Scale": 0
+            }
+        },
+        "Product25": {
+            "$Kind": "EntityType",
+            "$Key": [
+                "ID"
+            ],
+            "ID": {
+
+            },
+            "ProductDimensions": {
+                "$Nullable": true,
+                "$Type": "self.Dimensions"
+            },
+            "ShippingDimensions": {
+                "$Nullable": true,
+                "$Type": "self.Dimensions"
+            }
+        },
+        "ShipmentBox": {
+            "$Kind": "EntityType",
+            "$Key": [
+                "ID"
+            ],
+            "ID": {
+
+            },
+            "Dimensions": {
+                "$Nullable": true,
+                "$Type": "self.Dimensions"
+            }
+        },
+        "NothingC": {
+            "$Kind": "ComplexType",
+            "$Abstract": true
+        },
+        "NotMuchC": {
+            "$Kind": "ComplexType",
+            "$OpenType": true,
+            "$BaseType": "self.NothingC"
+        },
+        "FileAccess": {
+            "$Kind": "EnumType",
+            "$UnderlyingType": "Edm.Int32",
+            "$IsFlags": true,
+            "Read": 1,
+            "Write": 2,
+            "Create": 4,
+            "Delete": 8
+        },
+        "Pattern": {
+            "$Kind": "EnumType",
+            "$UnderlyingType": "Edm.Int32",
+            "$IsFlags": true,
+            "Plain": 0,
+            "Red": 1,
+            "Blue": 2,
+            "Yellow": 4,
+            "Solid": 8,
+            "Striped": 16,
+            "SolidRed": 9,
+            "SolidBlue": 10,
+            "SolidYellow": 12,
+            "RedBlueStriped": 19,
+            "BlueRedStriped": 19,
+            "RedYellowStriped": 21,
+            "BlueYellowStriped": 22
+        },
+        "ShippingMethod": {
+            "$Kind": "EnumType",
+            "FirstClass": 0,
+            "FirstClass@Core.Description": "Shipped with highest priority",
+            "TwoDay": 1,
+            "TwoDay@Core.Description": "Shipped within two days",
+            "Overnight": 2,
+            "Overnight@Core.Description": "Shipped overnight",
+            "@Core.Description": "Method of shipping"
+        },
+        "Length": {
+            "$Kind": "TypeDefinition",
+            "$UnderlyingType": "Edm.Int32",
+            "@Measures.Unit": "Centimeters"
+        },
+        "Weight": {
+            "$Kind": "TypeDefinition",
+            "$UnderlyingType": "Edm.Int32",
+            "@Measures.Unit": "Kilograms"
+        },
+        "Size": {
+            "$Kind": "ComplexType",
+            "Height": {
+                "$Nullable": true,
+                "$Type": "self.Length"
+            },
+            "Weight": {
+                "$Nullable": true,
+                "$Type": "self.Weight"
+            }
+        },
+        "Approval": [
+            {
+                "$Kind": "Action",
+                "$IsBound": true,
+                "$Parameter": [
+                    {
+                        "$Name": "binding",
+                        "$Nullable": true,
+                        "$Type": "self.Order"
+                    }
+                ]
+            }
+        ],
+        "Logout": [
+            {
+                "$Kind": "Action"
+            }
+        ],
+        "ProductsByRating": [
+            {
+                "$Kind": "Function",
+                "$Parameter": [
+                    {
+                        "$Name": "Rating",
+                        "$Type": "Edm.Decimal",
+                        "$Precision": 4,
+                        "$Scale": 0
+                    }
+                ],
+                "$ReturnType": {
+                    "$Collection": true,
+                    "$Type": "self.Product"
+                }
+            }
+        ],
+        "TopSellingProducts": [
+            {
+                "$Kind": "Function",
+                "$Parameter": [
+                    {
+                        "$Name": "Year",
+                        "$Nullable": true,
+                        "$Type": "Edm.Decimal",
+                        "$Precision": 4,
+                        "$Scale": 0
+                    }
+                ],
+                "$ReturnType": {
+                    "$Collection": true,
+                    "$Type": "self.Product"
+                }
+            },
+            {
+                "$Kind": "Function",
+                "$ReturnType": {
+                    "$Collection": true,
+                    "$Type": "self.Product"
+                }
+            }
+        ],
+        "DemoService": {
+            "$Kind": "EntityContainer",
+            "StandardCustomers": {
+                "$Kind": "EntitySet",
+                "$Type": "self.Customer",
+                "$NavigationPropertyBinding": {
+                    "Orders": "Orders"
+                }
+            },
+            "PreferredCustomers": {
+                "$Kind": "EntitySet",
+                "$Type": "self.Customer",
+                "$NavigationPropertyBinding": {
+                    "Orders": "Orders"
+                }
+            },
+            "Orders": {
+                "$Kind": "EntitySet",
+                "$Type": "self.Order"
+            },
+            "Products": {
+                "$Kind": "EntitySet",
+                "$Type": "self.Product",
+                "$NavigationPropertyBinding": {
+                    "Category": "Categories",
+                    "Supplier": "Suppliers"
+                },
+                "@UI.DisplayName": "Product Catalog"
+            },
+            "Categories": {
+                "$Kind": "EntitySet",
+                "$Type": "self.Category",
+                "$NavigationPropertyBinding": {
+                    "Products": "Products"
+                }
+            },
+            "Suppliers": {
+                "$Kind": "EntitySet",
+                "$Type": "self.Supplier",
+                "$NavigationPropertyBinding": {
+                    "Products": "Products"
+                },
+                "@UI.DisplayName": "Supplier Directory"
+            },
+            "Categories34": {
+                "$Kind": "EntitySet",
+                "$Type": "self.Category",
+                "$NavigationPropertyBinding": {
+                    "Products": "SomeSet"
+                }
+            },
+            "Categories35": {
+                "$Kind": "EntitySet",
+                "$Type": "self.Category",
+                "$NavigationPropertyBinding": {
+                    "Products": "SomeModel.SomeContainer/SomeSet"
+                }
+            },
+            "Categories37": {
+                "$Kind": "EntitySet",
+                "$Type": "self.Category",
+                "$NavigationPropertyBinding": {
+                    "Products/Supplier": "Suppliers"
+                }
+            },
+            "MainSupplier": {
+                "$Kind": "Singleton",
+                "$Type": "self.Supplier"
+            },
+            "LeaveRequestApproval": {
+                "$Kind": "ActionImport",
+                "$Action": "self.Approval"
+            },
+            "ProductsByRating": {
+                "$Kind": "FunctionImport",
+                "$Function": "self.ProductsByRating",
+                "$EntitySet": "Products"
+            }
+        },
+        "Product2": {
+            "$Kind": "EntityType",
+            "$Key": [
+                "ID"
+            ],
+            "ID": {
+                "$Type": "Edm.Int32"
+            },
+            "Name": {
+                "$Nullable": true
+            },
+            "Description": {
+                "$Nullable": true
+            },
+            "@UI.DisplayName": {
+                "$Path": "Name"
+            },
+            "@SearchVocabulary.SearchResult": {
+                "Title": {
+                    "$Path": "Name"
+                },
+                "Abstract": {
+                    "$Path": "Description"
+                },
+                "Url": {
+                    "$Apply": [
+                        "Products(",
+                        {
+                            "$Path": "ID"
+                        },
+                        ")"
+                    ],
+                    "$Function": "odata.concat"
+                }
+            }
+        },
+        "IsURL": {
+            "$Kind": "Term",
+            "$Type": "Core.Tag",
+            "$DefaultValue": true,
+            "$AppliesTo": [
+                "Property"
+            ],
+            "@Core.Description": "Properties and terms annotated with this term MUST contain a valid URL",
+            "@Core.RequiresType": "Edm.String"
+        },
+        "Example40": {
+            "$Kind": "ComplexType",
+            "AmountInReportingCurrency": {
+                "$Nullable": true,
+                "$Type": "Edm.Decimal",
+                "$Scale": 0,
+                "@Measures.ISOCurrency": "USD",
+                "@Measures.ISOCurrency@Core.Description": "The parent company’s currency"
+            },
+            "AmountInTransactionCurrency": {
+                "$Nullable": true,
+                "$Type": "Edm.Decimal",
+                "$Scale": 0,
+                "@Measures.ISOCurrency": {
+                    "$Path": "Currency"
+                }
+            },
+            "Currency": {
+                "$Nullable": true,
+                "$MaxLength": 3
+            }
+        },
+        "$Annotations": {
+            "self.Person": {
+                "@Core.Description#Tablet": "Dummy",
+                "@UI.DisplayName#Tablet": {
+                    "$Path": "FirstName"
+                }
+            },
+            "self.MyEntityType": {
+                "@self.Dummy": true
+            },
+            "self.MyEntityType/MyProperty": {
+                "@self.Dummy": true
+            },
+            "self.MyEntityType/MyNavigationProperty": {
+                "@self.Dummy": true
+            },
+            "self.MyComplexType": {
+                "@self.Dummy": true
+            },
+            "self.MyComplexType/MyProperty": {
+                "@self.Dummy": true
+            },
+            "self.MyComplexType/MyNavigationProperty": {
+                "@self.Dummy": true
+            },
+            "self.MyEnumType": {
+                "@self.Dummy": true
+            },
+            "self.MyEnumType/MyMember": {
+                "@self.Dummy": true
+            },
+            "self.MyTypeDefinition": {
+                "@self.Dummy": true
+            },
+            "self.MyTerm": {
+                "@self.Dummy": true
+            },
+            "self.MyEntityContainer": {
+                "@self.Dummy": true
+            },
+            "self.MyEntityContainer/MyEntitySet": {
+                "@self.Dummy": true
+            },
+            "self.MyEntityContainer/MySingleton": {
+                "@self.Dummy": true
+            },
+            "self.MyEntityContainer/MyActionImport": {
+                "@self.Dummy": true
+            },
+            "self.MyEntityContainer/MyFunctionImport": {
+                "@self.Dummy": true
+            },
+            "self.MyAction": {
+                "@self.Dummy": true
+            },
+            "self.MyFunction": {
+                "@self.Dummy": true
+            },
+            "self.MyFunction/MyParameter": {
+                "@self.Dummy": true
+            },
+            "self.MyEntityContainer/MyEntitySet/MyProperty": {
+                "@self.Dummy": true
+            },
+            "self.MyEntityContainer/MyEntitySet/MyNavigationProperty": {
+                "@self.Dummy": true
+            },
+            "self.MyEntityContainer/MyEntitySet/self.MyEntityType/MyProperty": {
+                "@self.Dummy": true
+            },
+            "self.MyEntityContainer/MyEntitySet/self.MyEntityType/MyNavProperty": {
+                "@self.Dummy": true
+            },
+            "self.MyEntityContainer/MyEntitySet/MyComplexProperty/MyProperty": {
+                "@self.Dummy": true
+            },
+            "self.MyEntityContainer/MyEntitySet/MyComplexProperty/MyNavigationProperty": {
+                "@self.Dummy": true
+            },
+            "self.MyEntityContainer/MySingleton/MyComplexProperty/MyNavigationProperty": {
+                "@self.Dummy": true
+            },
+            "self.ConstantExpressions": {
+                "@UI.Thumbnail": {
+                    "$Binary": "T0RhdGE"
+                },
+                "@UI.Thumbnail#element": {
+                    "$Binary": "T0RhdGE"
+                },
+                "@UI.ReadOnly": true,
+                "@UI.ReadOnly#element": true,
+                "@vCard.birthDay": {
+                    "$Date": "2000-01-01"
+                },
+                "@vCard.birthDay#element": {
+                    "$Date": "2000-01-01"
+                },
+                "@UI.LastUpdated": {
+                    "$DateTimeOffset": "2000-01-01T16:00:00.000Z"
+                },
+                "@UI.LastUpdated#element": {
+                    "$DateTimeOffset": "2000-01-01T16:00:00.000-09:00"
+                },
+                "@UI.Width": {
+                    "$Decimal": "3.14"
+                },
+                "@UI.Width#element": {
+                    "$Decimal": "3.14"
+                },
+                "@task.duration": {
+                    "$Duration": "P7D"
+                },
+                "@task.duration#element": {
+                    "$Duration": "P11DT23H59M59.999999999999S"
+                },
+                "@self.HasPattern": {
+                    "$EnumMember": "Red"
+                },
+                "@self.HasPattern#element": {
+                    "$EnumMember": "Red"
+                },
+                "@self.HasPattern#list": {
+                    "$EnumMember": "Red,Striped"
+                },
+                "@self.HasPattern#listelement": {
+                    "$EnumMember": "Red,Striped"
+                },
+                "@UI.FloatWidth": 3.14,
+                "@UI.FloatWidth#element": 3.14,
+                "@UI.Id": {
+                    "$Guid": "21EC2020-3AEA-1069-A2DD-08002B30309D"
+                },
+                "@UI.Id#element": {
+                    "$Guid": "21EC2020-3AEA-1069-A2DD-08002B30309D"
+                },
+                "@UI.IntWidth": {
+                    "$Int": "42"
+                },
+                "@UI.IntWidth#element": {
+                    "$Int": "42"
+                },
+                "@UI.DisplayName": "Product Catalog",
+                "@UI.DisplayName#element": "Product Catalog",
+                "@UI.EndTime": {
+                    "$TimeOfDay": "21:45:00"
+                },
+                "@UI.EndTime#element": {
+                    "$TimeOfDay": "21:45:00"
+                }
+            },
+            "self.DynamicExpression": {
+                "@self.Dummy": [
+                    {
+                        "$PropertyPath": "/self.MyEntityContainer/MyEntitySet"
+                    },
+                    {
+                        "$PropertyPath": "/self.MyEntityContainer/MyEntitySet/MyProperty"
+                    },
+                    {
+                        "$PropertyPath": "Address/City"
+                    },
+                    {
+                        "$PropertyPath": "DirectReports/self.Manager/DirectReports"
+                    },
+                    {
+                        "$PropertyPath": "Address/City/@Capabilities.SortRestrictions/Sortable"
+                    },
+                    {
+                        "$PropertyPath": "Orders/Items/Product"
+                    },
+                    {
+                        "$PropertyPath": "Addresses/Street"
+                    },
+                    {
+                        "$PropertyPath": "Addresses/$count"
+                    },
+                    {
+                        "$PropertyPath": "Orders/Items@Capabilities.InsertRestrictions/Insertable"
+                    },
+                    {
+                        "$Path": "/self.container/SettingsCollection('FeatureXxx')/IsAvailable"
+                    },
+                    {
+                        "$Path": "/self.container/Products(ID=ProductID)/Name"
+                    }
+                ],
+                "@UI.ReferenceFacet": {
+                    "$AnnotationPath": "Product/Supplier/@UI.LineItem"
+                },
+                "@UI.CollectionFacet#Contacts": [
+                    {
+                        "$AnnotationPath": "Supplier/@Communication.Contact"
+                    },
+                    {
+                        "$AnnotationPath": "Customer/@Communication.Contact"
+                    }
+                ],
+                "@self.MyFavoriteModelElement": {
+                    "$ModelElementPath": "/self.someAction"
+                },
+                "@self.MyFavoriteModelElement#element": {
+                    "$ModelElementPath": "/self.someAction"
+                },
+                "@UI.HyperLink": {
+                    "$NavigationPropertyPath": "Supplier"
+                },
+                "@Capabilities.UpdateRestrictions#element": {
+                    "NonUpdatableNavigationProperties": [
+                        {
+                            "$NavigationPropertyPath": "Supplier"
+                        },
+                        {
+                            "$NavigationPropertyPath": "Category"
+                        }
+                    ]
+                },
+                "@UI.RefreshOnChangeOf": {
+                    "$PropertyPath": "ChangedAt"
+                },
+                "@Capabilities.UpdateRestrictions#element2": {
+                    "NonUpdatableProperties": [
+                        {
+                            "$PropertyPath": "CreatedAt"
+                        },
+                        {
+                            "$PropertyPath": "ChangedAt"
+                        }
+                    ]
+                },
+                "@UI.DisplayName": {
+                    "$Path": "FirstName"
+                },
+                "@UI.DisplayName#element": {
+                    "$Path": "@vCard.Address#work/FullName"
+                },
+                "@A.ComparisonAndLogicalOperators": [
+                    {
+                        "$And": [
+                            {
+                                "$Path": "IsMale"
+                            },
+                            {
+                                "$Path": "IsMarried"
+                            }
+                        ]
+                    },
+                    {
+                        "$Or": [
+                            {
+                                "$Path": "IsMale"
+                            },
+                            {
+                                "$Path": "IsMarried"
+                            }
+                        ],
+                        "@A.B": true
+                    },
+                    {
+                        "$Not": {
+                            "$Path": "IsMale"
+                        },
+                        "@A.B": true
+                    },
+                    {
+                        "$Eq": [
+                            null,
+                            {
+                                "$Path": "IsMale"
+                            }
+                        ],
+                        "@A.B": true
+                    },
+                    {
+                        "$Ne": [
+                            null,
+                            {
+                                "$Path": "IsMale"
+                            }
+                        ]
+                    },
+                    {
+                        "$Gt": [
+                            {
+                                "$Path": "Price"
+                            },
+                            {
+                                "$Int": "20"
+                            }
+                        ]
+                    },
+                    {
+                        "$Ge": [
+                            {
+                                "$Path": "Price"
+                            },
+                            {
+                                "$Int": "10"
+                            }
+                        ]
+                    },
+                    {
+                        "$Lt": [
+                            {
+                                "$Path": "Price"
+                            },
+                            {
+                                "$Int": "20"
+                            }
+                        ]
+                    },
+                    {
+                        "$Le": [
+                            {
+                                "$Path": "Price"
+                            },
+                            {
+                                "$Int": "100"
+                            }
+                        ]
+                    },
+                    {
+                        "$Has": [
+                            {
+                                "$Path": "Fabric"
+                            },
+                            {
+                                "$EnumMember": "Red"
+                            }
+                        ]
+                    },
+                    {
+                        "$In": [
+                            {
+                                "$Path": "Size"
+                            },
+                            [
+                                "XS",
+                                "S"
+                            ]
+                        ]
+                    }
+                ],
+                "@A.ArithmeticOperators": [
+                    {
+                        "$Add": [
+                            {
+                                "$Path": "StartDate"
+                            },
+                            {
+                                "$Path": "Duration"
+                            }
+                        ]
+                    },
+                    {
+                        "$Sub": [
+                            {
+                                "$Path": "Revenue"
+                            },
+                            {
+                                "$Path": "Cost"
+                            }
+                        ]
+                    },
+                    {
+                        "$Neg": {
+                            "$Path": "Height"
+                        }
+                    },
+                    {
+                        "$Mul": [
+                            {
+                                "$Path": "NetPrice"
+                            },
+                            {
+                                "$Path": "TaxRate"
+                            }
+                        ]
+                    },
+                    {
+                        "$Div": [
+                            {
+                                "$Path": "Quantity"
+                            },
+                            {
+                                "$Path": "QuantityPerParcel"
+                            }
+                        ]
+                    },
+                    {
+                        "$DivBy": [
+                            {
+                                "$Path": "Quantity"
+                            },
+                            {
+                                "$Path": "QuantityPerParcel"
+                            }
+                        ]
+                    },
+                    {
+                        "$Mod": [
+                            {
+                                "$Path": "Quantity"
+                            },
+                            {
+                                "$Path": "QuantityPerParcel"
+                            }
+                        ]
+                    }
+                ],
+                "@UI.DisplayName#apply": {
+                    "$Apply": [
+                        "Product: ",
+                        {
+                            "$Path": "ProductName"
+                        },
+                        " (",
+                        {
+                            "$Path": "Available/Quantity"
+                        },
+                        "\n            ",
+                        {
+                            "$Path": "Available/Unit"
+                        },
+                        " available)"
+                    ],
+                    "$Function": "odata.concat"
+                },
+                "@Some.Term#Example71": {
+                    "$Apply": [
+                        "http://host/someAPI/Actors/{actorName}/CV",
+                        {
+                            "$LabeledElement": {
+                                "$Path": "Actor/Name"
+                            },
+                            "$Name": "actorName"
+                        }
+                    ],
+                    "$Function": "odata.fillUriTemplate"
+                },
+                "@Some.Term#Example72": {
+                    "$Apply": [
+                        {
+                            "$Path": "FirstName"
+                        },
+                        "[^b-d]"
+                    ],
+                    "$Function": "odata.matchesPattern"
+                },
+                "@Some.Term#Example73": {
+                    "$Apply": [
+                        "http://host/service/Genres({genreName})",
+                        {
+                            "$LabeledElement": {
+                                "$Apply": [
+                                    {
+                                        "$Path": "NameOfMovieGenre"
+                                    }
+                                ],
+                                "$Function": "odata.uriEncode"
+                            },
+                            "$Name": "genreName"
+                        }
+                    ],
+                    "$Function": "odata.fillUriTemplate"
+                },
+                "@UI.Threshold": {
+                    "$Cast": {
+                        "$Path": "Average"
+                    },
+                    "$Nullable": true,
+                    "$Type": "Edm.Decimal",
+                    "$Scale": 0
+                },
+                "@seo.SeoTerms": [
+                    "Product",
+                    "Supplier",
+                    "Customer"
+                ],
+                "@person.Gender": {
+                    "$If": [
+                        {
+                            "$Path": "IsFemale"
+                        },
+                        "Female",
+                        "Male"
+                    ]
+                },
+                "@self.IsPreferredCustomer": {
+                    "$IsOf": {
+                        "$Path": "Customer"
+                    },
+                    "$Nullable": true,
+                    "$Type": "self.PreferredCustomer"
+                },
+                "@UI.DisplayName#LE": {
+                    "$LabeledElement": {
+                        "$Path": "FirstName"
+                    },
+                    "$Name": "CustomerFirstName"
+                },
+                "@UI.DisplayName#LEelement": {
+                    "$LabeledElement": {
+                        "$Path": "FirstName"
+                    },
+                    "$Name": "CustomerFirstName"
+                },
+                "@UI.DisplayName#LEref": {
+                    "$LabeledElementReference": "self.CustomerFirstName"
+                },
+                "@UI.DisplayName#null": null,
+                "@UI.DisplayName#nullWithAnnotation": {
+                    "$Null": null,
+                    "@self.Reason": "Private"
+                },
+                "@person.Employee": {
+                    "@Core.Description": "Annotation on record",
+                    "GivenName": {
+                        "$Path": "FirstName"
+                    },
+                    "GivenName@Core.Description": "Annotation on record member",
+                    "Surname": {
+                        "$Path": "LastName"
+                    },
+                    "Manager": {
+                        "$Path": "DirectSupervisor"
+                    },
+                    "CostCenter": {
+                        "$UrlRef": {
+                            "$Apply": [
+                                "http://host/anotherservice/CostCenters('{ccid}')",
+                                {
+                                    "$LabeledElement": {
+                                        "$Path": "CostCenterID"
+                                    },
+                                    "$Name": "ccid"
+                                }
+                            ],
+                            "$Function": "odata.fillUriTemplate"
+                        }
+                    }
+                },
+                "@person.Supplier": {
+                    "$UrlRef": {
+                        "$Apply": [
+                            "http://host/service/Suppliers({suppID})",
+                            {
+                                "$LabeledElement": {
+                                    "$Apply": [
+                                        {
+                                            "$Path": "SupplierId"
+                                        }
+                                    ],
+                                    "$Function": "odata.uriEncode"
+                                },
+                                "$Name": "suppID"
+                            }
+                        ],
+                        "$Function": "odata.fillUriTemplate"
+                    }
+                },
+                "@Core.LongDescription#element": {
+                    "$UrlRef": "http://host/wiki/HowToUse"
+                },
+                "@Core.LongDescription": {
+                    "$UrlRef": "http://host/wiki/HowToUse"
+                }
+            }
+        }
+    },
+    "Model1": {
+        "$Alias": "M1",
+        "@UI.ReferenceFacet": {
+            "$AnnotationPath": "@UI.LineItem"
+        },
+        "@UI.ReferenceFacet#OnNavPropTarget": {
+            "$AnnotationPath": "Product/Supplier/@UI.LineItem"
+        },
+        "@UI.ReferenceFacet#OnNavProp": {
+            "$AnnotationPath": "Product/Supplier/@UI.LineItem"
+        },
+        "@UI.ReferenceFacet#OnNavPropQualified": {
+            "$AnnotationPath": "Product/Supplier/@UI.LineItem#Tablet"
+        },
+        "@UI.ReferenceFacet#ViaUrl": {
+            "$UrlRef": "http://LineItem"
+        },
+        "@UI.ReferenceFacet#complicated": {
+            "$AnnotationPath": "@X.Supplier#X/Contacts/@Y.ViewVariants"
+        },
+        "@UI.HyperLink": {
+            "$NavigationPropertyPath": "Supplier"
+        },
+        "@Is.Null": {
+            "$Null": null,
+            "@Is.WithinNull": true
+        },
+        "@Is.Null@Is.NextToNull": true,
+        "@UI.SubTitle": {
+            "$Int": "1234"
+        },
+        "@UI.SubTitle@A.Constant": true,
+        "@A.Bool": true,
+        "@A.Bool@A.AnnotatedBool": true,
+        "@A.Decimal": {
+            "$Decimal": "12.34"
+        },
+        "@A.Decimal#inf": {
+            "$Decimal": "INF"
+        },
+        "@A.Decimal#minusInf": {
+            "$Decimal": "-INF"
+        },
+        "@A.Decimal#nan": {
+            "$Decimal": "NaN"
+        },
+        "@A.Float": 1.23456789e4,
+        "@A.Float#inf": {
+            "$Float": "INF"
+        },
+        "@A.Float#minusInf": {
+            "$Float": "-INF"
+        },
+        "@A.Float#nan": {
+            "$Float": "NaN"
+        },
+        "@A.NumericValues#Element": [
+            1.23456789e4,
+            -2E80,
+            {
+                "$Float": "-INF"
+            },
+            {
+                "$Float": "INF"
+            },
+            {
+                "$Float": "NaN"
+            },
+            {
+                "$Decimal": "1.23456789e4"
+            },
+            {
+                "$Decimal": "-2E80"
+            },
+            {
+                "$Decimal": "-INF"
+            },
+            {
+                "$Decimal": "INF"
+            },
+            {
+                "$Decimal": "NaN"
+            }
+        ],
+        "@An.Int": {
+            "$Int": "1234"
+        },
+        "@A.Very_Long_Int": {
+            "$Int": "9007199254740992"
+        },
+        "@A.String": "1.23e4",
+        "@A.String#withAmp": "Fast&Furious",
+        "@A.String#ToBeEscaped": "A/\"good\"\r\nstory\\for\tkids",
+        "@A.Guid": {
+            "$Guid": "86a96539-871b-45cf-b96b-93dbc235105e"
+        },
+        "@A.Guid#Element": {
+            "$Guid": "86a96539-871b-45cf-b96b-93dbc235105e"
+        },
+        "@A.Date": {
+            "$Date": "2013-10-09"
+        },
+        "@Capabilities.UpdateRestrictions": {
+            "Updatable": true,
+            "NonUpdatableNavigationProperties": [
+                {
+                    "$NavigationPropertyPath": "Supplier"
+                },
+                {
+                    "$NavigationPropertyPath": "Category"
+                }
+            ],
+            "NonUpdatableNavigationProperties@Core.Description": "These navigation properties don't allow PATCH"
+        },
+        "@SearchVocabulary.SearchResult": {
+            "Title": {
+                "$Path": "Name"
+            },
+            "Abstract": {
+                "$Path": "Description"
+            },
+            "Url": {
+                "$Apply": [
+                    "Products(",
+                    {
+                        "$Path": "ID"
+                    },
+                    ")"
+                ],
+                "$Function": "odata.concat",
+                "@Is.InApply": true
+            }
+        },
+        "@UI.DisplayName#if": {
+            "$If": [
+                {
+                    "$Path": "IsFemale"
+                },
+                "Female",
+                "Male"
+            ],
+            "@Is.InIf": true
+        },
+        "@UI.CollectionFacet#Contacts": [
+            {
+                "$AnnotationPath": "Supplier/@Communication.Contact"
+            },
+            {
+                "$AnnotationPath": "Customer/@Communication.Contact"
+            }
+        ],
+        "@Some.Thing": {
+            "$And": [
+                {
+                    "$Or": [
+                        {
+                            "$Eq": [
+                                {
+                                    "$Ge": [
+                                        null,
+                                        null
+                                    ],
+                                    "@Is.InGe": true
+                                },
+                                {
+                                    "$Gt": [
+                                        null,
+                                        null
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "$Ne": [
+                                {
+                                    "$Lt": [
+                                        null,
+                                        null
+                                    ]
+                                },
+                                null
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "$Not": {
+                        "$Le": [
+                            {
+                                "$Float": "INF"
+                            },
+                            null
+                        ]
+                    }
+                }
+            ]
+        },
+        "@Is.OneleggedIf": {
+            "$If": [
+                true,
+                {
+                    "$Path": "Then"
+                }
+            ]
+        },
+        "@Is.TwoleggedIf": {
+            "$If": [
+                false,
+                {
+                    "$Path": "Then"
+                },
+                {
+                    "$Path": "Else"
+                }
+            ]
+        },
+        "NullablePrimitiveTypes": {
+            "$Kind": "ComplexType",
+            "NullValue": {
+                "$Nullable": true,
+                "$Type": "Edm.Boolean",
+                "$DefaultValue": null
+            },
+            "TrueValue": {
+                "$Nullable": true,
+                "$Type": "Edm.Boolean",
+                "$DefaultValue": true
+            },
+            "FalseValue": {
+                "$Nullable": true,
+                "$Type": "Edm.Boolean",
+                "$DefaultValue": false
+            },
+            "BinaryValue": {
+                "$Nullable": true,
+                "$Type": "Edm.Binary",
+                "$MaxLength": 31,
+                "$DefaultValue": "T0RhdGE"
+            },
+            "IntegerValue": {
+                "$Nullable": true,
+                "$Type": "Edm.Int32",
+                "$DefaultValue": -128
+            },
+            "DoubleValue": {
+                "$Nullable": true,
+                "$Type": "Edm.Double",
+                "$DefaultValue": 3.1415926535897931
+            },
+            "SingleValue": {
+                "$Nullable": true,
+                "$Type": "Edm.Single"
+            },
+            "DecimalValue": {
+                "$Nullable": true,
+                "$Type": "Edm.Decimal",
+                "$DefaultValue": 34.95
+            },
+            "StringValue": {
+                "$Nullable": true,
+                "$DefaultValue": "Say \"Hello\",\nthen go"
+            },
+            "DateValue": {
+                "$Nullable": true,
+                "$Type": "Edm.Date",
+                "$DefaultValue": "2012-12-03"
+            },
+            "DateTimeOffsetValue": {
+                "$Nullable": true,
+                "$Type": "Edm.DateTimeOffset",
+                "$Precision": 0,
+                "$DefaultValue": "2012-12-03T07:16:23Z"
+            },
+            "DurationValue": {
+                "$Nullable": true,
+                "$Type": "Edm.Duration",
+                "$Precision": 12,
+                "$DefaultValue": "P12DT23H59M59.999999999999S"
+            },
+            "TimeOfDayValue": {
+                "$Nullable": true,
+                "$Type": "Edm.TimeOfDay",
+                "$Precision": 6,
+                "$DefaultValue": "07:59:59.999"
+            },
+            "GuidValue": {
+                "$Nullable": true,
+                "$Type": "Edm.Guid",
+                "$DefaultValue": "1234567-89ab-cdef-0123-456789abcdef"
+            },
+            "Int64Value": {
+                "$Nullable": true,
+                "$Type": "Edm.Int64",
+                "$DefaultValue": 0
+            },
+            "ColorEnumValue": {
+                "$Nullable": true,
+                "$Type": "M1.Color",
+                "$DefaultValue": "yellow"
+            },
+            "GeographyPoint": {
+                "$Nullable": true,
+                "$Type": "Edm.GeographyPoint",
+                "$DefaultValue": "SRID=0;Point(142.1 64.1)"
+            },
+            "StreamValue": {
+                "$Nullable": true,
+                "$Type": "Edm.Stream"
+            },
+            "TypeDefValue": {
+                "$Nullable": true,
+                "$Type": "M1.IntegerDecimal",
+                "$Precision": 20,
+                "$DefaultValue": 42
+            },
+            "PrimitiveValue": {
+                "$Nullable": true,
+                "$Type": "Edm.PrimitiveType"
+            }
+        },
+        "NonNullablePrimitiveTypes": {
+            "$Kind": "ComplexType",
+            "NullValue": {
+                "$Type": "Edm.Boolean",
+                "$DefaultValue": null
+            },
+            "TrueValue": {
+                "$Type": "Edm.Boolean",
+                "$DefaultValue": true
+            },
+            "FalseValue": {
+                "$Type": "Edm.Boolean",
+                "$DefaultValue": false
+            },
+            "BinaryValue": {
+                "$Type": "Edm.Binary",
+                "$MaxLength": 31,
+                "$DefaultValue": "T0RhdGE"
+            },
+            "IntegerValue": {
+                "$Type": "Edm.Int32",
+                "$DefaultValue": -128
+            },
+            "DoubleValue": {
+                "$Type": "Edm.Double",
+                "$DefaultValue": 3.1415926535897931
+            },
+            "SingleValue": {
+                "$Type": "Edm.Single",
+                "$DefaultValue": "-INF"
+            },
+            "DecimalValue": {
+                "$Type": "Edm.Decimal",
+                "$DefaultValue": 34.95
+            },
+            "StringValue": {
+                "$DefaultValue": "Say \"Hello\",\nthen go"
+            },
+            "DateValue": {
+                "$Type": "Edm.Date",
+                "$DefaultValue": "2012-12-03"
+            },
+            "DateTimeOffsetValue": {
+                "$Type": "Edm.DateTimeOffset",
+                "$Precision": 0,
+                "$DefaultValue": "2012-12-03T07:16:23Z"
+            },
+            "DurationValue": {
+                "$Type": "Edm.Duration",
+                "$Precision": 12,
+                "$DefaultValue": "P12DT23H59M59.999999999999S"
+            },
+            "TimeOfDayValue": {
+                "$Type": "Edm.TimeOfDay",
+                "$Precision": 6,
+                "$DefaultValue": "07:59:59.999"
+            },
+            "GuidValue": {
+                "$Type": "Edm.Guid",
+                "$DefaultValue": "1234567-89ab-cdef-0123-456789abcdef"
+            },
+            "Int64Value": {
+                "$Type": "Edm.Int64",
+                "$DefaultValue": 0
+            },
+            "ColorEnumValue": {
+                "$Type": "M1.Color",
+                "$DefaultValue": "yellow"
+            },
+            "GeographyPoint": {
+                "$Type": "Edm.GeographyPoint",
+                "$DefaultValue": "SRID=0;Point(142.1 64.1)"
+            },
+            "StreamValue": {
+                "$Type": "Edm.Stream"
+            },
+            "TypeDefValue": {
+                "$Type": "M1.IntegerDecimal",
+                "$Precision": 20,
+                "$DefaultValue": 42
+            },
+            "TextValue": {
+                "$Type": "M1.Text",
+                "$MaxLength": 60,
+                "$DefaultValue": 42
+            },
+            "PrimitiveValue": {
+                "$Type": "Edm.PrimitiveType"
+            }
+        },
+        "CreatedEntities": [
+            {
+                "$Kind": "Function",
+                "$Parameter": [
+                    {
+                        "$Name": "before",
+                        "$Nullable": true,
+                        "$Type": "Edm.DateTimeOffset",
+                        "$Precision": 0
+                    },
+                    {
+                        "$Name": "after",
+                        "$Nullable": true,
+                        "$Type": "Edm.DateTimeOffset",
+                        "$Precision": 0
+                    }
+                ],
+                "$ReturnType": {
+                    "$Nullable": true,
+                    "$Collection": true,
+                    "$Type": "Edm.EntityType"
+                }
+            }
+        ],
+        "TopSellingProducts": [
+            {
+                "$Kind": "Function",
+                "$Parameter": [
+                    {
+                        "$Name": "Year",
+                        "$Nullable": true,
+                        "$Type": "Edm.Decimal",
+                        "$Precision": 4,
+                        "$Scale": 0
+                    }
+                ],
+                "$ReturnType": {
+                    "$Collection": true,
+                    "$Type": "self.Product",
+                    "@A.B": "Works"
+                }
+            }
+        ],
+        "Size": {
+            "$Kind": "EnumType",
+            "S": 0,
+            "S@Core.Description": "Small",
+            "M": 1,
+            "M@Core.Description": "Medium",
+            "L": 2,
+            "L@Core.Description": "Large",
+            "@Core.Description": "T-Shirt Size",
+            "@Core.Description#alt": "Size (S, M, L)",
+            "@Core.LongDescription": "Size, expressed with letters familiar from e.g. T-Shirt sizes"
+        },
+        "Color": {
+            "$Kind": "EnumType",
+            "$UnderlyingType": "Edm.Int64",
+            "$IsFlags": true,
+            "Yellow": 1,
+            "Yellow@Is.Working": true,
+            "Yellow@Is.Testing": {
+                "$IsOf": {
+                    "$Path": "Hugo"
+                },
+                "$Nullable": true,
+                "$Type": "Edm.Binary"
+            },
+            "Striped": 2,
+            "Striped@Core.Description": "nicely striped"
+        },
+        "Weird": {
+            "$Kind": "EntityType",
+            "$Key": [
+                "TheKey"
+            ],
+            "TheKey": {
+
+            },
+            "TheValue": {
+                "$Nullable": true
+            },
+            "TheString": {
+                "$Nullable": true,
+                "$MaxLength": 20
+            },
+            "Tags": {
+                "$Nullable": true,
+                "$Collection": true
+            },
+            "Dates": {
+                "$Nullable": true,
+                "$Collection": true,
+                "$Type": "Edm.Date"
+            },
+            "Price": {
+                "$Nullable": true,
+                "$Type": "Edm.Decimal",
+                "$Precision": 15,
+                "$Scale": 3
+            },
+            "Permission": {
+                "$Type": "Core.Permission"
+            },
+            "AliasPermission": {
+                "$Nullable": true,
+                "$Type": "Core.Permission"
+            },
+            "@A.CollectionOfStrings": [
+                "SomeString",
+                {
+                    "$Path": "MyAddress/vCard.Address#work/Street"
+                },
+                {
+                    "$LabeledElement": "Hello",
+                    "$Name": "Attribute"
+                },
+                {
+                    "$LabeledElementReference": "M1.Attribute"
+                },
+                {
+                    "$LabeledElement": "Hello",
+                    "$Name": "Element"
+                },
+                {
+                    "$LabeledElementReference": "M1.Element"
+                }
+            ],
+            "@A.CollectionOfStrings@Core.Description": "String-valued expressions",
+            "@A.CollectionOfRecords": [
+                {
+                    "Egon": "1",
+                    "Hugo": "2",
+                    "Hugo@Some.Term": "Some Value",
+                    "@Some.Term": "Some Value"
+                },
+                {
+                    "$LabeledElement": {
+
+                    },
+                    "$Name": "Record"
+                },
+                {
+                    "$LabeledElementReference": "M1.Record"
+                }
+            ],
+            "@A.CollectionOfRecords@Core.Description": "Record-valued expressions",
+            "@A.GIQSupplier": {
+                "$UrlRef": "http://www.odata.org"
+            },
+            "@A.GIQSupplier#two": {
+                "$UrlRef": "http://www.odata.org"
+            },
+            "@A.GIQSupplier#three": {
+                "$UrlRef": {
+                    "$Apply": [
+                        "http://host/service/Suppliers({suppID})",
+                        {
+                            "$LabeledElement": {
+                                "$Apply": [
+                                    {
+                                        "$Path": "SupplierId"
+                                    },
+                                    {
+                                        "$DateTimeOffset": "2013-04-08T23:00:00.0Z"
+                                    }
+                                ],
+                                "$Function": "odata.UriEncode"
+                            },
+                            "$Name": "suppID"
+                        }
+                    ],
+                    "$Function": "odata.fillUriTemplate"
+                }
+            },
+            "@UI.DisplayName#cast": {
+                "$Cast": "Product Catalog",
+                "$MaxLength": 30,
+                "$Nullable": true
+            },
+            "@UI.DisplayName#cast2": {
+                "$Cast": 3.14,
+                "$Precision": 30,
+                "$Scale": "variable",
+                "$Nullable": true,
+                "$Type": "Edm.Decimal"
+            },
+            "@self.IsFloatingDecimal": {
+                "$IsOf": {
+                    "$Path": "Customer/$count"
+                },
+                "$Scale": "variable",
+                "$Nullable": true,
+                "$Type": "Edm.Decimal"
+            },
+            "@Some.Binary#two": {
+                "$Binary": "Zg"
+            },
+            "@Some.Binary#twoEqEq": {
+                "$Binary": "Zg=="
+            },
+            "@Some.Binary#three": {
+                "$Binary": "Zm8"
+            },
+            "@Some.Binary#threeEq": {
+                "$Binary": "Zm8="
+            },
+            "@Some.Binary": {
+                "$Binary": "HugoHase-_ab"
+            }
+        },
+        "Address": {
+            "$Kind": "ComplexType",
+            "$OpenType": true,
+            "Street": {
+                "$Nullable": true
+            },
+            "City": {
+                "$Kind": "NavigationProperty",
+                "$Nullable": true,
+                "$Type": "M1.City"
+            },
+            "Region": {
+                "$Kind": "NavigationProperty",
+                "$Nullable": true,
+                "$Type": "M1.Region"
+            },
+            "Country": {
+                "$Kind": "NavigationProperty",
+                "$Nullable": true,
+                "$Type": "M1.Country"
+            },
+            "MapLocation": {
+                "$Nullable": true,
+                "$Type": "Edm.GeographyPoint",
+                "$SRID": "variable"
+            },
+            "Numbers": {
+                "$Collection": true,
+                "$Type": "Edm.Int16"
+            }
+        },
+        "City": {
+            "$Kind": "EntityType",
+            "$HasStream": true
+        },
+        "Region": {
+            "$Kind": "EntityType"
+        },
+        "Country": {
+            "$Kind": "EntityType"
+        },
+        "Planet": {
+            "$Kind": "EntityType"
+        },
+        "NavigationOnly": {
+            "$Kind": "ComplexType",
+            "Planet": {
+                "$Kind": "NavigationProperty",
+                "$Nullable": true,
+                "$Type": "M1.Planet"
+            }
+        },
+        "AnnotationOnly": {
+            "$Kind": "ComplexType",
+            "@Some.Tag": true
+        },
+        "Order": {
+            "$Kind": "EntityType",
+            "$Abstract": true,
+            "Quantity": {
+                "$Nullable": true,
+                "$Type": "Edm.Decimal",
+                "$Scale": 0,
+                "@Measures.Unit": {
+                    "$Path": "ShippingUnit"
+                },
+                "@Validation.Minimum": {
+                    "$Decimal": "0"
+                }
+            },
+            "ShippingUnit": {
+                "$Nullable": true,
+                "@Core.Description": "Contains the unit for property Quantity"
+            }
+        },
+        "Validated": {
+            "$Kind": "ComplexType",
+            "EvenNumber": {
+                "$Nullable": true,
+                "$Type": "Edm.Int32",
+                "@Validation.MultipleOf": {
+                    "$Decimal": "2"
+                }
+            },
+            "PercentComplete": {
+                "$Nullable": true,
+                "$Type": "Edm.Byte",
+                "@Validation.Maximum": {
+                    "$Decimal": "100"
+                }
+            },
+            "Epsilon": {
+                "$Nullable": true,
+                "$Type": "Edm.Decimal",
+                "$Scale": 0,
+                "@Validation.Minimum": {
+                    "$Decimal": "0"
+                },
+                "@Validation.Minimum@Validation.Exclusive": true,
+                "@Validation.Maximum": {
+                    "$Decimal": "1"
+                },
+                "@Validation.Maximum@Validation.Exclusive": true
+            },
+            "Temperature": {
+                "$Nullable": true,
+                "$Type": "Edm.Decimal",
+                "$Scale": 0,
+                "@Validation.Minimum": {
+                    "$Decimal": "0"
+                },
+                "@Validation.Minimum@Validation.Exclusive": false
+            },
+            "EmailAddress": {
+                "$Nullable": true,
+                "@Validation.Pattern": "^.+@.+\\..+$"
+            }
+        },
+        "SpecialByte": {
+            "$Kind": "TypeDefinition",
+            "$UnderlyingType": "Edm.Byte"
+        },
+        "Text50": {
+            "$Kind": "TypeDefinition",
+            "$MaxLength": 50,
+            "$UnderlyingType": "Edm.String"
+        },
+        "Text": {
+            "$Kind": "TypeDefinition",
+            "$UnderlyingType": "Edm.String"
+        },
+        "LanguageDependentText": {
+            "$Kind": "TypeDefinition",
+            "$UnderlyingType": "Edm.String",
+            "@Core.IsLanguageDependent": true,
+            "@Core.IsLanguageDependent@Core.DefaultLanguage": "en-US"
+        },
+        "IntegerDecimal": {
+            "$Kind": "TypeDefinition",
+            "$UnderlyingType": "Edm.Decimal",
+            "$Scale": 0,
+            "@Core.Description": "A decimal without fractional part"
+        },
+        "IntegerDecimal10": {
+            "$Kind": "TypeDefinition",
+            "$UnderlyingType": "Edm.Decimal",
+            "$Precision": 10,
+            "@Core.Description": "A ten-digit integer"
+        },
+        "VariableDecimal": {
+            "$Kind": "TypeDefinition",
+            "$UnderlyingType": "Edm.Decimal",
+            "@Core.Description": "A floating decimal"
+        },
+        "ExactTimestamp": {
+            "$Kind": "TypeDefinition",
+            "$UnderlyingType": "Edm.DateTimeOffset",
+            "$Precision": 12
+        }
+    },
+    "X": {
+        "Person": {
+            "$Kind": "Term",
+            "$Nullable": true,
+            "$Type": "X.PersonType"
+        },
+        "PersonType": {
+            "$Kind": "ComplexType"
+        },
+        "Team": {
+            "$Kind": "Term",
+            "$Collection": true,
+            "$Type": "X.PersonType",
+            "@custom.ItemIsA": "X.Person"
+        },
+        "Movie": {
+            "$Kind": "Term",
+            "$Type": "X.MovieType"
+        },
+        "MovieType": {
+            "$Kind": "ComplexType"
+        },
+        "Friend": {
+            "$Kind": "Term",
+            "$Nullable": true,
+            "$Type": "X.FriendType"
+        },
+        "FriendType": {
+            "$Kind": "EntityType"
+        }
+    },
+    "Y": {
+        "@Core.Description": {
+            "$Apply": [
+                "When: ",
+                {
+                    "$Apply": [
+
+                    ],
+                    "$Function": "odata.now"
+                }
+            ],
+            "$Function": "odata.concat"
+        },
+        "Developer": {
+            "$Kind": "Term",
+            "$BaseTerm": "X.Person",
+            "$Type": "Y.DeveloperType"
+        },
+        "DeveloperType": {
+            "$Kind": "ComplexType",
+            "$BaseType": "X.PersonType"
+        },
+        "DevelopmentTeam": {
+            "$Kind": "Term",
+            "$Collection": true,
+            "$Type": "Y.DeveloperType",
+            "@custom.ItemIsA": "Y.Developer",
+            "@custom.IsA": "X.Team"
+        },
+        "ScrumTeam": {
+            "$Kind": "Term",
+            "$BaseTerm": "Y.DevelopmentTeam",
+            "$Nullable": true,
+            "$Type": "Y.ScrumTeamType"
+        },
+        "ScrumTeamType": {
+            "$Kind": "ComplexType",
+            "ScrumMaster": {
+                "$Nullable": true,
+                "$Type": "Y.DeveloperType",
+                "@custom.IsA": "Y.Developer X.Person"
+            }
+        },
+        "Movies": {
+            "$Kind": "Term",
+            "$Collection": true,
+            "$Type": "X.MovieType"
+        },
+        "ArchivedMovies": {
+            "$Kind": "Term",
+            "$Collection": true,
+            "$Type": "Y.ArchivedMovieType",
+            "@custom.ItemIsA": "X.Movie"
+        },
+        "ArchivedMovieType": {
+            "$Kind": "ComplexType",
+            "$BaseType": "X.MovieType",
+            "@custom.IsA": "X.Movie",
+            "ArchivedAt": {
+                "$Nullable": true,
+                "$Type": "Edm.Date"
+            }
+        },
+        "SomeThing": {
+            "$Kind": "Term",
+            "$Nullable": true,
+            "$Type": "Y.SomeThingType"
+        },
+        "SomeThingType": {
+            "$Kind": "ComplexType",
+            "SomeProperty": {
+                "$Nullable": true
+            },
+            "Contacts": {
+                "$Collection": true,
+                "$Type": "X.PersonType",
+                "@custom.ItemIsA": "X.Person"
+            },
+            "VIPs": {
+                "$Kind": "NavigationProperty",
+                "$Collection": true,
+                "$Type": "X.FriendType",
+                "@custom.ItemIsA": "X.Friend"
+            }
+        },
+        "AdvancedChangeTracking": {
+            "$Kind": "Term",
+            "$BaseTerm": "Capabilities.ChangeTracking",
+            "$Type": "Y.ChangeTrackingType",
+            "$AppliesTo": [
+                "EntityContainer",
+                "EntitySet"
+            ],
+            "@Core.Description": "Advanced change tracking capabilities of this service or entity set"
+        },
+        "ChangeTrackingType": {
+            "$Kind": "ComplexType",
+            "InlineableStreamProperties": {
+                "$Collection": true,
+                "$Type": "Edm.PropertyPath",
+                "@Core.Description": "Change tracking supports inlining these stream properties"
+            }
+        },
+        "Minimal": {
+            "$Kind": "Term"
+        },
+        "$Annotations": {
+            "Some.EntityType": {
+                "@X.Person": {
+
+                },
+                "@Y.Developer": {
+
+                },
+                "@Core.Description": "External description",
+                "@Core.Description#alt": "Alternative description",
+                "@Core.Description#WithPath": {
+                    "$Path": "SomeProperty"
+                },
+                "@Y.DevelopmentTeam": {
+                    "$Path": "SomeCollectionNavProp/@Y.Developer"
+                },
+                "@Y.DevelopmentTeam@custom.IsA": "X.Team",
+                "@Y.ScrumTeam": {
+                    "ScrumMaster": {
+
+                    },
+                    "ScrumMaster@custom.IsA": "Y.Developer X.Person"
+                },
+                "@Y.Movies": {
+                    "$Path": "AllMyMovies"
+                },
+                "@Y.ArchivedMovies": {
+                    "$Path": "MoviesInStorage"
+                },
+                "@Y.ArchivedMovies@custom.ItemIsA": "X.Movie",
+                "@Y.Something": {
+                    "SomeProperty": "Some Thing",
+                    "AnotherProperty": "A string with spaces",
+                    "SomeTime": {
+                        "$Duration": "P20D"
+                    },
+                    "MoreTime": {
+                        "$Duration": "P20D"
+                    },
+                    "Contacts": {
+                        "$Path": "MyContacts"
+                    },
+                    "Contacts@custom.ItemIsA": "X.Person",
+                    "VIPs": {
+                        "$Path": "MyBestFriends"
+                    },
+                    "VIPs@custom.ItemIsA": "X.Person"
+                }
+            },
+            "self.MyEntityContainer/MyEntitySet/self.MyEntityType/MyProperty": {
+                "@Y.Movies": {
+                    "$Path": "AllMyMovies"
+                }
+            }
+        }
+    },
+    "Intentionally.Empty": {
+
+    }
+}
