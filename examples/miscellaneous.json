@@ -1138,7 +1138,7 @@
                         {
                             "$Path": "FirstName"
                         },
-                        "[^b-d]"
+                        "[^b-d]+$"
                     ],
                     "$Function": "odata.matchesPattern"
                 },
@@ -1163,9 +1163,7 @@
                     "$Cast": {
                         "$Path": "Average"
                     },
-                    "$Nullable": true,
-                    "$Type": "Edm.Decimal",
-                    "$Scale": 0
+                    "$Type": "Edm.Decimal"
                 },
                 "@seo.SeoTerms": [
                     "Product",
@@ -1185,7 +1183,6 @@
                     "$IsOf": {
                         "$Path": "Customer"
                     },
-                    "$Nullable": true,
                     "$Type": "self.PreferredCustomer"
                 },
                 "@UI.DisplayName#LE": {
@@ -1738,7 +1735,6 @@
                 "$IsOf": {
                     "$Path": "Hugo"
                 },
-                "$Nullable": true,
                 "$Type": "Edm.Binary"
             },
             "Striped": 2,
@@ -1850,14 +1846,12 @@
             },
             "@UI.DisplayName#cast": {
                 "$Cast": "Product Catalog",
-                "$MaxLength": 30,
-                "$Nullable": true
+                "$MaxLength": 30
             },
             "@UI.DisplayName#cast2": {
                 "$Cast": 3.14,
                 "$Precision": 30,
                 "$Scale": "variable",
-                "$Nullable": true,
                 "$Type": "Edm.Decimal"
             },
             "@self.IsFloatingDecimal": {
@@ -1865,7 +1859,6 @@
                     "$Path": "Customer/$count"
                 },
                 "$Scale": "variable",
-                "$Nullable": true,
                 "$Type": "Edm.Decimal"
             },
             "@Some.Binary#two": {

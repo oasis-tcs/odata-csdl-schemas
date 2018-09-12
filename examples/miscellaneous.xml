@@ -793,7 +793,7 @@
         <Annotation Term="Some.Term" Qualifier="Example72">
           <Apply Function="odata.matchesPattern">
             <Path>FirstName</Path>
-            <String>[^b-d]</String>
+            <String>[^b-d]+$</String>
           </Apply>
         </Annotation>
 
