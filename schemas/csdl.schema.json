@@ -300,8 +300,7 @@
         "$SRID": {
           "$ref": "#/definitions/SRID"
         },
-        "$DefaultValue": {
-        }
+        "$DefaultValue": {}
       }
     },
     "NavigationProperty": {
@@ -522,8 +521,7 @@
             ]
           }
         },
-        "$DefaultValue": {
-        }
+        "$DefaultValue": {}
       },
       "required": [
         "$Kind"
@@ -649,9 +647,9 @@
         }
       },
       "properties": {
-        "$Kind": {
+        "$Collection": {
           "enum": [
-            "EntitySet"
+            true
           ]
         },
         "$Type": {
@@ -666,7 +664,7 @@
         }
       },
       "required": [
-        "$Kind",
+        "$Collection",
         "$Type"
       ]
     },
@@ -680,11 +678,6 @@
         }
       },
       "properties": {
-        "$Kind": {
-          "enum": [
-            "Singleton"
-          ]
-        },
         "$Type": {
           "type": "string"
         },
@@ -693,7 +686,6 @@
         }
       },
       "required": [
-        "$Kind",
         "$Type"
       ]
     },
@@ -706,11 +698,6 @@
         }
       },
       "properties": {
-        "$Kind": {
-          "enum": [
-            "ActionImport"
-          ]
-        },
         "$Action": {
           "type": "string"
         },
@@ -719,7 +706,6 @@
         }
       },
       "required": [
-        "$Kind",
         "$Action"
       ]
     },
@@ -733,11 +719,6 @@
         }
       },
       "properties": {
-        "$Kind": {
-          "enum": [
-            "FunctionImport"
-          ]
-        },
         "$Function": {
           "type": "string"
         },
@@ -750,7 +731,6 @@
         }
       },
       "required": [
-        "$Kind",
         "$Function"
       ]
     },

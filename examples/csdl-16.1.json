@@ -169,14 +169,14 @@
         "DemoService": {
             "$Kind": "EntityContainer",
             "Products": {
-                "$Kind": "EntitySet",
+                "$Collection": true,
                 "$Type": "ODataDemo.Product",
                 "$NavigationPropertyBinding": {
                     "Category": "Categories"
                 }
             },
             "Categories": {
-                "$Kind": "EntitySet",
+                "$Collection": true,
                 "$Type": "ODataDemo.Category",
                 "$NavigationPropertyBinding": {
                     "Products": "Products"
@@ -184,7 +184,7 @@
                 "@Core.Description": "Product Categories"
             },
             "Suppliers": {
-                "$Kind": "EntitySet",
+                "$Collection": true,
                 "$Type": "ODataDemo.Supplier",
                 "$NavigationPropertyBinding": {
                     "Products": "Products",
@@ -197,11 +197,10 @@
                 ]
             },
             "Countries": {
-                "$Kind": "EntitySet",
+                "$Collection": true,
                 "$Type": "ODataDemo.Country"
             },
             "MainSupplier": {
-                "$Kind": "Singleton",
                 "$Type": "self.Supplier",
                 "$NavigationPropertyBinding": {
                     "Products": "Products"
@@ -209,7 +208,6 @@
                 "@Core.Description": "Primary Supplier"
             },
             "ProductsByRating": {
-                "$Kind": "FunctionImport",
                 "$EntitySet": "Products",
                 "$Function": "ODataDemo.ProductsByRating"
             }

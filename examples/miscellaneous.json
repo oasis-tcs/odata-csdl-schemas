@@ -538,25 +538,25 @@
         "DemoService": {
             "$Kind": "EntityContainer",
             "StandardCustomers": {
-                "$Kind": "EntitySet",
+                "$Collection": true,
                 "$Type": "self.Customer",
                 "$NavigationPropertyBinding": {
                     "Orders": "Orders"
                 }
             },
             "PreferredCustomers": {
-                "$Kind": "EntitySet",
+                "$Collection": true,
                 "$Type": "self.Customer",
                 "$NavigationPropertyBinding": {
                     "Orders": "Orders"
                 }
             },
             "Orders": {
-                "$Kind": "EntitySet",
+                "$Collection": true,
                 "$Type": "self.Order"
             },
             "Products": {
-                "$Kind": "EntitySet",
+                "$Collection": true,
                 "$Type": "self.Product",
                 "$NavigationPropertyBinding": {
                     "Category": "Categories",
@@ -565,14 +565,14 @@
                 "@UI.DisplayName": "Product Catalog"
             },
             "Categories": {
-                "$Kind": "EntitySet",
+                "$Collection": true,
                 "$Type": "self.Category",
                 "$NavigationPropertyBinding": {
                     "Products": "Products"
                 }
             },
             "Suppliers": {
-                "$Kind": "EntitySet",
+                "$Collection": true,
                 "$Type": "self.Supplier",
                 "$NavigationPropertyBinding": {
                     "Products": "Products"
@@ -580,36 +580,33 @@
                 "@UI.DisplayName": "Supplier Directory"
             },
             "Categories34": {
-                "$Kind": "EntitySet",
+                "$Collection": true,
                 "$Type": "self.Category",
                 "$NavigationPropertyBinding": {
                     "Products": "SomeSet"
                 }
             },
             "Categories35": {
-                "$Kind": "EntitySet",
+                "$Collection": true,
                 "$Type": "self.Category",
                 "$NavigationPropertyBinding": {
                     "Products": "SomeModel.SomeContainer/SomeSet"
                 }
             },
             "Categories37": {
-                "$Kind": "EntitySet",
+                "$Collection": true,
                 "$Type": "self.Category",
                 "$NavigationPropertyBinding": {
                     "Products/Supplier": "Suppliers"
                 }
             },
             "MainSupplier": {
-                "$Kind": "Singleton",
                 "$Type": "self.Supplier"
             },
             "LeaveRequestApproval": {
-                "$Kind": "ActionImport",
                 "$Action": "self.Approval"
             },
             "ProductsByRating": {
-                "$Kind": "FunctionImport",
                 "$Function": "self.ProductsByRating",
                 "$EntitySet": "Products"
             }

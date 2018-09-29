@@ -15,11 +15,11 @@
             "$Kind": "EntityContainer",
             "$Extends": "Some.Other.Schema.Base",
             "Waldos": {
-                "$Kind": "EntitySet",
+                "$Collection": true,
                 "$Type": "Two.Waldo"
             },
             "Freds": {
-                "$Kind": "EntitySet",
+                "$Collection": true,
                 "$Type": "Two.Fred",
                 "$NavigationPropertyBinding": {
                     "Waldos": "Waldos",
@@ -28,13 +28,11 @@
                 }
             },
             "Bar": {
-                "$Kind": "FunctionImport",
                 "$Function": "One.Foo",
                 "$IncludeInServiceDocument": true,
                 "$EntitySet": "Model.Extending/Freds"
             },
             "CreatedEntities": {
-                "$Kind": "FunctionImport",
                 "$Function": "Model.CreatedEntities",
                 "$EntitySet": "Waldos",
                 "$IncludeInServiceDocument": true
