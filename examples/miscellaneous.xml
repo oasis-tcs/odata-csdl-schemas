@@ -328,6 +328,7 @@
         <EntitySet Name="StandardCustomers" EntityType="self.Customer" IncludeInServiceDocument="true">
           <NavigationPropertyBinding Path="Orders" Target="Orders" />
         </EntitySet>
+        <EntitySet Name="HiddenEntitySet" EntityType="self.Customer" IncludeInServiceDocument="false" />
         <EntitySet Name="PreferredCustomers" EntityType="self.Customer">
           <NavigationPropertyBinding Path="Orders" Target="Orders" />
         </EntitySet>
@@ -350,7 +351,11 @@
         </EntitySet>
         <Singleton Name="MainSupplier" Type="self.Supplier" />
         <ActionImport Name="LeaveRequestApproval" Action="self.Approval" />
+        <ActionImport Name="AdvertisedActionImport" Action="self.Approval" IncludeInServiceDocument="true" />
+        <ActionImport Name="HiddenActionImport" Action="self.Approval" IncludeInServiceDocument="false" />
         <FunctionImport Name="ProductsByRating" Function="self.ProductsByRating" EntitySet="Products" />
+        <FunctionImport Name="AdvertisedFunctionImport" Function="self.ProductsByRating" IncludeInServiceDocument="true" />
+        <FunctionImport Name="HiddenFunctionImport" Function="self.ProductsByRating" IncludeInServiceDocument="false" />
 
         <!-- Example 34: see miscellaneous2.xml -->
 

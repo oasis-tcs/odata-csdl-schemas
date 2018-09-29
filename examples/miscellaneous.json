@@ -544,6 +544,11 @@
                     "Orders": "Orders"
                 }
             },
+            "HiddenEntitySet": {
+                "$Collection": true,
+                "$Type": "self.Customer",
+                "$IncludeInServiceDocument": false
+            },
             "PreferredCustomers": {
                 "$Collection": true,
                 "$Type": "self.Customer",
@@ -606,9 +611,23 @@
             "LeaveRequestApproval": {
                 "$Action": "self.Approval"
             },
+            "AdvertisedActionImport": {
+                "$Action": "self.Approval",
+                "$IncludeInServiceDocument": true
+            },
+            "HiddenActionImport": {
+                "$Action": "self.Approval"
+            },
             "ProductsByRating": {
                 "$Function": "self.ProductsByRating",
                 "$EntitySet": "Products"
+            },
+            "AdvertisedFunctionImport": {
+                "$Function": "self.ProductsByRating",
+                "$IncludeInServiceDocument": true
+            },
+            "HiddenFunctionImport": {
+                "$Function": "self.ProductsByRating"
             }
         },
         "Product2": {
