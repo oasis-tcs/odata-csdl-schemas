@@ -191,9 +191,7 @@
                     "Address/Country": "Countries"
                 },
                 "@Core.OptimisticConcurrency": [
-                    {
-                        "$PropertyPath": "Concurrency"
-                    }
+                    "Concurrency"
                 ]
             },
             "Countries": {

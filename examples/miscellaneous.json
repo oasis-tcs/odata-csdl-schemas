@@ -771,105 +771,45 @@
                 "@self.Dummy": true
             },
             "self.ConstantExpressions": {
-                "@UI.Thumbnail": {
-                    "$Binary": "T0RhdGE"
-                },
-                "@UI.Thumbnail#element": {
-                    "$Binary": "T0RhdGE"
-                },
+                "@UI.Thumbnail": "T0RhdGE",
+                "@UI.Thumbnail#element": "T0RhdGE",
                 "@UI.ReadOnly": true,
                 "@UI.ReadOnly#element": true,
-                "@vCard.birthDay": {
-                    "$Date": "2000-01-01"
-                },
-                "@vCard.birthDay#element": {
-                    "$Date": "2000-01-01"
-                },
-                "@UI.LastUpdated": {
-                    "$DateTimeOffset": "2000-01-01T16:00:00.000Z"
-                },
-                "@UI.LastUpdated#element": {
-                    "$DateTimeOffset": "2000-01-01T16:00:00.000-09:00"
-                },
-                "@UI.Width": {
-                    "$Decimal": "3.14"
-                },
-                "@UI.Width#element": {
-                    "$Decimal": "3.14"
-                },
-                "@task.duration": {
-                    "$Duration": "P7D"
-                },
-                "@task.duration#element": {
-                    "$Duration": "P11DT23H59M59.999999999999S"
-                },
-                "@self.HasPattern": {
-                    "$EnumMember": "Red"
-                },
-                "@self.HasPattern#element": {
-                    "$EnumMember": "Red"
-                },
-                "@self.HasPattern#list": {
-                    "$EnumMember": "Red,Striped"
-                },
-                "@self.HasPattern#listelement": {
-                    "$EnumMember": "Red,Striped"
-                },
+                "@vCard.birthDay": "2000-01-01",
+                "@vCard.birthDay#element": "2000-01-01",
+                "@UI.LastUpdated": "2000-01-01T16:00:00.000Z",
+                "@UI.LastUpdated#element": "2000-01-01T16:00:00.000-09:00",
+                "@UI.Width": "3.14",
+                "@UI.Width#element": "3.14",
+                "@task.duration": "P7D",
+                "@task.duration#element": "P11DT23H59M59.999999999999S",
+                "@self.HasPattern": "Red",
+                "@self.HasPattern#element": "Red",
+                "@self.HasPattern#list": "Red,Striped",
+                "@self.HasPattern#listelement": "Red,Striped",
                 "@UI.FloatWidth": 3.14,
                 "@UI.FloatWidth#element": 3.14,
-                "@UI.FloatWidth#INF": {
-                    "$Float": "INF"
-                },
-                "@UI.Id": {
-                    "$Guid": "21EC2020-3AEA-1069-A2DD-08002B30309D"
-                },
-                "@UI.Id#element": {
-                    "$Guid": "21EC2020-3AEA-1069-A2DD-08002B30309D"
-                },
-                "@UI.IntWidth": {
-                    "$Int": "42"
-                },
-                "@UI.IntWidth#element": {
-                    "$Int": "42"
-                },
+                "@UI.FloatWidth#INF": "INF",
+                "@UI.Id": "21EC2020-3AEA-1069-A2DD-08002B30309D",
+                "@UI.Id#element": "21EC2020-3AEA-1069-A2DD-08002B30309D",
+                "@UI.IntWidth": "42",
+                "@UI.IntWidth#element": "42",
                 "@UI.DisplayName": "Product Catalog",
                 "@UI.DisplayName#element": "Product Catalog",
-                "@UI.EndTime": {
-                    "$TimeOfDay": "21:45:00"
-                },
-                "@UI.EndTime#element": {
-                    "$TimeOfDay": "21:45:00"
-                }
+                "@UI.EndTime": "21:45:00",
+                "@UI.EndTime#element": "21:45:00"
             },
             "self.DynamicExpression": {
                 "@self.Dummy": [
-                    {
-                        "$PropertyPath": "/self.MyEntityContainer/MyEntitySet"
-                    },
-                    {
-                        "$PropertyPath": "/self.MyEntityContainer/MyEntitySet/MyProperty"
-                    },
-                    {
-                        "$PropertyPath": "Address/City"
-                    },
-                    {
-                        "$PropertyPath": "DirectReports/self.Manager/DirectReports"
-                    },
-                    {
-                        "$PropertyPath": "Address/City/@Capabilities.SortRestrictions/Sortable"
-                    },
-                    {
-                        "$PropertyPath": "Orders/Items/Product"
-                    },
-                    {
-                        "$PropertyPath": "Addresses/Street"
-                    },
-                    {
-                        "$PropertyPath": "Addresses/$count"
-                    },
-                    {
-                        "$PropertyPath": "Orders/Items@Capabilities.InsertRestrictions/Insertable"
-                    },
+                    "/self.MyEntityContainer/MyEntitySet",
+                    "/self.MyEntityContainer/MyEntitySet/MyProperty",
+                    "Address/City",
+                    "DirectReports/self.Manager/DirectReports",
+                    "Address/City/@Capabilities.SortRestrictions/Sortable",
+                    "Orders/Items/Product",
+                    "Addresses/Street",
+                    "Addresses/$count",
+                    "Orders/Items@Capabilities.InsertRestrictions/Insertable",
                     {
                         "$Path": "/self.container/SettingsCollection('FeatureXxx')/IsAvailable"
                     },
@@ -877,47 +817,25 @@
                         "$Path": "/self.container/Products(ID=ProductID)/Name"
                     }
                 ],
-                "@UI.ReferenceFacet": {
-                    "$AnnotationPath": "Product/Supplier/@UI.LineItem"
-                },
+                "@UI.ReferenceFacet": "Product/Supplier/@UI.LineItem",
                 "@UI.CollectionFacet#Contacts": [
-                    {
-                        "$AnnotationPath": "Supplier/@Communication.Contact"
-                    },
-                    {
-                        "$AnnotationPath": "Customer/@Communication.Contact"
-                    }
+                    "Supplier/@Communication.Contact",
+                    "Customer/@Communication.Contact"
                 ],
-                "@self.MyFavoriteModelElement": {
-                    "$ModelElementPath": "/self.someAction"
-                },
-                "@self.MyFavoriteModelElement#element": {
-                    "$ModelElementPath": "/self.someAction"
-                },
-                "@UI.HyperLink": {
-                    "$NavigationPropertyPath": "Supplier"
-                },
+                "@self.MyFavoriteModelElement": "/self.someAction",
+                "@self.MyFavoriteModelElement#element": "/self.someAction",
+                "@UI.HyperLink": "Supplier",
                 "@Capabilities.UpdateRestrictions#element": {
                     "NonUpdatableNavigationProperties": [
-                        {
-                            "$NavigationPropertyPath": "Supplier"
-                        },
-                        {
-                            "$NavigationPropertyPath": "Category"
-                        }
+                        "Supplier",
+                        "Category"
                     ]
                 },
-                "@UI.RefreshOnChangeOf": {
-                    "$PropertyPath": "ChangedAt"
-                },
+                "@UI.RefreshOnChangeOf": "ChangedAt",
                 "@Capabilities.UpdateRestrictions#element2": {
                     "NonUpdatableProperties": [
-                        {
-                            "$PropertyPath": "CreatedAt"
-                        },
-                        {
-                            "$PropertyPath": "ChangedAt"
-                        }
+                        "CreatedAt",
+                        "ChangedAt"
                     ]
                 },
                 "@UI.DisplayName": {
@@ -976,9 +894,7 @@
                             {
                                 "$Path": "Price"
                             },
-                            {
-                                "$Int": "20"
-                            }
+                            "20"
                         ]
                     },
                     {
@@ -986,9 +902,7 @@
                             {
                                 "$Path": "Price"
                             },
-                            {
-                                "$Int": "10"
-                            }
+                            "10"
                         ]
                     },
                     {
@@ -996,9 +910,7 @@
                             {
                                 "$Path": "Price"
                             },
-                            {
-                                "$Int": "20"
-                            }
+                            "20"
                         ]
                     },
                     {
@@ -1006,9 +918,7 @@
                             {
                                 "$Path": "Price"
                             },
-                            {
-                                "$Int": "100"
-                            }
+                            "100"
                         ]
                     },
                     {
@@ -1016,9 +926,7 @@
                             {
                                 "$Path": "Fabric"
                             },
-                            {
-                                "$EnumMember": "Red"
-                            }
+                            "Red"
                         ]
                     },
                     {
@@ -1259,115 +1167,57 @@
     },
     "Model1": {
         "$Alias": "M1",
-        "@UI.ReferenceFacet": {
-            "$AnnotationPath": "@UI.LineItem"
-        },
-        "@UI.ReferenceFacet#OnNavPropTarget": {
-            "$AnnotationPath": "Product/Supplier/@UI.LineItem"
-        },
-        "@UI.ReferenceFacet#OnNavProp": {
-            "$AnnotationPath": "Product/Supplier/@UI.LineItem"
-        },
-        "@UI.ReferenceFacet#OnNavPropQualified": {
-            "$AnnotationPath": "Product/Supplier/@UI.LineItem#Tablet"
-        },
+        "@UI.ReferenceFacet": "@UI.LineItem",
+        "@UI.ReferenceFacet#OnNavPropTarget": "Product/Supplier/@UI.LineItem",
+        "@UI.ReferenceFacet#OnNavProp": "Product/Supplier/@UI.LineItem",
+        "@UI.ReferenceFacet#OnNavPropQualified": "Product/Supplier/@UI.LineItem#Tablet",
         "@UI.ReferenceFacet#ViaUrl": {
             "$UrlRef": "http://LineItem"
         },
-        "@UI.ReferenceFacet#complicated": {
-            "$AnnotationPath": "@X.Supplier#X/Contacts/@Y.ViewVariants"
-        },
-        "@UI.HyperLink": {
-            "$NavigationPropertyPath": "Supplier"
-        },
+        "@UI.ReferenceFacet#complicated": "@X.Supplier#X/Contacts/@Y.ViewVariants",
+        "@UI.HyperLink": "Supplier",
         "@Is.Null": {
             "$Null": null,
             "@Is.WithinNull": true
         },
         "@Is.Null@Is.NextToNull": true,
-        "@UI.SubTitle": {
-            "$Int": "1234"
-        },
+        "@UI.SubTitle": "1234",
         "@UI.SubTitle@A.Constant": true,
         "@A.Bool": true,
         "@A.Bool@A.AnnotatedBool": true,
-        "@A.Decimal": {
-            "$Decimal": "12.34"
-        },
-        "@A.Decimal#inf": {
-            "$Decimal": "INF"
-        },
-        "@A.Decimal#minusInf": {
-            "$Decimal": "-INF"
-        },
-        "@A.Decimal#nan": {
-            "$Decimal": "NaN"
-        },
+        "@A.Decimal": "12.34",
+        "@A.Decimal#inf": "INF",
+        "@A.Decimal#minusInf": "-INF",
+        "@A.Decimal#nan": "NaN",
         "@A.Float": 1.23456789e4,
-        "@A.Float#inf": {
-            "$Float": "INF"
-        },
-        "@A.Float#minusInf": {
-            "$Float": "-INF"
-        },
-        "@A.Float#nan": {
-            "$Float": "NaN"
-        },
+        "@A.Float#inf": "INF",
+        "@A.Float#minusInf": "-INF",
+        "@A.Float#nan": "NaN",
         "@A.NumericValues#Element": [
             1.23456789e4,
             -2E80,
-            {
-                "$Float": "-INF"
-            },
-            {
-                "$Float": "INF"
-            },
-            {
-                "$Float": "NaN"
-            },
-            {
-                "$Decimal": "1.23456789e4"
-            },
-            {
-                "$Decimal": "-2E80"
-            },
-            {
-                "$Decimal": "-INF"
-            },
-            {
-                "$Decimal": "INF"
-            },
-            {
-                "$Decimal": "NaN"
-            }
+            "-INF",
+            "INF",
+            "NaN",
+            "1.23456789e4",
+            "-2E80",
+            "-INF",
+            "INF",
+            "NaN"
         ],
-        "@An.Int": {
-            "$Int": "1234"
-        },
-        "@A.Very_Long_Int": {
-            "$Int": "9007199254740992"
-        },
+        "@An.Int": "1234",
+        "@A.Very_Long_Int": "9007199254740992",
         "@A.String": "1.23e4",
         "@A.String#withAmp": "Fast&Furious",
         "@A.String#ToBeEscaped": "A/\"good\"\r\nstory\\for\tkids",
-        "@A.Guid": {
-            "$Guid": "86a96539-871b-45cf-b96b-93dbc235105e"
-        },
-        "@A.Guid#Element": {
-            "$Guid": "86a96539-871b-45cf-b96b-93dbc235105e"
-        },
-        "@A.Date": {
-            "$Date": "2013-10-09"
-        },
+        "@A.Guid": "86a96539-871b-45cf-b96b-93dbc235105e",
+        "@A.Guid#Element": "86a96539-871b-45cf-b96b-93dbc235105e",
+        "@A.Date": "2013-10-09",
         "@Capabilities.UpdateRestrictions": {
             "Updatable": true,
             "NonUpdatableNavigationProperties": [
-                {
-                    "$NavigationPropertyPath": "Supplier"
-                },
-                {
-                    "$NavigationPropertyPath": "Category"
-                }
+                "Supplier",
+                "Category"
             ],
             "NonUpdatableNavigationProperties@Core.Description": "These navigation properties don't allow PATCH"
         },
@@ -1401,12 +1251,8 @@
             "@Is.InIf": true
         },
         "@UI.CollectionFacet#Contacts": [
-            {
-                "$AnnotationPath": "Supplier/@Communication.Contact"
-            },
-            {
-                "$AnnotationPath": "Customer/@Communication.Contact"
-            }
+            "Supplier/@Communication.Contact",
+            "Customer/@Communication.Contact"
         ],
         "@Some.Thing": {
             "$And": [
@@ -1445,9 +1291,7 @@
                 {
                     "$Not": {
                         "$Le": [
-                            {
-                                "$Float": "INF"
-                            },
+                            "INF",
                             null
                         ]
                     }
@@ -1829,9 +1673,7 @@
                                     {
                                         "$Path": "SupplierId"
                                     },
-                                    {
-                                        "$DateTimeOffset": "2013-04-08T23:00:00.0Z"
-                                    }
+                                    "2013-04-08T23:00:00.0Z"
                                 ],
                                 "$Function": "odata.UriEncode"
                             },
@@ -1858,21 +1700,11 @@
                 "$Scale": "variable",
                 "$Type": "Edm.Decimal"
             },
-            "@Some.Binary#two": {
-                "$Binary": "Zg"
-            },
-            "@Some.Binary#twoEqEq": {
-                "$Binary": "Zg=="
-            },
-            "@Some.Binary#three": {
-                "$Binary": "Zm8"
-            },
-            "@Some.Binary#threeEq": {
-                "$Binary": "Zm8="
-            },
-            "@Some.Binary": {
-                "$Binary": "HugoHase-_ab"
-            }
+            "@Some.Binary#two": "Zg",
+            "@Some.Binary#twoEqEq": "Zg==",
+            "@Some.Binary#three": "Zm8",
+            "@Some.Binary#threeEq": "Zm8=",
+            "@Some.Binary": "HugoHase-_ab"
         },
         "Address": {
             "$Kind": "ComplexType",
@@ -1940,9 +1772,7 @@
                 "@Measures.Unit": {
                     "$Path": "ShippingUnit"
                 },
-                "@Validation.Minimum": {
-                    "$Decimal": "0"
-                }
+                "@Validation.Minimum": "0"
             },
             "ShippingUnit": {
                 "$Nullable": true,
@@ -1954,37 +1784,27 @@
             "EvenNumber": {
                 "$Nullable": true,
                 "$Type": "Edm.Int32",
-                "@Validation.MultipleOf": {
-                    "$Decimal": "2"
-                }
+                "@Validation.MultipleOf": "2"
             },
             "PercentComplete": {
                 "$Nullable": true,
                 "$Type": "Edm.Byte",
-                "@Validation.Maximum": {
-                    "$Decimal": "100"
-                }
+                "@Validation.Maximum": "100"
             },
             "Epsilon": {
                 "$Nullable": true,
                 "$Type": "Edm.Decimal",
                 "$Scale": 0,
-                "@Validation.Minimum": {
-                    "$Decimal": "0"
-                },
+                "@Validation.Minimum": "0",
                 "@Validation.Minimum@Validation.Exclusive": true,
-                "@Validation.Maximum": {
-                    "$Decimal": "1"
-                },
+                "@Validation.Maximum": "1",
                 "@Validation.Maximum@Validation.Exclusive": true
             },
             "Temperature": {
                 "$Nullable": true,
                 "$Type": "Edm.Decimal",
                 "$Scale": 0,
-                "@Validation.Minimum": {
-                    "$Decimal": "0"
-                },
+                "@Validation.Minimum": "0",
                 "@Validation.Minimum@Validation.Exclusive": false
             },
             "EmailAddress": {
@@ -2204,12 +2024,8 @@
                 "@Y.Something": {
                     "SomeProperty": "Some Thing",
                     "AnotherProperty": "A string with spaces",
-                    "SomeTime": {
-                        "$Duration": "P20D"
-                    },
-                    "MoreTime": {
-                        "$Duration": "P20D"
-                    },
+                    "SomeTime": "P20D",
+                    "MoreTime": "P20D",
                     "Contacts": {
                         "$Path": "MyContacts"
                     },
