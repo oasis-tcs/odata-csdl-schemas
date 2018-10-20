@@ -254,7 +254,7 @@
       <xs:element name="String" type="edm:TStringConstantExpression" />
       <xs:element name="TimeOfDay" type="edm:TTimeOfDayConstantExpression" />
       <!-- Dynamic Expressions -->
-      <xs:element name="AnnotationPath" type="edm:TModelPathExpression" />
+      <xs:element name="AnnotationPath" type="edm:TModelPath" />
       <xs:element name="Apply" type="edm:TApplyExpression" />
       <xs:element name="Cast" type="edm:TCastOrIsOfExpression" />
       <xs:element name="Collection" type="edm:TCollectionExpression" />
@@ -281,10 +281,10 @@
       <xs:element name="LabeledElement" type="edm:TLabeledElementExpression" />
       <xs:element name="LabeledElementReference" type="edm:TLabeledElementReferenceExpression" />
       <xs:element name="Null" type="edm:TNullExpression" />
-      <xs:element name="ModelElementPath" type="edm:TModelPathExpression" />
-      <xs:element name="NavigationPropertyPath" type="edm:TModelPathExpression" />
-      <xs:element name="Path" type="edm:TPathExpression" />
-      <xs:element name="PropertyPath" type="edm:TModelPathExpression" />
+      <xs:element name="ModelElementPath" type="edm:TModelPath" />
+      <xs:element name="NavigationPropertyPath" type="edm:TModelPath" />
+      <xs:element name="Path" type="edm:TInstancePath" />
+      <xs:element name="PropertyPath" type="edm:TModelPath" />
       <xs:element name="Record" type="edm:TRecordExpression" />
       <xs:element name="UrlRef" type="edm:TOneChildExpression" />
     </xs:choice>
@@ -304,11 +304,11 @@
     <xs:attribute name="String" type="xs:string" use="optional" />
     <xs:attribute name="TimeOfDay" type="edm:time" use="optional" />
     <!-- Dynamic Expressions -->
-    <xs:attribute name="AnnotationPath" type="edm:TPathWithTermSegments" use="optional" />
-    <xs:attribute name="ModelElementPath" type="edm:TPathWithTermSegments" use="optional" />
-    <xs:attribute name="NavigationPropertyPath" type="edm:TPathWithTermSegments" use="optional" />
-    <xs:attribute name="Path" type="xs:string" use="optional" />
-    <xs:attribute name="PropertyPath" type="edm:TPathWithTermSegments" use="optional" />
+    <xs:attribute name="AnnotationPath" type="edm:TModelPath" use="optional" />
+    <xs:attribute name="ModelElementPath" type="edm:TModelPath" use="optional" />
+    <xs:attribute name="NavigationPropertyPath" type="edm:TModelPath" use="optional" />
+    <xs:attribute name="Path" type="edm:TInstancePath" use="optional" />
+    <xs:attribute name="PropertyPath" type="edm:TModelPath" use="optional" />
     <xs:attribute name="UrlRef" type="xs:anyURI" use="optional" />
   </xs:attributeGroup>
   <!--
@@ -442,16 +442,6 @@
     <xs:sequence>
       <xs:element ref="edm:Annotation" minOccurs="0" maxOccurs="unbounded" />
     </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name="TModelPathExpression">
-    <xs:simpleContent>
-      <xs:extension base="edm:TPathWithTermSegments" />
-    </xs:simpleContent>
-  </xs:complexType>
-  <xs:complexType name="TPathExpression">
-    <xs:simpleContent>
-      <xs:extension base="xs:string" />
-    </xs:simpleContent>
   </xs:complexType>
   <xs:complexType name="TRecordExpression">
     <xs:choice minOccurs="0" maxOccurs="unbounded">
@@ -615,8 +605,12 @@
         value="[\p{L}\p{Nl}_][\p{L}\p{Nl}\p{Nd}\p{Mn}\p{Mc}\p{Pc}\p{Cf}]{0,}([\./][\p{L}\p{Nl}_][\p{L}\p{Nl}\p{Nd}\p{Mn}\p{Mc}\p{Pc}\p{Cf}]{0,}){0,}" />
     </xs:restriction>
   </xs:simpleType>
-  <xs:simpleType name="TPathWithTermSegments">
-    <!-- Note: this pattern is overly generous, for the strict definition see http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part3-csdl.html -->
+  <xs:simpleType name="TInstancePath">
+    <!-- Note: this type is overly generous, for the strict definition see http://docs.oasis-open.org/odata/odata-csdl-xml/v4.01/odata-csdl-xml-v4.01.html#sec_PathSyntax -->
+    <xs:restriction base="xs:string" />
+  </xs:simpleType>
+  <xs:simpleType name="TModelPath">
+    <!-- Note: this type is overly generous, for the strict definition see http://docs.oasis-open.org/odata/odata-csdl-xml/v4.01/odata-csdl-xml-v4.01.html#sec_PathSyntax -->
     <xs:restriction base="xs:string">
       <!-- The below pattern represents the allowed identifiers in the ECMAScript specification plus the '/' for path segment separation
         and
@@ -628,7 +622,7 @@
   <xs:simpleType name="TTarget">
     <xs:restriction base="xs:string">
       <!-- The below pattern represents the allowed identifiers in the ECMAScript specification plus the '.' for namespace qualification,
-      the '/' for path segment separation, and parentheses and comma for overload targeting -->
+        the '/' for path segment separation, and parentheses and comma for overload targeting -->
       <xs:pattern
         value="[\p{L}\p{Nl}_][\p{L}\p{Nl}\p{Nd}\p{Mn}\p{Mc}\p{Pc}\p{Cf}]{0,}([\./\(,][\p{L}\p{Nl}_][\p{L}\p{Nl}\p{Nd}\p{Mn}\p{Mc}\p{Pc}\p{Cf}]{0,}){0,}\)?" />
     </xs:restriction>
@@ -862,7 +856,8 @@
   <!-- binary data in base64url encoding -->
   <xs:simpleType name="binary">
     <xs:restriction base="xs:string">
-      <xs:pattern value="([A-Za-z0-9_\-]{4})*([A-Za-z0-9_\-]{3}[A-Za-z0-9_\-]|[A-Za-z0-9_\-]{2}[AEIMQUYcgkosw048]=?|[A-Za-z0-9_\-][AQgw](==)?)?" />
+      <xs:pattern
+        value="([A-Za-z0-9_\-]{4})*([A-Za-z0-9_\-]{3}[A-Za-z0-9_\-]|[A-Za-z0-9_\-]{2}[AEIMQUYcgkosw048]=?|[A-Za-z0-9_\-][AQgw](==)?)?" />
     </xs:restriction>
   </xs:simpleType>
   <!--boolean without 0 and 1 -->
