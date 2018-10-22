@@ -547,6 +547,7 @@
     </xs:choice>
     <xs:attribute name="Name" type="edm:TSimpleIdentifier" use="required" />
     <xs:attribute name="Type" type="edm:TQualifiedName" use="required" />
+    <xs:attribute name="Nullable" type="xs:boolean" use="optional" />
   </xs:complexType>
   <xs:complexType name="TActionImport">
     <xs:sequence>
