@@ -2,7 +2,7 @@
     "$Version": "4.01",
     "$EntityContainer": "org.example.DemoService",
     "$Reference": {
-        "http://tinyurl.com/Org-OData-Measures-V1": {
+        "https://tinyurl.com/Org-OData-Measures-V1-xml": {
             "@Some.Term": true,
             "$Include": [
                 {
@@ -11,7 +11,7 @@
                 }
             ]
         },
-        "http://docs.oasis-open.org/odata/odata/v4.0/errata02/os/complete/vocabularies/Org.OData.Validation.V1.xml": {
+        "https://tinyurl.com/Org-OData-Validation-V1-xml": {
             "$Include": [
                 {
                     "$Alias": "Validation",
@@ -76,14 +76,18 @@
                 {
                     "$Namespace": "org.example.seo",
                     "$Alias": "seo"
-                },
+                }
+            ]
+        },
+        "https://example.org/vocabs/person": {
+            "$Include": [
                 {
                     "$Namespace": "org.example.person",
                     "$Alias": "person"
                 }
             ]
         },
-        "http://vocabs.odata.org/capabilities/v1": {
+        "https://tinyurl.com/Org-OData-Capabilities-V1-xml": {
             "$Include": [
                 {
                     "$Namespace": "Org.OData.Capabilities.V1",
@@ -1130,6 +1134,7 @@
                     "@self.Reason": "Private"
                 },
                 "@person.Employee": {
+                    "@type": "https://example.org/vocabs/person#org.example.person.Manager",
                     "@Core.Description": "Annotation on record",
                     "GivenName": {
                         "$Path": "FirstName"
@@ -2041,6 +2046,7 @@
                 },
                 "@Y.ArchivedMovies@custom.ItemIsA": "X.Movie",
                 "@Y.Something": {
+                    "@type": "#Y.SomeDerivedType",
                     "SomeProperty": "Some Thing",
                     "AnotherProperty": "A string with spaces",
                     "SomeTime": "P20D",
@@ -2053,6 +2059,10 @@
                         "$Path": "MyBestFriends"
                     },
                     "VIPs@custom.ItemIsA": "X.Person"
+                },
+                "@Y.Something#referenced": {
+                    "@type": "http://vocabs.odata.org/core/v1#Core.MessageType",
+                    "message": "Hello"
                 }
             },
             "self.MyEntityContainer/MyEntitySet/self.MyEntityType/MyProperty": {
