@@ -709,7 +709,7 @@
           ]
         },
         "$Type": {
-          "description": "Qualified name of an entity type",
+          "description": "Qualified name of entity type",
           "type": "string"
         },
         "$NavigationPropertyBinding": {
@@ -737,7 +737,7 @@
       },
       "properties": {
         "$Type": {
-          "description": "Qualified name of an entity type",
+          "description": "Qualified name of entity type",
           "type": "string"
         },
         "$NavigationPropertyBinding": {
@@ -758,10 +758,11 @@
       },
       "properties": {
         "$Action": {
-          "description": "Qualified name of an action",
+          "description": "Qualified name of action",
           "type": "string"
         },
         "$EntitySet": {
+          "description": "Entity set of result entities",
           "type": "string"
         }
       },
@@ -780,10 +781,11 @@
       },
       "properties": {
         "$Function": {
-          "description": "Qualified name of a function",
+          "description": "Qualified name of function",
           "type": "string"
         },
         "$EntitySet": {
+          "description": "Entity set of result entities",
           "type": "string"
         },
         "$IncludeInServiceDocument": {
@@ -818,17 +820,21 @@
         },
         "properties": {
           "$Name": {
+            "description": "Parameter name",
             "type": "string"
           },
           "$Type": {
+            "description": "Qualified name of parameter type",
             "type": "string",
             "default": "Edm.String"
           },
           "$Collection": {
+            "description": "Collection-valued parameter",
             "type": "boolean",
             "default": true
           },
           "$Nullable": {
+            "description": "Nullable parameter",
             "type": "boolean",
             "default": false
           },
@@ -864,14 +870,17 @@
       },
       "properties": {
         "$Type": {
+          "description": "Qualified name of return type",
           "type": "string",
           "default": "Edm.String"
         },
         "$Collection": {
+          "description": "Returns a collection",
           "type": "boolean",
           "default": true
         },
         "$Nullable": {
+          "description": "Can return null",
           "type": "boolean",
           "default": false
         },
@@ -893,7 +902,7 @@
       }
     },
     "MaxLength": {
-      "description": "Maximum length of a string or binary value",
+      "description": "Maximum length of string or binary value",
       "type": "integer",
       "minimum": 1
     },
