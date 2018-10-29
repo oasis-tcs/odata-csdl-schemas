@@ -351,8 +351,6 @@
         </EntitySet>
         <Singleton Name="MainSupplier" Type="self.Supplier" />
         <ActionImport Name="LeaveRequestApproval" Action="self.Approval" />
-        <ActionImport Name="AdvertisedActionImport" Action="self.Approval" IncludeInServiceDocument="true" />
-        <ActionImport Name="HiddenActionImport" Action="self.Approval" IncludeInServiceDocument="false" />
         <FunctionImport Name="ProductsByRating" Function="self.ProductsByRating" EntitySet="Products" />
         <FunctionImport Name="AdvertisedFunctionImport" Function="self.ProductsByRating" IncludeInServiceDocument="true" />
         <FunctionImport Name="HiddenFunctionImport" Function="self.ProductsByRating" IncludeInServiceDocument="false" />
