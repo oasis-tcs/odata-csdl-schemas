@@ -802,7 +802,8 @@
       "description": "Navigation Property Binding",
       "type": "object",
       "patternProperties": {
-        "": {
+        ".*": {
+          "description": "Path to navigation property : path to target entity set",
           "type": "string"
         }
       }
