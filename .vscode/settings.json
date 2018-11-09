@@ -1,0 +1,13 @@
+{
+    "json.schemas": [
+        {
+            "fileMatch": [
+                "examples/*.json"
+            ],
+            "url": "./schemas/csdl.schema.json"
+        }
+    ],
+    "xml.catalogs": [
+        "c:/git/odata-csdl-schemas/catalog.xml"
+    ]
+}
