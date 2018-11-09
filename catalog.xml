@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
+  <public publicId="http://docs.oasis-open.org/odata/ns/edmx" uri="./schemas/edmx.xsd" />
+  <uri name="http://docs.oasis-open.org/odata/ns/edmx" uri="./schemas/edmx.xsd" />
+  <public publicId="http://docs.oasis-open.org/odata/ns/edm" uri="./schemas/edm.xsd" />
+  <uri name="http://docs.oasis-open.org/odata/ns/edm" uri="./schemas/edm.xsd" />
+</catalog>
