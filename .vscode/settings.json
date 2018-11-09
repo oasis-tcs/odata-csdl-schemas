@@ -8,6 +8,6 @@
         }
     ],
     "xml.catalogs": [
-        "c:/git/odata-csdl-schemas/catalog.xml"
+        "./catalog.xml"
     ]
 }
