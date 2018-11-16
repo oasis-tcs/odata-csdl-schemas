@@ -681,6 +681,11 @@
         "$Type": {
           "type": "string"
         },
+        "$Nullable": {
+          "description": "Nullable singleton",
+          "type": "boolean",
+          "default": false
+        },
         "$NavigationPropertyBinding": {
           "$ref": "#/definitions/NavigationPropertyBinding"
         }

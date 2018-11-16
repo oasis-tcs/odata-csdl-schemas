@@ -350,6 +350,7 @@
           <NavigationPropertyBinding Path="Products" Target="self.DemoService/Products" />
         </EntitySet>
         <Singleton Name="MainSupplier" Type="self.Supplier" />
+        <Singleton Name="OptionalAlternativeSupplier" Nullable="true" Type="self.Supplier" />
         <ActionImport Name="LeaveRequestApproval" Action="self.Approval" />
         <ActionImport Name="AdvertisedActionImport" Action="self.Approval" IncludeInServiceDocument="true" />
         <ActionImport Name="HiddenActionImport" Action="self.Approval" IncludeInServiceDocument="false" />
