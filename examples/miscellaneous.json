@@ -612,6 +612,10 @@
             "MainSupplier": {
                 "$Type": "self.Supplier"
             },
+            "OptionalAlternativeSupplier": {
+                "$Nullable": true,
+                "$Type": "self.Supplier"
+            },
             "LeaveRequestApproval": {
                 "$Action": "self.Approval"
             },
