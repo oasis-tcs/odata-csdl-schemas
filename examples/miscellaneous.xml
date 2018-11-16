@@ -2,13 +2,11 @@
 <!-- 4 CSDL XML Document, -->
 <!--Example 2 -->
 <edmx:Edmx xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" xmlns="http://docs.oasis-open.org/odata/ns/edm" Version="4.01">
-  <edmx:Reference Uri="http://tinyurl.com/Org-OData-Measures-V1">
+  <edmx:Reference Uri="https://tinyurl.com/Org-OData-Measures-V1-xml">
     <edmx:Include Alias="Measures" Namespace="Org.OData.Measures.V1" />
     <Annotation Term="Some.Term" />
   </edmx:Reference>
-  <edmx:Reference
-    Uri="http://docs.oasis-open.org/odata/odata/v4.0/errata02/os/complete/vocabularies/Org.OData.Validation.V1.xml"
-  >
+  <edmx:Reference Uri="https://tinyurl.com/Org-OData-Validation-V1-xml">
     <edmx:Include Alias="Validation" Namespace="Org.OData.Validation.V1" />
   </edmx:Reference>
   <edmx:Reference Uri="http://somewhere/Vocabulary/V1">
@@ -27,13 +25,15 @@
     <edmx:Include Namespace="Dummy.Namespace7" Alias="SearchVocabulary" />
     <edmx:Include Namespace="Org.OData.Communication.V1" Alias="Communication" />
     <edmx:Include Namespace="org.example.seo" Alias="seo" />
+  </edmx:Reference>
+  <edmx:Reference Uri="https://example.org/vocabs/person">
     <edmx:Include Namespace="org.example.person" Alias="person" />
   </edmx:Reference>
   <!-- 4.1 Reference -->
   <!-- Example 3 -->
   <!-- 4.2 Included Schema -->
   <!-- Example 4 -->
-  <edmx:Reference Uri="http://vocabs.odata.org/capabilities/v1">
+  <edmx:Reference Uri="https://tinyurl.com/Org-OData-Capabilities-V1-xml">
     <edmx:Include Namespace="Org.OData.Capabilities.V1" Alias="Capabilities" />
   </edmx:Reference>
   <edmx:Reference Uri="http://vocabs.odata.org/core/v1">
@@ -876,7 +876,7 @@
 
         <!-- Example 85: record with two structural and two navigation properties -->
         <Annotation Term="org.example.person.Employee">
-          <Record>
+          <Record Type="org.example.person.Manager">
             <Annotation Term="Core.Description" String="Annotation on record" />
             <PropertyValue Property="GivenName" Path="FirstName">
               <Annotation Term="Core.Description" String="Annotation on record member" />
@@ -1453,7 +1453,7 @@
       </ComplexType>
       <Annotations Target="Some.EntityType">
         <Annotation Term="Y.Something">
-          <Record>
+          <Record Type="Y.SomeDerivedType">
             <PropertyValue Property="SomeProperty" String="Some Thing" />
             <PropertyValue Property="AnotherProperty">
               <String>A string with spaces</String>
@@ -1470,6 +1470,11 @@
               <Annotation Term="custom.ItemIsA" String="X.Person" />
               <Path>MyBestFriends</Path>
             </PropertyValue>
+          </Record>
+        </Annotation>
+        <Annotation Term="Y.Something" Qualifier="referenced">
+          <Record Type="Core.MessageType">
+            <PropertyValue Property="message" String="Hello" />
           </Record>
         </Annotation>
       </Annotations>
