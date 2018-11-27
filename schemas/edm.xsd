@@ -617,7 +617,7 @@
         and
         the '.' for namespace qualification inside the segments. -->
       <xs:pattern
-        value="/?@?[\p{L}\p{Nl}_][\p{L}\p{Nl}\p{Nd}\p{Mn}\p{Mc}\p{Pc}\p{Cf}]{0,}(([\./#@]|/@)[\p{L}\p{Nl}_][\p{L}\p{Nl}\p{Nd}\p{Mn}\p{Mc}\p{Pc}\p{Cf}]{0,}){0,}(/$count)?" />
+        value="(/?@?[\p{L}\p{Nl}_][\p{L}\p{Nl}\p{Nd}\p{Mn}\p{Mc}\p{Pc}\p{Cf}]{0,}(([\./#@]|/@)[\p{L}\p{Nl}_][\p{L}\p{Nl}\p{Nd}\p{Mn}\p{Mc}\p{Pc}\p{Cf}]{0,}){0,}(/$count)?)?" />
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name="TTarget">
