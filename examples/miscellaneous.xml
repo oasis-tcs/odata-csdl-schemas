@@ -1519,6 +1519,5 @@
 
     <Schema Namespace="Intentionally.Empty" />
 
-
   </edmx:DataServices>
 </edmx:Edmx>
