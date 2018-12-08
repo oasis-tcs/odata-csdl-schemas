@@ -1501,7 +1501,24 @@
 
     </Schema>
 
+    <Schema Namespace="ODATA1221">
+
+      <EnumType Name="Color">
+        <Member Name="Taupe" Value="1" />
+        <Member Name="GreyBrown" Value="1" />
+      </EnumType>
+
+      <Annotation Term="True.Or.False">
+        <Eq>
+          <EnumMember>ODATA1221.Color/Taupe</EnumMember>
+          <EnumMember>ODATA1221.Color/GreyBrown</EnumMember>
+        </Eq>
+      </Annotation>
+
+    </Schema>
+
     <Schema Namespace="Intentionally.Empty" />
+
 
   </edmx:DataServices>
 </edmx:Edmx>
