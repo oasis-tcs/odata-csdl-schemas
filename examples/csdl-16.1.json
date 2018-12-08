@@ -194,16 +194,16 @@
                     "Concurrency"
                 ]
             },
-            "Countries": {
-                "$Collection": true,
-                "$Type": "ODataDemo.Country"
-            },
             "MainSupplier": {
                 "$Type": "self.Supplier",
                 "$NavigationPropertyBinding": {
                     "Products": "Products"
                 },
                 "@Core.Description": "Primary Supplier"
+            },
+            "Countries": {
+                "$Collection": true,
+                "$Type": "ODataDemo.Country"
             },
             "ProductsByRating": {
                 "$EntitySet": "Products",
