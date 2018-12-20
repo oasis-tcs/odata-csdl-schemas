@@ -599,13 +599,6 @@
             "LeaveRequestApproval": {
                 "$Action": "self.Approval"
             },
-            "AdvertisedActionImport": {
-                "$Action": "self.Approval",
-                "$IncludeInServiceDocument": true
-            },
-            "HiddenActionImport": {
-                "$Action": "self.Approval"
-            },
             "ProductsByRating": {
                 "$Function": "self.ProductsByRating",
                 "$EntitySet": "Products"

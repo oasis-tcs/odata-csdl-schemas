@@ -756,6 +756,7 @@
     "ActionImport": {
       "description": "Action Import",
       "type": "object",
+      "additionalProperties": false,
       "patternProperties": {
         "^@": {
           "$ref": "#/definitions/Annotation"

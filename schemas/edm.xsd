@@ -551,12 +551,12 @@
       <xs:element ref="edm:Annotation" minOccurs="0" maxOccurs="unbounded" />
     </xs:sequence>
     <xs:attribute name="Function" type="edm:TQualifiedName" use="required" />
+    <xs:attribute name="IncludeInServiceDocument" type="xs:boolean" use="optional" default="false" />
     <xs:attributeGroup ref="edm:TActionFunctionImportAttributes" />
   </xs:complexType>
   <xs:attributeGroup name="TActionFunctionImportAttributes">
     <xs:attribute name="Name" type="edm:TSimpleIdentifier" use="required" />
     <xs:attribute name="EntitySet" type="edm:TPath" use="optional" />
-    <xs:attribute name="IncludeInServiceDocument" type="xs:boolean" use="optional" default="false" />
   </xs:attributeGroup>
   <!--
     general purpose simple types
