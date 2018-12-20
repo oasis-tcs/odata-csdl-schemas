@@ -317,7 +317,7 @@
         <ReturnType Type="Collection(self.Product)" />
       </Function>
       <!-- no example yet: overload without parameters -->
-      <Function Name="TopSellingProducts">
+      <Function Name="TopSellingProducts" IsComposable="true">
         <ReturnType Type="Collection(self.Product)" />
       </Function>
 

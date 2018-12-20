@@ -533,6 +533,7 @@
             },
             {
                 "$Kind": "Function",
+                "$IsComposable": true,
                 "$ReturnType": {
                     "$Collection": true,
                     "$Type": "self.Product"
@@ -588,27 +589,6 @@
                 },
                 "@UI.DisplayName": "Supplier Directory"
             },
-            "Categories34": {
-                "$Collection": true,
-                "$Type": "self.Category",
-                "$NavigationPropertyBinding": {
-                    "Products": "SomeSet"
-                }
-            },
-            "Categories35": {
-                "$Collection": true,
-                "$Type": "self.Category",
-                "$NavigationPropertyBinding": {
-                    "Products": "SomeModel.SomeContainer/SomeSet"
-                }
-            },
-            "Categories37": {
-                "$Collection": true,
-                "$Type": "self.Category",
-                "$NavigationPropertyBinding": {
-                    "Products/Supplier": "Suppliers"
-                }
-            },
             "MainSupplier": {
                 "$Type": "self.Supplier"
             },
@@ -629,6 +609,27 @@
             },
             "HiddenFunctionImport": {
                 "$Function": "self.ProductsByRating"
+            },
+            "Categories34": {
+                "$Collection": true,
+                "$Type": "self.Category",
+                "$NavigationPropertyBinding": {
+                    "Products": "SomeSet"
+                }
+            },
+            "Categories35": {
+                "$Collection": true,
+                "$Type": "self.Category",
+                "$NavigationPropertyBinding": {
+                    "Products": "SomeModel.SomeContainer/SomeSet"
+                }
+            },
+            "Categories37": {
+                "$Collection": true,
+                "$Type": "self.Category",
+                "$NavigationPropertyBinding": {
+                    "Products/Supplier": "Suppliers"
+                }
             }
         },
         "Product2": {
@@ -1861,6 +1862,7 @@
         "IntegerDecimal10": {
             "$Kind": "TypeDefinition",
             "$UnderlyingType": "Edm.Decimal",
+            "$Scale": 0,
             "$Precision": 10,
             "@Core.Description": "A ten-digit integer"
         },
