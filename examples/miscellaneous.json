@@ -533,6 +533,7 @@
             },
             {
                 "$Kind": "Function",
+                "$IsComposable": true,
                 "$ReturnType": {
                     "$Collection": true,
                     "$Type": "self.Product"
@@ -1868,6 +1869,7 @@
         "IntegerDecimal10": {
             "$Kind": "TypeDefinition",
             "$UnderlyingType": "Edm.Decimal",
+            "$Scale": 0,
             "$Precision": 10,
             "@Core.Description": "A ten-digit integer"
         },
