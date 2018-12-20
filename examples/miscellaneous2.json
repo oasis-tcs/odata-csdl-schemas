@@ -14,6 +14,16 @@
         "Extending": {
             "$Kind": "EntityContainer",
             "$Extends": "Some.Other.Schema.Base",
+            "Bar": {
+                "$Function": "One.Foo",
+                "$IncludeInServiceDocument": true,
+                "$EntitySet": "Model.Extending/Freds"
+            },
+            "CreatedEntities": {
+                "$Function": "Model.CreatedEntities",
+                "$EntitySet": "Waldos",
+                "$IncludeInServiceDocument": true
+            },
             "Waldos": {
                 "$Collection": true,
                 "$Type": "Two.Waldo"
@@ -26,16 +36,6 @@
                     "MoreWaldos": "org.example.Container/Freds",
                     "EvenMoreWaldos": "org.example.Container/Orders/Items/Model.E/Nav"
                 }
-            },
-            "Bar": {
-                "$Function": "One.Foo",
-                "$IncludeInServiceDocument": true,
-                "$EntitySet": "Model.Extending/Freds"
-            },
-            "CreatedEntities": {
-                "$Function": "Model.CreatedEntities",
-                "$EntitySet": "Waldos",
-                "$IncludeInServiceDocument": true
             }
         }
     },
