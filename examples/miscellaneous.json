@@ -533,6 +533,7 @@
             },
             {
                 "$Kind": "Function",
+                "$IsComposable": true,
                 "$ReturnType": {
                     "$Collection": true,
                     "$Type": "self.Product"
@@ -596,13 +597,6 @@
                 "$Type": "self.Supplier"
             },
             "LeaveRequestApproval": {
-                "$Action": "self.Approval"
-            },
-            "AdvertisedActionImport": {
-                "$Action": "self.Approval",
-                "$IncludeInServiceDocument": true
-            },
-            "HiddenActionImport": {
                 "$Action": "self.Approval"
             },
             "ProductsByRating": {

@@ -317,7 +317,7 @@
         <ReturnType Type="Collection(self.Product)" />
       </Function>
       <!-- no example yet: overload without parameters -->
-      <Function Name="TopSellingProducts">
+      <Function Name="TopSellingProducts" IsComposable="true">
         <ReturnType Type="Collection(self.Product)" />
       </Function>
 
@@ -352,8 +352,6 @@
         <Singleton Name="MainSupplier" Type="self.Supplier" />
         <Singleton Name="OptionalAlternativeSupplier" Nullable="true" Type="self.Supplier" />
         <ActionImport Name="LeaveRequestApproval" Action="self.Approval" />
-        <ActionImport Name="AdvertisedActionImport" Action="self.Approval" IncludeInServiceDocument="true" />
-        <ActionImport Name="HiddenActionImport" Action="self.Approval" IncludeInServiceDocument="false" />
         <FunctionImport Name="ProductsByRating" Function="self.ProductsByRating" EntitySet="Products" />
         <FunctionImport Name="AdvertisedFunctionImport" Function="self.ProductsByRating" IncludeInServiceDocument="true" />
         <FunctionImport Name="HiddenFunctionImport" Function="self.ProductsByRating" IncludeInServiceDocument="false" />

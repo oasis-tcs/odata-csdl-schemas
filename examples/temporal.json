@@ -1,0 +1,147 @@
+{
+    "$Version": "4.0",
+    "$EntityContainer": "org.example.odata.orgservice.Default",
+    "$Reference": {
+        "https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.json": {
+            "$Include": [
+                {
+                    "$Namespace": "Org.OData.Core.V1",
+                    "$Alias": "Core"
+                }
+            ]
+        },
+        "https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Temporal.V1.json": {
+            "$Include": [
+                {
+                    "$Alias": "Temporal",
+                    "$Namespace": "Org.OData.Temporal.V1"
+                }
+            ]
+        }
+    },
+    "org.example.odata.orgservice": {
+        "$Alias": "OrgModel",
+        "Employee": {
+            "$Kind": "EntityType",
+            "$Key": [
+                "ID"
+            ],
+            "ID": {
+
+            },
+            "Name": {
+
+            },
+            "Jobtitle": {
+                "$Nullable": true
+            },
+            "Department": {
+                "$Kind": "NavigationProperty",
+                "$Nullable": true,
+                "$Type": "OrgModel.Department"
+            }
+        },
+        "Department": {
+            "$Kind": "EntityType",
+            "$Key": [
+                "ID"
+            ],
+            "ID": {
+
+            },
+            "Name": {
+
+            },
+            "Employees": {
+                "$Kind": "NavigationProperty",
+                "$Collection": true,
+                "$Type": "OrgModel.Employee"
+            },
+            "Budget": {
+                "$Kind": "NavigationProperty",
+                "$Collection": true,
+                "$Type": "OrgModel.DepartmentBudget"
+            }
+        },
+        "DepartmentBudget": {
+            "$Kind": "EntityType",
+            "@Temporal.From": {
+                "$Path": "From"
+            },
+            "@Temporal.To": {
+                "$Path": "To"
+            },
+            "@Temporal.SystemFrom": {
+                "$Path": "ChangedAt"
+            },
+            "@Temporal.ObjectKey": [
+                "Department/ID"
+            ],
+            "$Key": [
+                "ID"
+            ],
+            "ID": {
+
+            },
+            "From": {
+                "$Type": "Edm.Date"
+            },
+            "To": {
+                "$Type": "Edm.Date"
+            },
+            "Budget": {
+                "$Nullable": true,
+                "$Type": "Edm.Decimal",
+                "$Scale": 0
+            },
+            "ChangedAt": {
+                "$Type": "Edm.DateTimeOffset",
+                "$Precision": 0,
+                "@Core.Computed": true
+            },
+            "Department": {
+                "$Kind": "NavigationProperty",
+                "$Collection": true,
+                "$Type": "OrgModel.Department"
+            }
+        },
+        "Default": {
+            "$Kind": "EntityContainer",
+            "Employees": {
+                "$Collection": true,
+                "$Type": "OrgModel.Employee",
+                "@Temporal.TemporalSupport": {
+                    "ApplicationTime": {
+                        "@type": "https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Temporal.V1.xml#Temporal.GranularityDate",
+                        "SupportedQueries": "TimeTravel,TimeSeries"
+                    }
+                }
+            },
+            "Departments": {
+                "$Collection": true,
+                "$Type": "OrgModel.Department",
+                "@Temporal.TemporalSupport": {
+                    "ApplicationTime": {
+                        "@type": "https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Temporal.V1.xml#Temporal.GranularityDate",
+                        "SupportedQueries": "TimeTravel,TimeSeries"
+                    }
+                }
+            },
+            "DepartmentBudgets": {
+                "$Collection": true,
+                "$Type": "OrgModel.DepartmentBudget",
+                "@Temporal.TemporalSupported": {
+                    "ApplicationTime": {
+                        "@type": "https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Temporal.V1.xml#Temporal.GranularityDate",
+                        "SupportedQueries": "TimeTravel,TimeSeries"
+                    },
+                    "SystemTime": {
+                        "@type": "https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Temporal.V1.xml#Temporal.GranularityDateTimeOffset",
+                        "Precision": "0",
+                        "SupportedQueries": "TimeTravel,TimeSeries"
+                    }
+                }
+            }
+        }
+    }
+}
