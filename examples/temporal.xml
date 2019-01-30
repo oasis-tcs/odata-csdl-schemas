@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Version="4.0">
+  <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
+    <edmx:Include Namespace="Org.OData.Core.V1" Alias="Core" />
+  </edmx:Reference>
+  <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Temporal.V1.xml">
+    <edmx:Include Alias="Temporal" Namespace="Org.OData.Temporal.V1" />
+  </edmx:Reference>
+  <edmx:DataServices>
+    <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Alias="OrgModel" Namespace="org.example.odata.orgservice">
+      <EntityType Name="Employee">
+        <Key>
+          <PropertyRef Name="ID" />
+        </Key>
+        <Property Name="ID" Type="Edm.String" Nullable="false" />
+        <Property Name="Name" Type="Edm.String" Nullable="false" />
+        <Property Name="Jobtitle" Type="Edm.String" />
+        <NavigationProperty Name="Department" Type="OrgModel.Department" />
+      </EntityType>
+
+      <EntityType Name="Department">
+        <Key>
+          <PropertyRef Name="ID" />
+        </Key>
+        <Property Name="ID" Type="Edm.String" Nullable="false" />
+        <Property Name="Name" Type="Edm.String" Nullable="false" />
+        <NavigationProperty Name="Employees" Type="Collection(OrgModel.Employee)" />
+        <NavigationProperty Name="Budget" Type="Collection(OrgModel.DepartmentBudget)" />
+      </EntityType>
+
+      <EntityType Name="DepartmentBudget">
+        <Annotation Term="Temporal.From" Path="From" />
+        <Annotation Term="Temporal.To" Path="To" />
+        <Annotation Term="Temporal.SystemFrom" Path="ChangedAt" />
+        <Annotation Term="Temporal.ObjectKey">
+          <Collection>
+            <PropertyPath>Department/ID</PropertyPath>
+          </Collection>
+        </Annotation>
+        <Key>
+          <PropertyRef Name="ID" />
+        </Key>
+        <Property Name="ID" Type="Edm.String" Nullable="false" />
+        <Property Name="From" Type="Edm.Date" Nullable="false" />
+        <Property Name="To" Type="Edm.Date" Nullable="false" />
+        <Property Name="Budget" Type="Edm.Decimal" />
+        <Property Name="ChangedAt" Type="Edm.DateTimeOffset" Nullable="false">
+          <Annotation Term="Core.Computed" />
+        </Property>
+        <NavigationProperty Name="Department" Type="Collection(OrgModel.Department)" />
+      </EntityType>
+
+      <EntityContainer Name="Default">
+        <EntitySet Name="Employees" EntityType="OrgModel.Employee">
+          <Annotation Term="Temporal.TemporalSupport">
+            <Record>
+              <PropertyValue Property="ApplicationTime">
+                <Record Type="Temporal.GranularityDate">
+                  <PropertyValue Property="SupportedQueries"
+                    EnumMember="Temporal.QueryType/TimeTravel Temporal.QueryType/TimeSeries" />
+                </Record>
+              </PropertyValue>
+            </Record>
+          </Annotation>
+        </EntitySet>
+
+        <EntitySet Name="Departments" EntityType="OrgModel.Department">
+          <Annotation Term="Temporal.TemporalSupport">
+            <Record>
+              <PropertyValue Property="ApplicationTime">
+                <Record Type="Temporal.GranularityDate">
+                  <PropertyValue Property="SupportedQueries"
+                    EnumMember="Temporal.QueryType/TimeTravel Temporal.QueryType/TimeSeries" />
+                </Record>
+              </PropertyValue>
+            </Record>
+          </Annotation>
+        </EntitySet>
+
+        <EntitySet Name="DepartmentBudgets" EntityType="OrgModel.DepartmentBudget">
+          <Annotation Term="Temporal.TemporalSupported">
+            <Record>
+              <PropertyValue Property="ApplicationTime">
+                <Record Type="Temporal.GranularityDate">
+                  <PropertyValue Property="SupportedQueries"
+                    EnumMember="Temporal.QueryType/TimeTravel Temporal.QueryType/TimeSeries" />
+                </Record>
+              </PropertyValue>
+              <PropertyValue Property="SystemTime">
+                <Record Type="Temporal.GranularityDateTimeOffset">
+                  <PropertyValue Property="Precision" Int="0" />
+                  <PropertyValue Property="SupportedQueries"
+                    EnumMember="Temporal.QueryType/TimeTravel Temporal.QueryType/TimeSeries" />
+                </Record>
+              </PropertyValue>
+            </Record>
+          </Annotation>
+        </EntitySet>
+      </EntityContainer>
+    </Schema>
+  </edmx:DataServices>
+</edmx:Edmx>
