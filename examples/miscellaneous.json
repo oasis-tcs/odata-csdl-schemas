@@ -954,8 +954,8 @@
                                 "$Path": "Fabric"
                             },
                             {
-                                "@type": "org.example.Pattern",
-                                "value": "Red"
+                                "$Type": "org.example.Pattern",
+                                "$Cast": "Red"
                             }
                         ]
                     },
@@ -1871,6 +1871,7 @@
         "IntegerDecimal10": {
             "$Kind": "TypeDefinition",
             "$UnderlyingType": "Edm.Decimal",
+            "$Scale": 0,
             "$Precision": 10,
             "@Core.Description": "A ten-digit integer"
         },
@@ -2083,12 +2084,12 @@
         "@True.Or.False": {
             "$Eq": [
                 {
-                    "@type": "ODATA1221.Color",
-                    "value": "Taupe"
+                    "$Type": "ODATA1221.Color",
+                    "$Cast": "Taupe"
                 },
                 {
-                    "@type": "ODATA1221.Color",
-                    "value": "GreyBrown"
+                    "$Type": "ODATA1221.Color",
+                    "$Cast": "GreyBrown"
                 }
             ]
         },
