@@ -139,7 +139,10 @@
                         "@type": "https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Temporal.V1.xml#Temporal.GranularityDateTimeOffset",
                         "Precision": "0",
                         "SupportedQueries": "TimeTravel,TimeSeries"
-                    }
+                    },
+                    "SupportedActions": [
+                        "Temporal.UpdateObject"
+                    ]
                 }
             }
         }
