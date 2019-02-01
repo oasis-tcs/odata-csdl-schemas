@@ -93,6 +93,11 @@
                     EnumMember="Temporal.QueryType/TimeTravel Temporal.QueryType/TimeSeries" />
                 </Record>
               </PropertyValue>
+              <PropertyValue Property="SupportedActions">
+                <Collection>
+                  <String>Temporal.UpdateObject</String>
+                </Collection>
+              </PropertyValue>
             </Record>
           </Annotation>
         </EntitySet>
