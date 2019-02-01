@@ -947,7 +947,10 @@
                             {
                                 "$Path": "Fabric"
                             },
-                            "Red"
+                            {
+                                "$Type": "org.example.Pattern",
+                                "$Cast": "Red"
+                            }
                         ]
                     },
                     {
@@ -2069,6 +2072,25 @@
                     "$Path": "AllMyMovies"
                 }
             }
+        }
+    },
+    "ODATA1221": {
+        "@True.Or.False": {
+            "$Eq": [
+                {
+                    "$Type": "ODATA1221.Color",
+                    "$Cast": "Taupe"
+                },
+                {
+                    "$Type": "ODATA1221.Color",
+                    "$Cast": "GreyBrown"
+                }
+            ]
+        },
+        "Color": {
+            "$Kind": "EnumType",
+            "Taupe": 1,
+            "GreyBrown": 1
         }
     },
     "Intentionally.Empty": {
