@@ -625,7 +625,7 @@
       <!-- The below pattern represents the allowed identifiers in the ECMAScript specification plus the '.' for namespace qualification,
         the '/' for path segment separation, and parentheses and comma for overload targeting -->
       <xs:pattern
-        value="[\p{L}\p{Nl}_][\p{L}\p{Nl}\p{Nd}\p{Mn}\p{Mc}\p{Pc}\p{Cf}]{0,}([\./\(,](\)|[\p{L}\p{Nl}_][\p{L}\p{Nl}\p{Nd}\p{Mn}\p{Mc}\p{Pc}\p{Cf}]{0,}\)?)){0,}" />
+        value="[\p{L}\p{Nl}_][\p{L}\p{Nl}\p{Nd}\p{Mn}\p{Mc}\p{Pc}\p{Cf}]{0,}([\./\(,](\)|[\p{L}\p{Nl}_][\p{L}\p{Nl}\p{Nd}\p{Mn}\p{Mc}\p{Pc}\p{Cf}]{0,}\)?\)?)){0,}" />
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name="TClientFunction">
