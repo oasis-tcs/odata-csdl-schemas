@@ -195,7 +195,7 @@
                 ]
             },
             "MainSupplier": {
-                "$Type": "self.Supplier",
+                "$Type": "ODataDemo.Supplier",
                 "$NavigationPropertyBinding": {
                     "Products": "Products"
                 },
