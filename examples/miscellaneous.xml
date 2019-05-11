@@ -489,10 +489,10 @@
       <Annotations Target="self.MyFunction">
         <Annotation Term="self.Dummy" />
       </Annotations>
-      <Annotations Target="org.example.MyFunction(org.example.MyBindingParamType,NonBindingParamName1)">
+      <Annotations Target="org.example.MyFunction(org.example.MyBindingParamType,org.example.MyNonBindingParamType1)">
         <Annotation Term="self.Dummy" />
       </Annotations>
-      <Annotations Target="self.MyFunction(NonBindingParamName1,NonBindingParamName2)">
+      <Annotations Target="self.MyFunction(org.example.MyNonBindingParamType1,org.example.MyNonBindingParamType2)">
         <Annotation Term="self.Dummy" />
       </Annotations>
       <Annotations Target="self.MyFunction/MyParameter">

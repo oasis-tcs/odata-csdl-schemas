@@ -761,10 +761,10 @@
             "self.MyFunction": {
                 "@self.Dummy": true
             },
-            "self.MyFunction(self.MyBindingParamType,NonBindingParamName1)": {
+            "self.MyFunction(self.MyBindingParamType,self.MyNonBindingParamType1)": {
                 "@self.Dummy": true
             },
-            "self.MyFunction(NonBindingParamName1,NonBindingParamName2)": {
+            "self.MyFunction(self.MyNonBindingParamType1,self.MyNonBindingParamType2)": {
                 "@self.Dummy": true
             },
             "self.MyFunction/MyParameter": {
