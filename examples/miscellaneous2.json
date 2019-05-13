@@ -45,6 +45,7 @@
             {
                 "$Kind": "Function",
                 "$ReturnType": {
+                    "$Nullable": true,
                     "$MaxLength": 42
                 }
             }
