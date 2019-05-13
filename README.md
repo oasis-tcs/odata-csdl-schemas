@@ -33,7 +33,7 @@
 * [edmx.xsd](schemas/edmx.xsd) - root schema for CSDL XML documents
 * [edm.xsd](schemas/edm.xsd) - sub-schema for CSDL XML documents
 
-
+This repository also contains a Node.js-based tool to [convert CDSL XML files into CSDL JSON files](lib).
 
 <div>
 <h3>Contact</h3>
