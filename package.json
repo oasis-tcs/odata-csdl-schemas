@@ -9,7 +9,9 @@
   "bin": {
     "odata-csdl-xml2json": "lib/cli.js"
   },
+  "main": "lib/xml2json.js",
   "dependencies": {
+    "minimist": "^1.2.0",
     "sax": "^1.2.4"
   },
   "devDependencies": {
