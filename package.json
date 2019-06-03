@@ -1,11 +1,16 @@
 {
-  "name": "odata-csdl-json",
+  "name": "odata-csdl",
   "version": "0.0.0",
   "description": "Convert CSDL XML to CSDL JSON",
+  "homepage": "https://github.com/oasis-tcs/odata-csdl-schemas/blob/master/lib/README.md",
+  "bugs": "https://github.com/oasis-tcs/odata-csdl-schemas/issues",
   "repository": {
     "type": "git",
     "url": "https://github.com/oasis-tcs/odata-csdl-schemas.git"
   },
+  "files": [
+    "lib/*"
+  ],
   "bin": {
     "odata-csdl-xml2json": "lib/cli.js"
   },
@@ -21,5 +26,5 @@
     "test": "mocha"
   },
   "author": "",
-  "license": "See https://github.com/oasis-tcs/odata-csdl-schemas/blob/master/LICENSE.md"
+  "license": "SEE LICENSE IN LICENSE.md"
 }
