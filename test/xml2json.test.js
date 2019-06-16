@@ -17,6 +17,9 @@ const result3 = require('../examples/miscellaneous.json');
 const example4 = fs.readFileSync('examples/miscellaneous2.xml');
 const result4 = require('../examples/miscellaneous2.json');
 
+const example5 = fs.readFileSync('examples/temporal.xml');
+const result5 = require('../examples/temporal.json');
+
 describe('Examples', function () {
 
     it('csdl-16.1', function () {
@@ -33,6 +36,21 @@ describe('Examples', function () {
 
     it('miscellaneous2', function () {
         assert.deepStrictEqual(csdl.xml2json(example4), result4);
+    })
+
+    it('temporal', function () {
+        assert.deepStrictEqual(csdl.xml2json(example5), result5);
+    })
+
+    it('empty <String> element', function () {
+        //TODO: correct XML once checks are added
+        const xml = '<Edmx Version=""><DataServices><Schema Namespace="n">'
+            + ' <Annotation Term="String.NoBody"><String/></Annotation>'
+            + ' <Annotation Term="String.EmptyBody"><String></String></Annotation>'
+            + ' </Schema></DataServices></Edmx>';
+        const json = csdl.xml2json(xml);
+        assert.deepStrictEqual(json.n['@String.NoBody'], '');
+        assert.deepStrictEqual(json.n['@String.EmptyBody'], '');
     })
 
 })

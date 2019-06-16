@@ -971,7 +971,9 @@
         <ReturnType Type="Collection(Edm.EntityType)" Nullable="true" />
       </Function>
       <Function Name="TopSellingProducts">
-        <Parameter Name="Year" Type="Edm.Decimal" Precision="4" Scale="0" Nullable="true" />
+        <Parameter Name="Year" Type="Edm.Decimal" Precision="4" Scale="0" Nullable="true">
+          <Annotation Term="Core.Description" String="Year in form YYYY" />
+        </Parameter>
         <ReturnType Type="Collection(self.Product)">
           <Annotation Term="A.B" String="Works" />
         </ReturnType>
