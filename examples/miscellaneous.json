@@ -800,8 +800,8 @@
                 "@vCard.birthDay#element": "2000-01-01",
                 "@UI.LastUpdated": "2000-01-01T16:00:00.000Z",
                 "@UI.LastUpdated#element": "2000-01-01T16:00:00.000-09:00",
-                "@UI.Width": "3.14",
-                "@UI.Width#element": "3.14",
+                "@UI.Width": 3.14,
+                "@UI.Width#element": 3.14,
                 "@task.duration": "P7D",
                 "@task.duration#element": "P11DT23H59M59.999999999999S",
                 "@self.HasPattern": "Red",
@@ -813,8 +813,8 @@
                 "@UI.FloatWidth#INF": "INF",
                 "@UI.Id": "21EC2020-3AEA-1069-A2DD-08002B30309D",
                 "@UI.Id#element": "21EC2020-3AEA-1069-A2DD-08002B30309D",
-                "@UI.IntWidth": "42",
-                "@UI.IntWidth#element": "42",
+                "@UI.IntWidth": 42,
+                "@UI.IntWidth#element": 42,
                 "@UI.DisplayName": "Product Catalog",
                 "@UI.DisplayName#element": "Product Catalog",
                 "@UI.EndTime": "21:45:00",
@@ -915,7 +915,7 @@
                             {
                                 "$Path": "Price"
                             },
-                            "20"
+                            20
                         ]
                     },
                     {
@@ -923,7 +923,7 @@
                             {
                                 "$Path": "Price"
                             },
-                            "10"
+                            10
                         ]
                     },
                     {
@@ -931,7 +931,7 @@
                             {
                                 "$Path": "Price"
                             },
-                            "20"
+                            20
                         ]
                     },
                     {
@@ -939,7 +939,7 @@
                             {
                                 "$Path": "Price"
                             },
-                            "100"
+                            100
                         ]
                     },
                     {
@@ -1206,11 +1206,11 @@
             "@Is.WithinNull": true
         },
         "@Is.Null@Is.NextToNull": true,
-        "@UI.SubTitle": "1234",
+        "@UI.SubTitle": 1234,
         "@UI.SubTitle@A.Constant": true,
         "@A.Bool": true,
         "@A.Bool@A.AnnotatedBool": true,
-        "@A.Decimal": "12.34",
+        "@A.Decimal": 12.34,
         "@A.Decimal#inf": "INF",
         "@A.Decimal#minusInf": "-INF",
         "@A.Decimal#nan": "NaN",
@@ -1224,14 +1224,14 @@
             "-INF",
             "INF",
             "NaN",
-            "1.23456789e4",
-            "-2E80",
+            1.23456789e4,
+            -2E80,
             "-INF",
             "INF",
             "NaN"
         ],
-        "@An.Int": "1234",
-        "@A.Very_Long_Int": "9007199254740992",
+        "@An.Int": 1234,
+        "@A.Very_Long_Int": 9007199254740992,
         "@A.String": "1.23e4",
         "@A.String#withAmp": "Fast&Furious",
         "@A.String#ToBeEscaped": "A/\"good\"\r\nstory\\for\tkids",
@@ -1798,7 +1798,7 @@
                 "@Measures.Unit": {
                     "$Path": "ShippingUnit"
                 },
-                "@Validation.Minimum": "0"
+                "@Validation.Minimum": 0
             },
             "ShippingUnit": {
                 "$Nullable": true,
@@ -1810,27 +1810,27 @@
             "EvenNumber": {
                 "$Nullable": true,
                 "$Type": "Edm.Int32",
-                "@Validation.MultipleOf": "2"
+                "@Validation.MultipleOf": 2
             },
             "PercentComplete": {
                 "$Nullable": true,
                 "$Type": "Edm.Byte",
-                "@Validation.Maximum": "100"
+                "@Validation.Maximum": 100
             },
             "Epsilon": {
                 "$Nullable": true,
                 "$Type": "Edm.Decimal",
                 "$Scale": 0,
-                "@Validation.Minimum": "0",
+                "@Validation.Minimum": 0,
                 "@Validation.Minimum@Validation.Exclusive": true,
-                "@Validation.Maximum": "1",
+                "@Validation.Maximum": 1,
                 "@Validation.Maximum@Validation.Exclusive": true
             },
             "Temperature": {
                 "$Nullable": true,
                 "$Type": "Edm.Decimal",
                 "$Scale": 0,
-                "@Validation.Minimum": "0",
+                "@Validation.Minimum": 0,
                 "@Validation.Minimum@Validation.Exclusive": false
             },
             "EmailAddress": {
