@@ -1,4 +1,6 @@
-//TODO: UrlRef with nested annotation
+//TODO: 
+// UrlRef with nested annotation
+// function overload with same name as type: detect collision, warn and continue gracefully 
 
 const assert = require('assert');
 const fs = require('fs');
