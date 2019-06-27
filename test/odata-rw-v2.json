@@ -1,0 +1,114 @@
+{
+    "$Version": "2.0",
+    "ODataDemo": {
+        "Product": {
+            "$Kind": "EntityType",
+            "$Key": [
+                "ID"
+            ],
+            "ID": {
+                "$Type": "Edm.Int32"
+            },
+            "Name": {
+                "$Nullable": true
+            },
+            "Description": {
+                "$Nullable": true
+            },
+            "ReleaseDate": {
+                "$Type": "Edm.DateTime"
+            },
+            "DiscontinuedDate": {
+                "$Type": "Edm.DateTime",
+                "$Nullable": true
+            },
+            "Rating": {
+                "$Type": "Edm.Int32"
+            },
+            "Price": {
+                "$Type": "Edm.Decimal",
+                "$Scale": 0
+            },
+            "Category": {
+                "$Kind": "NavigationProperty",
+                "$Nullable": true
+            },
+            "Supplier": {
+                "$Kind": "NavigationProperty",
+                "$Nullable": true
+            }
+        },
+        "Category": {
+            "$Kind": "EntityType",
+            "$Key": [
+                "ID"
+            ],
+            "ID": {
+                "$Type": "Edm.Int32"
+            },
+            "Name": {
+                "$Nullable": true
+            },
+            "Products": {
+                "$Kind": "NavigationProperty",
+                "$Nullable": true
+            }
+        },
+        "Supplier": {
+            "$Kind": "EntityType",
+            "$Key": [
+                "ID"
+            ],
+            "ID": {
+                "$Type": "Edm.Int32"
+            },
+            "Name": {
+                "$Nullable": true
+            },
+            "Address": {
+                "$Type": "ODataDemo.Address"
+            },
+            "Concurrency": {
+                "$Type": "Edm.Int32"
+            },
+            "Products": {
+                "$Kind": "NavigationProperty",
+                "$Nullable": true
+            }
+        },
+        "Address": {
+            "$Kind": "ComplexType",
+            "Street": {
+                "$Nullable": true
+            },
+            "City": {
+                "$Nullable": true
+            },
+            "State": {
+                "$Nullable": true
+            },
+            "ZipCode": {
+                "$Nullable": true
+            },
+            "Country": {
+                "$Nullable": true
+            }
+        },
+        "DemoService": {
+            "$Kind": "EntityContainer",
+            "Products": {
+                "$Collection": true,
+                "$Type": "ODataDemo.Product"
+            },
+            "Categories": {
+                "$Collection": true,
+                "$Type": "ODataDemo.Category"
+            },
+            "Suppliers": {
+                "$Collection": true,
+                "$Type": "ODataDemo.Supplier"
+            }
+        }
+    },
+    "$EntityContainer": "ODataDemo.DemoService"
+}

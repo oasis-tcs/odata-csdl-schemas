@@ -22,6 +22,12 @@ const result4 = require('../examples/miscellaneous2.json');
 const example5 = fs.readFileSync('examples/temporal.xml');
 const result5 = require('../examples/temporal.json');
 
+const example6 = fs.readFileSync('test/odata-rw-v2.xml');
+const result6 = require('./odata-rw-v2.json');
+
+const example7 = fs.readFileSync('test/odata-rw-v3.xml');
+const result7 = require('./odata-rw-v3.json');
+
 describe('Examples', function () {
 
     it('csdl-16.1', function () {
@@ -42,6 +48,14 @@ describe('Examples', function () {
 
     it('temporal', function () {
         assert.deepStrictEqual(csdl.xml2json(example5), result5);
+    })
+
+    it('odata-rw-v2', function () {
+        assert.deepStrictEqual(csdl.xml2json(example6), result6);
+    })
+
+    it('odata-rw-v3', function () {
+        assert.deepStrictEqual(csdl.xml2json(example7), result7);
     })
 
     it('empty <String> element', function () {

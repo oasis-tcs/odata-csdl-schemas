@@ -2,7 +2,8 @@
     "json.schemas": [
         {
             "fileMatch": [
-                "examples/*.json"
+                "examples/*.json",
+                "test/*.json"
             ],
             "url": "./schemas/csdl.schema.json"
         }
