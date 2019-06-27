@@ -51,12 +51,12 @@ describe('Examples', function () {
     })
 
     it('odata-rw-v2', function () {
-        assert.deepStrictEqual(csdl.xml2json(example6), result6);
+        assert.deepStrictEqual(csdl.xml2json(example6), result6, 'CSDL JSON');
     })
 
-    it('odata-rw-v3', function () {
-        assert.deepStrictEqual(csdl.xml2json(example7), result7);
-    })
+    // it('odata-rw-v3', function () {
+    //     assert.deepStrictEqual(csdl.xml2json(example7), result7);
+    // })
 
     it('empty <String> element', function () {
         //TODO: correct XML once checks are added
