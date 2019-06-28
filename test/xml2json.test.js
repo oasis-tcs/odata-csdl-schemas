@@ -1,4 +1,6 @@
 //TODO: 
+// V2 service with alias, mix of namespace- and alias-qualified associations/sets
+// V2 service with HttpMethod=POST
 // UrlRef with nested annotation
 // function overload with same name as type: detect collision, warn and continue gracefully 
 
