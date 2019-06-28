@@ -33,32 +33,32 @@ const result7 = require('./odata-rw-v3.json');
 describe('Examples', function () {
 
     it('csdl-16.1', function () {
-        assert.deepStrictEqual(csdl.xml2json(example1), result1);
+        assert.deepStrictEqual(csdl.xml2json(example1), result1, 'CSDL JSON');
     })
 
     it('csdl-16.2', function () {
-        assert.deepStrictEqual(csdl.xml2json(example2), result2);
+        assert.deepStrictEqual(csdl.xml2json(example2), result2, 'CSDL JSON');
     })
 
     it('miscellaneous', function () {
-        assert.deepStrictEqual(csdl.xml2json(example3), result3);
+        assert.deepStrictEqual(csdl.xml2json(example3), result3, 'CSDL JSON');
     })
 
     it('miscellaneous2', function () {
-        assert.deepStrictEqual(csdl.xml2json(example4), result4);
+        assert.deepStrictEqual(csdl.xml2json(example4), result4, 'CSDL JSON');
     })
 
     it('temporal', function () {
-        assert.deepStrictEqual(csdl.xml2json(example5), result5);
+        assert.deepStrictEqual(csdl.xml2json(example5), result5, 'CSDL JSON');
     })
 
     it('odata-rw-v2', function () {
         assert.deepStrictEqual(csdl.xml2json(example6), result6, 'CSDL JSON');
     })
 
-    // it('odata-rw-v3', function () {
-    //     assert.deepStrictEqual(csdl.xml2json(example7), result7);
-    // })
+    it('odata-rw-v3', function () {
+        assert.deepStrictEqual(csdl.xml2json(example7), result7, 'CSDL JSON');
+    })
 
     it('empty <String> element', function () {
         //TODO: correct XML once checks are added
