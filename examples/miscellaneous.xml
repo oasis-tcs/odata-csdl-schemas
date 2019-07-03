@@ -483,10 +483,37 @@
       <Annotations Target="self.MyAction">
         <Annotation Term="self.Dummy" />
       </Annotations>
+      <Annotations Target="self.MyAction/MyParameter">
+        <Annotation Term="self.Dummy" />
+      </Annotations>
+      <Annotations Target="self.MyAction/$ReturnType">
+        <Annotation Term="self.Dummy" />
+      </Annotations>
       <Annotations Target="org.example.MyAction(org.example.MyBindingType)">
         <Annotation Term="self.Dummy" />
       </Annotations>
+      <Annotations Target="org.example.MyAction(org.example.MyBindingType)/MyParameter">
+        <Annotation Term="self.Dummy" />
+      </Annotations>
+      <Annotations Target="org.example.MyAction(org.example.MyBindingType)/$ReturnType">
+        <Annotation Term="self.Dummy" />
+      </Annotations>
+      <Annotations Target="self.MyAction()">
+        <Annotation Term="self.Dummy" />
+      </Annotations>
+      <Annotations Target="self.MyAction()/MyParameter">
+        <Annotation Term="self.Dummy" />
+      </Annotations>
+      <Annotations Target="self.MyAction()/$ReturnType">
+        <Annotation Term="self.Dummy" />
+      </Annotations>
       <Annotations Target="self.MyFunction">
+        <Annotation Term="self.Dummy" />
+      </Annotations>
+      <Annotations Target="self.MyFunction/MyParameter">
+        <Annotation Term="self.Dummy" />
+      </Annotations>
+      <Annotations Target="self.MyFunction/$ReturnType">
         <Annotation Term="self.Dummy" />
       </Annotations>
       <Annotations Target="org.example.MyFunction(org.example.MyBindingParamType,org.example.MyNonBindingParamType1)">
@@ -495,7 +522,16 @@
       <Annotations Target="self.MyFunction(org.example.MyNonBindingParamType1,org.example.MyNonBindingParamType2)">
         <Annotation Term="self.Dummy" />
       </Annotations>
-      <Annotations Target="self.MyFunction/MyParameter">
+      <Annotations Target="self.MyFunction(org.example.MyParamType1,org.example.MyParamType2)/MyParameter">
+        <Annotation Term="self.Dummy" />
+      </Annotations>
+      <Annotations Target="self.MyFunction(org.example.MyParamType1,org.example.MyParamType2)/$ReturnType">
+        <Annotation Term="self.Dummy" />
+      </Annotations>
+      <Annotations Target="self.MyFunction()/MyParameter">
+        <Annotation Term="self.Dummy" />
+      </Annotations>
+      <Annotations Target="self.MyFunction()/$ReturnType">
         <Annotation Term="self.Dummy" />
       </Annotations>
       <Annotations Target="self.MyEntityContainer/MyEntitySet/MyProperty">
@@ -517,6 +553,9 @@
         <Annotation Term="self.Dummy" />
       </Annotations>
       <Annotations Target="self.MyEntityContainer/MySingleton/MyComplexProperty/MyNavigationProperty">
+        <Annotation Term="self.Dummy" />
+      </Annotations>
+      <Annotations Target="self.MyEntityContainer/MySingleton/MyComplexProperty/MyNavigationProperty/@self.Dummy#qualifier">
         <Annotation Term="self.Dummy" />
       </Annotations>
 

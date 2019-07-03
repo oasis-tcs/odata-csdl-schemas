@@ -755,10 +755,37 @@
             "self.MyAction": {
                 "@self.Dummy": true
             },
+            "self.MyAction/MyParameter": {
+                "@self.Dummy": true
+            },
+            "self.MyAction/$ReturnType": {
+                "@self.Dummy": true
+            },
             "self.MyAction(self.MyBindingType)": {
                 "@self.Dummy": true
             },
+            "self.MyAction(self.MyBindingType)/MyParameter": {
+                "@self.Dummy": true
+            },
+            "self.MyAction(self.MyBindingType)/$ReturnType": {
+                "@self.Dummy": true
+            },
+            "self.MyAction()": {
+                "@self.Dummy": true
+            },
+            "self.MyAction()/MyParameter": {
+                "@self.Dummy": true
+            },
+            "self.MyAction()/$ReturnType": {
+                "@self.Dummy": true
+            },
             "self.MyFunction": {
+                "@self.Dummy": true
+            },
+            "self.MyFunction/MyParameter": {
+                "@self.Dummy": true
+            },
+            "self.MyFunction/$ReturnType": {
                 "@self.Dummy": true
             },
             "self.MyFunction(self.MyBindingParamType,self.MyNonBindingParamType1)": {
@@ -767,7 +794,16 @@
             "self.MyFunction(self.MyNonBindingParamType1,self.MyNonBindingParamType2)": {
                 "@self.Dummy": true
             },
-            "self.MyFunction/MyParameter": {
+            "self.MyFunction(self.MyParamType1,self.MyParamType2)/MyParameter": {
+                "@self.Dummy": true
+            },
+            "self.MyFunction(self.MyParamType1,self.MyParamType2)/$ReturnType": {
+                "@self.Dummy": true
+            },
+            "self.MyFunction()/MyParameter": {
+                "@self.Dummy": true
+            },
+            "self.MyFunction()/$ReturnType": {
                 "@self.Dummy": true
             },
             "self.MyEntityContainer/MyEntitySet/MyProperty": {
@@ -789,6 +825,9 @@
                 "@self.Dummy": true
             },
             "self.MyEntityContainer/MySingleton/MyComplexProperty/MyNavigationProperty": {
+                "@self.Dummy": true
+            },
+            "self.MyEntityContainer/MySingleton/MyComplexProperty/MyNavigationProperty/@self.Dummy#qualifier": {
                 "@self.Dummy": true
             },
             "self.ConstantExpressions": {
