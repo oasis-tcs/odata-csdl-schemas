@@ -30,6 +30,9 @@ const result6 = require('./odata-rw-v2.json');
 const example7 = fs.readFileSync('test/odata-rw-v3.xml');
 const result7 = require('./odata-rw-v3.json');
 
+const example8 = fs.readFileSync('test/ReferentialConstraint-v2.xml');
+const result8 = require('./ReferentialConstraint-v2.json');
+
 describe('Examples', function () {
 
     it('csdl-16.1', function () {
@@ -58,6 +61,10 @@ describe('Examples', function () {
 
     it('odata-rw-v3', function () {
         assert.deepStrictEqual(csdl.xml2json(example7), result7, 'CSDL JSON');
+    })
+
+    it('ReferentialConstraint-v2', function () {
+        assert.deepStrictEqual(csdl.xml2json(example8), result8, 'CSDL JSON');
     })
 
     it('empty <String> element', function () {
