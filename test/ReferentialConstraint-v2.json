@@ -1,1 +1,106 @@
-{"$Version":"1.0","one":{"a":{"$Kind":"EntityType","$Key":["id"],"id":{"$MaxLength":5},"to_b":{"$Kind":"NavigationProperty","$Type":"one.b","$Collection":true,"$Partner":"to_a"}},"b":{"$Kind":"EntityType","$Key":["id1","id2"],"id1":{"$Type":"Edm.Int32"},"id2":{"$MaxLength":4},"a_id":{"$Nullable":true,"$MaxLength":5},"to_a":{"$Kind":"NavigationProperty","$Type":"one.a","$Nullable":true,"$Partner":"to_b"},"to_c":{"$Kind":"NavigationProperty","$Type":"one.c","$Collection":true,"$Partner":"to_b"}},"c":{"$Kind":"EntityType","$Key":["b_id1","b_id2","id"],"b_id1":{"$Type":"Edm.Int32"},"b_id2":{"$MaxLength":4},"id":{"$Type":"Edm.Int32"},"to_b":{"$Kind":"NavigationProperty","$Type":"one.b","$Partner":"to_c"}}},"two":{"container":{"$Kind":"EntityContainer","a":{"$Collection":true,"$Type":"one.a","$NavigationPropertyBinding":{"to_b":"b"}},"b":{"$Collection":true,"$Type":"one.b","$NavigationPropertyBinding":{"to_a":"a","to_c":"c"}},"c":{"$Collection":true,"$Type":"one.c","$NavigationPropertyBinding":{"to_b":"b"}}}},"$EntityContainer":"two.container"}
+{
+    "$Version": "2.0",
+    "one": {
+        "a": {
+            "$Kind": "EntityType",
+            "$Key": [
+                "id"
+            ],
+            "id": {
+                "$MaxLength": 5
+            },
+            "to_b": {
+                "$Kind": "NavigationProperty",
+                "$Type": "one.b",
+                "$Collection": true,
+                "$Partner": "to_a"
+            }
+        },
+        "b": {
+            "$Kind": "EntityType",
+            "$Key": [
+                "id1",
+                "id2"
+            ],
+            "id1": {
+                "$Type": "Edm.Int32"
+            },
+            "id2": {
+                "$MaxLength": 4
+            },
+            "a_id": {
+                "$Nullable": true,
+                "$MaxLength": 5
+            },
+            "to_a": {
+                "$Kind": "NavigationProperty",
+                "$Type": "one.a",
+                "$Nullable": true,
+                "$Partner": "to_b",
+                "$ReferentialConstraint": {
+                    "a_id": "a_id"
+                }
+            },
+            "to_c": {
+                "$Kind": "NavigationProperty",
+                "$Type": "one.c",
+                "$Collection": true,
+                "$Partner": "to_b"
+            }
+        },
+        "c": {
+            "$Kind": "EntityType",
+            "$Key": [
+                "b_id1",
+                "b_id2",
+                "id"
+            ],
+            "b_id1": {
+                "$Type": "Edm.Int32"
+            },
+            "b_id2": {
+                "$MaxLength": 4
+            },
+            "id": {
+                "$Type": "Edm.Int32"
+            },
+            "to_b": {
+                "$Kind": "NavigationProperty",
+                "$Type": "one.b",
+                "$Partner": "to_c",
+                "$ReferentialConstraint": {
+                    "b_id1": "b_id1",
+                    "b_id2": "b_id2"
+                }
+            }
+        }
+    },
+    "two": {
+        "container": {
+            "$Kind": "EntityContainer",
+            "a": {
+                "$Collection": true,
+                "$Type": "one.a",
+                "$NavigationPropertyBinding": {
+                    "to_b": "b"
+                }
+            },
+            "b": {
+                "$Collection": true,
+                "$Type": "one.b",
+                "$NavigationPropertyBinding": {
+                    "to_a": "a",
+                    "to_c": "c"
+                }
+            },
+            "c": {
+                "$Collection": true,
+                "$Type": "one.c",
+                "$NavigationPropertyBinding": {
+                    "to_b": "b"
+                }
+            }
+        }
+    },
+    "$EntityContainer": "two.container"
+}
