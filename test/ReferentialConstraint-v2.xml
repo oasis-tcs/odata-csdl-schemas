@@ -44,7 +44,9 @@
         </ReferentialConstraint>
       </Association>
       <Association Name="b_c">
-        <End Role="b_role" Type="one.b" Multiplicity="1" />
+        <End Role="b_role" Type="one.b" Multiplicity="1">
+          <OnDelete Action="Cascade" />
+        </End>
         <End Role="c_role" Type="one.c" Multiplicity="*" />
         <ReferentialConstraint>
           <Principal Role="b_role">

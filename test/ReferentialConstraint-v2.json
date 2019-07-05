@@ -45,7 +45,8 @@
                 "$Kind": "NavigationProperty",
                 "$Type": "one.c",
                 "$Collection": true,
-                "$Partner": "to_b"
+                "$Partner": "to_b",
+                "$OnDelete": "Cascade"
             }
         },
         "c": {
