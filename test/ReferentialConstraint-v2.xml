@@ -45,6 +45,7 @@
       </Association>
       <Association Name="b_c">
         <End Role="b_role" Type="one.b" Multiplicity="1" />
+        <End Role="c_role" Type="one.c" Multiplicity="*" />
         <ReferentialConstraint>
           <Principal Role="b_role">
             <PropertyRef Name="b_id1" />
