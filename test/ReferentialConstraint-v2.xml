@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx">
-  <edmx:DataServices xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" m:DataServiceVersion="1.0">
+  <edmx:DataServices xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" m:DataServiceVersion="2.0">
     <Schema Namespace="one" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
       <EntityType Name="a">
         <Key>
@@ -34,7 +34,6 @@
       <Association Name="a_b">
         <End Role="a_role" Type="one.a" Multiplicity="0..1" />
         <End Role="b_role" Type="one.b" Multiplicity="*" />
-        <!--
         <ReferentialConstraint>
           <Principal Role="a_role">
             <PropertyRef Name="a_id" />
@@ -43,12 +42,9 @@
             <PropertyRef Name="a_id" />
           </Dependent>
         </ReferentialConstraint>
-      -->
       </Association>
       <Association Name="b_c">
         <End Role="b_role" Type="one.b" Multiplicity="1" />
-        <End Role="c_role" Type="one.c" Multiplicity="*" />
-        <!--
         <ReferentialConstraint>
           <Principal Role="b_role">
             <PropertyRef Name="b_id1" />
@@ -59,7 +55,6 @@
             <PropertyRef Name="b_id2" />
           </Dependent>
         </ReferentialConstraint>
-      -->
       </Association>
     </Schema>
     <Schema Namespace="two" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
