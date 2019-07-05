@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx">
+  <edmx:DataServices xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" m:DataServiceVersion="1.0">
+    <Schema Namespace="one" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+      <EntityType Name="a">
+        <Key>
+          <PropertyRef Name="id" />
+        </Key>
+        <Property Name="id" Type="Edm.String" Nullable="false" MaxLength="5" Unicode="true" FixedLength="true" />
+        <NavigationProperty Name="to_b" Relationship="one.a_b" FromRole="a_role" ToRole="Orders" />
+      </EntityType>
+      <EntityType Name="b">
+        <Key>
+          <PropertyRef Name="id1" />
+          <PropertyRef Name="id2" />
+        </Key>
+        <Property Name="id1" Type="Edm.Int32" Nullable="false" p8:StoreGeneratedPattern="Identity" xmlns:p8="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+        <Property Name="id2" Type="Edm.String" MaxLength="4" Nullable="false" />
+        <Property Name="a_id" Type="Edm.String" Nullable="true" MaxLength="5" Unicode="true" FixedLength="true" />
+        <NavigationProperty Name="to_a" Relationship="one.a_b" FromRole="Orders" ToRole="a_role" />
+        <NavigationProperty Name="to_c" Relationship="one.b_c" FromRole="Orders" ToRole="Order_Details" />
+      </EntityType>
+      <EntityType Name="c">
+        <Key>
+          <PropertyRef Name="b_id1" />
+          <PropertyRef Name="b_id2" />
+          <PropertyRef Name="id" />
+        </Key>
+        <Property Name="b_id1" Type="Edm.Int32" Nullable="false" />
+        <Property Name="b_id2" Type="Edm.String" MaxLength="4" Nullable="false" />
+        <Property Name="id" Type="Edm.Int32" Nullable="false" />
+        <NavigationProperty Name="to_b" Relationship="one.b_c" FromRole="Order_Details" ToRole="Orders" />
+      </EntityType>
+      <Association Name="a_b">
+        <End Role="a_role" Type="one.a" Multiplicity="0..1" />
+        <End Role="Orders" Type="one.b" Multiplicity="*" />
+          <!--
+        <ReferentialConstraint>
+          <Principal Role="a_role">
+            <PropertyRef Name="a_id" />
+          </Principal>
+          <Dependent Role="Orders">
+            <PropertyRef Name="a_id" />
+          </Dependent>
+        </ReferentialConstraint>
+      -->
+      </Association>
+      <Association Name="b_c">
+        <End Role="Orders" Type="one.b" Multiplicity="1" />
+        <End Role="Order_Details" Type="one.c" Multiplicity="*" />
+        <!--
+        <ReferentialConstraint>
+          <Principal Role="Orders">
+            <PropertyRef Name="b_id1" />
+            <PropertyRef Name="b_id2" />
+          </Principal>
+          <Dependent Role="Order_Details">
+            <PropertyRef Name="b_id1" />
+            <PropertyRef Name="b_id2" />
+          </Dependent>
+        </ReferentialConstraint>
+      -->
+      </Association>
+    </Schema>
+    <Schema Namespace="two" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+      <EntityContainer Name="container" p7:LazyLoadingEnabled="true" m:IsDefaultEntityContainer="true" xmlns:p7="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+        <EntitySet Name="a" EntityType="one.a" />
+        <EntitySet Name="b" EntityType="one.b" />
+        <EntitySet Name="c" EntityType="one.c" />
+        <AssociationSet Name="a_b" Association="one.a_b">
+          <End Role="a_role" EntitySet="a" />
+          <End Role="Orders" EntitySet="b" />
+        </AssociationSet>
+        <AssociationSet Name="b_c" Association="one.b_c">
+          <End Role="Orders" EntitySet="b" />
+          <End Role="Order_Details" EntitySet="c" />
+        </AssociationSet>
+      </EntityContainer>
+    </Schema>
+  </edmx:DataServices>
+</edmx:Edmx>
