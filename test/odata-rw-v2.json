@@ -1,0 +1,153 @@
+{
+    "$Version": "2.0",
+    "ODataDemo": {
+        "Product": {
+            "$Kind": "EntityType",
+            "$Key": [
+                "ID"
+            ],
+            "ID": {
+                "$Type": "Edm.Int32"
+            },
+            "Name": {
+                "$Nullable": true
+            },
+            "Description": {
+                "$Nullable": true
+            },
+            "ReleaseDate": {
+                "$Type": "Edm.DateTime",
+                "$Precision": 0
+            },
+            "DiscontinuedDate": {
+                "$Type": "Edm.DateTime",
+                "$Nullable": true,
+                "$Precision": 0
+            },
+            "Rating": {
+                "$Type": "Edm.Int32"
+            },
+            "Price": {
+                "$Type": "Edm.Decimal",
+                "$Scale": 0
+            },
+            "Category": {
+                "$Kind": "NavigationProperty",
+                "$Type": "ODataDemo.Category",
+                "$Nullable": true,
+                "$Partner": "Products"
+            },
+            "Supplier": {
+                "$Kind": "NavigationProperty",
+                "$Type": "ODataDemo.Supplier",
+                "$Nullable": true,
+                "$Partner": "Products"
+            }
+        },
+        "Category": {
+            "$Kind": "EntityType",
+            "$Key": [
+                "ID"
+            ],
+            "ID": {
+                "$Type": "Edm.Int32"
+            },
+            "Name": {
+                "$Nullable": true
+            },
+            "Products": {
+                "$Kind": "NavigationProperty",
+                "$Collection": true,
+                "$Type": "ODataDemo.Product",
+                "$Partner": "Category"
+            }
+        },
+        "Supplier": {
+            "$Kind": "EntityType",
+            "$Key": [
+                "ID"
+            ],
+            "ID": {
+                "$Type": "Edm.Int32"
+            },
+            "Name": {
+                "$Nullable": true
+            },
+            "Address": {
+                "$Type": "ODataDemo.Address"
+            },
+            "Concurrency": {
+                "$Type": "Edm.Int32"
+            },
+            "Products": {
+                "$Kind": "NavigationProperty",
+                "$Collection": true,
+                "$Type": "ODataDemo.Product",
+                "$Partner": "Supplier"
+            }
+        },
+        "Address": {
+            "$Kind": "ComplexType",
+            "Street": {
+                "$Nullable": true
+            },
+            "City": {
+                "$Nullable": true
+            },
+            "State": {
+                "$Nullable": true
+            },
+            "ZipCode": {
+                "$Nullable": true
+            },
+            "Country": {
+                "$Nullable": true
+            }
+        },
+        "DemoService": {
+            "$Kind": "EntityContainer",
+            "Products": {
+                "$Collection": true,
+                "$Type": "ODataDemo.Product",
+                "$NavigationPropertyBinding": {
+                    "Category": "Categories",
+                    "Supplier": "Suppliers"
+                }
+            },
+            "Categories": {
+                "$Collection": true,
+                "$Type": "ODataDemo.Category",
+                "$NavigationPropertyBinding": {
+                    "Products": "Products"
+                }
+            },
+            "Suppliers": {
+                "$Collection": true,
+                "$Type": "ODataDemo.Supplier",
+                "$NavigationPropertyBinding": {
+                    "Products": "Products"
+                }
+            },
+            "GetProductsByRating": {
+                "$Function": "ODataDemo.GetProductsByRating",
+                "$EntitySet": "Products"
+            }
+        },
+        "GetProductsByRating": [
+            {
+                "$Kind": "Function",
+                "$Parameter": [
+                    {
+                        "$Name": "rating",
+                        "$Type": "Edm.Int32"
+                    }
+                ],
+                "$ReturnType": {
+                    "$Collection": true,
+                    "$Type": "ODataDemo.Product"
+                }
+            }
+        ]
+    },
+    "$EntityContainer": "ODataDemo.DemoService"
+}

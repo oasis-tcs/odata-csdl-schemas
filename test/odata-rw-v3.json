@@ -1,0 +1,373 @@
+{
+    "$Version": "3.0",
+    "ODataDemo": {
+        "Product": {
+            "$Kind": "EntityType",
+            "$Key": [
+                "ID"
+            ],
+            "ID": {
+                "$Type": "Edm.Int32"
+            },
+            "Name": {
+                "$Nullable": true
+            },
+            "Description": {
+                "$Nullable": true
+            },
+            "ReleaseDate": {
+                "$Type": "Edm.DateTime",
+                "$Precision": 0
+            },
+            "DiscontinuedDate": {
+                "$Type": "Edm.DateTime",
+                "$Nullable": true,
+                "$Precision": 0
+            },
+            "Rating": {
+                "$Type": "Edm.Int16"
+            },
+            "Price": {
+                "$Type": "Edm.Double"
+            },
+            "Categories": {
+                "$Kind": "NavigationProperty",
+                "$Collection": true,
+                "$Type": "ODataDemo.Category",
+                "$Partner": "Products"
+            },
+            "Supplier": {
+                "$Kind": "NavigationProperty",
+                "$Type": "ODataDemo.Supplier",
+                "$Nullable": true,
+                "$Partner": "Products"
+            },
+            "ProductDetail": {
+                "$Kind": "NavigationProperty",
+                "$Type": "ODataDemo.ProductDetail",
+                "$Nullable": true,
+                "$Partner": "Product"
+            }
+        },
+        "FeaturedProduct": {
+            "$Kind": "EntityType",
+            "$BaseType": "ODataDemo.Product",
+            "Advertisement": {
+                "$Kind": "NavigationProperty",
+                "$Type": "ODataDemo.Advertisement",
+                "$Nullable": true,
+                "$Partner": "FeaturedProduct"
+            }
+        },
+        "ProductDetail": {
+            "$Kind": "EntityType",
+            "$Key": [
+                "ProductID"
+            ],
+            "ProductID": {
+                "$Type": "Edm.Int32"
+            },
+            "Details": {
+                "$Nullable": true
+            },
+            "Product": {
+                "$Kind": "NavigationProperty",
+                "$Type": "ODataDemo.Product",
+                "$Nullable": true,
+                "$Partner": "ProductDetail"
+            }
+        },
+        "Category": {
+            "$Kind": "EntityType",
+            "$OpenType": true,
+            "$Key": [
+                "ID"
+            ],
+            "ID": {
+                "$Type": "Edm.Int32"
+            },
+            "Name": {
+                "$Nullable": true
+            },
+            "Products": {
+                "$Kind": "NavigationProperty",
+                "$Collection": true,
+                "$Type": "ODataDemo.Product",
+                "$Partner": "Categories"
+            }
+        },
+        "Supplier": {
+            "$Kind": "EntityType",
+            "$Key": [
+                "ID"
+            ],
+            "ID": {
+                "$Type": "Edm.Int32"
+            },
+            "Name": {
+                "$Nullable": true
+            },
+            "Address": {
+                "$Type": "ODataDemo.Address",
+                "$Nullable": true
+            },
+            "Location": {
+                "$Type": "Edm.GeographyPoint",
+                "$Nullable": true,
+                "$SRID": "Variable"
+            },
+            "Concurrency": {
+                "$Type": "Edm.Int32"
+            },
+            "Products": {
+                "$Kind": "NavigationProperty",
+                "$Collection": true,
+                "$Type": "ODataDemo.Product",
+                "$Partner": "Supplier"
+            }
+        },
+        "Address": {
+            "$Kind": "ComplexType",
+            "Street": {
+                "$Nullable": true
+            },
+            "City": {
+                "$Nullable": true
+            },
+            "State": {
+                "$Nullable": true
+            },
+            "ZipCode": {
+                "$Nullable": true
+            },
+            "Country": {
+                "$Nullable": true
+            }
+        },
+        "Person": {
+            "$Kind": "EntityType",
+            "$Key": [
+                "ID"
+            ],
+            "ID": {
+                "$Type": "Edm.Int32"
+            },
+            "Name": {
+                "$Nullable": true
+            },
+            "PersonDetail": {
+                "$Kind": "NavigationProperty",
+                "$Type": "ODataDemo.PersonDetail",
+                "$Nullable": true,
+                "$Partner": "Person"
+            }
+        },
+        "Customer": {
+            "$Kind": "EntityType",
+            "$BaseType": "ODataDemo.Person",
+            "TotalExpense": {
+                "$Type": "Edm.Decimal",
+                "$Scale": 0
+            }
+        },
+        "Employee": {
+            "$Kind": "EntityType",
+            "$BaseType": "ODataDemo.Person",
+            "EmployeeID": {
+                "$Type": "Edm.Int64"
+            },
+            "HireDate": {
+                "$Type": "Edm.DateTime",
+                "$Precision": 0
+            },
+            "Salary": {
+                "$Type": "Edm.Single"
+            }
+        },
+        "PersonDetail": {
+            "$Kind": "EntityType",
+            "$Key": [
+                "PersonID"
+            ],
+            "PersonID": {
+                "$Type": "Edm.Int32"
+            },
+            "Age": {
+                "$Type": "Edm.Byte"
+            },
+            "Gender": {
+                "$Type": "Edm.Boolean"
+            },
+            "Phone": {
+                "$Nullable": true
+            },
+            "Address": {
+                "$Type": "ODataDemo.Address",
+                "$Nullable": true
+            },
+            "Photo": {
+                "$Type": "Edm.Stream"
+            },
+            "Person": {
+                "$Kind": "NavigationProperty",
+                "$Type": "ODataDemo.Person",
+                "$Nullable": true,
+                "$Partner": "PersonDetail"
+            }
+        },
+        "Advertisement": {
+            "$Kind": "EntityType",
+            "$HasStream": true,
+            "$Key": [
+                "ID"
+            ],
+            "ID": {
+                "$Type": "Edm.Guid"
+            },
+            "Name": {
+                "$Nullable": true
+            },
+            "AirDate": {
+                "$Type": "Edm.DateTime",
+                "$Precision": 0
+            },
+            "FeaturedProduct": {
+                "$Kind": "NavigationProperty",
+                "$Type": "ODataDemo.FeaturedProduct",
+                "$Nullable": true,
+                "$Partner": "Advertisement"
+            }
+        },
+        "DemoService": {
+            "$Kind": "EntityContainer",
+            "Products": {
+                "$Collection": true,
+                "$Type": "ODataDemo.Product",
+                "$NavigationPropertyBinding": {
+                    "ODataDemo.FeaturedProduct/Advertisement": "Advertisements",
+                    "Categories": "Categories",
+                    "Supplier": "Suppliers",
+                    "ProductDetail": "ProductDetails"
+                }
+            },
+            "ProductDetails": {
+                "$Collection": true,
+                "$Type": "ODataDemo.ProductDetail",
+                "$NavigationPropertyBinding": {
+                    "Product": "Products"
+                }
+            },
+            "Categories": {
+                "$Collection": true,
+                "$Type": "ODataDemo.Category",
+                "$NavigationPropertyBinding": {
+                    "Products": "Products"
+                }
+            },
+            "Suppliers": {
+                "$Collection": true,
+                "$Type": "ODataDemo.Supplier",
+                "$NavigationPropertyBinding": {
+                    "Products": "Products"
+                }
+            },
+            "Persons": {
+                "$Collection": true,
+                "$Type": "ODataDemo.Person",
+                "$NavigationPropertyBinding": {
+                    "PersonDetail": "PersonDetails"
+                }
+            },
+            "PersonDetails": {
+                "$Collection": true,
+                "$Type": "ODataDemo.PersonDetail",
+                "$NavigationPropertyBinding": {
+                    "Person": "Persons"
+                }
+            },
+            "Advertisements": {
+                "$Collection": true,
+                "$Type": "ODataDemo.Advertisement",
+                "$NavigationPropertyBinding": {
+                    "FeaturedProduct": "Products"
+                }
+            },
+            "GetProductsByRating": {
+                "$Function": "ODataDemo.GetProductsByRating",
+                "$EntitySet": "Products"
+            },
+            "IncreaseSalaries": {
+                "$Action": "ODataDemo.IncreaseSalaries"
+            }
+        },
+        "$Annotations": {
+            "ODataDemo.DemoService": {
+                "@Org.OData.Display.V1.Description": "This is a sample OData service with vocabularies"
+            },
+            "ODataDemo.Product": {
+                "@Org.OData.Display.V1.Description": "All Products available in the online store"
+            },
+            "ODataDemo.Product/Name": {
+                "@Org.OData.Display.V1.DisplayName": "Product Name"
+            },
+            "ODataDemo.DemoService/Suppliers": {
+                "@Org.OData.Publication.V1.PublisherName": "Microsoft Corp.",
+                "@Org.OData.Publication.V1.PublisherId": "MSFT",
+                "@Org.OData.Publication.V1.Keywords": "Inventory, Supplier, Advertisers, Sales, Finance",
+                "@Org.OData.Publication.V1.AttributionUrl": "http://www.odata.org/",
+                "@Org.OData.Publication.V1.AttributionDescription": "All rights reserved",
+                "@Org.OData.Publication.V1.DocumentationUrl ": "http://www.odata.org/",
+                "@Org.OData.Publication.V1.TermsOfUseUrl": "All rights reserved",
+                "@Org.OData.Publication.V1.PrivacyPolicyUrl": "http://www.odata.org/",
+                "@Org.OData.Publication.V1.LastModified": "4/2/2013",
+                "@Org.OData.Publication.V1.ImageUrl ": "http://www.odata.org/"
+            }
+        },
+        "GetProductsByRating": [
+            {
+                "$Kind": "Function",
+                "$Parameter": [
+                    {
+                        "$Name": "rating",
+                        "$Type": "Edm.Int16"
+                    }
+                ],
+                "$ReturnType": {
+                    "$Collection": true,
+                    "$Type": "ODataDemo.Product"
+                }
+            }
+        ],
+        "Discount": [
+            {
+                "$Kind": "Action",
+                "$IsBound": true,
+                "$Parameter": [
+                    {
+                        "$Name": "product",
+                        "$Type": "ODataDemo.Product"
+                    },
+                    {
+                        "$Name": "discountPercentage",
+                        "$Type": "Edm.Int32"
+                    }
+                ],
+                "$ReturnType": {
+                    "$Type": "Edm.Double"
+                }
+            }
+        ],
+        "IncreaseSalaries": [
+            {
+                "$Kind": "Action",
+                "$Parameter": [
+                    {
+                        "$Name": "percentage",
+                        "$Type": "Edm.Int32"
+                    }
+                ]
+            }
+        ]
+    },
+    "$EntityContainer": "ODataDemo.DemoService"
+}
