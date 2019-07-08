@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx">
   <edmx:DataServices xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" m:DataServiceVersion="2.0">
-    <Schema Namespace="one" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+    <Schema Namespace="first" Alias="one" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
       <EntityType Name="a">
         <Key>
           <PropertyRef Name="id" />
@@ -17,7 +17,7 @@
         <Property Name="id1" Type="Edm.Int32" Nullable="false" p8:StoreGeneratedPattern="Identity" xmlns:p8="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
         <Property Name="id2" Type="Edm.String" MaxLength="4" Nullable="false" />
         <Property Name="a_id" Type="Edm.String" Nullable="true" MaxLength="5" Unicode="true" FixedLength="true" />
-        <NavigationProperty Name="to_a" Relationship="one.a_b" FromRole="b_role" ToRole="a_role" />
+        <NavigationProperty Name="to_a" Relationship="first.a_b" FromRole="b_role" ToRole="a_role" />
         <NavigationProperty Name="to_c" Relationship="one.b_c" FromRole="b_role" ToRole="c_role" />
       </EntityType>
       <EntityType Name="c">
@@ -60,12 +60,12 @@
         </ReferentialConstraint>
       </Association>
     </Schema>
-    <Schema Namespace="two" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+    <Schema Namespace="second" Alias="two" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
       <EntityContainer Name="container" p7:LazyLoadingEnabled="true" m:IsDefaultEntityContainer="true" xmlns:p7="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
-        <EntitySet Name="a" EntityType="one.a" />
+        <EntitySet Name="a" EntityType="first.a" />
         <EntitySet Name="b" EntityType="one.b" />
         <EntitySet Name="c" EntityType="one.c" />
-        <AssociationSet Name="a_b" Association="one.a_b">
+        <AssociationSet Name="a_b" Association="first.a_b">
           <End Role="a_role" EntitySet="a" />
           <End Role="b_role" EntitySet="b" />
         </AssociationSet>

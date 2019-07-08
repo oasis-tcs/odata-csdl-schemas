@@ -1,6 +1,7 @@
 {
     "$Version": "2.0",
-    "one": {
+    "first": {
+        "$Alias": "one",
         "a": {
             "$Kind": "EntityType",
             "$Key": [
@@ -76,7 +77,8 @@
             }
         }
     },
-    "two": {
+    "second": {
+        "$Alias": "two",
         "container": {
             "$Kind": "EntityContainer",
             "a": {
@@ -103,5 +105,5 @@
             }
         }
     },
-    "$EntityContainer": "two.container"
+    "$EntityContainer": "second.container"
 }
