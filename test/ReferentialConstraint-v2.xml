@@ -36,7 +36,7 @@
         <End Role="b_role" Type="one.b" Multiplicity="*" />
         <ReferentialConstraint>
           <Principal Role="a_role">
-            <PropertyRef Name="a_id" />
+            <PropertyRef Name="id" />
           </Principal>
           <Dependent Role="b_role">
             <PropertyRef Name="a_id" />
@@ -50,8 +50,8 @@
         <End Role="c_role" Type="one.c" Multiplicity="*" />
         <ReferentialConstraint>
           <Principal Role="b_role">
-            <PropertyRef Name="b_id1" />
-            <PropertyRef Name="b_id2" />
+            <PropertyRef Name="id1" />
+            <PropertyRef Name="id2" />
           </Principal>
           <Dependent Role="c_role">
             <PropertyRef Name="b_id1" />

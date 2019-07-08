@@ -38,7 +38,7 @@
                 "$Nullable": true,
                 "$Partner": "to_b",
                 "$ReferentialConstraint": {
-                    "a_id": "a_id"
+                    "a_id": "id"
                 }
             },
             "to_c": {
@@ -70,8 +70,8 @@
                 "$Type": "one.b",
                 "$Partner": "to_c",
                 "$ReferentialConstraint": {
-                    "b_id1": "b_id1",
-                    "b_id2": "b_id2"
+                    "b_id1": "id1",
+                    "b_id2": "id2"
                 }
             }
         }
