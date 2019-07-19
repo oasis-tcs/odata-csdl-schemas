@@ -501,9 +501,6 @@
       <Annotations Target="self.MyAction()">
         <Annotation Term="self.Dummy" />
       </Annotations>
-      <Annotations Target="self.MyAction()/MyParameter">
-        <Annotation Term="self.Dummy" />
-      </Annotations>
       <Annotations Target="self.MyAction()/$ReturnType">
         <Annotation Term="self.Dummy" />
       </Annotations>
@@ -526,9 +523,6 @@
         <Annotation Term="self.Dummy" />
       </Annotations>
       <Annotations Target="self.MyFunction(org.example.MyParamType1,org.example.MyParamType2)/$ReturnType">
-        <Annotation Term="self.Dummy" />
-      </Annotations>
-      <Annotations Target="self.MyFunction()/MyParameter">
         <Annotation Term="self.Dummy" />
       </Annotations>
       <Annotations Target="self.MyFunction()/$ReturnType">

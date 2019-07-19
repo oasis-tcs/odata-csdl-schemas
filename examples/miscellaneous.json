@@ -773,9 +773,6 @@
             "self.MyAction()": {
                 "@self.Dummy": true
             },
-            "self.MyAction()/MyParameter": {
-                "@self.Dummy": true
-            },
             "self.MyAction()/$ReturnType": {
                 "@self.Dummy": true
             },
@@ -798,9 +795,6 @@
                 "@self.Dummy": true
             },
             "self.MyFunction(self.MyParamType1,self.MyParamType2)/$ReturnType": {
-                "@self.Dummy": true
-            },
-            "self.MyFunction()/MyParameter": {
                 "@self.Dummy": true
             },
             "self.MyFunction()/$ReturnType": {
