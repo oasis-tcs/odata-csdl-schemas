@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<edmx:Edmx xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Version="4.0">
+<edmx:Edmx xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Version="4.01">
   <edmx:Reference Uri="http://host/service/$metadata">
     <edmx:Include Namespace="ODataDemo" Alias="target" />
   </edmx:Reference>
