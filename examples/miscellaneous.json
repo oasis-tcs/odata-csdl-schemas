@@ -1267,7 +1267,7 @@
         "@A.Very_Long_Int": 9007199254740992,
         "@A.String": "1.23e4",
         "@A.String#withAmp": "Fast&Furious",
-        "@A.String#ToBeEscaped": "A/\"good\"\r\nstory\\for\tkids",
+        "@A.String#ToBeEscaped": "A/\"good\"\nstory\\for\tkids\nat\nnight",
         "@A.Guid": "86a96539-871b-45cf-b96b-93dbc235105e",
         "@A.Guid#Element": "86a96539-871b-45cf-b96b-93dbc235105e",
         "@A.Date": "2013-10-09",

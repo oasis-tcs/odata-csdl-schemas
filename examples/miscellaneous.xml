@@ -1062,7 +1062,7 @@
       <Annotation Term="A.String" String="1.23e4" />
       <Annotation Term="A.String" String="Fast&amp;Furious" Qualifier="withAmp" />
       <Annotation Term="A.String" Qualifier="ToBeEscaped">
-        <String>A/"good"&#x0D;&#x0A;story\for&#x09;kids</String>
+        <String>A/"good"&#x0D;&#x0A;story\for&#x09;kids&#x0D;at&#x0A;night</String>
       </Annotation>
 
       <Annotation Term="A.Guid" Guid="86a96539-871b-45cf-b96b-93dbc235105e" />

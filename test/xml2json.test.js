@@ -78,4 +78,34 @@ describe('Examples', function () {
         assert.deepStrictEqual(json.n['@String.EmptyBody'], '');
     })
 
+    it('<String> with line-breaks', function () {
+        //TODO: correct XML once checks are added
+        const xml = '<Edmx Version=""><DataServices><Schema Namespace="n">'
+            + ' <Annotation Term="String.WithCRLF"><String>one\r\ntwo\r\nthree</String></Annotation>'
+            + ' <Annotation Term="String.WithLF"><String>one\ntwo\nthree</String></Annotation>'
+            + ' <Annotation Term="String.WithCR"><String>one\rtwo\rthree</String></Annotation>'
+            + ' </Schema></DataServices></Edmx>';
+        const normalized = 'one\ntwo\nthree';
+        const json = csdl.xml2json(xml);
+        assert.deepStrictEqual(json.n['@String.WithCRLF'], normalized);
+        assert.deepStrictEqual(json.n['@String.WithLF'], normalized);
+        assert.deepStrictEqual(json.n['@String.WithCR'], normalized);
+    })
+
+    it('<EnumMember Value="0"', function () {
+        //TODO: correct XML once checks are added
+        const xml = '<Edmx Version=""><DataServices><Schema Namespace="n">'
+            + ' <EnumType Name="WithZeroValue"><Member Name="One" Value="1"/><Member Name="Zero" Value="0"/></EnumType>'
+            + ' </Schema></DataServices></Edmx>';
+        const schema = {
+            WithZeroValue: {
+                $Kind: 'EnumType',
+                One: 1,
+                Zero: 0
+            }
+        };
+        const json = csdl.xml2json(xml);
+        assert.deepStrictEqual(json.n, schema);
+    })
+
 })
