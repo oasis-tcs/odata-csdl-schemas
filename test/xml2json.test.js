@@ -108,4 +108,23 @@ describe('Examples', function () {
         assert.deepStrictEqual(json.n, schema);
     })
 
+    it('with line numbers', function () {
+        //TODO: correct XML once checks are added
+        const xml = '<Edmx Version="">\n<DataServices>\n<Schema Namespace="n">\n'
+            + '<EnumType Name="WithZeroValue">\n<Member Name="One" Value="1"/>\n<Member Name="Zero" Value="0"/>\n</EnumType>\n'
+            + '</Schema>\n</DataServices>\n</Edmx>';
+        const schema = {
+            WithZeroValue: {
+                $Kind: 'EnumType',
+                '@parser.line': 4,
+                One: 1,
+                'One@parser.line': 5,
+                Zero: 0,
+                'Zero@parser.line': 6
+            }
+        };
+        const json = csdl.xml2json(xml, true);
+        assert.deepStrictEqual(json.n, schema);
+    })
+
 })
