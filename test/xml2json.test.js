@@ -112,6 +112,7 @@ describe('Examples', function () {
         //TODO: correct XML once checks are added
         const xml = '<Edmx Version="">\n<DataServices>\n<Schema Namespace="n">\n'
             + '<EnumType Name="WithZeroValue">\n<Member Name="One" Value="1"/>\n<Member Name="Zero" Value="0"/>\n</EnumType>\n'
+            + '<ComplexType Name="ct">\n</ComplexType>\n'
             + '</Schema>\n</DataServices>\n</Edmx>';
         const schema = {
             WithZeroValue: {
@@ -121,6 +122,10 @@ describe('Examples', function () {
                 'One@parser.line': 5,
                 Zero: 0,
                 'Zero@parser.line': 6
+            },
+            ct: {
+                $Kind: 'ComplexType',
+                '@parser.line': 8
             }
         };
         const json = csdl.xml2json(xml, true);
