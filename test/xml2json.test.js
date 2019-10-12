@@ -120,6 +120,7 @@ describe('Examples', function () {
             + '<EntityType Name="et">\n'
             + '<NavigationProperty Name="np" Type="n.et"/>\n'
             + '</EntityType>\n'
+            + '<TypeDefinition Name="td" UnderlyingType="Edm.String"/>\n'
             + '<Term Name="t" Type="Edm.String"/>\n'
             + '<Action Name="a"/>\n'
             + '<Function Name="f" ReturnType="Edm.String"/>\n'
@@ -151,21 +152,26 @@ describe('Examples', function () {
                     '@parser.line': 12
                 }
             },
+            td: {
+                $Kind: 'TypeDefinition',
+                $UnderlyingType: 'Edm.String',
+                '@parser.line': 14
+            },
             t: {
                 $Kind: 'Term',
                 $Nullable: true,
-                '@parser.line': 14
+                '@parser.line': 15
             },
             a: [
                 {
                     $Kind: 'Action',
-                    '@parser.line': 15
+                    '@parser.line': 16
                 }
             ],
             f: [
                 {
                     $Kind: 'Function',
-                    '@parser.line': 16
+                    '@parser.line': 17
                 }
             ]
         };
