@@ -110,9 +110,16 @@ describe('Examples', function () {
 
     it('with line numbers', function () {
         //TODO: correct XML once checks are added
-        const xml = '<Edmx Version="">\n<DataServices>\n<Schema Namespace="n">\n'
+        const xml = '<Edmx Version="4.0">\n'
+            + '<DataServices>\n'
+            + '<Schema Namespace="n">\n'
             + '<EnumType Name="WithZeroValue">\n<Member Name="One" Value="1"/>\n<Member Name="Zero" Value="0"/>\n</EnumType>\n'
-            + '<ComplexType Name="ct">\n</ComplexType>\n'
+            + '<ComplexType Name="ct">\n'
+            + '<Property Name="p" Type="Edm.String"/>\n'
+            + '</ComplexType>\n'
+            + '<EntityType Name="et">\n'
+            + '<NavigationProperty Name="np" Type="n.et"/>\n'
+            + '</EntityType>\n'
             + '</Schema>\n</DataServices>\n</Edmx>';
         const schema = {
             WithZeroValue: {
@@ -125,7 +132,21 @@ describe('Examples', function () {
             },
             ct: {
                 $Kind: 'ComplexType',
-                '@parser.line': 8
+                '@parser.line': 8,
+                p: {
+                    $Nullable: true,
+                    '@parser.line': 9
+                }
+            },
+            et: {
+                $Kind: 'EntityType',
+                '@parser.line': 11,
+                np: {
+                    $Kind: 'NavigationProperty',
+                    $Nullable: true,
+                    $Type: 'n.et',
+                    '@parser.line': 12
+                }
             }
         };
         const json = csdl.xml2json(xml, true);
