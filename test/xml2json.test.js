@@ -120,6 +120,9 @@ describe('Examples', function () {
             + '<EntityType Name="et">\n'
             + '<NavigationProperty Name="np" Type="n.et"/>\n'
             + '</EntityType>\n'
+            + '<Term Name="t" Type="Edm.String"/>\n'
+            + '<Action Name="a"/>\n'
+            + '<Function Name="f" ReturnType="Edm.String"/>\n'
             + '</Schema>\n</DataServices>\n</Edmx>';
         const schema = {
             WithZeroValue: {
@@ -147,7 +150,24 @@ describe('Examples', function () {
                     $Type: 'n.et',
                     '@parser.line': 12
                 }
-            }
+            },
+            t: {
+                $Kind: 'Term',
+                $Nullable: true,
+                '@parser.line': 14
+            },
+            a: [
+                {
+                    $Kind: 'Action',
+                    '@parser.line': 15
+                }
+            ],
+            f: [
+                {
+                    $Kind: 'Function',
+                    '@parser.line': 16
+                }
+            ]
         };
         const json = csdl.xml2json(xml, true);
         assert.deepStrictEqual(json.n, schema);
