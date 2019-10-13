@@ -110,21 +110,31 @@ describe('Examples', function () {
 
     it('with line numbers', function () {
         //TODO: correct XML once checks are added
-        const xml = '<Edmx Version="4.0">\n'
-            + '<DataServices>\n'
-            + '<Schema Namespace="n">\n'
-            + '<EnumType Name="WithZeroValue">\n<Member Name="One" Value="1"/>\n<Member Name="Zero" Value="0"/>\n</EnumType>\n'
-            + '<ComplexType Name="ct">\n'
-            + '<Property Name="p" Type="Edm.String"/>\n'
-            + '</ComplexType>\n'
-            + '<EntityType Name="et">\n'
-            + '<NavigationProperty Name="np" Type="n.et"/>\n'
-            + '</EntityType>\n'
-            + '<TypeDefinition Name="td" UnderlyingType="Edm.String"/>\n'
-            + '<Term Name="t" Type="Edm.String"/>\n'
-            + '<Action Name="a"/>\n'
-            + '<Function Name="f" ReturnType="Edm.String"/>\n'
-            + '</Schema>\n</DataServices>\n</Edmx>';
+        const xml = [
+            '<Edmx Version="4.0">',
+            '<DataServices>',
+            '<Schema Namespace="n">',
+            '<EnumType Name="WithZeroValue">\n<Member Name="One" Value="1"/>\n<Member Name="Zero" Value="0"/>\n</EnumType>',
+            '<ComplexType Name="ct">',
+            '<Property Name="p" Type="Edm.String"/>',
+            '</ComplexType>',
+            '<EntityType Name="et">',
+            '<NavigationProperty Name="np" Type="n.et"/>',
+            '</EntityType>',
+            '<TypeDefinition Name="td" UnderlyingType="Edm.String"/>',
+            '<Term Name="t" Type="Edm.String"/>',
+            '<Action Name="a"/>',
+            '<Function Name="f" ReturnType="Edm.String"/>',
+            '<Annotation Term="Some.Collection">',
+            '<Collection>',
+            '<Record>',
+            '</Record>',
+            '</Collection>',
+            '</Annotation>',
+            '</Schema>',
+            '</DataServices>',
+            '</Edmx>'
+        ].join('\n');
         const schema = {
             WithZeroValue: {
                 $Kind: 'EnumType',
@@ -172,6 +182,11 @@ describe('Examples', function () {
                 {
                     $Kind: 'Function',
                     '@parser.line': 17
+                }
+            ],
+            '@Some.Collection': [
+                {
+                    '@parser.line': 20
                 }
             ]
         };
