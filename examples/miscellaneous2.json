@@ -1,6 +1,5 @@
 {
     "$Version": "4.0",
-    "$EntityContainer": "org.example2.Extending",
     "$Reference": {
         "SomeOther.xml": {
             "$Include": [
@@ -16,8 +15,8 @@
             "$Extends": "Some.Other.Schema.Base",
             "Bar": {
                 "$Function": "One.Foo",
-                "$IncludeInServiceDocument": true,
-                "$EntitySet": "Model.Extending/Freds"
+                "$EntitySet": "Model.Extending/Freds",
+                "$IncludeInServiceDocument": true
             },
             "CreatedEntities": {
                 "$Function": "Model.CreatedEntities",
@@ -39,6 +38,7 @@
             }
         }
     },
+    "$EntityContainer": "org.example2.Extending",
     "Schema.One": {
         "$Alias": "One",
         "Foo": [
@@ -53,8 +53,8 @@
         "OddWaldos": [
             {
                 "$Kind": "Function",
-                "$IsBound": true,
                 "$EntitySetPath": "waldos",
+                "$IsBound": true,
                 "$Parameter": [
                     {
                         "$Name": "waldos",
@@ -101,9 +101,7 @@
             "$Key": [
                 "ID"
             ],
-            "ID": {
-
-            }
+            "ID": {}
         }
     },
     "Schema.Two": {
@@ -120,9 +118,7 @@
             "$Key": [
                 "ID"
             ],
-            "ID": {
-
-            },
+            "ID": {},
             "Waldos": {
                 "$Kind": "NavigationProperty",
                 "$Collection": true,

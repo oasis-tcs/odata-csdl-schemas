@@ -27,6 +27,7 @@
                 },
                 "@Vocabulary1.Title": "Supplier Info",
                 "@Vocabulary1.DisplayName": {
+                    "$Function": "odata.concat",
                     "$Apply": [
                         {
                             "$Path": "Name"
@@ -35,8 +36,7 @@
                         {
                             "$Path": "Address/CountryName"
                         }
-                    ],
-                    "$Function": "odata.concat"
+                    ]
                 }
             },
             "target.Product": {
