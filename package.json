@@ -21,11 +21,11 @@
   },
   "devDependencies": {
     "mocha": "^6.1.4",
-    "ajv-cli" : "^3.0.0"
+    "ajv-cli": "^3.0.0"
   },
   "scripts": {
     "build": "node lib/transform.js",
-    "validate":"npm run validate:schema && npm run validate:examples",
+    "validate": "npm run validate:schema && npm run validate:examples",
     "validate:examples": "ajv validate -s schemas/csdl.schema.json -d examples/*.json",
     "validate:schema": "ajv validate -s schemas/json-schema-draft-07.json -d schemas/csdl.schema.json",
     "test": "mocha"

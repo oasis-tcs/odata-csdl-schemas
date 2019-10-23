@@ -615,7 +615,7 @@
                     "$Null": null
                 },
                 "@person.Employee": {
-                    "@type": "https://example.org/vocabs/person#org.example.person.Manager",
+                    "@type": "https://example.org/vocabs/person#person.Manager",
                     "@Core.Description": "Annotation on record",
                     "GivenName@Core.Description": "Annotation on record member",
                     "GivenName": {
