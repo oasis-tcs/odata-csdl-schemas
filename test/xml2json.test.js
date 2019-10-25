@@ -191,7 +191,53 @@ describe('Examples', function () {
             ]
         };
         const json = csdl.xml2json(xml, true);
-        assert.deepStrictEqual(json.n, schema);
+        assert.deepStrictEqual(json.n, schema, 'schema');
+    })
+
+    it('Annotation of type Stream', function () {
+        //TODO: correct XML once checks are added
+        const xml =
+            `<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+               <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.JSON.V1.xml">
+                 <edmx:Include Namespace="Org.OData.JSON.V1" Alias="JSON" />
+               </edmx:Reference>
+               <edmx:DataServices>
+                 <Schema Namespace="n">
+                   <TypeDefinition Name="ResponseCodes" UnderlyingType="Edm.Stream">
+                     <Annotation Term="Core.LongDescription" String="Dictionary of response code --> description" />
+                     <Annotation Term="Core.AutoExpand" Bool="true" />
+                     <Annotation Term="JSON.Schema">
+                       <String>{"type":"object","additionalProperties":false,"patternProperties":{"^[0-9]{3}$":{"type":"string"}}}</String>
+                     </Annotation>
+                     <Annotation Term="Core.AcceptableMediaTypes">
+                       <Collection>
+                         <String>application/json</String>
+                       </Collection>
+                     </Annotation>
+                   </TypeDefinition>
+                 </Schema>
+               </edmx:DataServices>
+             </edmx:Edmx>`;
+        const schema = {
+            ResponseCodes: {
+                $Kind: 'TypeDefinition',
+                $UnderlyingType: 'Edm.Stream',
+                '@Core.AcceptableMediaTypes': ['application/json'],
+                '@Core.AutoExpand': true,
+                '@Core.LongDescription': 'Dictionary of response code --> description',
+                '@JSON.Schema': {
+                    type: 'object',
+                    additionalProperties: false,
+                    patternProperties: {
+                        '^[0-9]{3}$': {
+                            type: 'string'
+                        }
+                    }
+                }
+            }
+        };
+        const json = csdl.xml2json(xml);
+        assert.deepStrictEqual(json.n, schema, 'schema');
     })
 
 })
