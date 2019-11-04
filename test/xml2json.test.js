@@ -194,19 +194,35 @@ describe('Examples', function () {
         assert.deepStrictEqual(json.n, schema, 'schema');
     })
 
-    it('Annotation of type Stream', function () {
+    it('Annotation (property) value of media type application/json', function () {
         //TODO: correct XML once checks are added
         const xml =
             `<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+               <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
+                 <edmx:Include Namespace="Org.OData.Core.V1" Alias="C" />
+               </edmx:Reference>
                <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.JSON.V1.xml">
-                 <edmx:Include Namespace="Org.OData.JSON.V1" Alias="JSON" />
+                 <edmx:Include Namespace="Org.OData.JSON.V1" Alias="J" />
                </edmx:Reference>
                <edmx:DataServices>
                  <Schema Namespace="n">
                    <Annotations Target="Something.Else">
-                     <Annotation Term="JSON.Schema">
+                     <Annotation Term="J.Schema">
                        <String>{"type":"object","additionalProperties":false,"patternProperties":{"^[0-9]{3}$":{"type":"string"}}}</String>
-                       <Annotation Term="Core.MediaType" String="application/json" />
+                     </Annotation>
+                     <Annotation Term="Some.PrimitiveTerm">
+                       <Annotation Term="C.MediaType" String="application/json" />
+                       <String>{"a-b":"not a property name"}</String>
+                     </Annotation>
+                     <Annotation Term="C.MediaType" String="application/json" />
+                     <Annotation Term="Some.StructuredTerm">
+                       <Record>
+                         <Annotation Term="C.MediaType" String="application/json" />
+                         <PropertyValue Property="somestream">
+                           <Annotation Term="C.MediaType" String="application/json" />
+                           <String>{"a-b":"not a property name"}</String>
+                         </PropertyValue>
+                       </Record>
                      </Annotation>
                    </Annotations>
                  </Schema>
@@ -215,8 +231,8 @@ describe('Examples', function () {
         const schema = {
             $Annotations: {
                 "Something.Else": {
-                    '@JSON.Schema@Core.MediaType': 'application/json',
-                    '@JSON.Schema': {
+                    '@C.MediaType': 'application/json',
+                    '@J.Schema': {
                         type: 'object',
                         additionalProperties: false,
                         patternProperties: {
@@ -224,6 +240,17 @@ describe('Examples', function () {
                                 type: 'string'
                             }
                         }
+                    },
+                    '@Some.PrimitiveTerm@C.MediaType': 'application/json',
+                    '@Some.PrimitiveTerm': {
+                        'a-b': 'not a property name'
+                    },
+                    '@Some.StructuredTerm': {
+                        '@C.MediaType': 'application/json',
+                        somestream: {
+                            'a-b': 'not a property name'
+                        },
+                        'somestream@C.MediaType': 'application/json'
                     }
                 }
             }
