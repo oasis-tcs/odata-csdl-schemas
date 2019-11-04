@@ -203,34 +203,26 @@ describe('Examples', function () {
                </edmx:Reference>
                <edmx:DataServices>
                  <Schema Namespace="n">
-                   <TypeDefinition Name="ResponseCodes" UnderlyingType="Edm.Stream">
-                     <Annotation Term="Core.LongDescription" String="Dictionary of response code --> description" />
-                     <Annotation Term="Core.AutoExpand" Bool="true" />
+                   <Annotations Target="Something.Else">
                      <Annotation Term="JSON.Schema">
                        <String>{"type":"object","additionalProperties":false,"patternProperties":{"^[0-9]{3}$":{"type":"string"}}}</String>
+                       <Annotation Term="Core.MediaType" String="application/json" />
                      </Annotation>
-                     <Annotation Term="Core.AcceptableMediaTypes">
-                       <Collection>
-                         <String>application/json</String>
-                       </Collection>
-                     </Annotation>
-                   </TypeDefinition>
+                   </Annotations>
                  </Schema>
                </edmx:DataServices>
              </edmx:Edmx>`;
         const schema = {
-            ResponseCodes: {
-                $Kind: 'TypeDefinition',
-                $UnderlyingType: 'Edm.Stream',
-                '@Core.AcceptableMediaTypes': ['application/json'],
-                '@Core.AutoExpand': true,
-                '@Core.LongDescription': 'Dictionary of response code --> description',
-                '@JSON.Schema': {
-                    type: 'object',
-                    additionalProperties: false,
-                    patternProperties: {
-                        '^[0-9]{3}$': {
-                            type: 'string'
+            $Annotations: {
+                "Something.Else": {
+                    '@JSON.Schema@Core.MediaType': 'application/json',
+                    '@JSON.Schema': {
+                        type: 'object',
+                        additionalProperties: false,
+                        patternProperties: {
+                            '^[0-9]{3}$': {
+                                type: 'string'
+                            }
                         }
                     }
                 }
