@@ -101,7 +101,7 @@
                 "$Type": "OrgModel.Employee",
                 "@Temporal.TemporalSupport": {
                     "ApplicationTime": {
-                        "@type": "https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Temporal.V1.xml#Temporal.GranularityDate",
+                        "@odata.type": "https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Temporal.V1.xml#Temporal.GranularityDate",
                         "SupportedQueries": "TimeTravel,TimeSeries"
                     }
                 }
@@ -111,7 +111,7 @@
                 "$Type": "OrgModel.Department",
                 "@Temporal.TemporalSupport": {
                     "ApplicationTime": {
-                        "@type": "https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Temporal.V1.xml#Temporal.GranularityDate",
+                        "@odata.type": "https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Temporal.V1.xml#Temporal.GranularityDate",
                         "SupportedQueries": "TimeTravel,TimeSeries"
                     }
                 }
@@ -121,11 +121,11 @@
                 "$Type": "OrgModel.DepartmentBudget",
                 "@Temporal.TemporalSupported": {
                     "ApplicationTime": {
-                        "@type": "https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Temporal.V1.xml#Temporal.GranularityDate",
+                        "@odata.type": "https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Temporal.V1.xml#Temporal.GranularityDate",
                         "SupportedQueries": "TimeTravel,TimeSeries"
                     },
                     "SystemTime": {
-                        "@type": "https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Temporal.V1.xml#Temporal.GranularityDateTimeOffset",
+                        "@odata.type": "https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Temporal.V1.xml#Temporal.GranularityDateTimeOffset",
                         "Precision": 0,
                         "SupportedQueries": "TimeTravel,TimeSeries"
                     },
