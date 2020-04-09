@@ -298,7 +298,9 @@
                 "@UI.DisplayName": "Product Catalog",
                 "@UI.DisplayName#element": "Product Catalog",
                 "@UI.EndTime": "21:45:00",
-                "@UI.EndTime#element": "21:45:00"
+                "@UI.EndTime#element": "21:45:00",
+                "@UI.EndTime#noSeconds": "21:45",
+                "@UI.EndTime#elementSubSeconds": "21:45:00.000000000000"
             },
             "self.DynamicExpression": {
                 "@self.Dummy": [

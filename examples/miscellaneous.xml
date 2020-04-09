@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <!-- 4 CSDL XML Document, -->
 <!--Example 2 -->
 <edmx:Edmx xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" xmlns="http://docs.oasis-open.org/odata/ns/edm" Version="4.01">
@@ -162,9 +162,7 @@
         <Property Type="Edm.String" Name="ID" Nullable="false" />
         <Property Name="CategoryID" Type="Edm.String" Nullable="false" />
         <Property Name="CategoryKind" Type="Edm.String" Nullable="true" />
-        <NavigationProperty Name="Category" Type="self.Category" Nullable="false" ContainsTarget="false"
-          Partner="Products"
-        >
+        <NavigationProperty Name="Category" Type="self.Category" Nullable="false" ContainsTarget="false" Partner="Products">
           <ReferentialConstraint Property="CategoryID" ReferencedProperty="ID" />
           <ReferentialConstraint Property="CategoryKind" ReferencedProperty="Kind">
             <Annotation Term="Core.Description" String="Referential Constraint to non-key property" />
@@ -600,8 +598,7 @@
         </Annotation>
 
         <!-- Example 51: combined value for IsFlags enumeration type -->
-        <Annotation Term="org.example.HasPattern" Qualifier="list"
-          EnumMember="org.example.Pattern/Red org.example.Pattern/Striped" />
+        <Annotation Term="org.example.HasPattern" Qualifier="list" EnumMember="org.example.Pattern/Red org.example.Pattern/Striped" />
         <Annotation Term="org.example.HasPattern" Qualifier="listelement">
           <EnumMember>org.example.Pattern/Red org.example.Pattern/Striped</EnumMember>
         </Annotation>
@@ -638,6 +635,10 @@
         <Annotation Term="org.example.display.EndTime" TimeOfDay="21:45:00" />
         <Annotation Term="org.example.display.EndTime" Qualifier="element">
           <TimeOfDay>21:45:00</TimeOfDay>
+        </Annotation>
+        <Annotation Term="org.example.display.EndTime" TimeOfDay="21:45" Qualifier="noSeconds" />
+        <Annotation Term="org.example.display.EndTime" Qualifier="elementSubSeconds">
+          <TimeOfDay>21:45:00.000000000000</TimeOfDay>
         </Annotation>
       </Annotations>
 
@@ -985,8 +986,7 @@
         <Property Name="StringValue" Type="Edm.String" DefaultValue="Say &quot;Hello&quot;,&#x0A;then go" Nullable="false" />
         <Property Name="DateValue" Type="Edm.Date" DefaultValue="2012-12-03" Nullable="false" />
         <Property Name="DateTimeOffsetValue" Type="Edm.DateTimeOffset" DefaultValue="2012-12-03T07:16:23Z" Nullable="false" />
-        <Property Name="DurationValue" Type="Edm.Duration" Precision="12" DefaultValue="P12DT23H59M59.999999999999S"
-          Nullable="false" />
+        <Property Name="DurationValue" Type="Edm.Duration" Precision="12" DefaultValue="P12DT23H59M59.999999999999S" Nullable="false" />
         <Property Name="TimeOfDayValue" Type="Edm.TimeOfDay" Precision="6" DefaultValue="07:59:59.999" Nullable="false" />
         <Property Name="GuidValue" Type="Edm.Guid" DefaultValue="1234567-89ab-cdef-0123-456789abcdef" Nullable="false" />
         <Property Name="Int64Value" Type="Edm.Int64" DefaultValue="0" Nullable="false" />
@@ -1512,9 +1512,7 @@
         </Annotation>
       </Annotations>
 
-      <Term Name="AdvancedChangeTracking" BaseTerm="Capabilities.ChangeTracking" Type="Y.ChangeTrackingType"
-        AppliesTo="EntityContainer EntitySet" Nullable="false"
-      >
+      <Term Name="AdvancedChangeTracking" BaseTerm="Capabilities.ChangeTracking" Type="Y.ChangeTrackingType" AppliesTo="EntityContainer EntitySet" Nullable="false">
         <Annotation Term="Core.Description" String="Advanced change tracking capabilities of this service or entity set" />
       </Term>
       <ComplexType Name="ChangeTrackingType">
