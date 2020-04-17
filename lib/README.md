@@ -9,7 +9,7 @@ npm install
 
 To install globally type
 ```sh
-npm install -g odata-csdl
+npm install -g
 ```
 ## Usage
 
