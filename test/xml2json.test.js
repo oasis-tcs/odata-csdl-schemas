@@ -259,4 +259,60 @@ describe('Examples', function () {
         assert.deepStrictEqual(json.n, schema, 'schema');
     })
 
+    it('Function with same name as type', function () {
+        //TODO: correct XML once checks are added
+        const xml =
+            `<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+               <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
+                 <edmx:Include Namespace="Org.OData.Core.V1" Alias="C" />
+               </edmx:Reference>
+               <edmx:DataServices>
+                 <Schema Namespace="collision">
+                   <ComplexType Name="foo">
+                     <Annotation Term="Core.Description" String="types win" />
+                   </ComplexType>
+                   <Action Name="foo" IsBound="true">
+                     <Annotation Term="Core.Description" String="this one is ignored" />
+                     <Parameter Name="it" Type="collision.foo" />
+                   </Action>
+                   <Action Name="foo" IsBound="true">
+                     <Annotation Term="Core.Description" String="this one is ignored" />
+                     <Parameter Name="it" Type="collision.bar" />
+                   </Action>
+                   <Action Name="bar">
+                     <Annotation Term="Core.Description" String="this one is ignored" />
+                     <Parameter Name="it" Type="collision.bar" />
+                   </Action>
+                   <Function Name="foo" IsBound="true">
+                     <Annotation Term="Core.Description" String="this one is ignored" />
+                     <Parameter Name="it" Type="collision.foo" />
+                   </Function>
+                   <Function Name="foo" IsBound="true">
+                     <Annotation Term="Core.Description" String="this one is ignored" />
+                     <Parameter Name="it" Type="collision.bar" />
+                   </Function>
+                   <Function Name="bar">
+                     <Annotation Term="Core.Description" String="this one is ignored" />
+                     <Parameter Name="it" Type="collision.bar" />
+                   </Function>
+                   <ComplexType Name="bar">
+                     <Annotation Term="Core.Description" String="types win" />
+                   </ComplexType>
+                 </Schema>
+               </edmx:DataServices>
+             </edmx:Edmx>`;
+        const schema = {
+            foo: {
+                $Kind: 'ComplexType',
+                '@Core.Description' : 'types win'
+            },
+            bar: {
+                $Kind: 'ComplexType',
+                '@Core.Description' : 'types win'
+            }
+        };
+        const json = csdl.xml2json(xml);
+        assert.deepStrictEqual(json.collision, schema, 'schema');
+    })
+
 })
