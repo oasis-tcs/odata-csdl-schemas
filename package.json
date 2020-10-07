@@ -22,15 +22,16 @@
     "sax": "^1.2.4"
   },
   "devDependencies": {
-    "mocha": "^8.1.1",
-    "ajv-cli": "^3.2.1"
+    "ajv-cli": "^3.2.1",
+    "c8": "^7.3.1",
+    "mocha": "^8.1.1"
   },
   "scripts": {
     "build": "node lib/transform.js",
     "validate": "npm run validate:schema && npm run validate:examples",
     "validate:examples": "ajv validate -s schemas/csdl.schema.json -d examples/*.json",
     "validate:schema": "ajv validate -s schemas/json-schema-draft-07.json -d schemas/csdl.schema.json",
-    "test": "mocha"
+    "test": "c8 mocha"
   },
   "author": "",
   "license": "SEE LICENSE IN LICENSE.md"
