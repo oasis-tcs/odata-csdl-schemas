@@ -29,12 +29,10 @@
             ],
             "id1": {
                 "$Type": "Edm.Int32",
-                "@Org.OData.Core.V1.Description": "b/id1 summary, empty longdescription",
-                "@Org.OData.Core.V1.LongDescription": ""
+                "@Org.OData.Core.V1.Description": "b/id1 summary, empty longdescription"
             },
             "id2": {
                 "$MaxLength": 4,
-                "@Org.OData.Core.V1.Description": "",
                 "@Org.OData.Core.V1.LongDescription": "b/id2 longdescription, empty summary"
             },
             "b1": {
