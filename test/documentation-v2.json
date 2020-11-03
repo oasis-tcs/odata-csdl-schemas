@@ -8,13 +8,17 @@
                 "id"
             ],
             "id": {
-                "$MaxLength": 5
+                "$MaxLength": 5,
+                "@Org.OData.Core.V1.Description": "a/id summary",
+                "@Org.OData.Core.V1.LongDescription": "a/id longdescription"
             },
             "to_b": {
                 "$Kind": "NavigationProperty",
                 "$Type": "one.b",
                 "$Collection": true,
-                "$Partner": "to_a"
+                "$Partner": "to_a",
+                "@Org.OData.Core.V1.Description": "a/to_b summary",
+                "@Org.OData.Core.V1.LongDescription": "a/to_b longdescription"
             }
         },
         "b": {
@@ -24,16 +28,22 @@
                 "id2"
             ],
             "id1": {
-                "$Type": "Edm.Int32"
+                "$Type": "Edm.Int32",
+                "@Org.OData.Core.V1.Description": "b/id1 summary, empty longdescription",
+                "@Org.OData.Core.V1.LongDescription": ""
             },
             "id2": {
-                "$MaxLength": 4
+                "$MaxLength": 4,
+                "@Org.OData.Core.V1.Description": "",
+                "@Org.OData.Core.V1.LongDescription": "b/id2 longdescription, empty summary"
             },
             "b1": {
-                "$Nullable": true
+                "$Nullable": true,
+                "@Org.OData.Core.V1.Description": "b/b1 summary, no longdescription"
             },
             "b2": {
-                "$Nullable": true
+                "$Nullable": true,
+                "@Org.OData.Core.V1.LongDescription": "b/b2 longdescription, no summary"
             },
             "to_a": {
                 "$Kind": "NavigationProperty",
