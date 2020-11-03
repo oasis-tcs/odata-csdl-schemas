@@ -1,0 +1,67 @@
+{
+    "$Version": "2.0",
+    "first": {
+        "$Alias": "one",
+        "a": {
+            "$Kind": "EntityType",
+            "$Key": [
+                "id"
+            ],
+            "id": {
+                "$MaxLength": 5
+            },
+            "to_b": {
+                "$Kind": "NavigationProperty",
+                "$Type": "one.b",
+                "$Collection": true,
+                "$Partner": "to_a"
+            }
+        },
+        "b": {
+            "$Kind": "EntityType",
+            "$Key": [
+                "id1",
+                "id2"
+            ],
+            "id1": {
+                "$Type": "Edm.Int32"
+            },
+            "id2": {
+                "$MaxLength": 4
+            },
+            "b1": {
+                "$Nullable": true
+            },
+            "b2": {
+                "$Nullable": true
+            },
+            "to_a": {
+                "$Kind": "NavigationProperty",
+                "$Type": "one.a",
+                "$Nullable": true,
+                "$Partner": "to_b"
+            }
+        }
+    },
+    "second": {
+        "$Alias": "two",
+        "container": {
+            "$Kind": "EntityContainer",
+            "a": {
+                "$Collection": true,
+                "$Type": "one.a",
+                "$NavigationPropertyBinding": {
+                    "to_b": "b"
+                }
+            },
+            "b": {
+                "$Collection": true,
+                "$Type": "one.b",
+                "$NavigationPropertyBinding": {
+                    "to_a": "a"
+                }
+            }
+        }
+    },
+    "$EntityContainer": "second.container"
+}
