@@ -71,5 +71,14 @@
             }
         }
     },
-    "$EntityContainer": "second.container"
+    "$EntityContainer": "second.container",
+    "$Reference": {
+        "https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.json": {
+            "$Include": [
+                {
+                    "$Namespace": "Org.OData.Core.V1"
+                }
+            ]
+        }
+    }
 }
