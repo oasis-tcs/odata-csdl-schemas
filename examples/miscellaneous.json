@@ -1347,7 +1347,7 @@
                 "$DefaultValue": 34.95
             },
             "StringValue": {
-                "$DefaultValue": "Say \"Hello\",\nthen go"
+                "$DefaultValue": "0000"
             },
             "DateValue": {
                 "$Type": "Edm.Date",
