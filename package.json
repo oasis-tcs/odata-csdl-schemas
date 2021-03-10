@@ -1,6 +1,6 @@
 {
   "name": "odata-csdl",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "Convert CSDL XML to CSDL JSON",
   "homepage": "https://github.com/oasis-tcs/odata-csdl-schemas/blob/master/lib/README.md",
   "bugs": "https://github.com/oasis-tcs/odata-csdl-schemas/issues",
@@ -22,15 +22,14 @@
     "sax": "^1.2.4"
   },
   "devDependencies": {
-    "ajv-cli": "^3.2.1",
-    "c8": "^7.3.1",
-    "mocha": "^8.1.1"
+    "ajv-cli": "^4.2.0",
+    "c8": "^7.6.0",
+    "eslint": "^7.21.0",
+    "mocha": "^8.3.1"
   },
   "scripts": {
     "build": "node lib/transform.js",
-    "validate": "npm run validate:schema && npm run validate:examples",
-    "validate:examples": "ajv validate -s schemas/csdl.schema.json -d examples/*.json",
-    "validate:schema": "ajv validate -s schemas/json-schema-draft-07.json -d schemas/csdl.schema.json",
+    "validate": "ajv validate -s schemas/csdl.schema.json -d examples/*.json",
     "test": "c8 mocha"
   },
   "author": "",

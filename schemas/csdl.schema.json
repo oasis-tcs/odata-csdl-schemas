@@ -1,6 +1,7 @@
 {
-  "$schema": "http://json-schema.org/draft-04/schema#",
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "description": "OData Common Schema Definition Language (CSDL) JSON Representation Version 4.01",
+  "type": "object",
   "additionalProperties": false,
   "properties": {
     "$Version": {
@@ -195,16 +196,20 @@
           "type": "array",
           "items": {
             "description": "Key property name",
-            "type": [
-              "string",
-              "object"
-            ],
-            "patternProperties": {
-              ".*": {
-                "description": "Key alias : path to key property",
+            "oneOf": [
+              {
                 "type": "string"
+              },
+              {
+                "type": "object",
+                "patternProperties": {
+                  ".*": {
+                    "description": "Key alias : path to key property",
+                    "type": "string"
+                  }
+                }
               }
-            }
+            ]
           }
         },
         "$Abstract": {

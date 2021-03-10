@@ -10,5 +10,11 @@
     ],
     "xml.catalogs": [
         "./catalog.xml"
-    ]
+    ],
+    "mochaExplorer.esmLoader": false,
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "files.insertFinalNewline": true,
+    "files.trimFinalNewlines": true,
 }
