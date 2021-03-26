@@ -36,9 +36,6 @@ const result8 = require('./ReferentialConstraint-v2.json');
 const example9 = fs.readFileSync('test/documentation-v2.xml');
 const result9 = require('./documentation-v2.json');
 
-const example10 = fs.readFileSync('examples/function.xml');
-const result10 = require('../examples/function.json');
-
 describe('Examples', function () {
 
     it('csdl-16.1', function () {
@@ -77,10 +74,6 @@ describe('Examples', function () {
         assert.deepStrictEqual(csdl.xml2json(example9), result9, 'CSDL JSON');
     })
 
-    it('function', function () {
-        assert.deepStrictEqual(csdl.xml2json(example10), result10, 'CSDL JSON');
-    })
-    
     it('empty <String> element', function () {
         //TODO: correct XML once checks are added
         const xml = '<Edmx Version=""><DataServices><Schema Namespace="n">'
@@ -145,6 +138,11 @@ describe('Examples', function () {
             '</Record>',
             '</Collection>',
             '</Annotation>',
+            '<Function Name="fp">',
+            '<Parameter Name="fp1"',
+            'Type="Edm.String"/>',
+            '<ReturnType Type="n.ct"/>',
+            '</Function>',
             '</Schema>',
             '</DataServices>',
             '</Edmx>'
@@ -201,6 +199,24 @@ describe('Examples', function () {
             '@Some.Collection': [
                 {
                     '@parser.line': 20
+                }
+            ],
+            fp: [
+                {
+                    $Kind: 'Function',
+                    '@parser.line': 24,
+                    $Parameter: [
+                        {
+                            $Name: 'fp1',
+                            $Nullable: true,
+                            '@parser.line': 26
+                        }
+                    ],
+                    $ReturnType: {
+                        $Type: 'n.ct',
+                        $Nullable: true,
+                        '@parser.line': 27
+                    }
                 }
             ]
         };
