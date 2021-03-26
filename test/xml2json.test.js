@@ -36,8 +36,8 @@ const result8 = require('./ReferentialConstraint-v2.json');
 const example9 = fs.readFileSync('test/documentation-v2.xml');
 const result9 = require('./documentation-v2.json');
 
-const example10 = fs.readFileSync('test/function.xml');
-const result10 = require('./function.json');
+const example10 = fs.readFileSync('examples/function.xml');
+const result10 = require('../examples/function.json');
 
 describe('Examples', function () {
 
