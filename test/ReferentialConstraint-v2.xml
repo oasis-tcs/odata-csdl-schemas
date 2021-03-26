@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx">
   <edmx:DataServices xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" m:DataServiceVersion="2.0">
     <Schema Namespace="first" Alias="one" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
@@ -73,6 +73,9 @@
           <End Role="b_role" EntitySet="b" />
           <End Role="c_role" EntitySet="c" />
         </AssociationSet>
+        <FunctionImport Name="fill" EntitySet="a" ReturnType="Collection(one.a)" m:HttpMethod="POST">
+          <Parameter Name="count" Type="Edm.Int32" Mode="In" />
+        </FunctionImport>
       </EntityContainer>
     </Schema>
   </edmx:DataServices>

@@ -102,8 +102,27 @@
                 "$NavigationPropertyBinding": {
                     "to_b": "b"
                 }
+            },
+            "fill": {
+                "$Action": "second.fill",
+                "$EntitySet": "a"
             }
-        }
+        },
+        "fill": [
+            {
+                "$Kind": "Action",
+                "$ReturnType": {
+                    "$Collection": true,
+                    "$Type": "one.a"
+                },
+                "$Parameter": [
+                    {
+                        "$Name": "count",
+                        "$Type": "Edm.Int32"
+                    }
+                ]
+            }
+        ]
     },
     "$EntityContainer": "second.container"
 }
