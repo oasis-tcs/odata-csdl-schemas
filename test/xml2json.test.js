@@ -73,7 +73,7 @@ describe('Examples', function () {
     it('documentation-v2', function () {
         assert.deepStrictEqual(csdl.xml2json(example9), result9, 'CSDL JSON');
     })
-    
+
     it('empty <String> element', function () {
         //TODO: correct XML once checks are added
         const xml = '<Edmx Version=""><DataServices><Schema Namespace="n">'
@@ -138,6 +138,11 @@ describe('Examples', function () {
             '</Record>',
             '</Collection>',
             '</Annotation>',
+            '<Function Name="fp">',
+            '<Parameter Name="fp1"',
+            'Type="Edm.String"/>',
+            '<ReturnType Type="n.ct"/>',
+            '</Function>',
             '</Schema>',
             '</DataServices>',
             '</Edmx>'
@@ -194,6 +199,24 @@ describe('Examples', function () {
             '@Some.Collection': [
                 {
                     '@parser.line': 20
+                }
+            ],
+            fp: [
+                {
+                    $Kind: 'Function',
+                    '@parser.line': 24,
+                    $Parameter: [
+                        {
+                            $Name: 'fp1',
+                            $Nullable: true,
+                            '@parser.line': 26
+                        }
+                    ],
+                    $ReturnType: {
+                        $Type: 'n.ct',
+                        $Nullable: true,
+                        '@parser.line': 27
+                    }
                 }
             ]
         };
