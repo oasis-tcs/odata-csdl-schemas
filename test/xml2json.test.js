@@ -36,6 +36,9 @@ const result8 = require('./ReferentialConstraint-v2.json');
 const example9 = fs.readFileSync('test/documentation-v2.xml');
 const result9 = require('./documentation-v2.json');
 
+const example10 = fs.readFileSync('test/function.xml');
+const result10 = require('./function.json');
+
 describe('Examples', function () {
 
     it('csdl-16.1', function () {
@@ -72,6 +75,10 @@ describe('Examples', function () {
 
     it('documentation-v2', function () {
         assert.deepStrictEqual(csdl.xml2json(example9), result9, 'CSDL JSON');
+    })
+
+    it('function', function () {
+        assert.deepStrictEqual(csdl.xml2json(example10), result10, 'CSDL JSON');
     })
     
     it('empty <String> element', function () {

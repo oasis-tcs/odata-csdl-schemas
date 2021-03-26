@@ -1,0 +1,74 @@
+{
+    "$Version": "4.0",
+    "$Reference": {
+        "https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.json": {
+            "$Include": [
+                {
+                    "$Namespace": "Org.OData.Core.V1",
+                    "$Alias": "Core"
+                }
+            ]
+        }
+    },
+    "org.example.odata.test.function": {
+        "$Alias": "self",
+        "Employee": {
+            "$Kind": "EntityType",
+            "$Key": [
+                "ID"
+            ],
+            "ID": {},
+            "Name": {},
+            "Salary": {
+                "$Type": "Edm.Decimal",
+                "$Nullable": true,
+                "$Scale": 0
+            }
+        },
+        "Salary": [
+            {
+                "$Kind": "Function",
+                "$IsBound": true,
+                "$Parameter": [
+                    {
+                        "$Name": "_it",
+                        "$Type": "self.Employee"
+                    }
+                ],
+                "$ReturnType": {
+                    "$Type": "Edm.Decimal",
+                    "$Nullable": true,
+                    "$Scale": 0
+                }
+            }
+        ],
+        "Hire": [
+            {
+                "$Kind": "Action",
+                "$Parameter": [
+                    {
+                        "$Name": "InitialSalary",
+                        "$Type": "Edm.Decimal",
+                        "$Scale": 0
+                    }
+                ],
+                "$ReturnType": {
+                    "$Type": "self.Employee",
+                    "$Nullable": true
+                }
+            }
+        ],
+        "Dehire": [
+            {
+                "$Kind": "Action",
+                "$IsBound": true,
+                "$Parameter": [
+                    {
+                        "$Name": "_it",
+                        "$Type": "self.Employee"
+                    }
+                ]
+            }
+        ]
+    }
+}
