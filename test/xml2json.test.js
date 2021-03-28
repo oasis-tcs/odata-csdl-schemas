@@ -347,24 +347,19 @@ describe("Examples", function () {
 });
 
 describe("Error cases", function () {
-  var consoleError;
-  var error = [];
-
-  beforeEach(() => {
-    consoleError = console.error;
-    console.error = (e) => error.push(e);
-  });
-
-  afterEach(() => {
-    console.error = consoleError;
-  });
-
   it("malformed xml", function () {
     const xml = `<kaputt>`;
-    const json = csdl.xml2json(xml);
-    assert.strictEqual(error.length, 1);
-    const message = error[0].message.split("\n");
-    assert.strictEqual(message[0], "Unclosed root tag");
+    try {
+      const json = csdl.xml2json(xml);
+      assert.fail("should not get here");
+    } catch (e) {
+      assert.strictEqual(e.message.split("\n")[0], "Unclosed root tag");
+      assert.deepStrictEqual(e.parser, {
+        construct: "<kaputt>",
+        line: 1,
+        column: 8,
+      });
+    }
   });
 
   it("no xml", function () {
