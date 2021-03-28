@@ -357,6 +357,25 @@
                 }
             }
         ],
+        "CalculateDiscount": [
+            {
+                "$IsBound": true,
+                "$Kind": "Function",
+                "$Parameter": [
+                    {
+                        "$Name": "product",
+                        "$Type": "ODataDemo.Product"
+                    },
+                    {
+                        "$Name": "discountPercentage",
+                        "$Type": "Edm.Int32"
+                    }
+                ],
+                "$ReturnType": {
+                    "$Type": "Edm.Double"
+                }
+            }
+        ],
         "IncreaseSalaries": [
             {
                 "$Kind": "Action",

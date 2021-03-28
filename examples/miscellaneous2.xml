@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<edmx:Edmx xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" xmlns="http://docs.oasis-open.org/odata/ns/edm"
-  Version="4.0"
->
+<edmx:Edmx xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" xmlns="http://docs.oasis-open.org/odata/ns/edm" Version="4.0">
   <edmx:Reference Uri="SomeOther.xml">
     <edmx:Include Namespace="Some.Other.Schema" />
   </edmx:Reference>
@@ -14,8 +12,7 @@
       -->
       <EntityContainer Name="Extending" Extends="Some.Other.Schema.Base">
         <FunctionImport Name="Bar" Function="One.Foo" IncludeInServiceDocument="true" EntitySet="Model.Extending/Freds" />
-        <FunctionImport Name="CreatedEntities" Function="Model.CreatedEntities" EntitySet="org.example2.Extending/Waldos"
-          IncludeInServiceDocument="true" />
+        <FunctionImport Name="CreatedEntities" Function="Model.CreatedEntities" EntitySet="org.example2.Extending/Waldos" IncludeInServiceDocument="true" />
         <EntitySet Name="Waldos" EntityType="Two.Waldo" />
         <EntitySet Name="Freds" EntityType="Two.Fred">
           <NavigationPropertyBinding Target="Waldos" Path="Waldos" />
@@ -58,7 +55,7 @@
           <PropertyRef Name="ID" />
         </Key>
         <Property Name="ID" Type="Edm.String" Nullable="false" />
-        <NavigationProperty Name="Waldos" Type="Collection(Two.Waldo)" />
+        <NavigationProperty Name="Waldos" Type="Collection(Two.Waldo)" Nullable="true" />
       </EntityType>
     </Schema>
 
