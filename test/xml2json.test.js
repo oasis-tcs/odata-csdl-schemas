@@ -62,11 +62,19 @@ describe("Examples", function () {
   });
 
   it("odata-rw-v3", function () {
-    assert.deepStrictEqual(csdl.xml2json(example7), result7, "CSDL JSON");
+    assert.deepStrictEqual(
+      csdl.xml2json(example7, false, true),
+      result7,
+      "CSDL JSON"
+    );
   });
 
   it("ReferentialConstraint-v2", function () {
-    assert.deepStrictEqual(csdl.xml2json(example8), result8, "CSDL JSON");
+    assert.deepStrictEqual(
+      csdl.xml2json(example8, false, true),
+      result8,
+      "CSDL JSON"
+    );
   });
 
   it("documentation-v2", function () {
@@ -350,7 +358,7 @@ describe("Error cases", function () {
   it("malformed xml", function () {
     const xml = `<kaputt>`;
     try {
-      const json = csdl.xml2json(xml);
+      csdl.xml2json(xml);
       assert.fail("should not get here");
     } catch (e) {
       assert.strictEqual(e.message.split("\n")[0], "Unclosed root tag");
@@ -365,7 +373,7 @@ describe("Error cases", function () {
   it("no xml", function () {
     const xml = `kaputt`;
     try {
-      const json = csdl.xml2json(xml);
+      csdl.xml2json(xml);
       assert.fail("should not get here");
     } catch (e) {
       assert.strictEqual(
