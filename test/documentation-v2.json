@@ -1,84 +1,79 @@
 {
-    "$Version": "2.0",
-    "first": {
-        "$Alias": "one",
-        "a": {
-            "$Kind": "EntityType",
-            "$Key": [
-                "id"
-            ],
-            "id": {
-                "$MaxLength": 5,
-                "@Org.OData.Core.V1.Description": "a/id summary",
-                "@Org.OData.Core.V1.LongDescription": "a/id longdescription"
-            },
-            "to_b": {
-                "$Kind": "NavigationProperty",
-                "$Type": "one.b",
-                "$Collection": true,
-                "$Partner": "to_a",
-                "@Org.OData.Core.V1.Description": "a/to_b summary",
-                "@Org.OData.Core.V1.LongDescription": "a/to_b longdescription"
-            }
-        },
-        "b": {
-            "$Kind": "EntityType",
-            "$Key": [
-                "id1",
-                "id2"
-            ],
-            "id1": {
-                "$Type": "Edm.Int32",
-                "@Org.OData.Core.V1.Description": "b/id1 summary, empty longdescription"
-            },
-            "id2": {
-                "$MaxLength": 4,
-                "@Org.OData.Core.V1.LongDescription": "b/id2 longdescription, empty summary"
-            },
-            "b1": {
-                "$Nullable": true,
-                "@Org.OData.Core.V1.Description": "b/b1 summary, no longdescription"
-            },
-            "b2": {
-                "$Nullable": true,
-                "@Org.OData.Core.V1.LongDescription": "b/b2 longdescription, no summary"
-            },
-            "to_a": {
-                "$Kind": "NavigationProperty",
-                "$Type": "one.a",
-                "$Nullable": true,
-                "$Partner": "to_b"
-            }
-        }
+  "$Version": "2.0",
+  "first": {
+    "$Alias": "one",
+    "a": {
+      "$Kind": "EntityType",
+      "$Key": ["id"],
+      "id": {
+        "$MaxLength": 5,
+        "@Org.OData.Core.V1.Description": "a/id summary",
+        "@Org.OData.Core.V1.LongDescription": "a/id longdescription"
+      },
+      "to_b": {
+        "$Kind": "NavigationProperty",
+        "$Type": "one.b",
+        "$Collection": true,
+        "$Partner": "to_a",
+        "@Org.OData.Core.V1.Description": "a/to_b summary",
+        "@Org.OData.Core.V1.LongDescription": "a/to_b longdescription"
+      }
     },
-    "second": {
-        "$Alias": "two",
-        "container": {
-            "$Kind": "EntityContainer",
-            "a": {
-                "$Collection": true,
-                "$Type": "one.a",
-                "$NavigationPropertyBinding": {
-                    "to_b": "b"
-                }
-            },
-            "b": {
-                "$Collection": true,
-                "$Type": "one.b",
-                "$NavigationPropertyBinding": {
-                    "to_a": "a"
-                }
-            }
-        }
-    },
-    "$EntityContainer": "second.container",
-    "$Reference": {
-        "https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.json": {
-            "$Include": [
-                {
-                    "$Namespace": "Org.OData.Core.V1"
-                }
-            ]
-        }
+    "b": {
+      "$Kind": "EntityType",
+      "$Key": ["id1", "id2"],
+      "id1": {
+        "$Type": "Edm.Int32",
+        "@Org.OData.Core.V1.Description": "b/id1 summary, empty longdescription"
+      },
+      "id2": {
+        "$MaxLength": 4,
+        "@Org.OData.Core.V1.LongDescription": "b/id2 longdescription, empty summary"
+      },
+      "b1": {
+        "$Nullable": true,
+        "@Org.OData.Core.V1.Description": "b/b1 summary, no longdescription"
+      },
+      "b2": {
+        "$Nullable": true,
+        "@Org.OData.Core.V1.LongDescription": "b/b2 longdescription, no summary"
+      },
+      "to_a": {
+        "$Kind": "NavigationProperty",
+        "$Type": "one.a",
+        "$Nullable": true,
+        "$Partner": "to_b"
+      }
     }
+  },
+  "second": {
+    "$Alias": "two",
+    "container": {
+      "$Kind": "EntityContainer",
+      "a": {
+        "$Collection": true,
+        "$Type": "one.a",
+        "$NavigationPropertyBinding": {
+          "to_b": "b"
+        }
+      },
+      "b": {
+        "$Collection": true,
+        "$Type": "one.b",
+        "$NavigationPropertyBinding": {
+          "to_a": "a"
+        }
+      }
+    }
+  },
+  "$EntityContainer": "second.container",
+  "$Reference": {
+    "https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.json": {
+      "$Include": [
+        {
+          "$Namespace": "Org.OData.Core.V1"
+        }
+      ]
+    }
+  }
 }

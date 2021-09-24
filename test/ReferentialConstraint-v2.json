@@ -1,128 +1,140 @@
 {
-    "$Version": "2.0",
-    "first": {
-        "$Alias": "one",
-        "a": {
-            "$Kind": "EntityType",
-            "$Key": [
-                "id"
-            ],
-            "id": {
-                "$MaxLength": 5
-            },
-            "to_b": {
-                "$Kind": "NavigationProperty",
-                "$Type": "one.b",
-                "$Collection": true,
-                "$Partner": "to_a"
-            }
-        },
-        "b": {
-            "$Kind": "EntityType",
-            "$Key": [
-                "id1",
-                "id2"
-            ],
-            "id1": {
-                "$Type": "Edm.Int32"
-            },
-            "id2": {
-                "$MaxLength": 4
-            },
-            "a_id": {
-                "$Nullable": true,
-                "$MaxLength": 5
-            },
-            "to_a": {
-                "$Kind": "NavigationProperty",
-                "$Type": "one.a",
-                "$Nullable": true,
-                "$Partner": "to_b",
-                "$ReferentialConstraint": {
-                    "a_id": "id"
-                }
-            },
-            "to_c": {
-                "$Kind": "NavigationProperty",
-                "$Type": "one.c",
-                "$Collection": true,
-                "$Partner": "to_b",
-                "$OnDelete": "Cascade"
-            }
-        },
-        "c": {
-            "$Kind": "EntityType",
-            "$Key": [
-                "b_id1",
-                "b_id2",
-                "id"
-            ],
-            "b_id1": {
-                "$Type": "Edm.Int32"
-            },
-            "b_id2": {
-                "$MaxLength": 4
-            },
-            "id": {
-                "$Type": "Edm.Int32"
-            },
-            "to_b": {
-                "$Kind": "NavigationProperty",
-                "$Type": "one.b",
-                "$Partner": "to_c",
-                "$ReferentialConstraint": {
-                    "b_id1": "id1",
-                    "b_id2": "id2"
-                }
-            }
+  "$Version": "2.0",
+  "$Reference": {
+    "http://schemas.microsoft.com/ado/2009/02/edm/annotation": {
+      "$Include": [
+        {
+          "$Namespace": "schemas.microsoft.com.ado.n2009.n02.edm.annotation",
+          "$Alias": "p8"
         }
+      ]
     },
-    "second": {
-        "$Alias": "two",
-        "container": {
-            "$Kind": "EntityContainer",
-            "a": {
-                "$Collection": true,
-                "$Type": "one.a",
-                "$NavigationPropertyBinding": {
-                    "to_b": "b"
-                }
-            },
-            "b": {
-                "$Collection": true,
-                "$Type": "one.b",
-                "$NavigationPropertyBinding": {
-                    "to_a": "a",
-                    "to_c": "c"
-                }
-            },
-            "c": {
-                "$Collection": true,
-                "$Type": "one.c",
-                "$NavigationPropertyBinding": {
-                    "to_b": "b"
-                }
-            },
-            "fill": {
-                "$Action": "second.fill",
-                "$EntitySet": "a"
-            }
+    "http://www.sap.com/Protocols/SAPData": {
+      "$Include": [
+        {
+          "$Namespace": "www.sap.com.Protocols.SAPData",
+          "$Alias": "sap"
+        }
+      ]
+    }
+  },
+  "first": {
+    "$Alias": "one",
+    "a": {
+      "$Kind": "EntityType",
+      "$Key": ["id"],
+      "id": {
+        "$MaxLength": 5
+      },
+      "to_b": {
+        "$Kind": "NavigationProperty",
+        "$Type": "one.b",
+        "$Collection": true,
+        "$Partner": "to_a"
+      }
+    },
+    "b": {
+      "$Kind": "EntityType",
+      "$Key": ["id1", "id2"],
+      "id1": {
+        "$Type": "Edm.Int32",
+        "@p8.StoreGeneratedPattern": "Identity"
+      },
+      "id2": {
+        "$MaxLength": 4
+      },
+      "a_id": {
+        "$Nullable": true,
+        "$MaxLength": 5
+      },
+      "to_a": {
+        "$Kind": "NavigationProperty",
+        "$Type": "one.a",
+        "$Nullable": true,
+        "$Partner": "to_b",
+        "$ReferentialConstraint": {
+          "a_id": "id"
+        }
+      },
+      "to_c": {
+        "$Kind": "NavigationProperty",
+        "$Type": "one.c",
+        "$Collection": true,
+        "$Partner": "to_b",
+        "$OnDelete": "Cascade"
+      }
+    },
+    "c": {
+      "$Kind": "EntityType",
+      "$Key": ["b_id1", "b_id2", "id"],
+      "b_id1": {
+        "$Type": "Edm.Int32"
+      },
+      "b_id2": {
+        "$MaxLength": 4
+      },
+      "id": {
+        "$Type": "Edm.Int32"
+      },
+      "to_b": {
+        "$Kind": "NavigationProperty",
+        "$Type": "one.b",
+        "$Partner": "to_c",
+        "$ReferentialConstraint": {
+          "b_id1": "id1",
+          "b_id2": "id2"
+        }
+      }
+    }
+  },
+  "second": {
+    "$Alias": "two",
+    "container": {
+      "$Kind": "EntityContainer",
+      "@p8.LazyLoadingEnabled": true,
+      "a": {
+        "$Collection": true,
+        "$Type": "one.a",
+        "$NavigationPropertyBinding": {
+          "to_b": "b"
+        }
+      },
+      "b": {
+        "$Collection": true,
+        "$Type": "one.b",
+        "$NavigationPropertyBinding": {
+          "to_a": "a",
+          "to_c": "c"
+        }
+      },
+      "c": {
+        "$Collection": true,
+        "$Type": "one.c",
+        "@sap.filterable": false,
+        "$NavigationPropertyBinding": {
+          "to_b": "b"
+        }
+      },
+      "fill": {
+        "$Action": "second.fill",
+        "$EntitySet": "a"
+      }
+    },
+    "fill": [
+      {
+        "$Kind": "Action",
+        "$ReturnType": {
+          "$Collection": true,
+          "$Type": "one.a"
         },
-        "fill": [
-            {
-                "$Kind": "Action",
-                "$ReturnType": {
-                    "$Collection": true,
-                    "$Type": "one.a"
-                },
-                "$Parameter": [
-                    {
-                        "$Name": "count",
-                        "$Type": "Edm.Int32"
-                    }
-                ]
-            }
+        "$Parameter": [
+          {
+            "$Name": "count",
+            "$Type": "Edm.Int32"
+          }
         ]
-    },
-    "$EntityContainer": "second.container"
+      }
+    ]
+  },
+  "$EntityContainer": "second.container"
 }
