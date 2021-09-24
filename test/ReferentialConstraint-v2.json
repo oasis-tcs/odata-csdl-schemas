@@ -9,10 +9,10 @@
         }
       ]
     },
-    "http://www.sap.com/protocols/SAPData": {
+    "http://www.sap.com/Protocols/SAPData": {
       "$Include": [
         {
-          "$Namespace": "www.sap.com.protocols.SAPData",
+          "$Namespace": "www.sap.com.Protocols.SAPData",
           "$Alias": "sap"
         }
       ]
