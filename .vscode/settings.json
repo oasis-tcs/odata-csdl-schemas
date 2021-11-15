@@ -1,20 +1,18 @@
 {
-    "json.schemas": [
-        {
-            "fileMatch": [
-                "examples/*.json",
-                "test/*.json"
-            ],
-            "url": "./schemas/csdl.schema.json"
-        }
-    ],
-    "xml.catalogs": [
-        "./catalog.xml"
-    ],
-    "mochaExplorer.esmLoader": false,
-    "[javascript]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "files.insertFinalNewline": true,
-    "files.trimFinalNewlines": true,
+  "json.schemas": [
+    {
+      "fileMatch": ["examples/*.json", "test/*.json"],
+      "url": "./schemas/csdl.schema.json"
+    }
+  ],
+  "xml.catalogs": ["./catalog.xml"],
+  "mochaExplorer.esmLoader": false,
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true
 }
