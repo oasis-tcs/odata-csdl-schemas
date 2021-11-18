@@ -189,7 +189,10 @@
         "$HasStream": {
           "description": "Media entity type",
           "type": "boolean",
-          "default": true
+          "default": false,
+          "examples": [
+            true
+          ]
         },
         "$Key": {
           "description": "List of key properties",
@@ -215,12 +218,18 @@
         "$Abstract": {
           "description": "Abstract entity type",
           "type": "boolean",
-          "default": true
+          "default": false,
+          "examples": [
+            true
+          ]
         },
         "$OpenType": {
           "description": "Open entity type",
           "type": "boolean",
-          "default": true
+          "default": false,
+          "examples": [
+            true
+          ]
         },
         "$BaseType": {
           "description": "Qualified name of base entity type",
@@ -260,12 +269,18 @@
         "$Abstract": {
           "description": "Abstract complex type",
           "type": "boolean",
-          "default": true
+          "default": false,
+          "examples": [
+            true
+          ]
         },
         "$OpenType": {
           "description": "Open complex type",
           "type": "boolean",
-          "default": true
+          "default": false,
+          "examples": [
+            true
+          ]
         },
         "$BaseType": {
           "description": "Qualified name of base complex type",
@@ -300,12 +315,18 @@
         "$Collection": {
           "description": "Collection-valued property",
           "type": "boolean",
-          "default": true
+          "default": false,
+          "examples": [
+            true
+          ]
         },
         "$Nullable": {
           "description": "Nullable property",
           "type": "boolean",
-          "default": false
+          "default": false,
+          "examples": [
+            true
+          ]
         },
         "$MaxLength": {
           "$ref": "#/definitions/MaxLength"
@@ -353,12 +374,18 @@
         "$Collection": {
           "description": "Collection-valued navigation property",
           "type": "boolean",
-          "default": true
+          "default": false,
+          "examples": [
+            true
+          ]
         },
         "$Nullable": {
           "description": "Minimum cardinality is zero",
           "type": "boolean",
-          "default": false
+          "default": false,
+          "examples": [
+            true
+          ]
         },
         "$Partner": {
           "description": "Partner navigation property leading back to this entity",
@@ -367,7 +394,10 @@
         "$ContainsTarget": {
           "description": "Related entities are contained in this entity",
           "type": "boolean",
-          "default": true
+          "default": false,
+          "examples": [
+            true
+          ]
         },
         "$ReferentialConstraint": {
           "type": "object",
@@ -419,7 +449,10 @@
         "$IsFlags": {
           "description": "Multiple enumeration members can be selected simultaneously",
           "type": "boolean",
-          "default": true
+          "default": false,
+          "examples": [
+            true
+          ]
         },
         "$UnderlyingType": {
           "description": "Underlying integer type",
@@ -502,12 +535,18 @@
         "$Collection": {
           "description": "Collection-valued term",
           "type": "boolean",
-          "default": true
+          "default": false,
+          "examples": [
+            true
+          ]
         },
         "$Nullable": {
           "description": "Nullable term",
           "type": "boolean",
-          "default": false
+          "default": false,
+          "examples": [
+            true
+          ]
         },
         "$MaxLength": {
           "$ref": "#/definitions/MaxLength"
@@ -597,7 +636,10 @@
         "$IsBound": {
           "description": "Invoke on existing resource",
           "type": "boolean",
-          "default": true
+          "default": false,
+          "examples": [
+            true
+          ]
         },
         "$EntitySetPath": {
           "description": "Path to entity set of result entities",
@@ -633,12 +675,18 @@
         "$IsBound": {
           "description": "Invoke on existing resource",
           "type": "boolean",
-          "default": true
+          "default": false,
+          "examples": [
+            true
+          ]
         },
         "$IsComposable": {
           "description": "Allows additional path segments or system query options",
           "type": "boolean",
-          "default": true
+          "default": false,
+          "examples": [
+            true
+          ]
         },
         "$EntitySetPath": {
           "description": "Path to entity set of result entities",
@@ -723,7 +771,10 @@
         "$IncludeInServiceDocument": {
           "description": "Advertise in service document",
           "type": "boolean",
-          "default": false
+          "default": true,
+          "examples": [
+            false
+          ]
         }
       },
       "required": [
@@ -748,7 +799,10 @@
         "$Nullable": {
           "description": "Nullable singleton",
           "type": "boolean",
-          "default": false
+          "default": false,
+          "examples": [
+            true
+          ]
         },
         "$NavigationPropertyBinding": {
           "$ref": "#/definitions/NavigationPropertyBinding"
@@ -802,7 +856,10 @@
         "$IncludeInServiceDocument": {
           "description": "Advertise in service document",
           "type": "boolean",
-          "default": true
+          "default": false,
+          "examples": [
+            true
+          ]
         }
       },
       "required": [
@@ -843,12 +900,18 @@
           "$Collection": {
             "description": "Collection-valued parameter",
             "type": "boolean",
-            "default": true
+            "default": false,
+            "examples": [
+              true
+            ]
           },
           "$Nullable": {
             "description": "Nullable parameter",
             "type": "boolean",
-            "default": false
+            "default": false,
+            "examples": [
+              true
+            ]
           },
           "$MaxLength": {
             "$ref": "#/definitions/MaxLength"
@@ -889,12 +952,18 @@
         "$Collection": {
           "description": "Returns a collection",
           "type": "boolean",
-          "default": true
+          "default": false,
+          "examples": [
+            true
+          ]
         },
         "$Nullable": {
           "description": "Can return null",
           "type": "boolean",
-          "default": false
+          "default": false,
+          "examples": [
+            true
+          ]
         },
         "$MaxLength": {
           "$ref": "#/definitions/MaxLength"
@@ -921,7 +990,10 @@
     "Unicode": {
       "description": "Unicode values allowed",
       "type": "boolean",
-      "default": false
+      "default": true,
+      "examples": [
+        false
+      ]
     },
     "Precision": {
       "description": "Maximum number of significant digits",
