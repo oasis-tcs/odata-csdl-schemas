@@ -21,9 +21,6 @@ const result3 = require("../examples/miscellaneous.json");
 const example4 = fs.readFileSync("examples/miscellaneous2.xml");
 const result4 = require("../examples/miscellaneous2.json");
 
-const example5 = fs.readFileSync("examples/temporal.xml");
-const result5 = require("../examples/temporal.json");
-
 const example6 = fs.readFileSync("test/odata-rw-v2.xml");
 const result6 = require("./odata-rw-v2.json");
 
@@ -51,10 +48,6 @@ describe("Examples", function () {
 
   it("miscellaneous2", function () {
     assert.deepStrictEqual(csdl.xml2json(example4), result4, "CSDL JSON");
-  });
-
-  it("temporal", function () {
-    assert.deepStrictEqual(csdl.xml2json(example5), result5, "CSDL JSON");
   });
 
   it("odata-rw-v2", function () {
@@ -356,16 +349,16 @@ describe("Examples", function () {
 
 describe("Error cases", function () {
   it("malformed xml", function () {
-    const xml = `<kaputt>`;
+    const xml = `<Edmx Version="4.0">`;
     try {
       csdl.xml2json(xml);
       assert.fail("should not get here");
     } catch (e) {
       assert.strictEqual(e.message.split("\n")[0], "Unclosed root tag");
       assert.deepStrictEqual(e.parser, {
-        construct: "<kaputt>",
+        construct: '<Edmx Version="4.0">',
         line: 1,
-        column: 8,
+        column: 20,
       });
     }
   });
@@ -384,6 +377,152 @@ describe("Error cases", function () {
         construct: "kaputt",
         line: 1,
         column: 6,
+      });
+    }
+  });
+
+  it("unexpected element", function () {
+    const xml = `<Edmx Version="4.0">
+      <DataServices>
+        <Schema Namespace="n">
+          <Annotation Term="Unknown.Element"><!--next element is unexpected--><string/></Annotation>
+        </Schema>
+      </DataServices>
+    </Edmx>`;
+    try {
+      csdl.xml2json(xml);
+      assert.fail("should not get here");
+    } catch (e) {
+      assert.strictEqual(
+        e.message.split("\n")[0],
+        "Unexpected element: string"
+      );
+      assert.deepStrictEqual(e.parser, {
+        construct: "<string/>",
+        line: 4,
+        column: 87,
+      });
+    }
+  });
+
+  it("V2 element in V4", function () {
+    const xml = `<Edmx Version="4.0">
+      <DataServices>
+        <Schema Namespace="n">
+          <Association Name="NotInV4" />
+        </Schema>
+      </DataServices>
+    </Edmx>`;
+    try {
+      csdl.xml2json(xml);
+      assert.fail("should not get here");
+    } catch (e) {
+      assert.strictEqual(
+        e.message.split("\n")[0],
+        "Unexpected element: Association"
+      );
+      assert.deepStrictEqual(e.parser, {
+        construct: '<Association Name="NotInV4" />',
+        line: 4,
+        column: 40,
+      });
+    }
+  });
+
+  it("unexpected attribute: Edmx/@version", function () {
+    const xml = `<Edmx version="4.0"></Edmx>`;
+    try {
+      csdl.xml2json(xml, { validate: true });
+      assert.fail("should not get here");
+    } catch (e) {
+      assert.strictEqual(
+        e.message.split("\n")[0],
+        "Element: Edmx, missing attribute: Version"
+      );
+      assert.deepStrictEqual(e.parser, {
+        construct: '<Edmx version="4.0">',
+        line: 1,
+        column: 20,
+      });
+    }
+  });
+
+  it("missing attribute: Reference/@Uri", function () {
+    const xml = `<Edmx Version="4.0"><Reference uri="foo"/></Edmx>`;
+    try {
+      csdl.xml2json(xml, { validate: true });
+      assert.fail("should not get here");
+    } catch (e) {
+      assert.strictEqual(
+        e.message.split("\n")[0],
+        "Element: Reference, missing attribute: Uri"
+      );
+      assert.deepStrictEqual(e.parser, {
+        construct: '<Reference uri="foo"/>',
+        line: 1,
+        column: 42,
+      });
+    }
+  });
+
+  it("missing attribute: Include/@Namespace", function () {
+    const xml = `<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+      <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
+        <edmx:Include namespace="Org.OData.Core.V1" />
+      </edmx:Reference>
+    </edmx:Edmx>`;
+    try {
+      csdl.xml2json(xml, { validate: true });
+      assert.fail("should not get here");
+    } catch (e) {
+      assert.strictEqual(
+        e.message.split("\n")[0],
+        "Element: Include, missing attribute: Namespace"
+      );
+      assert.deepStrictEqual(e.parser, {
+        construct: '<edmx:Include namespace="Org.OData.Core.V1" />',
+        line: 3,
+        column: 54,
+      });
+    }
+  });
+
+  it("unexpected attribute: Include/@alias", function () {
+    const xml = `<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+      <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
+        <edmx:Include Namespace="Org.OData.Core.V1" alias="C" />
+      </edmx:Reference>
+    </edmx:Edmx>`;
+    try {
+      csdl.xml2json(xml, { validate: true });
+      assert.fail("should not get here");
+    } catch (e) {
+      assert.strictEqual(
+        e.message.split("\n")[0],
+        "Element: Include, unexpected attribute: alias"
+      );
+      assert.deepStrictEqual(e.parser, {
+        construct: '<edmx:Include Namespace="Org.OData.Core.V1" alias="C" />',
+        line: 3,
+        column: 64,
+      });
+    }
+  });
+
+  it("missing attribute: Schema/@Namespace", function () {
+    const xml = `<Edmx Version="4.0"><DataServices><Schema namespace="foo"/></DataServices></Edmx>`;
+    try {
+      csdl.xml2json(xml, { validate: true });
+      assert.fail("should not get here");
+    } catch (e) {
+      assert.strictEqual(
+        e.message.split("\n")[0],
+        "Element: Schema, missing attribute: Namespace"
+      );
+      assert.deepStrictEqual(e.parser, {
+        construct: '<Schema namespace="foo"/>',
+        line: 1,
+        column: 59,
       });
     }
   });
