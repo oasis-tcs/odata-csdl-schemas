@@ -487,6 +487,26 @@ describe("Error cases", function () {
     }
   });
 
+  it("unexpected attribute: Null/@version", function () {
+    const xml = `<Edmx Version="4.0"><Reference Uri="foo">
+      <Annotation Term="choc.bar"><Null version="1" /></Annotation>
+    </Reference></Edmx>`;
+    try {
+      csdl.xml2json(xml, { validate: true });
+      assert.fail("should not get here");
+    } catch (e) {
+      assert.strictEqual(
+        e.message.split("\n")[0],
+        "Element: Null, unexpected attribute: version"
+      );
+      assert.deepStrictEqual(e.parser, {
+        construct: '<Null version="1" />',
+        line: 2,
+        column: 54,
+      });
+    }
+  });
+
   it("unexpected attribute: Include/@alias", function () {
     const xml = `<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
       <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
