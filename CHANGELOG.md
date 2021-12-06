@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.4.0 2021-12-06
+
+### Added
+
+- `xml2json` now minimally validates the input XML
+  - unexpected elements
+  - incorrect nesting of elements
+  - incorrect occurrence of child elements
+  - missing required attributes
+  - unexpected local attributes
+
 ## 0.3.0 2021-09-24
 
 ### Added

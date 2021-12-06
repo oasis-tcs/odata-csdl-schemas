@@ -119,7 +119,7 @@
         <EntitySet Name="Persons" EntityType="ODataDemo.Person" />
         <EntitySet Name="PersonDetails" EntityType="ODataDemo.PersonDetail" />
         <EntitySet Name="Advertisements" EntityType="ODataDemo.Advertisement" />
-        <FunctionImport Name="GetProductsByRating" ReturnType="Collection(ODataDemo.Product)" EntitySet="Products" m:HttpMethod="GET">
+        <FunctionImport Name="GetProductsByRating" ReturnType="Collection(ODataDemo.Product)" EntitySet="Products" IsSideEffecting="false">
           <Parameter Name="rating" Type="Edm.Int16" Nullable="false" />
         </FunctionImport>
         <FunctionImport Name="Discount" ReturnType="Edm.Double" IsBindable="true" m:IsAlwaysBindable="true">
