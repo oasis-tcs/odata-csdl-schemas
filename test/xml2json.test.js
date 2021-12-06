@@ -627,7 +627,7 @@ describe("Error cases", function () {
     } catch (e) {
       assert.strictEqual(
         e.message.split("\n")[0],
-        "Element: Edmx, missing attribute: Version"
+        "Element Edmx, missing attribute: Version"
       );
       assert.deepStrictEqual(e.parser, {
         construct: '<Edmx version="4.0">',
@@ -645,7 +645,7 @@ describe("Error cases", function () {
     } catch (e) {
       assert.strictEqual(
         e.message.split("\n")[0],
-        "Element: Reference, missing attribute: Uri"
+        "Element Reference, missing attribute: Uri"
       );
       assert.deepStrictEqual(e.parser, {
         construct: '<Reference uri="foo"/>',
@@ -667,7 +667,7 @@ describe("Error cases", function () {
     } catch (e) {
       assert.strictEqual(
         e.message.split("\n")[0],
-        "Element: Include, missing attribute: Namespace"
+        "Element Include, missing attribute: Namespace"
       );
       assert.deepStrictEqual(e.parser, {
         construct: '<edmx:Include namespace="Org.OData.Core.V1" />',
@@ -687,7 +687,7 @@ describe("Error cases", function () {
     } catch (e) {
       assert.strictEqual(
         e.message.split("\n")[0],
-        "Element: Null, unexpected attribute: version"
+        "Element Null, unexpected attribute: version"
       );
       assert.deepStrictEqual(e.parser, {
         construct: '<Null version="1" />',
@@ -709,7 +709,7 @@ describe("Error cases", function () {
     } catch (e) {
       assert.strictEqual(
         e.message.split("\n")[0],
-        "Element: edmx:Include, unexpected attribute: alias"
+        "Element Include, unexpected attribute: alias"
       );
       assert.deepStrictEqual(e.parser, {
         construct: '<edmx:Include Namespace="Org.OData.Core.V1" alias="C" />',
@@ -727,7 +727,7 @@ describe("Error cases", function () {
     } catch (e) {
       assert.strictEqual(
         e.message.split("\n")[0],
-        "Element: Schema, missing attribute: Namespace"
+        "Element Schema, missing attribute: Namespace"
       );
       assert.deepStrictEqual(e.parser, {
         construct: '<Schema namespace="foo"/>',
