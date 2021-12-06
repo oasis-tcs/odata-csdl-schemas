@@ -75,25 +75,21 @@ describe("Examples", function () {
   });
 
   it("empty <String> element", function () {
-    //TODO: correct XML once checks are added
-    const xml =
-      '<Edmx Version=""><DataServices><Schema Namespace="n">' +
-      ' <Annotation Term="String.NoBody"><String/></Annotation>' +
-      ' <Annotation Term="String.EmptyBody"><String></String></Annotation>' +
-      " </Schema></DataServices></Edmx>";
+    const xml = `<Edmx Version="4.01" xmlns="http://docs.oasis-open.org/odata/ns/edmx"><DataServices><Schema Namespace="n" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                   <Annotation Term="String.NoBody"><String/></Annotation>
+                   <Annotation Term="String.EmptyBody"><String></String></Annotation>
+                 </Schema></DataServices></Edmx>`;
     const json = csdl.xml2json(xml);
     assert.deepStrictEqual(json.n["@String.NoBody"], "");
     assert.deepStrictEqual(json.n["@String.EmptyBody"], "");
   });
 
   it("<String> with line-breaks", function () {
-    //TODO: correct XML once checks are added
-    const xml =
-      '<Edmx Version=""><DataServices><Schema Namespace="n">' +
-      ' <Annotation Term="String.WithCRLF"><String>one\r\ntwo\r\nthree</String></Annotation>' +
-      ' <Annotation Term="String.WithLF"><String>one\ntwo\nthree</String></Annotation>' +
-      ' <Annotation Term="String.WithCR"><String>one\rtwo\rthree</String></Annotation>' +
-      " </Schema></DataServices></Edmx>";
+    const xml = `<Edmx Version="4.0" xmlns="http://docs.oasis-open.org/odata/ns/edmx"><DataServices><Schema Namespace="n" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                   <Annotation Term="String.WithCRLF"><String>one\r\ntwo\r\nthree</String></Annotation>
+                   <Annotation Term="String.WithLF"><String>one\ntwo\nthree</String></Annotation>
+                   <Annotation Term="String.WithCR"><String>one\rtwo\rthree</String></Annotation>
+                   </Schema></DataServices></Edmx>`;
     const normalized = "one\ntwo\nthree";
     const json = csdl.xml2json(xml);
     assert.deepStrictEqual(json.n["@String.WithCRLF"], normalized);
@@ -102,9 +98,8 @@ describe("Examples", function () {
   });
 
   it('<EnumMember Value="0"', function () {
-    //TODO: correct XML once checks are added
     const xml =
-      '<Edmx Version=""><DataServices><Schema Namespace="n">' +
+      '<Edmx Version="5.0" xmlns="http://docs.oasis-open.org/odata/ns/edmx"><DataServices><Schema Namespace="n" xmlns="http://docs.oasis-open.org/odata/ns/edm">' +
       ' <EnumType Name="WithZeroValue"><Member Name="One" Value="1"/><Member Name="Zero" Value="0"/></EnumType>' +
       " </Schema></DataServices></Edmx>";
     const schema = {
@@ -119,11 +114,10 @@ describe("Examples", function () {
   });
 
   it("with line numbers", function () {
-    //TODO: correct XML once checks are added
     const xml = [
-      '<Edmx Version="4.0">',
-      "<DataServices>",
-      '<Schema Namespace="n">',
+      '<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">',
+      "<edmx:DataServices>",
+      '<Schema Namespace="n" xmlns="http://docs.oasis-open.org/odata/ns/edm">',
       '<EnumType Name="WithZeroValue">\n<Member Name="One" Value="1"/>\n<Member Name="Zero" Value="0"/>\n</EnumType>',
       '<ComplexType Name="ct">',
       '<Property Name="p" Type="Edm.String"/>',
@@ -134,7 +128,7 @@ describe("Examples", function () {
       '<TypeDefinition Name="td" UnderlyingType="Edm.String"/>',
       '<Term Name="t" Type="Edm.String"/>',
       '<Action Name="a"/>',
-      '<Function Name="f"/>',
+      '<Function Name="f"><ReturnType Type="Edm.Boolean" /></Function>',
       '<Annotation Term="Some.Collection">',
       "<Collection>",
       "<Record>",
@@ -147,8 +141,8 @@ describe("Examples", function () {
       '<ReturnType Type="n.ct"/>',
       "</Function>",
       "</Schema>",
-      "</DataServices>",
-      "</Edmx>",
+      "</edmx:DataServices>",
+      "</edmx:Edmx>",
     ].join("\n");
     const schema = {
       WithZeroValue: {
@@ -196,6 +190,11 @@ describe("Examples", function () {
       f: [
         {
           $Kind: "Function",
+          $ReturnType: {
+            $Nullable: true,
+            $Type: "Edm.Boolean",
+            "@parser.line": 17,
+          },
           "@parser.line": 17,
         },
       ],
@@ -228,38 +227,37 @@ describe("Examples", function () {
   });
 
   it("Annotation (property) value of media type application/json", function () {
-    //TODO: correct XML once checks are added
     const xml = `<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
-               <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
-                 <edmx:Include Namespace="Org.OData.Core.V1" Alias="C" />
-               </edmx:Reference>
-               <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.JSON.V1.xml">
-                 <edmx:Include Namespace="Org.OData.JSON.V1" Alias="J" />
-               </edmx:Reference>
-               <edmx:DataServices>
-                 <Schema Namespace="n">
-                   <Annotations Target="Something.Else">
-                     <Annotation Term="J.Schema">
-                       <String>{"type":"object","additionalProperties":false,"patternProperties":{"^[0-9]{3}$":{"type":"string"}}}</String>
-                     </Annotation>
-                     <Annotation Term="Some.PrimitiveTerm">
-                       <Annotation Term="C.MediaType" String="application/json" />
-                       <String>{"a-b":"not a property name"}</String>
-                     </Annotation>
-                     <Annotation Term="C.MediaType" String="application/json" />
-                     <Annotation Term="Some.StructuredTerm">
-                       <Record>
-                         <Annotation Term="C.MediaType" String="application/json" />
-                         <PropertyValue Property="somestream">
-                           <Annotation Term="C.MediaType" String="application/json" />
-                           <String>{"a-b":"not a property name"}</String>
-                         </PropertyValue>
-                       </Record>
-                     </Annotation>
-                   </Annotations>
-                 </Schema>
-               </edmx:DataServices>
-             </edmx:Edmx>`;
+                  <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
+                    <edmx:Include Namespace="Org.OData.Core.V1" Alias="C" />
+                  </edmx:Reference>
+                  <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.JSON.V1.xml">
+                    <edmx:Include Namespace="Org.OData.JSON.V1" Alias="J" />
+                  </edmx:Reference>
+                  <edmx:DataServices>
+                    <Schema Namespace="n" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                      <Annotations Target="Something.Else">
+                        <Annotation Term="J.Schema">
+                          <String>{"type":"object","additionalProperties":false,"patternProperties":{"^[0-9]{3}$":{"type":"string"}}}</String>
+                        </Annotation>
+                        <Annotation Term="Some.PrimitiveTerm">
+                          <Annotation Term="C.MediaType" String="application/json" />
+                          <String>{"a-b":"not a property name"}</String>
+                        </Annotation>
+                        <Annotation Term="C.MediaType" String="application/json" />
+                        <Annotation Term="Some.StructuredTerm">
+                          <Record>
+                            <Annotation Term="C.MediaType" String="application/json" />
+                            <PropertyValue Property="somestream">
+                              <Annotation Term="C.MediaType" String="application/json" />
+                              <String>{"a-b":"not a property name"}</String>
+                            </PropertyValue>
+                          </Record>
+                        </Annotation>
+                      </Annotations>
+                    </Schema>
+                  </edmx:DataServices>
+                 </edmx:Edmx>`;
     const schema = {
       $Annotations: {
         "Something.Else": {
@@ -292,46 +290,48 @@ describe("Examples", function () {
   });
 
   it("Function with same name as type", function () {
-    //TODO: correct XML once checks are added
     const xml = `<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
-               <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
-                 <edmx:Include Namespace="Org.OData.Core.V1" Alias="C" />
-               </edmx:Reference>
-               <edmx:DataServices>
-                 <Schema Namespace="collision">
-                   <ComplexType Name="foo">
-                     <Annotation Term="Core.Description" String="types win" />
-                   </ComplexType>
-                   <Action Name="foo" IsBound="true">
-                     <Annotation Term="Core.Description" String="this one is ignored" />
-                     <Parameter Name="it" Type="collision.foo" />
-                   </Action>
-                   <Action Name="foo" IsBound="true">
-                     <Annotation Term="Core.Description" String="this one is ignored" />
-                     <Parameter Name="it" Type="collision.bar" />
-                   </Action>
-                   <Action Name="bar">
-                     <Annotation Term="Core.Description" String="this one is ignored" />
-                     <Parameter Name="it" Type="collision.bar" />
-                   </Action>
-                   <Function Name="foo" IsBound="true">
-                     <Annotation Term="Core.Description" String="this one is ignored" />
-                     <Parameter Name="it" Type="collision.foo" />
-                   </Function>
-                   <Function Name="foo" IsBound="true">
-                     <Annotation Term="Core.Description" String="this one is ignored" />
-                     <Parameter Name="it" Type="collision.bar" />
-                   </Function>
-                   <Function Name="bar">
-                     <Annotation Term="Core.Description" String="this one is ignored" />
-                     <Parameter Name="it" Type="collision.bar" />
-                   </Function>
-                   <ComplexType Name="bar">
-                     <Annotation Term="Core.Description" String="types win" />
-                   </ComplexType>
-                 </Schema>
-               </edmx:DataServices>
-             </edmx:Edmx>`;
+                  <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
+                    <edmx:Include Namespace="Org.OData.Core.V1" Alias="C" />
+                  </edmx:Reference>
+                  <edmx:DataServices>
+                    <Schema Namespace="collision" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                      <ComplexType Name="foo">
+                        <Annotation Term="Core.Description" String="types win" />
+                      </ComplexType>
+                      <Action Name="foo" IsBound="true">
+                        <Annotation Term="Core.Description" String="this one is ignored" />
+                        <Parameter Name="it" Type="collision.foo" />
+                      </Action>
+                      <Action Name="foo" IsBound="true">
+                        <Annotation Term="Core.Description" String="this one is ignored" />
+                        <Parameter Name="it" Type="collision.bar" />
+                      </Action>
+                      <Action Name="bar">
+                        <Annotation Term="Core.Description" String="this one is ignored" />
+                        <Parameter Name="it" Type="collision.bar" />
+                      </Action>
+                      <Function Name="foo" IsBound="true">
+                        <Annotation Term="Core.Description" String="this one is ignored" />
+                        <Parameter Name="it" Type="collision.foo" />
+                        <ReturnType Type="Edm.Boolean" />
+                      </Function>
+                      <Function Name="foo" IsBound="true">
+                        <Annotation Term="Core.Description" String="this one is ignored" />
+                        <Parameter Name="it" Type="collision.bar" />
+                        <ReturnType Type="Edm.Boolean" />
+                      </Function>
+                      <Function Name="bar">
+                        <Annotation Term="Core.Description" String="this one is ignored" />
+                        <Parameter Name="it" Type="collision.bar" />
+                        <ReturnType Type="Edm.Boolean" />
+                      </Function>
+                      <ComplexType Name="bar">
+                        <Annotation Term="Core.Description" String="types win" />
+                      </ComplexType>
+                    </Schema>
+                  </edmx:DataServices>
+                 </edmx:Edmx>`;
     const schema = {
       foo: {
         $Kind: "ComplexType",
@@ -371,20 +371,44 @@ describe("Error cases", function () {
     } catch (e) {
       assert.strictEqual(
         e.message.split("\n")[0],
-        "Text data outside of root node."
+        "Non-whitespace before first tag."
       );
       assert.deepStrictEqual(e.parser, {
-        construct: "kaputt",
+        construct: "k",
+        column: 1,
         line: 1,
-        column: 6,
       });
     }
   });
 
   it("unexpected element", function () {
-    const xml = `<Edmx Version="4.0">
+    const xml = `<Edmx Version="4.0" xmlns="http://docs.oasis-open.org/odata/ns/edmx">
       <DataServices>
-        <Schema Namespace="n">
+        <Schema Namespace="n" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+          <foo/>
+        </Schema>
+      </DataServices>
+    </Edmx>`;
+    try {
+      csdl.xml2json(xml);
+      assert.fail("should not get here");
+    } catch (e) {
+      assert.strictEqual(
+        e.message.split("\n")[0],
+        "Element Schema, unexpected child: foo"
+      );
+      assert.deepStrictEqual(e.parser, {
+        construct: "<foo/>",
+        line: 4,
+        column: 16,
+      });
+    }
+  });
+
+  it("unexpected element in annotation", function () {
+    const xml = `<Edmx Version="4.0" xmlns="http://docs.oasis-open.org/odata/ns/edmx">
+      <DataServices>
+        <Schema Namespace="n" xmlns="http://docs.oasis-open.org/odata/ns/edm">
           <Annotation Term="Unknown.Element"><!--next element is unexpected--><string/></Annotation>
         </Schema>
       </DataServices>
@@ -395,7 +419,7 @@ describe("Error cases", function () {
     } catch (e) {
       assert.strictEqual(
         e.message.split("\n")[0],
-        "Unexpected element: string"
+        "Element Annotation, unexpected child: string"
       );
       assert.deepStrictEqual(e.parser, {
         construct: "<string/>",
@@ -405,10 +429,148 @@ describe("Error cases", function () {
     }
   });
 
-  it("V2 element in V4", function () {
-    const xml = `<Edmx Version="4.0">
+  it("misplaced element", function () {
+    const xml = `<Edmx Version="4.0" xmlns="http://docs.oasis-open.org/odata/ns/edmx">
+      <Schema Namespace="n">
+      </Schema>
+    </Edmx>`;
+    try {
+      csdl.xml2json(xml);
+      assert.fail("should not get here");
+    } catch (e) {
+      assert.strictEqual(
+        e.message.split("\n")[0],
+        "Element Edmx, unexpected child: Schema"
+      );
+      assert.deepStrictEqual(e.parser, {
+        construct: '<Schema Namespace="n">',
+        line: 2,
+        column: 28,
+      });
+    }
+  });
+
+  it("misplaced element, short notation", function () {
+    const xml = `<Edmx Version="4.0" xmlns="http://docs.oasis-open.org/odata/ns/edmx">
+      <Annotation />
+    </Edmx>`;
+    try {
+      csdl.xml2json(xml);
+      assert.fail("should not get here");
+    } catch (e) {
+      assert.strictEqual(
+        e.message.split("\n")[0],
+        "Element Edmx, unexpected child: Annotation"
+      );
+      assert.deepStrictEqual(e.parser, {
+        construct: "<Annotation />",
+        line: 2,
+        column: 20,
+      });
+    }
+  });
+
+  it("element occurs too often", function () {
+    const xml = `<Edmx Version="4.0" xmlns="http://docs.oasis-open.org/odata/ns/edmx">
+      <DataServices><Schema Namespace="foo" xmlns="http://docs.oasis-open.org/odata/ns/edm"/></DataServices>
+      <DataServices/>
+    </Edmx>`;
+    try {
+      csdl.xml2json(xml);
+      assert.fail("should not get here");
+    } catch (e) {
+      assert.strictEqual(
+        e.message.split("\n")[0],
+        "Element DataServices: 2 occurrences instead of at most 1"
+      );
+      assert.deepStrictEqual(e.parser, {
+        construct: "<DataServices/>",
+        line: 3,
+        column: 21,
+      });
+    }
+  });
+
+  it("too few child expressions", function () {
+    const xml = `<Edmx Version="4.0" xmlns="http://docs.oasis-open.org/odata/ns/edmx">
       <DataServices>
-        <Schema Namespace="n">
+        <Schema Namespace="foo" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+          <Annotation Term="foo.bar">
+            <Eq>
+              <String>foo</String>
+            </Eq>
+          </Annotation>
+        </Schema>
+      </DataServices>
+    </Edmx>`;
+    try {
+      csdl.xml2json(xml);
+      assert.fail("should not get here");
+    } catch (e) {
+      assert.strictEqual(
+        e.message.split("\n")[0],
+        "Element Eq, child element expression: 1 occurrences instead of at least 2"
+      );
+      assert.deepStrictEqual(e.parser, {
+        construct: "</Eq>",
+        line: 7,
+        column: 17,
+      });
+    }
+  });
+
+  it("too many child expressions", function () {
+    const xml = `<Edmx Version="4.0" xmlns="http://docs.oasis-open.org/odata/ns/edmx">
+      <DataServices>
+        <Schema Namespace="foo" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+          <Annotation Term="foo.bar">
+            <Eq>
+              <String>foo</String>
+              <Bool>true</Bool>
+              <String>foo</String>
+            </Eq>
+          </Annotation>
+        </Schema>
+      </DataServices>
+    </Edmx>`;
+    try {
+      csdl.xml2json(xml);
+      assert.fail("should not get here");
+    } catch (e) {
+      assert.strictEqual(
+        e.message.split("\n")[0],
+        "Element expression: 3 occurrences instead of at most 2"
+      );
+      assert.deepStrictEqual(e.parser, {
+        construct: "<String>",
+        line: 8,
+        column: 22,
+      });
+    }
+  });
+
+  it("required element is missing", function () {
+    const xml = `<Edmx Version="4.0" xmlns="http://docs.oasis-open.org/odata/ns/edmx"></Edmx>`;
+    try {
+      csdl.xml2json(xml);
+      assert.fail("should not get here");
+    } catch (e) {
+      assert.strictEqual(
+        e.message.split("\n")[0],
+        "Element Edmx, child element DataServices: 0 occurrences instead of at least 1"
+      );
+      assert.deepStrictEqual(e.parser, {
+        construct: "</Edmx>",
+        line: 1,
+        column: 76,
+      });
+    }
+  });
+
+  it("V2 element in V4", function () {
+    const xml = `<Edmx Version="4.0" xmlns="http://docs.oasis-open.org/odata/ns/edmx">
+      <DataServices>
+        <Schema Namespace="n" xmlns="http://docs.oasis-open.org/odata/ns/edm">
           <Association Name="NotInV4" />
         </Schema>
       </DataServices>
@@ -425,6 +587,34 @@ describe("Error cases", function () {
         construct: '<Association Name="NotInV4" />',
         line: 4,
         column: 40,
+      });
+    }
+  });
+
+  it("element in V2 place in V4", function () {
+    const xml = `<Edmx Version="4.0" xmlns="http://docs.oasis-open.org/odata/ns/edmx">
+      <DataServices>
+        <Schema Namespace="n" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+          <EntityContainer Name="container">
+            <FunctionImport Name="fi" Function="f">
+              <Parameter Name="NotInV4" Type="Edm.String" />
+            </FunctionImport>
+          </EntityContainer>
+        </Schema>
+      </DataServices>
+    </Edmx>`;
+    try {
+      csdl.xml2json(xml);
+      assert.fail("should not get here");
+    } catch (e) {
+      assert.strictEqual(
+        e.message.split("\n")[0],
+        "Unexpected element: Parameter"
+      );
+      assert.deepStrictEqual(e.parser, {
+        construct: '<Parameter Name="NotInV4" Type="Edm.String" />',
+        line: 6,
+        column: 60,
       });
     }
   });
@@ -488,8 +678,8 @@ describe("Error cases", function () {
   });
 
   it("unexpected attribute: Null/@version", function () {
-    const xml = `<Edmx Version="4.0"><Reference Uri="foo">
-      <Annotation Term="choc.bar"><Null version="1" /></Annotation>
+    const xml = `<Edmx Version="4.0" xmlns="http://docs.oasis-open.org/odata/ns/edmx"><Reference Uri="foo">
+      <Annotation Term="choc.bar" xmlns="http://docs.oasis-open.org/odata/ns/edm"><Null version="1" /></Annotation>
     </Reference></Edmx>`;
     try {
       csdl.xml2json(xml, { validate: true });
@@ -502,7 +692,7 @@ describe("Error cases", function () {
       assert.deepStrictEqual(e.parser, {
         construct: '<Null version="1" />',
         line: 2,
-        column: 54,
+        column: 102,
       });
     }
   });
@@ -519,7 +709,7 @@ describe("Error cases", function () {
     } catch (e) {
       assert.strictEqual(
         e.message.split("\n")[0],
-        "Element: Include, unexpected attribute: alias"
+        "Element: edmx:Include, unexpected attribute: alias"
       );
       assert.deepStrictEqual(e.parser, {
         construct: '<edmx:Include Namespace="Org.OData.Core.V1" alias="C" />',
@@ -543,6 +733,83 @@ describe("Error cases", function () {
         construct: '<Schema namespace="foo"/>',
         line: 1,
         column: 59,
+      });
+    }
+  });
+
+  it("missing XML namespace declaration on V4 Edmx", function () {
+    const xml = `<Edmx Version="4.0">
+                   <DataServices>
+                     <Schema Namespace="foo"/>
+                   </DataServices>
+                 </Edmx>`;
+    try {
+      csdl.xml2json(xml, { validate: true });
+      assert.fail("should not get here");
+    } catch (e) {
+      assert.strictEqual(
+        e.message.split("\n")[0],
+        "Element Edmx: invalid or missing XML namespace "
+      );
+      assert.deepStrictEqual(e.parser, {
+        construct: '<Edmx Version="4.0">',
+        line: 1,
+        column: 20,
+      });
+    }
+  });
+
+  it("missing XML namespace declaration on V4 Schema", function () {
+    const xml = `<Edmx Version="4.0" xmlns="http://docs.oasis-open.org/odata/ns/edmx">
+                   <DataServices>
+                     <Schema Namespace="foo">
+                       <EntityType />
+                     </Schema>
+                   </DataServices>
+                 </Edmx>`;
+    try {
+      console.dir(csdl.xml2json(xml, { validate: true }));
+      assert.fail("should not get here");
+    } catch (e) {
+      assert.strictEqual(
+        e.message.split("\n")[0],
+        "Element Schema: invalid or missing XML namespace http://docs.oasis-open.org/odata/ns/edmx"
+      );
+      assert.deepStrictEqual(e.parser, {
+        construct: '<Schema Namespace="foo">',
+        line: 3,
+        column: 45,
+      });
+    }
+  });
+
+  it("missing XML namespace declaration on old Edmx - ignore everything", function () {
+    const xml = `<Edmx Version="1.0">
+                   <DataServices m:DataServiceVersion="0-sense" xmlns:m="wrong">
+                     <Schema Namespace="n" />
+                   </DataServices>
+                 </Edmx>`;
+    assert.deepStrictEqual(csdl.xml2json(xml), { $Version: "0-sense" });
+  });
+
+  it("wrong XML namespace declaration on old Schema", function () {
+    const xml = `<Edmx Version="1.0" xmlns="http://schemas.microsoft.com/ado/2007/06/edmx">
+                   <DataServices m:DataServiceVersion="" xmlns:m="wrong">
+                     <Schema Namespace="foo" xmlns="typo"/>
+                   </DataServices>
+                 </Edmx>`;
+    try {
+      console.dir(csdl.xml2json(xml, { validate: true }));
+      assert.fail("should not get here");
+    } catch (e) {
+      assert.strictEqual(
+        e.message.split("\n")[0],
+        "Element DataServices, child element Schema: 0 occurrences instead of at least 1"
+      );
+      assert.deepStrictEqual(e.parser, {
+        construct: "</DataServices>",
+        line: 4,
+        column: 34,
       });
     }
   });

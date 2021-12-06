@@ -2,6 +2,10 @@
 <edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx">
   <edmx:DataServices xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" m:DataServiceVersion="2.0">
     <Schema Namespace="ODataDemo" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+      <Association Name="Product_Category_Category_Products">
+        <End Role="Product_Category" Type="ODataDemo.Product" Multiplicity="*" />
+        <End Role="Category_Products" Type="ODataDemo.Category" Multiplicity="0..1" />
+      </Association>
       <EntityType Name="Product">
         <Key>
           <PropertyRef Name="ID" />
@@ -41,10 +45,6 @@
         <Property Name="ZipCode" Type="Edm.String" Nullable="true" />
         <Property Name="Country" Type="Edm.String" Nullable="true" />
       </ComplexType>
-      <Association Name="Product_Category_Category_Products">
-        <End Role="Product_Category" Type="ODataDemo.Product" Multiplicity="*" />
-        <End Role="Category_Products" Type="ODataDemo.Category" Multiplicity="0..1" />
-      </Association>
       <Association Name="Product_Supplier_Supplier_Products">
         <End Role="Product_Supplier" Type="ODataDemo.Product" Multiplicity="*" />
         <End Role="Supplier_Products" Type="ODataDemo.Supplier" Multiplicity="0..1" />
