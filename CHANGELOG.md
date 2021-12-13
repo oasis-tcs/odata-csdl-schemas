@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.4.1 2021-12-13
+
+### Added
+
+- Unit tests for `csdl.schema.json`
+
+### Changed
+
+- `csdl.schema.json`: patterns for SimpleIdentifier and QualifiedName
+
 ## 0.4.0 2021-12-06
 
 ### Added

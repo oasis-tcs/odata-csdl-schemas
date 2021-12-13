@@ -171,7 +171,7 @@
       "type": "object",
       "additionalProperties": false,
       "patternProperties": {
-        "@": {
+        "^@": {
           "$ref": "#/definitions/Annotation"
         },
         "^(_|\\p{L}|\\p{Nl})(_|\\p{L}|\\p{Nl}|\\p{Nd}|\\p{Mn}|\\p{Mc}|\\p{Pc}|\\p{Cf}){0,127}$": {
@@ -251,7 +251,7 @@
       "type": "object",
       "additionalProperties": false,
       "patternProperties": {
-        "@": {
+        "^@": {
           "$ref": "#/definitions/Annotation"
         },
         "^(_|\\p{L}|\\p{Nl})(_|\\p{L}|\\p{Nl}|\\p{Nd}|\\p{Mn}|\\p{Mc}|\\p{Pc}|\\p{Cf}){0,127}$": {
@@ -359,7 +359,7 @@
       "type": "object",
       "additionalProperties": false,
       "patternProperties": {
-        "@": {
+        "^@": {
           "$ref": "#/definitions/Annotation"
         },
         "^\\$OnDelete@": {
@@ -409,6 +409,7 @@
           "type": "object",
           "patternProperties": {
             "@": {
+              "description": "Annotation on a constraint, prefixed with the dependent property",
               "$ref": "#/definitions/Annotation"
             },
             ".*": {
@@ -438,6 +439,7 @@
       "additionalProperties": false,
       "patternProperties": {
         "@": {
+          "description": "Annotation on the enumeration type or one of its members",
           "$ref": "#/definitions/Annotation"
         },
         "^(_|\\p{L}|\\p{Nl})(_|\\p{L}|\\p{Nl}|\\p{Nd}|\\p{Mn}|\\p{Mc}|\\p{Pc}|\\p{Cf}){0,127}$": {

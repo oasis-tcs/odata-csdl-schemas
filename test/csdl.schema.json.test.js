@@ -93,7 +93,7 @@ describe("Negative validation", function () {
     });
   });
 
-  it("invalid property name", function () {
+  it("invalid property name in entity type", function () {
     validate({
       $Version: "4.0",
       "my.schema": {
@@ -108,6 +108,89 @@ describe("Negative validation", function () {
       message: "must NOT have additional properties",
     });
   });
+
+  it("invalid property name in complex type", function () {
+    validate({
+      $Version: "4.0",
+      "my.schema": {
+        ct: { $Kind: "ComplexType", "no.dots": {} },
+      },
+    });
+    assert.deepStrictEqual(validate.errors[0], {
+      instancePath: "/my.schema/ct",
+      schemaPath: "#/additionalProperties",
+      keyword: "additionalProperties",
+      params: { additionalProperty: "no.dots" },
+      message: "must NOT have additional properties",
+    });
+  });
+
+  it("invalid member name in enumeration type", function () {
+    validate({
+      $Version: "4.0",
+      "my.schema": {
+        ent: { $Kind: "EnumType", "no-dashes": {} },
+      },
+    });
+    assert.deepStrictEqual(validate.errors[0], {
+      instancePath: "/my.schema/ent",
+      schemaPath: "#/additionalProperties",
+      keyword: "additionalProperties",
+      params: { additionalProperty: "no-dashes" },
+      message: "must NOT have additional properties",
+    });
+  });
+
+  it("invalid action parameter name", function () {
+    validate({
+      $Version: "4.0",
+      "my.schema": {
+        a: [{ $Kind: "Action", $Parameter: [{ $Name: "no/slashes" }] }],
+      },
+    });
+    assert.deepStrictEqual(
+      validate.errors.find(
+        (e) => e.instancePath === "/my.schema/a/0/$Parameter/0/$Name"
+      ),
+      {
+        instancePath: "/my.schema/a/0/$Parameter/0/$Name",
+        schemaPath: "#/definitions/SimpleIdentifier/pattern",
+        keyword: "pattern",
+        params: {
+          pattern:
+            "^(_|\\p{L}|\\p{Nl})(_|\\p{L}|\\p{Nl}|\\p{Nd}|\\p{Mn}|\\p{Mc}|\\p{Pc}|\\p{Cf}){0,127}$",
+        },
+        message:
+          'must match pattern "^(_|\\p{L}|\\p{Nl})(_|\\p{L}|\\p{Nl}|\\p{Nd}|\\p{Mn}|\\p{Mc}|\\p{Pc}|\\p{Cf}){0,127}$"',
+      }
+    );
+  });
+
+  it("invalid function parameter name", function () {
+    validate({
+      $Version: "4.0",
+      "my.schema": {
+        f: [{ $Kind: "Function", $Parameter: [{ $Name: "no/slashes" }] }],
+      },
+    });
+    assert.deepStrictEqual(
+      validate.errors.find(
+        (e) => e.instancePath === "/my.schema/f/0/$Parameter/0/$Name"
+      ),
+      {
+        instancePath: "/my.schema/f/0/$Parameter/0/$Name",
+        schemaPath: "#/definitions/SimpleIdentifier/pattern",
+        keyword: "pattern",
+        params: {
+          pattern:
+            "^(_|\\p{L}|\\p{Nl})(_|\\p{L}|\\p{Nl}|\\p{Nd}|\\p{Mn}|\\p{Mc}|\\p{Pc}|\\p{Cf}){0,127}$",
+        },
+        message:
+          'must match pattern "^(_|\\p{L}|\\p{Nl})(_|\\p{L}|\\p{Nl}|\\p{Nd}|\\p{Mn}|\\p{Mc}|\\p{Pc}|\\p{Cf}){0,127}$"',
+      }
+    );
+  });
+
   it("invalid property type name", function () {
     validate({
       $Version: "4.0",
