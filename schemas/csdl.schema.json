@@ -3,6 +3,14 @@
   "description": "OData Common Schema Definition Language (CSDL) JSON Representation Version 4.01",
   "type": "object",
   "additionalProperties": false,
+  "patternProperties": {
+    "^(_|\\p{L}|\\p{Nl})(_|\\p{L}|\\p{Nl}|\\p{Nd}|\\p{Mn}|\\p{Mc}|\\p{Pc}|\\p{Cf}){0,127}(\\.(_|\\p{L}|\\p{Nl})(_|\\p{L}|\\p{Nl}|\\p{Nd}|\\p{Mn}|\\p{Mc}|\\p{Pc}|\\p{Cf}){0,127})*$": {
+      "$ref": "#/definitions/Schema"
+    }
+  },
+  "propertyNames": {
+    "maxLength": 511
+  },
   "properties": {
     "$Version": {
       "description": "OData version used in this document",
@@ -38,11 +46,11 @@
                 "properties": {
                   "$Namespace": {
                     "description": "Namespace to include",
-                    "type": "string"
+                    "$ref": "#/definitions/QualifiedName"
                   },
                   "$Alias": {
                     "description": "Alias of included namespace",
-                    "type": "string"
+                    "$ref": "#/definitions/SimpleIdentifier"
                   }
                 },
                 "patternProperties": {
@@ -64,15 +72,15 @@
                 "properties": {
                   "$TermNamespace": {
                     "description": "Term namespace of annotations to include",
-                    "type": "string"
+                    "$ref": "#/definitions/QualifiedName"
                   },
                   "$TargetNamespace": {
                     "description": "Target namespace of annotations to include",
-                    "type": "string"
+                    "$ref": "#/definitions/QualifiedName"
                   },
                   "$Qualifier": {
                     "description": "Qualifier of annotations to include",
-                    "type": "string"
+                    "$ref": "#/definitions/SimpleIdentifier"
                   }
                 },
                 "required": [
@@ -85,11 +93,9 @@
       }
     }
   },
-  "patternProperties": {
-    "^[^$]": {
-      "$ref": "#/definitions/Schema"
-    }
-  },
+  "required": [
+    "$Version"
+  ],
   "definitions": {
     "Schema": {
       "description": "CSDL Schema",
@@ -99,7 +105,7 @@
         "^@": {
           "$ref": "#/definitions/Annotation"
         },
-        "^[^$@]*$": {
+        "^(_|\\p{L}|\\p{Nl})(_|\\p{L}|\\p{Nl}|\\p{Nd}|\\p{Mn}|\\p{Mc}|\\p{Pc}|\\p{Cf}){0,127}$": {
           "oneOf": [
             {
               "$ref": "#/definitions/EntityType"
@@ -139,7 +145,7 @@
       "properties": {
         "$Alias": {
           "description": "Alias of CSDL Schema",
-          "type": "string"
+          "$ref": "#/definitions/SimpleIdentifier"
         },
         "$Annotations": {
           "description": "Annotations",
@@ -168,7 +174,7 @@
         "@": {
           "$ref": "#/definitions/Annotation"
         },
-        "^[^$@]*$": {
+        "^(_|\\p{L}|\\p{Nl})(_|\\p{L}|\\p{Nl}|\\p{Nd}|\\p{Mn}|\\p{Mc}|\\p{Pc}|\\p{Cf}){0,127}$": {
           "oneOf": [
             {
               "$ref": "#/definitions/Property"
@@ -248,7 +254,7 @@
         "@": {
           "$ref": "#/definitions/Annotation"
         },
-        "^[^$@]*$": {
+        "^(_|\\p{L}|\\p{Nl})(_|\\p{L}|\\p{Nl}|\\p{Nd}|\\p{Mn}|\\p{Mc}|\\p{Pc}|\\p{Cf}){0,127}$": {
           "oneOf": [
             {
               "$ref": "#/definitions/Property"
@@ -309,8 +315,8 @@
         },
         "$Type": {
           "description": "Qualified name of primitive or complex type",
-          "type": "string",
-          "default": "Edm.String"
+          "default": "Edm.String",
+          "$ref": "#/definitions/QualifiedName"
         },
         "$Collection": {
           "description": "Collection-valued property",
@@ -369,7 +375,7 @@
         },
         "$Type": {
           "description": "Qualified name of entity type",
-          "type": "string"
+          "$ref": "#/definitions/QualifiedName"
         },
         "$Collection": {
           "description": "Collection-valued navigation property",
@@ -412,7 +418,7 @@
           }
         },
         "$OnDelete": {
-          "description": "Action on related entites when deleting this entity",
+          "description": "Action on related entities when deleting this entity",
           "enum": [
             "Cascade",
             "None",
@@ -434,7 +440,7 @@
         "@": {
           "$ref": "#/definitions/Annotation"
         },
-        "^[^$@]*$": {
+        "^(_|\\p{L}|\\p{Nl})(_|\\p{L}|\\p{Nl}|\\p{Nd}|\\p{Mn}|\\p{Mc}|\\p{Pc}|\\p{Cf}){0,127}$": {
           "description": "Enumeration Member : integer value",
           "type": "integer"
         }
@@ -529,8 +535,8 @@
         },
         "$Type": {
           "description": "Qualified type name",
-          "type": "string",
-          "default": "Edm.String"
+          "default": "Edm.String",
+          "$ref": "#/definitions/QualifiedName"
         },
         "$Collection": {
           "description": "Collection-valued term",
@@ -712,7 +718,7 @@
         "^@": {
           "$ref": "#/definitions/Annotation"
         },
-        "^[^$@]*$": {
+        "^(_|\\p{L}|\\p{Nl})(_|\\p{L}|\\p{Nl}|\\p{Nd}|\\p{Mn}|\\p{Mc}|\\p{Pc}|\\p{Cf}){0,127}$": {
           "oneOf": [
             {
               "$ref": "#/definitions/EntitySet"
@@ -763,7 +769,7 @@
         },
         "$Type": {
           "description": "Qualified name of entity type",
-          "type": "string"
+          "$ref": "#/definitions/QualifiedName"
         },
         "$NavigationPropertyBinding": {
           "$ref": "#/definitions/NavigationPropertyBinding"
@@ -794,7 +800,7 @@
       "properties": {
         "$Type": {
           "description": "Qualified name of entity type",
-          "type": "string"
+          "$ref": "#/definitions/QualifiedName"
         },
         "$Nullable": {
           "description": "Nullable singleton",
@@ -890,12 +896,12 @@
         "properties": {
           "$Name": {
             "description": "Parameter name",
-            "type": "string"
+            "$ref": "#/definitions/SimpleIdentifier"
           },
           "$Type": {
             "description": "Qualified name of parameter type",
-            "type": "string",
-            "default": "Edm.String"
+            "default": "Edm.String",
+            "$ref": "#/definitions/QualifiedName"
           },
           "$Collection": {
             "description": "Collection-valued parameter",
@@ -946,8 +952,8 @@
       "properties": {
         "$Type": {
           "description": "Qualified name of return type",
-          "type": "string",
-          "default": "Edm.String"
+          "default": "Edm.String",
+          "$ref": "#/definitions/QualifiedName"
         },
         "$Collection": {
           "description": "Returns a collection",
@@ -1013,6 +1019,16 @@
           ]
         }
       ]
+    },
+    "SimpleIdentifier": {
+      "description": "Simple Identifier",
+      "type": "string",
+      "pattern": "^(_|\\p{L}|\\p{Nl})(_|\\p{L}|\\p{Nl}|\\p{Nd}|\\p{Mn}|\\p{Mc}|\\p{Pc}|\\p{Cf}){0,127}$"
+    },
+    "QualifiedName": {
+      "description": "Qualified Name",
+      "type": "string",
+      "pattern": "^(_|\\p{L}|\\p{Nl})(_|\\p{L}|\\p{Nl}|\\p{Nd}|\\p{Mn}|\\p{Mc}|\\p{Pc}|\\p{Cf}){0,127}(\\.(_|\\p{L}|\\p{Nl})(_|\\p{L}|\\p{Nl}|\\p{Nd}|\\p{Mn}|\\p{Mc}|\\p{Pc}|\\p{Cf}){0,127})*$"
     },
     "SRID": {
       "description": "Coordinate reference system as defined by the European Petroleum Survey Group",
