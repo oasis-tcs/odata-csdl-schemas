@@ -1,12 +1,16 @@
 {
   "json.schemas": [
     {
-      "fileMatch": ["examples/*.json", "test/*.json"],
+      "fileMatch": [
+        "examples/*.json",
+        "test/*.json"
+      ],
       "url": "./schemas/csdl.schema.json"
     }
   ],
-  "xml.catalogs": ["./catalog.xml"],
-  "mochaExplorer.esmLoader": false,
+  "xml.catalogs": [
+    "./catalog.xml"
+  ],
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
@@ -14,5 +18,11 @@
     "editor.defaultFormatter": "vscode.json-language-features"
   },
   "files.insertFinalNewline": true,
-  "files.trimFinalNewlines": true
+  "files.trimFinalNewlines": true,
+  "cSpell.words": [
+    "csdl",
+    "odata",
+    "schön",
+    "SRID"
+  ]
 }
