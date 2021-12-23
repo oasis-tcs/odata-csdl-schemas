@@ -139,9 +139,9 @@
 
       <ComplexType Name="Example16to21">
         <!-- Example 16 -->
-        <Property Name="Units" Type="Collection(Edm.String)" />
+        <Property Name="Units" Type="Collection(Edm.String)" Nullable="false"/>
         <!-- Example 17 -->
-        <Property Name="SuggestedTimes" Type="Collection(Edm.DateTimeOffset)" Precision="6" />
+        <Property Name="SuggestedTimes" Type="Collection(Edm.DateTimeOffset)" Precision="6" Nullable="false"/>
         <!-- Example 18 -->
         <Property Name="Amount32" Type="Edm.Decimal" Precision="3" Scale="2" />
         <!-- Example 19 -->
@@ -1001,7 +1001,7 @@
       <Function Name="CreatedEntities">
         <Parameter Name="before" Type="Edm.DateTimeOffset" Nullable="true" />
         <Parameter Name="after" Type="Edm.DateTimeOffset" Nullable="true" />
-        <ReturnType Type="Collection(Edm.EntityType)" Nullable="true" />
+        <ReturnType Type="Collection(Edm.EntityType)" />
       </Function>
       <Function Name="TopSellingProducts">
         <Parameter Name="Year" Type="Edm.Decimal" Precision="4" Scale="0" Nullable="true">
@@ -1280,7 +1280,7 @@
         <NavigationProperty Name="Region" Type="M1.Region" />
         <NavigationProperty Name="Country" Type="M1.Country" />
         <Property Name="MapLocation" Type="Edm.GeographyPoint" SRID="variable" />
-        <Property Name="Numbers" Type="Collection(Edm.Int16)" />
+        <Property Name="Numbers" Type="Collection(Edm.Int16)" Nullable="false"/>
       </ComplexType>
 
       <EntityType Name="City" HasStream="true">
@@ -1372,7 +1372,7 @@
       <ComplexType Name="PersonType">
         <!-- properties -->
       </ComplexType>
-      <Term Name="Team" Type="Collection(X.PersonType)">
+      <Term Name="Team" Type="Collection(X.PersonType)" Nullable="false">
         <Annotation Term="custom.ItemIsA" String="X.Person" />
       </Term>
       <Term Name="Movie" Type="X.MovieType" Nullable="false" />
@@ -1406,7 +1406,7 @@
         <Annotation Term="Core.Description" Qualifier="WithPath" Path="SomeProperty" />
       </Annotations>
 
-      <Term Name="DevelopmentTeam" Type="Collection(Y.DeveloperType)">
+      <Term Name="DevelopmentTeam" Type="Collection(Y.DeveloperType)" Nullable="false">
         <Annotation Term="custom.ItemIsA" String="Y.Developer" />
         <Annotation Term="custom.IsA" String="X.Team" />
         <!--
@@ -1445,7 +1445,7 @@
         </Annotation>
       </Annotations>
 
-      <Term Name="Movies" Type="Collection(X.MovieType)" />
+      <Term Name="Movies" Type="Collection(X.MovieType)" Nullable="false"/>
       <Annotations Target="Some.EntityType">
         <Annotation Term="Y.Movies">
           <Path>AllMyMovies</Path>
@@ -1460,7 +1460,7 @@
       </Annotations>
 
 
-      <Term Name="ArchivedMovies" Type="Collection(Y.ArchivedMovieType)">
+      <Term Name="ArchivedMovies" Type="Collection(Y.ArchivedMovieType)" Nullable="false">
         <Annotation Term="custom.ItemIsA" String="X.Movie" />
       </Term>
       <ComplexType Name="ArchivedMovieType" BaseType="X.MovieType">
@@ -1477,7 +1477,7 @@
       <Term Name="SomeThing" Type="Y.SomeThingType" />
       <ComplexType Name="SomeThingType">
         <Property Name="SomeProperty" Type="Edm.String" />
-        <Property Name="Contacts" Type="Collection(X.PersonType)">
+        <Property Name="Contacts" Type="Collection(X.PersonType)" Nullable="false">
           <Annotation Term="custom.ItemIsA" String="X.Person" />
         </Property>
         <NavigationProperty Name="VIPs" Type="Collection(X.FriendType)">
@@ -1516,7 +1516,7 @@
         <Annotation Term="Core.Description" String="Advanced change tracking capabilities of this service or entity set" />
       </Term>
       <ComplexType Name="ChangeTrackingType">
-        <Property Name="InlineableStreamProperties" Type="Collection(Edm.PropertyPath)">
+        <Property Name="InlineableStreamProperties" Type="Collection(Edm.PropertyPath)" Nullable="false">
           <Annotation Term="Core.Description" String="Change tracking supports inlining these stream properties" />
         </Property>
       </ComplexType>
