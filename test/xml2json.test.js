@@ -429,6 +429,30 @@ describe("Error cases", function () {
     }
   });
 
+  it("missing Nullable in Collection", function () {
+    const xml = `<Edmx Version="4.01" xmlns="http://docs.oasis-open.org/odata/ns/edmx">
+      <DataServices>
+        <Schema Namespace="n" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+          <Term Name="Annotation" Type="Collection(Edm.String)"/>
+        </Schema>
+      </DataServices>
+    </Edmx>`;
+    try {
+      csdl.xml2json(xml);
+      assert.fail("should not get here");
+    } catch (e) {
+      assert.strictEqual(
+        e.message.split("\n")[0],
+        "Element Term, Type=Collection without Nullable attribute"
+      );
+      assert.deepStrictEqual(e.parser, {
+        construct: '<Term Name="Annotation" Type="Collection(Edm.String)"/>',
+        line: 4,
+        column: 65,
+      });
+    }
+  });
+
   it("misplaced element", function () {
     const xml = `<Edmx Version="4.0" xmlns="http://docs.oasis-open.org/odata/ns/edmx">
       <Schema Namespace="n">
