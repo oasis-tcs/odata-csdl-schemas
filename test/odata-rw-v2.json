@@ -8,6 +8,14 @@
           "$Namespace": "Org.OData.Core.V1"
         }
       ]
+    },
+    "https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Capabilities.V1.json": {
+      "$Include": [
+        {
+          "$Alias": "Capabilities",
+          "$Namespace": "Org.OData.Capabilities.V1"
+        }
+      ]
     }
   },
   "ODataDemo": {
