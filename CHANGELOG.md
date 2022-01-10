@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.4.3 2022-01-10
+
+### Added
+
+- Allow V4 annotations as foreign markup in V2
+
+## 0.4.2 2022-01-07
+
+### Added
+
+- `Property` and `Term` with `Type="Collection(...)"` must specify `Nullable` in 4.01.
+- `ReturnType Type="Collection(Edm.EntityType)"` must not specify `Nullable`.
+
 ## 0.4.1 2021-12-13
 
 ### Added
