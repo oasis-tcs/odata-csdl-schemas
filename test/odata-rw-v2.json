@@ -1,9 +1,42 @@
 {
   "$Version": "2.0",
+  "$Reference": {
+    "https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.json": {
+      "$Include": [
+        {
+          "$Alias": "Core",
+          "$Namespace": "Org.OData.Core.V1"
+        }
+      ]
+    },
+    "https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Capabilities.V1.json": {
+      "$Include": [
+        {
+          "$Alias": "Capabilities",
+          "$Namespace": "Org.OData.Capabilities.V1"
+        }
+      ]
+    }
+  },
   "ODataDemo": {
+    "@Core.SchemaVersion": "1.1.0",
+    "$Annotations": {
+      "ODataDemo.DemoService/Products": {
+        "@Capabilities.FilterRestrictions": {
+          "FilterExpressionRestrictions": [
+            {
+              "AllowedExpressions": "SearchExpression",
+              "Property": "Description"
+            }
+          ]
+        }
+      }
+    },
     "Product": {
       "$Kind": "EntityType",
-      "$Key": ["ID"],
+      "$Key": [
+        "ID"
+      ],
       "ID": {
         "$Type": "Edm.Int32"
       },
@@ -44,7 +77,9 @@
     },
     "Category": {
       "$Kind": "EntityType",
-      "$Key": ["ID"],
+      "$Key": [
+        "ID"
+      ],
       "ID": {
         "$Type": "Edm.Int32"
       },
@@ -60,7 +95,9 @@
     },
     "Supplier": {
       "$Kind": "EntityType",
-      "$Key": ["ID"],
+      "$Key": [
+        "ID"
+      ],
       "ID": {
         "$Type": "Edm.Int32"
       },
