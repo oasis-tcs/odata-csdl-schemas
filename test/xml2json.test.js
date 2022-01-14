@@ -473,6 +473,32 @@ describe("Error cases", function () {
     }
   });
 
+  it("forbidden Nullable in ReturnType", function () {
+    const xml = `<Edmx Version="4.01" xmlns="http://docs.oasis-open.org/odata/ns/edmx">
+      <DataServices>
+        <Schema Namespace="n" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+          <Function Name="f">
+            <ReturnType Type="Collection(Edm.EntityType)" Nullable="false"/>
+          </Function>
+        </Schema>
+      </DataServices>
+    </Edmx>`;
+    try {
+      csdl.xml2json(xml);
+      assert.fail("should not get here");
+    } catch (e) {
+      assert.strictEqual(
+        e.message.split("\n")[0],
+        "Element ReturnType, Type=Collection(Edm.EntityType) with Nullable attribute"
+      );
+      assert.deepStrictEqual(e.parser, {
+        construct: '<ReturnType Type="Collection(Edm.EntityType)" Nullable="false"/>',
+        line: 5,
+        column: 76,
+      });
+    }
+  });
+
   it("misplaced element", function () {
     const xml = `<Edmx Version="4.0" xmlns="http://docs.oasis-open.org/odata/ns/edmx">
       <Schema Namespace="n">
