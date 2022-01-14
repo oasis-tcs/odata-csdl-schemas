@@ -405,6 +405,26 @@ describe("Error cases", function () {
     }
   });
 
+  it("unexpected text content", function () {
+    const xml = `<Edmx Version="4.0" xmlns="http://docs.oasis-open.org/odata/ns/edmx">X
+      <DataServices/>
+    </Edmx>`;
+    try {
+      csdl.xml2json(xml);
+      assert.fail("should not get here");
+    } catch (e) {
+      assert.strictEqual(
+        e.message.split("\n")[0],
+        "Unexpected text content in Edmx"
+      );
+      assert.deepStrictEqual(e.parser, {
+        construct: "<DataServices/",
+        line: 2,
+        column: 20,
+      });
+    }
+  });
+
   it("unexpected element in annotation", function () {
     const xml = `<Edmx Version="4.0" xmlns="http://docs.oasis-open.org/odata/ns/edmx">
       <DataServices>
