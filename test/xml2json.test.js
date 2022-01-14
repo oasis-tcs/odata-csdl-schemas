@@ -415,7 +415,7 @@ describe("Error cases", function () {
     } catch (e) {
       assert.strictEqual(
         e.message.split("\n")[0],
-        "Unexpected text content in Edmx"
+        "Element Edmx, unexpected text: X"
       );
       assert.deepStrictEqual(e.parser, {
         construct: "<DataServices/",
