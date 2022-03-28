@@ -30,7 +30,9 @@
   },
   "scripts": {
     "build": "node lib/transform.js",
-    "test": "c8 mocha"
+    "build-java": "javac java/Validator.java",
+    "test": "c8 mocha",
+    "test-xsd": "java -cp java Validator"
   },
   "author": "",
   "license": "SEE LICENSE IN LICENSE.md"

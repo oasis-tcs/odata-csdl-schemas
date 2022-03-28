@@ -66,7 +66,6 @@
       <Annotation Term="Core.Version">
         <Add>
           <Int>1</Int>
-          <Annotation Term="Core.Description" String="add major and minor part" />
           <Decimal>0.2</Decimal>
         </Add>
       </Annotation>
