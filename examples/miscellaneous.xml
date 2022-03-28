@@ -63,12 +63,6 @@
     <!-- Example 6 -->
     <Schema Namespace="org.example" Alias="self">
       <Annotation Term="Core.Description" String="Example schema" />
-      <Annotation Term="Core.Version">
-        <Add>
-          <Int>1</Int>
-          <Decimal>0.2</Decimal>
-        </Add>
-      </Annotation>
 
       <!-- 5.2 Annotations with External Targeting -->
       <!-- Example 7 -->
