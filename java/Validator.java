@@ -15,7 +15,7 @@ class XMLFiles implements FilenameFilter {
 public class Validator {
 	public static void main(String[] args) throws IOException, SAXException {
 		var schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-		var validator = schemaFactory.newSchema(new StreamSource(new File("schemas/edmx.xsd"))).newValidator();
+		var validator = schemaFactory.newSchema(new File("schemas/edmx.xsd")).newValidator();
 		for (var file : new File("examples").listFiles(new XMLFiles())) {
 			System.out.println(file.getName());
 			validator.validate(new StreamSource(file));
