@@ -79,7 +79,7 @@
         <xs:element ref="edm:Annotation" />
       </xs:choice>
       <xs:attribute name="Namespace" type="edm:TNamespaceName" use="required" />
-      <xs:attribute name="Alias" type="edm:TSimpleIdentifier" use="optional" />
+      <xs:attribute name="Alias" type="edm:TSimpleIdentifier" />
     </xs:complexType>
   </xs:element>
   <!--
@@ -93,17 +93,17 @@
       <xs:element ref="edm:Annotation" minOccurs="0" maxOccurs="unbounded" />
     </xs:all>
     <xs:attributeGroup ref="edm:TDerivableTypeAttributes" />
-    <xs:attribute name="OpenType" type="xs:boolean" use="optional" default="false" />
-    <xs:attribute name="HasStream" type="xs:boolean" use="optional" default="false" />
+    <xs:attribute name="OpenType" type="xs:boolean" default="false" />
+    <xs:attribute name="HasStream" type="xs:boolean" default="false" />
   </xs:complexType>
   <xs:complexType name="TEntityKeyElement">
     <xs:all>
-      <xs:element name="PropertyRef" type="edm:TPropertyRef" minOccurs="1" maxOccurs="unbounded" />
+      <xs:element name="PropertyRef" type="edm:TPropertyRef" maxOccurs="unbounded" />
     </xs:all>
   </xs:complexType>
   <xs:complexType name="TPropertyRef">
     <xs:attribute name="Name" type="edm:TPath" use="required" />
-    <xs:attribute name="Alias" type="edm:TSimpleIdentifier" use="optional" />
+    <xs:attribute name="Alias" type="edm:TSimpleIdentifier" />
   </xs:complexType>
   <xs:complexType name="TComplexType">
     <xs:all>
@@ -112,7 +112,7 @@
       <xs:element ref="edm:Annotation" minOccurs="0" maxOccurs="unbounded" />
     </xs:all>
     <xs:attributeGroup ref="edm:TDerivableTypeAttributes" />
-    <xs:attribute name="OpenType" type="xs:boolean" use="optional" default="false" />
+    <xs:attribute name="OpenType" type="xs:boolean" default="false" />
   </xs:complexType>
   <xs:complexType name="TProperty">
     <xs:all>
@@ -136,9 +136,9 @@
     </xs:all>
     <xs:attribute name="Name" type="edm:TSimpleIdentifier" use="required" />
     <xs:attribute name="Type" type="edm:TTypeName" use="required" />
-    <xs:attribute name="Nullable" type="xs:boolean" use="optional" />
-    <xs:attribute name="Partner" type="edm:TPath" use="optional" />
-    <xs:attribute name="ContainsTarget" type="xs:boolean" use="optional" />
+    <xs:attribute name="Nullable" type="xs:boolean" />
+    <xs:attribute name="Partner" type="edm:TPath" />
+    <xs:attribute name="ContainsTarget" type="xs:boolean" />
   </xs:complexType>
   <xs:complexType name="TReferentialConstraint">
     <xs:all>
@@ -159,22 +159,22 @@
       <xs:element ref="edm:Annotation" minOccurs="0" maxOccurs="unbounded" />
     </xs:all>
     <xs:attributeGroup ref="edm:TTypeAttributes" />
-    <xs:attribute name="IsFlags" type="xs:boolean" use="optional" />
-    <xs:attribute name="UnderlyingType" type="edm:TTypeName" use="optional" />
+    <xs:attribute name="IsFlags" type="xs:boolean" />
+    <xs:attribute name="UnderlyingType" type="edm:TTypeName" />
   </xs:complexType>
   <xs:complexType name="TEnumTypeMember">
     <xs:all>
       <xs:element ref="edm:Annotation" minOccurs="0" maxOccurs="unbounded" />
     </xs:all>
     <xs:attribute name="Name" type="edm:TSimpleIdentifier" use="required" />
-    <xs:attribute name="Value" type="xs:long" use="optional" />
+    <xs:attribute name="Value" type="xs:long" />
   </xs:complexType>
   <xs:complexType name="TActionFunctionReturnType">
     <xs:all>
       <xs:element ref="edm:Annotation" minOccurs="0" maxOccurs="unbounded" />
     </xs:all>
     <xs:attribute name="Type" type="edm:TTypeName" use="required" />
-    <xs:attribute name="Nullable" type="xs:boolean" use="optional" />
+    <xs:attribute name="Nullable" type="xs:boolean" />
     <xs:attributeGroup ref="edm:TFacetAttributes" />
   </xs:complexType>
   <xs:complexType name="TAction">
@@ -208,19 +208,19 @@
     </xs:all>
     <xs:attribute name="Name" type="edm:TSimpleIdentifier" use="required" />
     <xs:attribute name="Type" type="edm:TTypeName" use="required" />
-    <xs:attribute name="BaseTerm" type="edm:TQualifiedName" use="optional" />
-    <xs:attribute name="Nullable" type="xs:boolean" use="optional" />
-    <xs:attribute name="DefaultValue" type="xs:string" use="optional" />
-    <xs:attribute name="AppliesTo" type="edm:TAppliesTo" use="optional" />
+    <xs:attribute name="BaseTerm" type="edm:TQualifiedName" />
+    <xs:attribute name="Nullable" type="xs:boolean" />
+    <xs:attribute name="DefaultValue" type="xs:string" />
+    <xs:attribute name="AppliesTo" type="edm:TAppliesTo" />
     <xs:attributeGroup ref="edm:TFacetAttributes" />
   </xs:complexType>
   <xs:element name="Annotations" type="edm:TAnnotations" />
   <xs:complexType name="TAnnotations">
     <xs:all>
-      <xs:element ref="edm:Annotation" minOccurs="1" maxOccurs="unbounded" />
+      <xs:element ref="edm:Annotation" maxOccurs="unbounded" />
     </xs:all>
     <xs:attribute name="Target" type="edm:TTarget" use="required" />
-    <xs:attribute name="Qualifier" type="edm:TSimpleIdentifier" use="optional" />
+    <xs:attribute name="Qualifier" type="edm:TSimpleIdentifier" />
   </xs:complexType>
   <xs:element name="Annotation">
     <xs:complexType>
@@ -229,7 +229,7 @@
         <xs:group ref="edm:GExpressionFollowedByAnnotations" minOccurs="0"/>
       </xs:sequence>
       <xs:attribute name="Term" type="edm:TQualifiedName" use="required" />
-      <xs:attribute name="Qualifier" type="edm:TSimpleIdentifier" use="optional" />
+      <xs:attribute name="Qualifier" type="edm:TSimpleIdentifier" />
       <xs:attributeGroup ref="edm:GInlineExpressions" /> <!-- either this or edm:GExpression -->
     </xs:complexType>
   </xs:element>
@@ -292,25 +292,25 @@
   </xs:group>
   <xs:attributeGroup name="GInlineExpressions">
     <!-- Constant Expressions -->
-    <xs:attribute name="Binary" type="edm:binary" use="optional" />
-    <xs:attribute name="Bool" type="edm:boolean" use="optional" />
-    <xs:attribute name="Date" type="edm:date" use="optional" />
-    <xs:attribute name="DateTimeOffset" type="edm:dateTimeStamp" use="optional" />
-    <xs:attribute name="Decimal" type="edm:TDecimalLiteral" use="optional" />
-    <xs:attribute name="Duration" type="edm:dayTimeDuration" use="optional" />
-    <xs:attribute name="EnumMember" type="edm:TEnumMemberList" use="optional" />
-    <xs:attribute name="Float" type="xs:double" use="optional" />
-    <xs:attribute name="Guid" type="edm:TGuidLiteral" use="optional" />
-    <xs:attribute name="Int" type="xs:integer" use="optional" />
-    <xs:attribute name="String" type="xs:string" use="optional" />
-    <xs:attribute name="TimeOfDay" type="edm:time" use="optional" />
+    <xs:attribute name="Binary" type="edm:binary" />
+    <xs:attribute name="Bool" type="edm:boolean" />
+    <xs:attribute name="Date" type="edm:date" />
+    <xs:attribute name="DateTimeOffset" type="edm:dateTimeStamp" />
+    <xs:attribute name="Decimal" type="edm:TDecimalLiteral" />
+    <xs:attribute name="Duration" type="edm:dayTimeDuration" />
+    <xs:attribute name="EnumMember" type="edm:TEnumMemberList" />
+    <xs:attribute name="Float" type="xs:double" />
+    <xs:attribute name="Guid" type="edm:TGuidLiteral" />
+    <xs:attribute name="Int" type="xs:integer" />
+    <xs:attribute name="String" type="xs:string" />
+    <xs:attribute name="TimeOfDay" type="edm:time" />
     <!-- Dynamic Expressions -->
-    <xs:attribute name="AnnotationPath" type="edm:TModelPath" use="optional" />
-    <xs:attribute name="ModelElementPath" type="edm:TModelPath" use="optional" />
-    <xs:attribute name="NavigationPropertyPath" type="edm:TModelPath" use="optional" />
-    <xs:attribute name="Path" type="edm:TInstancePath" use="optional" />
-    <xs:attribute name="PropertyPath" type="edm:TModelPath" use="optional" />
-    <xs:attribute name="UrlRef" type="xs:anyURI" use="optional" />
+    <xs:attribute name="AnnotationPath" type="edm:TModelPath" />
+    <xs:attribute name="ModelElementPath" type="edm:TModelPath" />
+    <xs:attribute name="NavigationPropertyPath" type="edm:TModelPath" />
+    <xs:attribute name="Path" type="edm:TInstancePath" />
+    <xs:attribute name="PropertyPath" type="edm:TModelPath" />
+    <xs:attribute name="UrlRef" type="xs:anyURI" />
   </xs:attributeGroup>
   <!--
     Constant Expressions
@@ -388,14 +388,14 @@
       <xs:element ref="edm:Annotation" minOccurs="0" maxOccurs="unbounded" />
       <xs:group ref="edm:GExpressionFollowedByAnnotations" minOccurs="0" maxOccurs="unbounded" />
     </xs:sequence>
-    <xs:attribute name="Function" type="edm:TClientFunction" use="optional" />
+    <xs:attribute name="Function" type="edm:TClientFunction" />
   </xs:complexType>
   <xs:complexType name="TCastOrIsOfExpression">
     <xs:sequence>
       <xs:element ref="edm:Annotation" minOccurs="0" maxOccurs="unbounded" />
       <xs:group ref="edm:GExpressionFollowedByAnnotations" />
     </xs:sequence>
-    <xs:attribute name="Type" type="edm:TTypeName" use="optional" />
+    <xs:attribute name="Type" type="edm:TTypeName" />
     <xs:attributeGroup ref="edm:TFacetAttributes" />
   </xs:complexType>
   <xs:complexType name="TCollectionExpression">
@@ -445,7 +445,7 @@
       <xs:element name="PropertyValue" type="edm:TPropertyValue" minOccurs="0" maxOccurs="unbounded" />
       <xs:element ref="edm:Annotation" minOccurs="0" maxOccurs="unbounded" />
     </xs:all>
-    <xs:attribute name="Type" type="edm:TQualifiedName" use="optional" />
+    <xs:attribute name="Type" type="edm:TQualifiedName" />
   </xs:complexType>
   <xs:complexType name="TPropertyValue">
     <xs:sequence>
@@ -459,57 +459,57 @@
     attributes
   -->
   <xs:attributeGroup name="TFacetAttributes">
-    <xs:attribute name="MaxLength" type="edm:TMaxLengthFacet" use="optional" />
-    <xs:attribute name="Precision" type="edm:TPrecisionFacet" use="optional" />
-    <xs:attribute name="Scale" type="edm:TScaleFacet" use="optional" />
-    <xs:attribute name="SRID" type="edm:TSridFacet" use="optional" />
-    <xs:attribute name="Unicode" type="edm:TUnicodeFacet" use="optional" />
+    <xs:attribute name="MaxLength" type="edm:TMaxLengthFacet" />
+    <xs:attribute name="Precision" type="edm:TPrecisionFacet" />
+    <xs:attribute name="Scale" type="edm:TScaleFacet" />
+    <xs:attribute name="SRID" type="edm:TSridFacet" />
+    <xs:attribute name="Unicode" type="edm:TUnicodeFacet" />
   </xs:attributeGroup>
   <xs:attributeGroup name="TCommonPropertyAttributes">
     <xs:attribute name="Name" type="edm:TSimpleIdentifier" use="required" />
     <xs:attribute name="Type" type="edm:TTypeName" use="required" />
-    <xs:attribute name="Nullable" type="xs:boolean" default="true" use="optional" />
-    <xs:attribute name="DefaultValue" type="xs:string" use="optional" />
+    <xs:attribute name="Nullable" type="xs:boolean" default="true" />
+    <xs:attribute name="DefaultValue" type="xs:string" />
     <xs:attributeGroup ref="edm:TFacetAttributes" />
   </xs:attributeGroup>
   <xs:attributeGroup name="TActionFunctionParameterAttributes">
     <xs:attribute name="Name" type="edm:TSimpleIdentifier" use="required" />
     <xs:attribute name="Type" type="edm:TTypeName" use="required" />
-    <xs:attribute name="Nullable" type="xs:boolean" use="optional" />
+    <xs:attribute name="Nullable" type="xs:boolean" />
     <xs:attributeGroup ref="edm:TFacetAttributes" />
   </xs:attributeGroup>
   <xs:attributeGroup name="TActionAttributes">
     <xs:attribute name="Name" type="edm:TSimpleIdentifier" use="required" />
-    <xs:attribute name="EntitySetPath" type="edm:TPath" use="optional" />
-    <xs:attribute name="IsBound" type="xs:boolean" use="optional" default="false" />
+    <xs:attribute name="EntitySetPath" type="edm:TPath" />
+    <xs:attribute name="IsBound" type="xs:boolean" default="false" />
   </xs:attributeGroup>
   <xs:attributeGroup name="TFunctionAttributes">
     <xs:attribute name="Name" type="edm:TSimpleIdentifier" use="required" />
-    <xs:attribute name="EntitySetPath" type="edm:TPath" use="optional" />
-    <xs:attribute name="IsBound" type="xs:boolean" use="optional" default="false" />
-    <xs:attribute name="IsComposable" type="xs:boolean" use="optional" default="false" />
+    <xs:attribute name="EntitySetPath" type="edm:TPath" />
+    <xs:attribute name="IsBound" type="xs:boolean" default="false" />
+    <xs:attribute name="IsComposable" type="xs:boolean" default="false" />
   </xs:attributeGroup>
   <xs:attributeGroup name="TTypeAttributes">
     <xs:attribute name="Name" type="edm:TSimpleIdentifier" use="required" />
   </xs:attributeGroup>
   <xs:attributeGroup name="TDerivableTypeAttributes">
     <xs:attributeGroup ref="edm:TTypeAttributes" />
-    <xs:attribute name="BaseType" type="edm:TQualifiedName" use="optional" />
-    <xs:attribute name="Abstract" type="xs:boolean" use="optional" default="false" />
+    <xs:attribute name="BaseType" type="edm:TQualifiedName" />
+    <xs:attribute name="Abstract" type="xs:boolean" default="false" />
   </xs:attributeGroup>
   <!--
     container constructs
   -->
   <xs:complexType name="TEntityContainer">
-    <xs:choice minOccurs="1" maxOccurs="unbounded">
+    <xs:choice maxOccurs="unbounded">
       <xs:element name="EntitySet" type="edm:TEntitySet" />
       <xs:element name="ActionImport" type="edm:TActionImport" />
       <xs:element name="FunctionImport" type="edm:TFunctionImport" />
       <xs:element name="Singleton" type="edm:TSingleton" />
-      <xs:element ref="edm:Annotation" />
+      <xs:element ref="edm:Annotation"/>
     </xs:choice>
     <xs:attribute name="Name" type="edm:TSimpleIdentifier" use="required" />
-    <xs:attribute name="Extends" type="edm:TQualifiedName" use="optional" />
+    <xs:attribute name="Extends" type="edm:TQualifiedName" />
   </xs:complexType>
   <xs:complexType name="TEntitySet">
     <xs:all>
@@ -525,7 +525,7 @@
   <xs:attributeGroup name="TEntitySetAttributes">
     <xs:attribute name="Name" type="edm:TSimpleIdentifier" use="required" />
     <xs:attribute name="EntityType" type="edm:TQualifiedName" use="required" />
-    <xs:attribute name="IncludeInServiceDocument" type="xs:boolean" use="optional" default="true" />
+    <xs:attribute name="IncludeInServiceDocument" type="xs:boolean" default="true" />
   </xs:attributeGroup>
   <xs:complexType name="TSingleton">
     <xs:all>
@@ -534,7 +534,7 @@
     </xs:all>
     <xs:attribute name="Name" type="edm:TSimpleIdentifier" use="required" />
     <xs:attribute name="Type" type="edm:TQualifiedName" use="required" />
-    <xs:attribute name="Nullable" type="xs:boolean" use="optional" />
+    <xs:attribute name="Nullable" type="xs:boolean" />
   </xs:complexType>
   <xs:complexType name="TActionImport">
     <xs:all>
@@ -548,12 +548,12 @@
       <xs:element ref="edm:Annotation" minOccurs="0" maxOccurs="unbounded" />
     </xs:all>
     <xs:attribute name="Function" type="edm:TQualifiedName" use="required" />
-    <xs:attribute name="IncludeInServiceDocument" type="xs:boolean" use="optional" default="false" />
+    <xs:attribute name="IncludeInServiceDocument" type="xs:boolean" default="false" />
     <xs:attributeGroup ref="edm:TActionFunctionImportAttributes" />
   </xs:complexType>
   <xs:attributeGroup name="TActionFunctionImportAttributes">
     <xs:attribute name="Name" type="edm:TSimpleIdentifier" use="required" />
-    <xs:attribute name="EntitySet" type="edm:TPath" use="optional" />
+    <xs:attribute name="EntitySet" type="edm:TPath" />
   </xs:attributeGroup>
   <!--
     general purpose simple types
