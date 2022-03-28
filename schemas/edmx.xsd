@@ -56,6 +56,7 @@
 -->
 <xs:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xs="http://www.w3.org/2001/XMLSchema"
   xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" xmlns:edm="http://docs.oasis-open.org/odata/ns/edm" targetNamespace="http://docs.oasis-open.org/odata/ns/edmx"
+  vc:minVersion="1.1" xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning"
 >
   <xs:annotation>
     <xs:documentation xml:lang="en">
@@ -67,24 +68,29 @@
 
   <xs:element name="Edmx" type="edmx:TEdmx" />
   <xs:complexType name="TEdmx">
-    <xs:sequence>
+    <xs:all>
       <xs:element name="Reference" type="edmx:TReference" minOccurs="0" maxOccurs="unbounded" />
       <xs:element name="DataServices" type="edmx:TDataServices" minOccurs="1" maxOccurs="1" />
-    </xs:sequence>
+    </xs:all>
     <xs:attribute name="Version" type="edmx:TVersion" use="required" />
   </xs:complexType>
   <xs:complexType name="TReference">
-    <xs:choice minOccurs="1" maxOccurs="unbounded">
-      <xs:element name="Include" type="edmx:TInclude" />
-      <xs:element name="IncludeAnnotations" type="edmx:TIncludeAnnotations" />
+    <xs:sequence>
       <xs:element ref="edm:Annotation" minOccurs="0" maxOccurs="unbounded" />
-    </xs:choice>
+      <xs:sequence maxOccurs="unbounded">
+        <xs:choice>
+          <xs:element name="Include" type="edmx:TInclude" />
+          <xs:element name="IncludeAnnotations" type="edmx:TIncludeAnnotations" />
+        </xs:choice>
+        <xs:element ref="edm:Annotation" minOccurs="0" maxOccurs="unbounded" />
+      </xs:sequence>
+    </xs:sequence>
     <xs:attribute name="Uri" type="xs:anyURI" use="required" />
   </xs:complexType>
   <xs:complexType name="TInclude">
-    <xs:sequence>
+    <xs:all>
       <xs:element ref="edm:Annotation" minOccurs="0" maxOccurs="unbounded" />
-    </xs:sequence>
+    </xs:all>
     <xs:attribute name="Namespace" type="edm:TNamespaceName" use="required" />
     <xs:attribute name="Alias" type="edm:TSimpleIdentifier" use="optional" />
   </xs:complexType>
