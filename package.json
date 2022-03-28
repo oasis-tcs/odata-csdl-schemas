@@ -31,7 +31,7 @@
   "scripts": {
     "build": "node lib/transform.js",
     "build-java": "javac java/Validator.java",
-    "test": "c8 mocha",
+    "test": "c8 mocha --reporter-option maxDiffSize=0",
     "test-xsd": "java -cp java Validator"
   },
   "author": "",
