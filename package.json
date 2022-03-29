@@ -32,7 +32,7 @@
     "build": "node lib/transform.js",
     "build-java": "javac java/Validator.java",
     "test": "c8 mocha --reporter-option maxDiffSize=0",
-    "test-xsd": "java -cp java/xercesImpl.jar;java/org.eclipse.wst.xml.xpath2.processor_1.2.1.jar;java Validator"
+    "test-xsd": "java -cp java Validator"
   },
   "author": "",
   "license": "SEE LICENSE IN LICENSE.md"
