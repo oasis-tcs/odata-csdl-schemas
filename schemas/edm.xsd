@@ -236,7 +236,6 @@
     <xs:attribute name="AppliesTo" type="edm:TAppliesTo" use="optional" />
     <xs:attributeGroup ref="edm:TFacetAttributes" />
   </xs:complexType>
-  <xs:element name="Annotations" type="edm:TAnnotations" />
   <xs:complexType name="TAnnotations">
     <xs:sequence>
       <xs:element ref="edm:Annotation" minOccurs="1" maxOccurs="unbounded" />

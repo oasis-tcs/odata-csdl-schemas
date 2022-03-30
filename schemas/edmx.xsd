@@ -74,11 +74,19 @@
     <xs:attribute name="Version" type="edmx:TVersion" use="required" />
   </xs:complexType>
   <xs:complexType name="TReference">
-    <xs:choice minOccurs="1" maxOccurs="unbounded">
-      <xs:element name="Include" type="edmx:TInclude" />
-      <xs:element name="IncludeAnnotations" type="edmx:TIncludeAnnotations" />
+    <xs:sequence>
       <xs:element ref="edm:Annotation" minOccurs="0" maxOccurs="unbounded" />
-    </xs:choice>
+      <xs:choice minOccurs="1" maxOccurs="unbounded">
+        <xs:sequence>
+          <xs:element name="Include" type="edmx:TInclude" />
+          <xs:element ref="edm:Annotation" minOccurs="0" maxOccurs="unbounded" />
+        </xs:sequence>
+        <xs:sequence>
+          <xs:element name="IncludeAnnotations" type="edmx:TIncludeAnnotations" />
+          <xs:element ref="edm:Annotation" minOccurs="0" maxOccurs="unbounded" />
+        </xs:sequence>
+      </xs:choice>
+    </xs:sequence>
     <xs:attribute name="Uri" type="xs:anyURI" use="required" />
   </xs:complexType>
   <xs:complexType name="TInclude">
