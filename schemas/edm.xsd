@@ -251,7 +251,6 @@
       </xs:sequence>
       <xs:attribute name="Term" type="edm:TQualifiedName" use="required" />
       <xs:attribute name="Qualifier" type="edm:TSimpleIdentifier" use="optional" />
-      <xs:attributeGroup ref="edm:GInlineExpressions" />
     </xs:complexType>
   </xs:element>
   <xs:group name="GExpression">
@@ -311,28 +310,6 @@
       <xs:element ref="edm:Annotation" minOccurs="0" maxOccurs="unbounded" />
     </xs:sequence>
   </xs:group>
-  <xs:attributeGroup name="GInlineExpressions">
-    <!-- Constant Expressions -->
-    <xs:attribute name="Binary" type="edm:binary" use="optional" />
-    <xs:attribute name="Bool" type="edm:boolean" use="optional" />
-    <xs:attribute name="Date" type="edm:date" use="optional" />
-    <xs:attribute name="DateTimeOffset" type="edm:dateTimeStamp" use="optional" />
-    <xs:attribute name="Decimal" type="edm:TDecimalLiteral" use="optional" />
-    <xs:attribute name="Duration" type="edm:dayTimeDuration" use="optional" />
-    <xs:attribute name="EnumMember" type="edm:TEnumMemberList" use="optional" />
-    <xs:attribute name="Float" type="xs:double" use="optional" />
-    <xs:attribute name="Guid" type="edm:TGuidLiteral" use="optional" />
-    <xs:attribute name="Int" type="xs:integer" use="optional" />
-    <xs:attribute name="String" type="xs:string" use="optional" />
-    <xs:attribute name="TimeOfDay" type="edm:time" use="optional" />
-    <!-- Dynamic Expressions -->
-    <xs:attribute name="AnnotationPath" type="edm:TModelPath" use="optional" />
-    <xs:attribute name="ModelElementPath" type="edm:TModelPath" use="optional" />
-    <xs:attribute name="NavigationPropertyPath" type="edm:TModelPath" use="optional" />
-    <xs:attribute name="Path" type="edm:TInstancePath" use="optional" />
-    <xs:attribute name="PropertyPath" type="edm:TModelPath" use="optional" />
-    <xs:attribute name="UrlRef" type="xs:anyURI" use="optional" />
-  </xs:attributeGroup>
   <!--
     Constant Expressions
   -->
@@ -446,10 +423,9 @@
   <xs:complexType name="TLabeledElementExpression">
     <xs:sequence>
       <xs:element ref="edm:Annotation" minOccurs="0" maxOccurs="unbounded" />
-      <xs:group ref="edm:GExpressionFollowedByAnnotations" minOccurs="0" maxOccurs="1" />
+      <xs:group ref="edm:GExpressionFollowedByAnnotations" />
     </xs:sequence>
     <xs:attribute name="Name" type="edm:TSimpleIdentifier" use="required" />
-    <xs:attributeGroup ref="edm:GInlineExpressions" />
   </xs:complexType>
   <xs:complexType name="TLabeledElementReferenceExpression">
     <xs:simpleContent>
@@ -469,12 +445,11 @@
     <xs:attribute name="Type" type="edm:TQualifiedName" use="optional" />
   </xs:complexType>
   <xs:complexType name="TPropertyValue">
-    <xs:choice minOccurs="0" maxOccurs="unbounded">
-      <xs:element ref="edm:Annotation" />
-      <xs:group ref="edm:GExpression" />
-    </xs:choice>
+    <xs:sequence>
+      <xs:element ref="edm:Annotation" minOccurs="0" maxOccurs="unbounded" />
+      <xs:group ref="edm:GExpressionFollowedByAnnotations" />
+    </xs:sequence>
     <xs:attribute name="Property" type="edm:TSimpleIdentifier" use="required" />
-    <xs:attributeGroup ref="edm:GInlineExpressions" />
   </xs:complexType>
   <!--
     attributes
