@@ -306,6 +306,7 @@
       <Function Name="ProductsByRating" IsBound="false" IsComposable="false">
         <Parameter Name="Rating" Type="Edm.Decimal" Precision="4" Scale="0" Nullable="false" />
         <ReturnType Type="Collection(self.Product)" />
+        <Annotation Term="org.example.display.DisplayName" String="Products by Rating" />
       </Function>
 
       <!-- Example 30: a function returning the top-selling products for a given year. In this case the year must be specified

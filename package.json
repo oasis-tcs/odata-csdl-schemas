@@ -29,8 +29,12 @@
     "mocha": "^9.2.2"
   },
   "scripts": {
-    "build": "node lib/transform.js",
-    "test": "c8 mocha"
+    "build": "npm run build-js && npm run build-xsd",
+    "build-js": "node lib/transform.js",
+    "build-xsd": "javac java/Validator.java",
+    "test": "npm run test-js && npm run test-xsd",
+    "test-js": "c8 mocha --reporter-option maxDiffSize=0",
+    "test-xsd": "java -cp java Validator"
   },
   "author": "",
   "license": "SEE LICENSE IN LICENSE.md"
