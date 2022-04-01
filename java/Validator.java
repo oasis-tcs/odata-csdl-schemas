@@ -39,7 +39,7 @@ public class Validator {
 				if (e.getColumnNumber() == col &&
 						e.getLineNumber() == line &&
 						e.getMessage().startsWith(rule + ":"))
-					System.out.println(file.getName());
+					System.out.println("Negative test " + file.getName());
 				else {
 					System.err.println(file.getName() + " fails at line " +
 							e.getLineNumber() + ", column " +
