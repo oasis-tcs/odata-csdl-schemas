@@ -1,8 +1,6 @@
 import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.SchemaFactory;
 import javax.xml.validation.TypeInfoProvider;
-import javax.xml.parsers.SAXParserFactory;
-import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.XMLConstants;
 import java.io.File;
 import java.io.FileInputStream;
@@ -49,7 +47,7 @@ class ABNFoutput extends DefaultHandler {
 }
 
 public class Validator {
-	public static void main(String[] args) throws IOException, SAXException, ParserConfigurationException {
+	public static void main(String[] args) throws IOException, SAXException {
 		var schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
 		var validator = schemaFactory.newSchema(new File("schemas/edmx.xsd")).newValidatorHandler();
 		validator.setContentHandler(new ABNFoutput(validator.getTypeInfoProvider()));
