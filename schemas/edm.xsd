@@ -647,9 +647,10 @@
   </xs:simpleType>
   <xs:simpleType name="TTarget">
     <xs:restriction base="xs:string">
-      <!-- The below pattern contains the allowed characters in identifiers, the '.' for namespace qualification, parentheses and comma for overload targeting,
-        the '/' for path segment separation, the '@' and '#' for annotations, and the '$' for special cases. The pattern is otherwise extremely lenient. -->
-      <xs:pattern value="[\p{L}\p{Nl}\p{Nd}\p{Mn}\p{Mc}\p{Pc}\p{Cf}\.\(\),/@#$]{1,}" />
+      <!-- The below pattern represents the allowed identifiers in the ECMAScript specification plus the '.' for namespace qualification,
+        the '/' for path segment separation, and parentheses and comma for overload targeting -->
+      <xs:pattern
+        value="[\p{L}\p{Nl}_][\p{L}\p{Nl}\p{Nd}\p{Mn}\p{Mc}\p{Pc}\p{Cf}]{0,}(([.,#(]|/@?|\(?\){1,}((,|/@?))?)[\p{L}\p{Nl}_][\p{L}\p{Nl}\p{Nd}\p{Mn}\p{Mc}\p{Pc}\p{Cf}]{0,}){0,}\(?\){0,}(/$ReturnType)?" />
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name="TClientFunction">
