@@ -3,6 +3,9 @@
   <edmx:Reference Uri="SomeOther.xml">
     <edmx:Include Namespace="Some.Other.Schema" />
   </edmx:Reference>
+  <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
+    <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1" />
+  </edmx:Reference>
 
   <edmx:DataServices>
     <Schema Namespace="org.example2">
@@ -26,24 +29,52 @@
       <Function Name="Foo">
         <ReturnType Type="Edm.String" MaxLength="42" />
       </Function>
+
       <Function Name="OddWaldos" IsBound="true" EntitySetPath="waldos">
         <Parameter Name="waldos" Type="Collection(One.Waldo)" />
         <ReturnType Type="Collection(One.Waldo)" />
       </Function>
+      <Function Name="OddWaldos" IsBound="true" EntitySetPath="waldos">
+        <Parameter Name="waldos" Type="Collection(One.Waldo)" />
+        <ReturnType Type="Collection(One.Waldo)" />
+      </Function>
+
       <Action Name="Rejection" />
-      <Action Name="Rejection" IsBound="true">
-        <Parameter Name="foo" Type="One.Waldo" Nullable="false" />
-      </Action>
       <Action Name="Rejection" IsBound="true">
         <Parameter Name="bar" Type="One.Waldo" Nullable="false" />
         <Parameter Name="Reason" Type="Edm.String" MaxLength="max" Nullable="false" />
       </Action>
+      <Action Name="Rejection" IsBound="true">
+        <Parameter Name="foo" Type="Collection(One.Waldo)" Nullable="false" />
+      </Action>
+
       <EntityType Name="Waldo">
         <Key>
           <PropertyRef Name="ID" />
         </Key>
         <Property Name="ID" Type="Edm.String" Nullable="false" />
       </EntityType>
+
+      <Annotations Target="One.Foo()">
+        <Annotation Term="Core.Description" String="Unbound function" />
+      </Annotations>
+
+      <Annotations Target="One.OddWaldos(Collection(One.Waldo),One.Waldo)">
+        <Annotation Term="Core.Description" String="Function bound to a collection of Waldos with an additional parameter" />
+      </Annotations>
+      <Annotations Target="One.OddWaldos(Collection(One.Waldo))">
+        <Annotation Term="Core.Description" String="Function bound to a collection of Waldos" />
+      </Annotations>
+
+      <Annotations Target="One.Rejection()">
+        <Annotation Term="Core.Description" String="Unbound action" />
+      </Annotations>
+      <Annotations Target="One.Rejection(One.Waldo)">
+        <Annotation Term="Core.Description" String="Action bound to a single Waldo" />
+      </Annotations>
+      <Annotations Target="One.Rejection(Collection(One.Waldo))">
+        <Annotation Term="Core.Description" String="Action bound to a collection of Waldos" />
+      </Annotations>
     </Schema>
 
     <Schema Namespace="Schema.Two" Alias="Two">
