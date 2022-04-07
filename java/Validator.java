@@ -29,17 +29,21 @@ class ABNFoutput extends DefaultHandler {
 		this.type = type;
 	}
 	public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
-		for (int i = 0; i < attributes.getLength(); i++) {
+		loop: for (int i = 0; i < attributes.getLength(); i++) {
+			String rule = "";
 			var typeinfo = this.type.getAttributeTypeInfo(i);
-			if (typeinfo.getTypeNamespace() == "http://docs.oasis-open.org/odata/ns/edm")
+			if (typeinfo.getTypeNamespace() == "http://docs.oasis-open.org/odata/ns/edm") {
 				switch (typeinfo.getTypeName()) {
-				case "TSimpleIdentifier": System.out.println("- odataIdentifier: " + attributes.getValue(i)); break;
-				case "TNamespaceName": System.out.println("- namespace: " + attributes.getValue(i)); break;
-				case "TPath": System.out.println("- propertyPath: " + attributes.getValue(i)); break;
-				case "TInstancePath": System.out.println("- commonExpr: " + attributes.getValue(i)); break;
-				case "TModelPath": System.out.println("- modelPath: " + attributes.getValue(i)); break;
-				case "TTarget": System.out.println("- annotationTarget: " + attributes.getValue(i)); break;
+				case "TSimpleIdentifier": rule = "odataIdentifier"; break;
+				case "TNamespaceName": rule = "namespace"; break;
+				case "TPath": rule = "propertyPath"; break;
+				case "TInstancePath": rule = "commonExpr"; break;
+				case "TModelPath": rule = "modelPath"; break;
+				case "TTarget": rule = "annotationTarget"; break;
+				default: continue loop;
 				}
+				System.out.println("- " + rule + ": \"" + attributes.getValue(i) + "\"");
+			}
 		}
 	}
 }
@@ -52,7 +56,7 @@ public class Validator {
 		var reader = XMLReaderFactory.createXMLReader();
 		reader.setContentHandler(validator);
 		for (var file : new File("examples").listFiles(new XMLFiles())) {
-			System.out.println("# " + file.getName());
+			System.out.println("- $test: " + file.getName());
 			reader.parse(new InputSource(new FileInputStream(file)));
 		}
 		var test = new Properties();
@@ -72,7 +76,7 @@ public class Validator {
 				if (e.getColumnNumber() == col &&
 						e.getLineNumber() == line &&
 						e.getMessage().startsWith(rule + ":"))
-					System.out.println("# Negative test " + file.getName());
+					System.out.println("- $negativeTest: " + file.getName());
 				else {
 					System.err.println(file.getName() + " fails at line " +
 							e.getLineNumber() + ", column " +

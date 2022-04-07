@@ -20,7 +20,8 @@
   "dependencies": {
     "colors": "^1.4.0",
     "minimist": "^1.2.6",
-    "sax": "^1.2.4"
+    "sax": "^1.2.4",
+    "odata-abnf": "github:oasis-tcs/odata-abnf"
   },
   "devDependencies": {
     "ajv": "^8.11.0",
@@ -34,7 +35,7 @@
     "build-xsd": "javac java/Validator.java",
     "test": "npm run test-js && npm run test-xsd",
     "test-js": "c8 mocha --reporter-option maxDiffSize=0",
-    "test-xsd": "java -cp java Validator"
+    "test-xsd": "java -cp java Validator | node lib/validate.js"
   },
   "author": "",
   "license": "SEE LICENSE IN LICENSE.md"
