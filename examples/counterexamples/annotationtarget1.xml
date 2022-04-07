@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<edmx:Edmx xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" xmlns="http://docs.oasis-open.org/odata/ns/edm" Version="4.01">
+  <edmx:DataServices>
+    <Schema Namespace="org.example">
+      <Annotations Target="org.example.Function1(org.example.Type1,)">
+        <Annotation Term="Core.Description" />
+      </Annotations>
+    </Schema>
+  </edmx:DataServices>
+</edmx:Edmx>
