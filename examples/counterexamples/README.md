@@ -9,3 +9,11 @@ filename.xml.rule=<rule name>
 To find out the correct values, first set `<line number> = <column number> = 0` and `<rule name> = dummy` and run `npm test`. It will fail at the wrong place and give you an error like
 > filename.xml fails at line 9, column 14, rule cvc-complex-type.2.4.a: ...  
 > instead of line 0, column 0, rule dummy
+
+This tells you to set
+```
+filename.xml.line=9
+filename.xml.col=14
+filename.xml.rule=cvc-complex-type.2.4.a
+```
+(the rule name ends before the colon).
