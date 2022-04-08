@@ -68,6 +68,11 @@
                         "$Name": "waldos",
                         "$Collection": true,
                         "$Type": "One.Waldo"
+                    },
+                    {
+                        "$Name": "waldo",
+                        "$Type": "One.Waldo",
+                        "$Nullable": true
                     }
                 ],
                 "$ReturnType": {

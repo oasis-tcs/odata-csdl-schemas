@@ -32,6 +32,7 @@
 
       <Function Name="OddWaldos" IsBound="true" EntitySetPath="waldos">
         <Parameter Name="waldos" Type="Collection(One.Waldo)" />
+        <Parameter Name="waldo" Type="One.Waldo" />
         <ReturnType Type="Collection(One.Waldo)" />
       </Function>
       <Function Name="OddWaldos" IsBound="true" EntitySetPath="waldos">
