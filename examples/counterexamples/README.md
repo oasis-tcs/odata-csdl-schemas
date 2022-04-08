@@ -1,4 +1,4 @@
-Every CSDL file in this folder represents a test case where schema validation that is meant to fail at a certain line and column because a certain XML schema rule is violated.
+Every CSDL XML file in this folder represents a test case where XML schema validation is meant to fail at a certain line and column because a certain XML schema rule is violated.
 
 Per CSDL file there must be three entries in the [`test.properties`](test.properties) file:
 ```
