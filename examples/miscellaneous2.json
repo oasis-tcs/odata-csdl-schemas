@@ -7,6 +7,14 @@
                     "$Namespace": "Some.Other.Schema"
                 }
             ]
+        },
+        "https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.json": {
+            "$Include": [
+                {
+                    "$Namespace": "Org.OData.Core.V1",
+                    "$Alias": "Core"
+                }
+            ]
         }
     },
     "org.example2": {
@@ -60,6 +68,27 @@
                         "$Name": "waldos",
                         "$Collection": true,
                         "$Type": "One.Waldo"
+                    },
+                    {
+                        "$Name": "waldo",
+                        "$Type": "One.Waldo",
+                        "$Nullable": true
+                    }
+                ],
+                "$ReturnType": {
+                    "$Collection": true,
+                    "$Type": "One.Waldo"
+                }
+            },
+            {
+                "$Kind": "Function",
+                "$EntitySetPath": "waldos",
+                "$IsBound": true,
+                "$Parameter": [
+                    {
+                        "$Name": "waldos",
+                        "$Collection": true,
+                        "$Type": "One.Waldo"
                     }
                 ],
                 "$ReturnType": {
@@ -77,8 +106,11 @@
                 "$IsBound": true,
                 "$Parameter": [
                     {
-                        "$Name": "foo",
+                        "$Name": "bar",
                         "$Type": "One.Waldo"
+                    },
+                    {
+                        "$Name": "Reason"
                     }
                 ]
             },
@@ -87,11 +119,9 @@
                 "$IsBound": true,
                 "$Parameter": [
                     {
-                        "$Name": "bar",
+                        "$Name": "foo",
+                        "$Collection": true,
                         "$Type": "One.Waldo"
-                    },
-                    {
-                        "$Name": "Reason"
                     }
                 ]
             }
@@ -102,6 +132,26 @@
                 "ID"
             ],
             "ID": {}
+        },
+        "$Annotations": {
+            "One.Foo()": {
+                "@Core.Description": "Unbound function"
+            },
+            "One.OddWaldos(Collection(One.Waldo),One.Waldo)": {
+                "@Core.Description": "Function bound to a collection of Waldos with an additional parameter"
+            },
+            "One.OddWaldos(Collection(One.Waldo))": {
+                "@Core.Description": "Function bound to a collection of Waldos"
+            },
+            "One.Rejection()": {
+                "@Core.Description": "Unbound action"
+            },
+            "One.Rejection(One.Waldo)": {
+                "@Core.Description": "Action bound to a single Waldo"
+            },
+            "One.Rejection(Collection(One.Waldo))": {
+                "@Core.Description": "Action bound to a collection of Waldos"
+            }
         }
     },
     "Schema.Two": {
