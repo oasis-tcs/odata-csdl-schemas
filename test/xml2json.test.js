@@ -131,8 +131,8 @@ describe("Examples", function () {
       '<Function Name="f"><ReturnType Type="Edm.Boolean" /></Function>',
       '<Annotation Term="Some.Collection">',
       "<Collection>",
-      "<Record>",
-      "</Record>",
+      '<Record Type="a.b">',
+      "</Record><Record />",
       "</Collection>",
       "</Annotation>",
       '<Function Name="fp">',
@@ -200,8 +200,10 @@ describe("Examples", function () {
       ],
       "@Some.Collection": [
         {
+          "@odata.type": "#a.b",
           "@parser.line": 20,
         },
+        { "@parser.line": 21 },
       ],
       fp: [
         {
@@ -492,7 +494,8 @@ describe("Error cases", function () {
         "Element ReturnType, Type=Collection(Edm.EntityType) with Nullable attribute"
       );
       assert.deepStrictEqual(e.parser, {
-        construct: '<ReturnType Type="Collection(Edm.EntityType)" Nullable="false"/>',
+        construct:
+          '<ReturnType Type="Collection(Edm.EntityType)" Nullable="false"/>',
         line: 5,
         column: 76,
       });
