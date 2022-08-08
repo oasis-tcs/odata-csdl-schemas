@@ -767,7 +767,7 @@
       </xs:simpleType>
       <xs:simpleType>
         <xs:restriction base="xs:string">
-          <xs:pattern value="Edm\.[\p{L}\p{Nl}_][\p{L}\p{Nl}\p{Nd}\p{Mn}\p{Mc}\p{Pc}\p{Cf}]{0,}" />
+          <xs:pattern value="Edm\.[\p{L}\p{Nl}_][\p{L}\p{Nl}\p{Nd}\p{Mn}\p{Mc}\p{Pc}\p{Cf}]{0,}|Collection\(Edm\.[\p{L}\p{Nl}_][\p{L}\p{Nl}\p{Nd}\p{Mn}\p{Mc}\p{Pc}\p{Cf}]{0,}\)" />
         </xs:restriction>
       </xs:simpleType>
     </xs:union>
