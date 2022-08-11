@@ -1,0 +1,31 @@
+{
+    "$Version": "4.0",
+    "$Reference": {
+        "https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.json": {
+            "$Include": [
+                {
+                    "$Namespace": "Org.OData.Core.V1",
+                    "$Alias": "Core"
+                }
+            ]
+        }
+    },
+    "special‿characters": {
+        "$Alias": "this",
+        "default": {
+            "$Kind": "EntityContainer",
+            "Pc_‿⁀⁔︳︴﹍﹎﹏＿": {
+                "$Collection": true,
+                "$Type": "this.Pc_‿⁀⁔︳︴﹍﹎﹏＿"
+            }
+        },
+        "Pc_‿⁀⁔︳︴﹍﹎﹏＿": {
+            "$Kind": "EntityType",
+            "$Key": [
+                "id"
+            ],
+            "id_Pc_‿⁀⁔︳︴﹍﹎﹏＿": {}
+        }
+    },
+    "$EntityContainer": "special‿characters.default"
+}

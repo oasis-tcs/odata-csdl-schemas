@@ -592,21 +592,24 @@
     general purpose simple types
   -->
   <xs:simpleType name="TSimpleIdentifier">
-    <xs:restriction base="xs:NCName">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1" />
       <xs:maxLength value="128" />
       <!-- ECMAScript identifiers not starting with a '$' -->
       <xs:pattern value="[\p{L}\p{Nl}_][\p{L}\p{Nl}\p{Nd}\p{Mn}\p{Mc}\p{Pc}\p{Cf}]{0,}" />
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name="TNamespaceName">
-    <xs:restriction base="xs:NCName">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1" />
       <xs:maxLength value="511" />
       <!-- one or more SimpleIdentifiers separated by dots -->
       <xs:pattern value="[\p{L}\p{Nl}_][\p{L}\p{Nl}\p{Nd}\p{Mn}\p{Mc}\p{Pc}\p{Cf}]{0,}(\.[\p{L}\p{Nl}_][\p{L}\p{Nl}\p{Nd}\p{Mn}\p{Mc}\p{Pc}\p{Cf}]{0,}){0,}" />
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name="TQualifiedName">
-    <xs:restriction base="xs:NCName">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1" />
       <!-- a NamespaceName followed by a dot and a SimpleIdentifier -->
       <xs:pattern value="[\p{L}\p{Nl}_][\p{L}\p{Nl}\p{Nd}\p{Mn}\p{Mc}\p{Pc}\p{Cf}]{0,}(\.[\p{L}\p{Nl}_][\p{L}\p{Nl}\p{Nd}\p{Mn}\p{Mc}\p{Pc}\p{Cf}]{0,}){1,}" />
     </xs:restriction>
@@ -617,7 +620,7 @@
   <xs:simpleType name="TTypeName">
     <xs:union memberTypes="edm:TPrimitiveType edm:TAbstractType edm:TQualifiedName">
       <xs:simpleType>
-        <xs:restriction base="xs:token">
+        <xs:restriction base="xs:string">
           <!-- The below pattern represents the allowed identifiers in the ECMAScript specification plus the '.' for namespace qualification
             and the Collection() wrapper -->
           <xs:pattern value="Collection\([\p{L}\p{Nl}_][\p{L}\p{Nl}\p{Nd}\p{Mn}\p{Mc}\p{Pc}\p{Cf}]{0,}(\.[\p{L}\p{Nl}_][\p{L}\p{Nl}\p{Nd}\p{Mn}\p{Mc}\p{Pc}\p{Cf}]{0,}){1,}\)" />
@@ -649,8 +652,7 @@
     <xs:restriction base="xs:string">
       <!-- The below pattern represents the allowed identifiers in the ECMAScript specification plus the '.' for namespace qualification,
         the '/' for path segment separation, and parentheses and comma for overload targeting -->
-      <xs:pattern
-        value="[\p{L}\p{Nl}_][\p{L}\p{Nl}\p{Nd}\p{Mn}\p{Mc}\p{Pc}\p{Cf}]{0,}(([.,#(]|/@?|\(?\){1,}((,|/@?))?)[\p{L}\p{Nl}_][\p{L}\p{Nl}\p{Nd}\p{Mn}\p{Mc}\p{Pc}\p{Cf}]{0,}){0,}\(?\){0,}(/$ReturnType)?" />
+      <xs:pattern value="[\p{L}\p{Nl}_][\p{L}\p{Nl}\p{Nd}\p{Mn}\p{Mc}\p{Pc}\p{Cf}]{0,}(([.,#(]|/@?|\(?\){1,}((,|/@?))?)[\p{L}\p{Nl}_][\p{L}\p{Nl}\p{Nd}\p{Mn}\p{Mc}\p{Pc}\p{Cf}]{0,}){0,}\(?\){0,}(/$ReturnType)?" />
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name="TClientFunction">
@@ -700,7 +702,7 @@
   <xs:simpleType name="TPrimitiveType">
     <xs:union>
       <xs:simpleType>
-        <xs:restriction base="xs:token">
+        <xs:restriction base="xs:string">
           <xs:enumeration value="Edm.Binary" />
           <xs:enumeration value="Edm.Boolean" />
           <xs:enumeration value="Edm.Byte" />
@@ -764,8 +766,8 @@
         </xs:restriction>
       </xs:simpleType>
       <xs:simpleType>
-        <xs:restriction base="xs:token">
-          <xs:pattern value="Edm\..+" />
+        <xs:restriction base="xs:string">
+          <xs:pattern value="Edm\.[\p{L}\p{Nl}_][\p{L}\p{Nl}\p{Nd}\p{Mn}\p{Mc}\p{Pc}\p{Cf}]{0,}|Collection\(Edm\.[\p{L}\p{Nl}_][\p{L}\p{Nl}\p{Nd}\p{Mn}\p{Mc}\p{Pc}\p{Cf}]{0,}\)" />
         </xs:restriction>
       </xs:simpleType>
     </xs:union>
@@ -872,7 +874,7 @@
     <xs:restriction base="xs:boolean" />
   </xs:simpleType>
   <xs:simpleType name="TOnDeleteAction">
-    <xs:restriction base="xs:token">
+    <xs:restriction base="xs:string">
       <xs:enumeration value="Cascade" />
       <xs:enumeration value="None" />
       <xs:enumeration value="SetDefault" />
