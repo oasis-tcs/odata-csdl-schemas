@@ -358,6 +358,9 @@ describe("Edge cases", function () {
           <Annotations Target="microsoft.graph.uploadDepToken(microsoft.graph.depOnboardingSetting, Edm.String, Edm.String)">
             <Annotation Term="Org.OData.Core.V1.Description" String="Uploads a new Device Enrollment Program token" />
           </Annotations>
+          <Annotations Target="One.OddWaldos(Collection(One.Waldo), One.Waldo)">
+            <Annotation Term="Org.OData.Core.V1.Description" String="Uploads a waldo" />
+          </Annotations>
         </Schema>
       </DataServices>
     </Edmx>`;
@@ -367,6 +370,11 @@ describe("Edge cases", function () {
           {
             "@Org.OData.Core.V1.Description":
               "Uploads a new Device Enrollment Program token",
+          },
+        "One.OddWaldos(Collection(One.Waldo),One.Waldo)":
+          {
+            "@Org.OData.Core.V1.Description":
+              "Uploads a waldo",
           },
       },
     };
