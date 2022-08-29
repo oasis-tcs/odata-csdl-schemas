@@ -358,9 +358,6 @@ describe("Edge cases", function () {
           <Annotations Target="microsoft.graph.uploadDepToken(microsoft.graph.depOnboardingSetting, Edm.String, Edm.String)">
             <Annotation Term="Org.OData.Core.V1.Description" String="Uploads a new Device Enrollment Program token" />
           </Annotations>
-          <Annotations Target="One.OddWaldos(Collection(One.Waldo), One.Waldo)">
-            <Annotation Term="Org.OData.Core.V1.Description" String="Uploads a waldo" />
-          </Annotations>
         </Schema>
       </DataServices>
     </Edmx>`;
@@ -371,15 +368,32 @@ describe("Edge cases", function () {
             "@Org.OData.Core.V1.Description":
               "Uploads a new Device Enrollment Program token",
           },
-        "One.OddWaldos(Collection(One.Waldo),One.Waldo)":
-          {
-            "@Org.OData.Core.V1.Description":
-              "Uploads a waldo",
-          },
       },
     };
     const json = csdl.xml2json(xml);
     assert.deepStrictEqual(json["microsoft.graph"], schema, "schema");
+  });
+
+  it("annotation on overload with collection-valued parameter", function () {
+    const xml = `
+    <Edmx Version="4.0" xmlns="http://docs.oasis-open.org/odata/ns/edmx">
+      <DataServices>
+        <Schema Namespace="edge" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+          <Annotations Target="One.OddWaldos(Collection(One.Waldo), One.Waldo)">
+            <Annotation Term="Org.OData.Core.V1.Description" String="Uploads a waldo" />
+          </Annotations>
+        </Schema>
+      </DataServices>
+    </Edmx>`;
+    const schema = {
+      $Annotations: {
+        "One.OddWaldos(Collection(One.Waldo),One.Waldo)": {
+          "@Org.OData.Core.V1.Description": "Uploads a waldo",
+        },
+      },
+    };
+    const json = csdl.xml2json(xml);
+    assert.deepStrictEqual(json.edge, schema, "schema");
   });
 });
 
