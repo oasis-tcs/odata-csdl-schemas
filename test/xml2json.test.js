@@ -349,6 +349,32 @@ describe("Examples", function () {
   });
 });
 
+describe("Edge cases", function () {
+  it("MS Graph: ignore spaces in annotation targets", function () {
+    const xml = `
+    <Edmx Version="4.0" xmlns="http://docs.oasis-open.org/odata/ns/edmx">
+      <DataServices>
+        <Schema Namespace="microsoft.graph" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+          <Annotations Target="microsoft.graph.uploadDepToken(microsoft.graph.depOnboardingSetting, Edm.String, Edm.String)">
+            <Annotation Term="Org.OData.Core.V1.Description" String="Uploads a new Device Enrollment Program token" />
+          </Annotations>
+        </Schema>
+      </DataServices>
+    </Edmx>`;
+    const schema = {
+      $Annotations: {
+        "microsoft.graph.uploadDepToken(microsoft.graph.depOnboardingSetting,Edm.String,Edm.String)":
+          {
+            "@Org.OData.Core.V1.Description":
+              "Uploads a new Device Enrollment Program token",
+          },
+      },
+    };
+    const json = csdl.xml2json(xml);
+    assert.deepStrictEqual(json["microsoft.graph"], schema, "schema");
+  });
+});
+
 describe("Error cases", function () {
   it("malformed xml", function () {
     const xml = `<Edmx Version="4.0">`;
