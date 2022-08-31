@@ -1,5 +1,32 @@
 # Changelog
 
+## 0.6.0 2022-08-31
+
+### Changed
+
+- `xml2json`: expects an options object as second parameter, replacing the current second and third parameters which have become properties of the options object:
+  - `lineNumbers` (Boolean, default `false`): add XML source line numbers to JSON output
+  - `annotations` (Boolean, default `false`): include XML annotation attributes in JSON output
+  - `strict` (Boolean, default `false`): strict validation of XML source (some validations cannot be turned off)
+
+## 0.5.1 2022-08-30
+
+### Changed
+
+- `xml2json`: strip illegal whitespace from annotation targets in XML source
+- `xml2json`: correctly process annotation targets for action/function overloads with collection-valued parameters
+
+## 0.5.0 2022-08-11
+
+- `edm.xsd`: correct patterns for TSimpleIdentifier, TQualifiedName, and TTypeName
+
+## 0.4.4 2022-03-29
+
+### Added
+
+- `xml2json`: detect unexpected text content in source XML
+- `xml2json`: improved checks for `ReturnType` element
+
 ## 0.4.3 2022-01-10
 
 ### Added
