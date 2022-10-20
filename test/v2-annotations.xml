@@ -11,7 +11,10 @@
       </EntityType>
 
       <EntityContainer Name="Container" m:IsDefaultEntityContainer="true">
-        <EntitySet Name="SetOne" EntityType="self.TypeOne" sap:creatable="false" sap:updatable="false" sap:deletable="false" />
+        <EntitySet Name="ReadOnly" EntityType="self.TypeOne" sap:creatable="false" sap:updatable="false" sap:deletable="false" />
+        <EntitySet Name="NoInsert" EntityType="self.TypeOne" sap:creatable="false" />
+        <EntitySet Name="NoUpdate" EntityType="self.TypeOne" sap:updatable="false" />
+        <EntitySet Name="NoDelete" EntityType="self.TypeOne" sap:deletable="false" />
       </EntityContainer>
     </Schema>
   </edmx:DataServices>

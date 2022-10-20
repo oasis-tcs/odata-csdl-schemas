@@ -253,7 +253,7 @@ describe("Examples", function () {
                         <Annotation Term="Some.StructuredTerm">
                           <Record>
                             <Annotation Term="C.MediaType" String="application/json" />
-                            <PropertyValue Property="somestream">
+                            <PropertyValue Property="someStream">
                               <Annotation Term="C.MediaType" String="application/json" />
                               <String>{"a-b":"not a property name"}</String>
                             </PropertyValue>
@@ -282,10 +282,10 @@ describe("Examples", function () {
           },
           "@Some.StructuredTerm": {
             "@C.MediaType": "application/json",
-            somestream: {
+            someStream: {
               "a-b": "not a property name",
             },
-            "somestream@C.MediaType": "application/json",
+            "someStream@C.MediaType": "application/json",
           },
         },
       },
