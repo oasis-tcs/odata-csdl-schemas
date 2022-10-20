@@ -9,11 +9,11 @@
         }
       ]
     },
-    "http://www.sap.com/Protocols/SAPData": {
+    "http://foo.com/annotations": {
       "$Include": [
         {
-          "$Namespace": "www.sap.com.Protocols.SAPData",
-          "$Alias": "sap"
+          "$Namespace": "foo.com.annotations",
+          "$Alias": "foo"
         }
       ]
     }
@@ -22,7 +22,9 @@
     "$Alias": "one",
     "a": {
       "$Kind": "EntityType",
-      "$Key": ["id"],
+      "$Key": [
+        "id"
+      ],
       "id": {
         "$MaxLength": 5
       },
@@ -35,7 +37,10 @@
     },
     "b": {
       "$Kind": "EntityType",
-      "$Key": ["id1", "id2"],
+      "$Key": [
+        "id1",
+        "id2"
+      ],
       "id1": {
         "$Type": "Edm.Int32",
         "@p8.StoreGeneratedPattern": "Identity"
@@ -66,7 +71,11 @@
     },
     "c": {
       "$Kind": "EntityType",
-      "$Key": ["b_id1", "b_id2", "id"],
+      "$Key": [
+        "b_id1",
+        "b_id2",
+        "id"
+      ],
       "b_id1": {
         "$Type": "Edm.Int32"
       },
@@ -110,7 +119,7 @@
       "c": {
         "$Collection": true,
         "$Type": "one.c",
-        "@sap.filterable": false,
+        "@foo.bar": false,
         "$NavigationPropertyBinding": {
           "to_b": "b"
         }
