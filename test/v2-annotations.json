@@ -1,0 +1,24 @@
+{
+  "$Version": "2.0",
+  "$EntityContainer": "V2.Annotations.Container",
+  "V2.Annotations": {
+    "$Alias": "self",
+    "Container": {
+      "$Kind": "EntityContainer",
+      "SetOne": {
+        "$Collection": true,
+        "$Type": "self.TypeOne"
+      }
+    },
+    "TypeOne": {
+      "$Kind": "EntityType",
+      "$Key": [
+        "id"
+      ],
+      "id": {},
+      "data": {
+        "$Nullable": true
+      }
+    }
+  }
+}
