@@ -626,15 +626,7 @@
     <xs:list itemType="edm:TPath" />
   </xs:simpleType>
   <xs:simpleType name="TTypeName">
-    <xs:union memberTypes="edm:TPrimitiveType edm:TAbstractType edm:TQualifiedName">
-      <xs:simpleType>
-        <xs:restriction base="xs:string">
-          <!-- The below pattern represents the allowed identifiers in the ECMAScript specification plus the '.' for namespace qualification
-            and the Collection() wrapper -->
-          <xs:pattern value="Collection\([\p{L}\p{Nl}_][\p{L}\p{Nl}\p{Nd}\p{Mn}\p{Mc}\p{Pc}\p{Cf}]{0,}(\.[\p{L}\p{Nl}_][\p{L}\p{Nl}\p{Nd}\p{Mn}\p{Mc}\p{Pc}\p{Cf}]{0,}){1,}\)" />
-        </xs:restriction>
-      </xs:simpleType>
-    </xs:union>
+    <xs:union memberTypes="edm:TPrimitiveType edm:TAbstractType edm:TQualifiedName edm:TCollQualifiedName" />
   </xs:simpleType>
   <xs:simpleType name="TCollQualifiedName">
     <xs:restriction base="xs:string">
