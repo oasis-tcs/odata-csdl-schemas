@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.7.0 2022-10-20
+
+### Added
+
+- `xml2json`: accept some [SAP Annotations for OData Version 2.0](https://github.com/SAP/odata-vocabularies/blob/main/docs/v2-annotations.md) and turn them into [Capabilities](https://github.com/oasis-tcs/odata-vocabularies/blob/main/vocabularies/Org.OData.Capabilities.V1.md)
+
 ## 0.6.0 2022-08-31
 
 ### Changed

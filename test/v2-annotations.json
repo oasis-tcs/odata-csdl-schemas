@@ -1,0 +1,64 @@
+{
+  "$Version": "2.0",
+  "$EntityContainer": "V2.Annotations.Container",
+  "$Reference": {
+    "https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Capabilities.V1.json": {
+      "$Include": [
+        {
+          "$Alias": "Capabilities",
+          "$Namespace": "Org.OData.Capabilities.V1"
+        }
+      ]
+    }
+  },
+  "V2.Annotations": {
+    "$Alias": "self",
+    "Container": {
+      "$Kind": "EntityContainer",
+      "ReadOnly": {
+        "$Collection": true,
+        "$Type": "self.TypeOne",
+        "@Capabilities.InsertRestrictions": {
+          "Insertable": false
+        },
+        "@Capabilities.UpdateRestrictions": {
+          "Updatable": false
+        },
+        "@Capabilities.DeleteRestrictions": {
+          "Deletable": false
+        }
+      },
+      "NoInsert": {
+        "$Collection": true,
+        "$Type": "self.TypeOne",
+        "@Capabilities.InsertRestrictions": {
+          "Insertable": false
+        }
+      },
+      "NoUpdate": {
+        "$Collection": true,
+        "$Type": "self.TypeOne",
+        "@Capabilities.UpdateRestrictions": {
+          "Updatable": false
+        }
+      },
+      "NoDelete": {
+        "$Collection": true,
+        "$Type": "self.TypeOne",
+        "@Capabilities.DeleteRestrictions": {
+          "Deletable": false
+        }
+      }
+    },
+    "TypeOne": {
+      "$Kind": "EntityType",
+      "$Key": [
+        "id"
+      ],
+      "id": {},
+      "data": {
+        "$Nullable": true
+      }
+    }
+  }
+}

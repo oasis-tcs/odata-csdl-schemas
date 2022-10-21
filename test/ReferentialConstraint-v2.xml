@@ -64,7 +64,7 @@
       <EntityContainer Name="container" p7:LazyLoadingEnabled="true" m:IsDefaultEntityContainer="true" xmlns:p7="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
         <EntitySet Name="a" EntityType="first.a" />
         <EntitySet Name="b" EntityType="one.b" />
-        <EntitySet Name="c" EntityType="one.c" sap:filterable="false" xmlns:sap="http://www.sap.com/Protocols/SAPData" />
+        <EntitySet Name="c" EntityType="one.c" foo:bar="false" xmlns:foo="http://foo.com/annotations" />
         <AssociationSet Name="a_b" Association="first.a_b">
           <End Role="a_role" EntitySet="a" />
           <End Role="b_role" EntitySet="b" />
