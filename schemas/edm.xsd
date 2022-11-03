@@ -620,6 +620,7 @@
       <xs:pattern value="E[^d].*" />
       <xs:pattern value="Ed[^m].*" />
       <xs:pattern value="Edm[^.].*" />
+      <xs:pattern value="Edm\.EntityType" />
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name="TEnumMemberList">
@@ -643,6 +644,7 @@
           <xs:pattern value="Collection\(E[^d].*" />
           <xs:pattern value="Collection\(Ed[^m].*" />
           <xs:pattern value="Collection\(Edm[^.].*" />
+          <xs:pattern value="Collection\(Edm\.EntityType\)" />
         </xs:restriction>
       </xs:simpleType>
     </xs:union>
