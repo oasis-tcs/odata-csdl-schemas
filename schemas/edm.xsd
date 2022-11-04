@@ -620,7 +620,6 @@
       <xs:pattern value="E[^d].*" />
       <xs:pattern value="Ed[^m].*" />
       <xs:pattern value="Edm[^.].*" />
-      <xs:pattern value="Edm\.EntityType" />
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name="TEnumMemberList">
@@ -638,6 +637,11 @@
   </xs:simpleType>
   <xs:simpleType name="TNavigationPropertyType">
     <xs:union memberTypes="edm:TNonEdmQualifiedName">
+      <xs:simpleType>
+        <xs:restriction base="edm:TQualifiedName">
+          <xs:pattern value="Edm\.EntityType" />
+        </xs:restriction>
+      </xs:simpleType>
       <xs:simpleType>
         <xs:restriction base="edm:TCollQualifiedName">
           <xs:pattern value="Collection\([^E].*" />
