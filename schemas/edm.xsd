@@ -144,7 +144,7 @@
       </xs:sequence>
     </xs:sequence>
     <xs:attribute name="Name" type="edm:TSimpleIdentifier" use="required" />
-    <xs:attribute name="Type" type="edm:TTypeName" use="required" />
+    <xs:attribute name="Type" type="edm:TNavigationPropertyType" use="required" />
     <xs:attribute name="Nullable" type="xs:boolean" use="optional" />
     <xs:attribute name="Partner" type="edm:TPath" use="optional" />
     <xs:attribute name="ContainsTarget" type="xs:boolean" use="optional" />
@@ -172,7 +172,7 @@
     </xs:sequence>
     <xs:attributeGroup ref="edm:TTypeAttributes" />
     <xs:attribute name="IsFlags" type="xs:boolean" use="optional" />
-    <xs:attribute name="UnderlyingType" type="edm:TTypeName" use="optional" />
+    <xs:attribute name="UnderlyingType" type="edm:TPrimitiveEnumType" use="optional" />
   </xs:complexType>
   <xs:complexType name="TEnumTypeMember">
     <xs:sequence>
@@ -557,7 +557,7 @@
   </xs:complexType>
   <xs:attributeGroup name="TEntitySetAttributes">
     <xs:attribute name="Name" type="edm:TSimpleIdentifier" use="required" />
-    <xs:attribute name="EntityType" type="edm:TQualifiedName" use="required" />
+    <xs:attribute name="EntityType" type="edm:TNonEdmQualifiedName" use="required" />
     <xs:attribute name="IncludeInServiceDocument" type="xs:boolean" use="optional" default="true" />
   </xs:attributeGroup>
   <xs:complexType name="TSingleton">
@@ -566,7 +566,7 @@
       <xs:element ref="edm:Annotation" />
     </xs:choice>
     <xs:attribute name="Name" type="edm:TSimpleIdentifier" use="required" />
-    <xs:attribute name="Type" type="edm:TQualifiedName" use="required" />
+    <xs:attribute name="Type" type="edm:TNonEdmQualifiedName" use="required" />
     <xs:attribute name="Nullable" type="xs:boolean" use="optional" />
   </xs:complexType>
   <xs:complexType name="TActionImport">
@@ -614,16 +614,41 @@
       <xs:pattern value="[\p{L}\p{Nl}_][\p{L}\p{Nl}\p{Nd}\p{Mn}\p{Mc}\p{Pc}\p{Cf}]{0,}(\.[\p{L}\p{Nl}_][\p{L}\p{Nl}\p{Nd}\p{Mn}\p{Mc}\p{Pc}\p{Cf}]{0,}){1,}" />
     </xs:restriction>
   </xs:simpleType>
+  <xs:simpleType name="TNonEdmQualifiedName">
+    <xs:restriction base="edm:TQualifiedName">
+      <xs:pattern value="[^E].*" />
+      <xs:pattern value="E[^d].*" />
+      <xs:pattern value="Ed[^m].*" />
+      <xs:pattern value="Edm[^.].*" />
+    </xs:restriction>
+  </xs:simpleType>
   <xs:simpleType name="TEnumMemberList">
     <xs:list itemType="edm:TPath" />
   </xs:simpleType>
   <xs:simpleType name="TTypeName">
-    <xs:union memberTypes="edm:TPrimitiveType edm:TAbstractType edm:TQualifiedName">
+    <xs:union memberTypes="edm:TPrimitiveType edm:TAbstractType edm:TQualifiedName edm:TCollQualifiedName" />
+  </xs:simpleType>
+  <xs:simpleType name="TCollQualifiedName">
+    <xs:restriction base="xs:string">
+      <!-- The below pattern represents the allowed identifiers in the ECMAScript specification plus the '.' for namespace qualification
+        and the Collection() wrapper -->
+      <xs:pattern value="Collection\([\p{L}\p{Nl}_][\p{L}\p{Nl}\p{Nd}\p{Mn}\p{Mc}\p{Pc}\p{Cf}]{0,}(\.[\p{L}\p{Nl}_][\p{L}\p{Nl}\p{Nd}\p{Mn}\p{Mc}\p{Pc}\p{Cf}]{0,}){1,}\)" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TNavigationPropertyType">
+    <xs:union memberTypes="edm:TNonEdmQualifiedName">
       <xs:simpleType>
-        <xs:restriction base="xs:string">
-          <!-- The below pattern represents the allowed identifiers in the ECMAScript specification plus the '.' for namespace qualification
-            and the Collection() wrapper -->
-          <xs:pattern value="Collection\([\p{L}\p{Nl}_][\p{L}\p{Nl}\p{Nd}\p{Mn}\p{Mc}\p{Pc}\p{Cf}]{0,}(\.[\p{L}\p{Nl}_][\p{L}\p{Nl}\p{Nd}\p{Mn}\p{Mc}\p{Pc}\p{Cf}]{0,}){1,}\)" />
+        <xs:restriction base="edm:TQualifiedName">
+          <xs:pattern value="Edm\.EntityType" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType>
+        <xs:restriction base="edm:TCollQualifiedName">
+          <xs:pattern value="Collection\([^E].*" />
+          <xs:pattern value="Collection\(E[^d].*" />
+          <xs:pattern value="Collection\(Ed[^m].*" />
+          <xs:pattern value="Collection\(Edm[^.].*" />
+          <xs:pattern value="Collection\(Edm\.EntityType\)" />
         </xs:restriction>
       </xs:simpleType>
     </xs:union>
@@ -695,6 +720,19 @@
           <xs:enumeration value="odata.geo.length" />
           <xs:enumeration value="odata.fillUriTemplate" />
           <xs:enumeration value="odata.uriEncode" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:union>
+  </xs:simpleType>
+  <xs:simpleType name="TPrimitiveEnumType">
+    <xs:union>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="Edm.Byte" />
+          <xs:enumeration value="Edm.Int16" />
+          <xs:enumeration value="Edm.Int32" />
+          <xs:enumeration value="Edm.Int64" />
+          <xs:enumeration value="Edm.SByte" />
         </xs:restriction>
       </xs:simpleType>
     </xs:union>
