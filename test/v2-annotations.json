@@ -48,6 +48,26 @@
         "@Capabilities.DeleteRestrictions": {
           "Deletable": false
         }
+      },
+      "NoCount": {
+        "$Collection": true,
+        "$Type": "self.TypeOne",
+        "@Capabilities.CountRestrictions": {
+          "Countable": false
+        }
+      },
+      "NoTopSkip": {
+        "$Collection": true,
+        "$Type": "self.TypeOne",
+        "@Capabilities.TopSupported": false,
+        "@Capabilities.SkipSupported": false
+      },
+      "NeedsFilter": {
+        "$Collection": true,
+        "$Type": "self.TypeOne",
+        "@Capabilities.FilterRestrictions": {
+          "RequiresFilter": true
+        }
       }
     },
     "TypeOne": {
