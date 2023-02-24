@@ -3,7 +3,7 @@
   xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata"
   xmlns:sap="http://www.sap.com/Protocols/SAPData">
   <edmx:DataServices m:DataServiceVersion="2.0">
-    <Schema Namespace="V2.Annotations" Alias="self" sap:schema-version="s.v"
+    <Schema Namespace="V2.Annotations" Alias="self" sap:schema-version="s.v" sap:foo="bar"
       xmlns="http://schemas.microsoft.com/ado/2008/09/edm"
       xmlns:sap="http://www.sap.com/Protocols/SAPData">
       <EntityType Name="TypeOne">
@@ -14,8 +14,7 @@
         <Property Name="data" Type="Edm.String" />
       </EntityType>
 
-      <EntityContainer
-        Name="Container" m:IsDefaultEntityContainer="true">
+      <EntityContainer Name="Container" m:IsDefaultEntityContainer="true">
         <EntitySet Name="ReadOnly" EntityType="self.TypeOne" sap:creatable="false"
           sap:updatable="false" sap:deletable="false" />
         <EntitySet Name="NoInsert" EntityType="self.TypeOne" sap:creatable="false" />
