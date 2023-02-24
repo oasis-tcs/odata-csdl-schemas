@@ -10,8 +10,13 @@
         <Key>
           <PropertyRef Name="id" />
         </Key>
-        <Property Name="id" Type="Edm.String" Nullable="false" />
-        <Property Name="data" Type="Edm.String" />
+        <Property Name="id" Type="Edm.String" Nullable="false" sap:creatable="false"
+          sap:updatable="false" />
+        <Property Name="pattern" Type="Edm.String" sap:validation-regexp="^(foo)+$" />
+        <Property Name="readonly" Type="Edm.String" sap:creatable="false" sap:updatable="false" />
+        <Property Name="immutable" Type="Edm.String" sap:updatable="false" />
+        <Property Name="date" Type="Edm.DateTime" sap:display-format="Date" />
+        <Property Name="decfloat" Type="Edm.Decimal" Precision="34" sap:variable-scale="true" />
       </EntityType>
 
       <EntityContainer Name="Container" m:IsDefaultEntityContainer="true">

@@ -17,6 +17,14 @@
           "$Namespace": "Org.OData.Capabilities.V1"
         }
       ]
+    },
+    "https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Validation.V1.json": {
+      "$Include": [
+        {
+          "$Alias": "Validation",
+          "$Namespace": "Org.OData.Validation.V1"
+        }
+      ]
     }
   },
   "V2.Annotations": {
@@ -84,9 +92,31 @@
       "$Key": [
         "id"
       ],
-      "id": {},
-      "data": {
-        "$Nullable": true
+      "id": {
+        "@Core.Computed": true
+      },
+      "pattern": {
+        "$Nullable": true,
+        "@Validation.Pattern": "^(foo)+$"
+      },
+      "readonly": {
+        "$Nullable": true,
+        "@Core.Computed": true
+      },
+      "immutable": {
+        "$Nullable": true,
+        "@Core.Immutable": true
+      },
+      "date": {
+        "$Type": "Edm.Date",
+        "$Nullable": true,
+        "$Precision": 0
+      },
+      "decfloat": {
+        "$Type": "Edm.Decimal",
+        "$Nullable": true,
+        "$Precision": 34,
+        "$Scale": "floating"
       }
     }
   }
