@@ -2,6 +2,14 @@
   "$Version": "2.0",
   "$EntityContainer": "V2.Annotations.Container",
   "$Reference": {
+    "https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.json": {
+      "$Include": [
+        {
+          "$Alias": "Core",
+          "$Namespace": "Org.OData.Core.V1"
+        }
+      ]
+    },
     "https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Capabilities.V1.json": {
       "$Include": [
         {
@@ -13,6 +21,7 @@
   },
   "V2.Annotations": {
     "$Alias": "self",
+    "@Core.SchemaVersion": "s.v",
     "Container": {
       "$Kind": "EntityContainer",
       "ReadOnly": {
