@@ -368,7 +368,7 @@ describe("Edge cases", function () {
       $Annotations: {
         "microsoft.graph.uploadDepToken(microsoft.graph.depOnboardingSetting,Edm.String,Edm.String)":
           {
-            "@Core.Description":
+            "@Org.OData.Core.V1.Description":
               "Uploads a new Device Enrollment Program token",
           },
       },
@@ -391,7 +391,7 @@ describe("Edge cases", function () {
     const schema = {
       $Annotations: {
         "One.OddWaldos(Collection(One.Waldo),One.Waldo)": {
-          "@Core.Description": "Uploads a waldo",
+          "@Org.OData.Core.V1.Description": "Uploads a waldo",
         },
       },
     };
