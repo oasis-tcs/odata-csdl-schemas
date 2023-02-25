@@ -81,9 +81,19 @@
       },
       "NeedsFilter": {
         "$Collection": true,
-        "$Type": "self.TypeOne",
+        "$Type": "self.TypeTwo",
         "@Capabilities.FilterRestrictions": {
+          "NonFilterableProperties": [
+            "noFilter",
+            "noFilterNoSort"
+          ],
           "RequiresFilter": true
+        },
+        "@Capabilities.SortRestrictions": {
+          "NonSortableProperties": [
+            "noSort",
+            "noFilterNoSort"
+          ]
         }
       }
     },
@@ -117,6 +127,25 @@
         "$Nullable": true,
         "$Precision": 34,
         "$Scale": "floating"
+      }
+    },
+    "TypeTwo": {
+      "$Key": [
+        "id"
+      ],
+      "$Kind": "EntityType",
+      "id": {},
+      "noFilter": {
+        "$Nullable": true
+      },
+      "noFilterNoSort": {
+        "$Nullable": true
+      },
+      "noSort": {
+        "$Nullable": true
+      },
+      "normal": {
+        "$Nullable": true
       }
     }
   }

@@ -24,6 +24,18 @@
         <Property Name="decfloat" Type="Edm.Decimal" Precision="34" sap:variable-scale="true" />
       </EntityType>
 
+      <EntityType Name="TypeTwo">
+        <Key>
+          <PropertyRef Name="id" />
+        </Key>
+        <Property Name="id" Type="Edm.String" Nullable="false" />
+        <Property Name="normal" Type="Edm.String" />
+        <Property Name="noFilter" Type="Edm.String" sap:filterable="false" />
+        <Property Name="noSort" Type="Edm.String" sap:sortable="false" />
+        <Property Name="noFilterNoSort" Type="Edm.String" sap:filterable="false"
+          sap:sortable="false" />
+      </EntityType>
+
       <EntityContainer Name="Container" m:IsDefaultEntityContainer="true">
         <EntitySet Name="ReadOnly" EntityType="self.TypeOne" sap:creatable="false"
           sap:updatable="false" sap:deletable="false" />
@@ -32,7 +44,7 @@
         <EntitySet Name="NoDelete" EntityType="self.TypeOne" sap:deletable="false" />
         <EntitySet Name="NoTopSkip" EntityType="self.TypeOne" sap:pageable="false" />
         <EntitySet Name="NoCount" EntityType="self.TypeOne" sap:countable="false" />
-        <EntitySet Name="NeedsFilter" EntityType="self.TypeOne" sap:requires-filter="true" />
+        <EntitySet Name="NeedsFilter" EntityType="self.TypeTwo" sap:requires-filter="true" />
       </EntityContainer>
     </Schema>
   </edmx:DataServices>
