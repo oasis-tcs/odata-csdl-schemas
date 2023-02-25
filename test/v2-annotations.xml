@@ -2,6 +2,11 @@
 <edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx"
   xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata"
   xmlns:sap="http://www.sap.com/Protocols/SAPData">
+  <edmx:Reference
+    Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml"
+    xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Include Namespace="Org.OData.Core.V1" Alias="OASIS_Core" />
+  </edmx:Reference>
   <edmx:DataServices m:DataServiceVersion="2.0">
     <Schema Namespace="V2.Annotations" Alias="self" sap:schema-version="s.v" sap:foo="bar"
       xmlns="http://schemas.microsoft.com/ado/2008/09/edm"

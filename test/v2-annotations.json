@@ -5,7 +5,7 @@
     "https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.json": {
       "$Include": [
         {
-          "$Alias": "Core",
+          "$Alias": "OASIS_Core",
           "$Namespace": "Org.OData.Core.V1"
         }
       ]
@@ -29,7 +29,7 @@
   },
   "V2.Annotations": {
     "$Alias": "self",
-    "@Core.SchemaVersion": "s.v",
+    "@OASIS_Core.SchemaVersion": "s.v",
     "Container": {
       "$Kind": "EntityContainer",
       "ReadOnly": {
@@ -93,7 +93,7 @@
         "id"
       ],
       "id": {
-        "@Core.Computed": true
+        "@OASIS_Core.Computed": true
       },
       "pattern": {
         "$Nullable": true,
@@ -101,11 +101,11 @@
       },
       "readonly": {
         "$Nullable": true,
-        "@Core.Computed": true
+        "@OASIS_Core.Computed": true
       },
       "immutable": {
         "$Nullable": true,
-        "@Core.Immutable": true
+        "@OASIS_Core.Immutable": true
       },
       "date": {
         "$Type": "Edm.Date",
