@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.8.0 2023-02-27
+
+### Added
+
+- `xml2json`: accept more [SAP Annotations for OData Version 2.0](https://github.com/SAP/odata-vocabularies/blob/main/docs/v2-annotations.md)
+
 ## 0.7.0 2022-10-20
 
 ### Added

@@ -36,6 +36,24 @@
           sap:sortable="false" />
       </EntityType>
 
+      <EntityType Name="TypeThree">
+        <Key>
+          <PropertyRef Name="id" />
+        </Key>
+        <Property Name="id" Type="Edm.String" Nullable="false" />
+        <Property Name="single" Type="Edm.String" sap:filter-restriction="single-value" />
+        <Property Name="multi" Type="Edm.String" sap:filter-restriction="multi-value" />
+        <Property Name="range" Type="Edm.String" sap:filter-restriction="interval" />
+      </EntityType>
+
+      <EntityType Name="TypeFour">
+        <Key>
+          <PropertyRef Name="id" />
+        </Key>
+        <Property Name="id" Type="Edm.String" Nullable="false" />
+        <Property Name="mustFilter" Type="Edm.String" sap:required-in-filter="true" />
+      </EntityType>
+
       <EntityContainer Name="Container" m:IsDefaultEntityContainer="true">
         <EntitySet Name="ReadOnly" EntityType="self.TypeOne" sap:creatable="false"
           sap:updatable="false" sap:deletable="false" />
@@ -44,7 +62,10 @@
         <EntitySet Name="NoDelete" EntityType="self.TypeOne" sap:deletable="false" />
         <EntitySet Name="NoTopSkip" EntityType="self.TypeOne" sap:pageable="false" />
         <EntitySet Name="NoCount" EntityType="self.TypeOne" sap:countable="false" />
-        <EntitySet Name="NeedsFilter" EntityType="self.TypeTwo" sap:requires-filter="true" />
+        <EntitySet Name="FilterSortRestrictions" EntityType="self.TypeTwo" />
+        <EntitySet Name="FilterExpressionRestrictions" EntityType="self.TypeThree" />
+        <EntitySet Name="RequiredFilterProperties" EntityType="self.TypeFour" />
+        <EntitySet Name="RequiresFilter" EntityType="self.TypeFour" sap:requires-filter="true" />
       </EntityContainer>
     </Schema>
   </edmx:DataServices>

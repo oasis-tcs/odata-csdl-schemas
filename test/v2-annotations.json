@@ -66,6 +66,12 @@
           "Deletable": false
         }
       },
+      "NoTopSkip": {
+        "$Collection": true,
+        "$Type": "self.TypeOne",
+        "@Capabilities.TopSupported": false,
+        "@Capabilities.SkipSupported": false
+      },
       "NoCount": {
         "$Collection": true,
         "$Type": "self.TypeOne",
@@ -73,27 +79,59 @@
           "Countable": false
         }
       },
-      "NoTopSkip": {
-        "$Collection": true,
-        "$Type": "self.TypeOne",
-        "@Capabilities.TopSupported": false,
-        "@Capabilities.SkipSupported": false
-      },
-      "NeedsFilter": {
+      "FilterSortRestrictions": {
         "$Collection": true,
         "$Type": "self.TypeTwo",
         "@Capabilities.FilterRestrictions": {
           "NonFilterableProperties": [
             "noFilter",
             "noFilterNoSort"
-          ],
-          "RequiresFilter": true
+          ]
         },
         "@Capabilities.SortRestrictions": {
           "NonSortableProperties": [
             "noSort",
             "noFilterNoSort"
           ]
+        }
+      },
+      "FilterExpressionRestrictions": {
+        "$Collection": true,
+        "$Type": "self.TypeThree",
+        "@Capabilities.FilterRestrictions": {
+          "FilterExpressionRestrictions": [
+            {
+              "Property": "single",
+              "AllowedExpressions": "SingleValue"
+            },
+            {
+              "Property": "multi",
+              "AllowedExpressions": "MultiValue"
+            },
+            {
+              "Property": "range",
+              "AllowedExpressions": "SingleRange"
+            }
+          ]
+        }
+      },
+      "RequiredFilterProperties": {
+        "$Collection": true,
+        "$Type": "self.TypeFour",
+        "@Capabilities.FilterRestrictions": {
+          "RequiredProperties": [
+            "mustFilter"
+          ]
+        }
+      },
+      "RequiresFilter": {
+        "$Collection": true,
+        "$Type": "self.TypeFour",
+        "@Capabilities.FilterRestrictions": {
+          "RequiredProperties": [
+            "mustFilter"
+          ],
+          "RequiresFilter": true
         }
       }
     },
@@ -130,21 +168,47 @@
       }
     },
     "TypeTwo": {
+      "$Kind": "EntityType",
       "$Key": [
         "id"
       ],
-      "$Kind": "EntityType",
       "id": {},
-      "noFilter": {
+      "normal": {
         "$Nullable": true
       },
-      "noFilterNoSort": {
+      "noFilter": {
         "$Nullable": true
       },
       "noSort": {
         "$Nullable": true
       },
-      "normal": {
+      "noFilterNoSort": {
+        "$Nullable": true
+      }
+    },
+    "TypeThree": {
+      "$Kind": "EntityType",
+      "$Key": [
+        "id"
+      ],
+      "id": {},
+      "single": {
+        "$Nullable": true
+      },
+      "multi": {
+        "$Nullable": true
+      },
+      "range": {
+        "$Nullable": true
+      }
+    },
+    "TypeFour": {
+      "$Kind": "EntityType",
+      "$Key": [
+        "id"
+      ],
+      "id": {},
+      "mustFilter": {
         "$Nullable": true
       }
     }
