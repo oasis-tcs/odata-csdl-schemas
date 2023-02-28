@@ -1,20 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx"
+  xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata"
+  xmlns:sap="http://www.sap.com/Protocols/SAPData">
+  <edmx:Reference
+    Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml"
+    xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Include Namespace="Org.OData.Core.V1" Alias="OASIS_Core" />
+  </edmx:Reference>
   <edmx:DataServices m:DataServiceVersion="2.0">
-    <Schema Namespace="V2.Annotations" Alias="self" xmlns="http://schemas.microsoft.com/ado/2008/09/edm" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <Schema Namespace="V2.Annotations" Alias="self" sap:schema-version="s.v" sap:foo="bar"
+      xmlns="http://schemas.microsoft.com/ado/2008/09/edm"
+      xmlns:sap="http://www.sap.com/Protocols/SAPData">
       <EntityType Name="TypeOne">
         <Key>
           <PropertyRef Name="id" />
         </Key>
+        <Property Name="id" Type="Edm.String" Nullable="false" sap:creatable="false"
+          sap:updatable="false" />
+        <Property Name="pattern" Type="Edm.String" sap:validation-regexp="^(foo)+$" />
+        <Property Name="readonly" Type="Edm.String" sap:creatable="false" sap:updatable="false" />
+        <Property Name="immutable" Type="Edm.String" sap:updatable="false" />
+        <Property Name="date" Type="Edm.DateTime" sap:display-format="Date" />
+        <Property Name="decfloat" Type="Edm.Decimal" Precision="34" sap:variable-scale="true" />
+      </EntityType>
+
+      <EntityType Name="TypeTwo">
+        <Key>
+          <PropertyRef Name="id" />
+        </Key>
         <Property Name="id" Type="Edm.String" Nullable="false" />
-        <Property Name="data" Type="Edm.String" />
+        <Property Name="normal" Type="Edm.String" />
+        <Property Name="noFilter" Type="Edm.String" sap:filterable="false" />
+        <Property Name="noSort" Type="Edm.String" sap:sortable="false" />
+        <Property Name="noFilterNoSort" Type="Edm.String" sap:filterable="false"
+          sap:sortable="false" />
+      </EntityType>
+
+      <EntityType Name="TypeThree">
+        <Key>
+          <PropertyRef Name="id" />
+        </Key>
+        <Property Name="id" Type="Edm.String" Nullable="false" />
+        <Property Name="single" Type="Edm.String" sap:filter-restriction="single-value" />
+        <Property Name="multi" Type="Edm.String" sap:filter-restriction="multi-value" />
+        <Property Name="range" Type="Edm.String" sap:filter-restriction="interval" />
+      </EntityType>
+
+      <EntityType Name="TypeFour">
+        <Key>
+          <PropertyRef Name="id" />
+        </Key>
+        <Property Name="id" Type="Edm.String" Nullable="false" />
+        <Property Name="mustFilter" Type="Edm.String" sap:required-in-filter="true" />
       </EntityType>
 
       <EntityContainer Name="Container" m:IsDefaultEntityContainer="true">
-        <EntitySet Name="ReadOnly" EntityType="self.TypeOne" sap:creatable="false" sap:updatable="false" sap:deletable="false" />
+        <EntitySet Name="ReadOnly" EntityType="self.TypeOne" sap:creatable="false"
+          sap:updatable="false" sap:deletable="false" />
         <EntitySet Name="NoInsert" EntityType="self.TypeOne" sap:creatable="false" />
         <EntitySet Name="NoUpdate" EntityType="self.TypeOne" sap:updatable="false" />
         <EntitySet Name="NoDelete" EntityType="self.TypeOne" sap:deletable="false" />
+        <EntitySet Name="NoTopSkip" EntityType="self.TypeOne" sap:pageable="false" />
+        <EntitySet Name="NoCount" EntityType="self.TypeOne" sap:countable="false" />
+        <EntitySet Name="FilterSortRestrictions" EntityType="self.TypeTwo" />
+        <EntitySet Name="FilterExpressionRestrictions" EntityType="self.TypeThree" />
+        <EntitySet Name="RequiredFilterProperties" EntityType="self.TypeFour" />
+        <EntitySet Name="RequiresFilter" EntityType="self.TypeFour" sap:requires-filter="true" />
       </EntityContainer>
     </Schema>
   </edmx:DataServices>
