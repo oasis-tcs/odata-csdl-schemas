@@ -53,6 +53,26 @@
   },
   "second": {
     "$Alias": "two",
+    "action": [
+      {
+        "$Kind": "Action",
+        "$Parameter": [
+          {
+            "$Name": "withDoc",
+            "$Type": "Edm.DateTime",
+            "$Precision": 0,
+            "@Core.Description": "Point in local time"
+          },
+          {
+            "$Name": "noDoc",
+            "$MaxLength": 12
+          }
+        ],
+        "$ReturnType": {
+          "$Type": "one.a"
+        }
+      }
+    ],
     "container": {
       "$Kind": "EntityContainer",
       "a": {
@@ -68,6 +88,11 @@
         "$NavigationPropertyBinding": {
           "to_a": "a"
         }
+      },
+      "action": {
+        "$Action": "second.action",
+        "$EntitySet": "a",
+        "@Core.Description": "Action returning new entity"
       }
     }
   },
