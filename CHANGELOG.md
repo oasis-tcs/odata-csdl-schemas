@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.8.1 2023-03-06
+
+### Added
+
+- `xml2json`: OData V2: accept `Documentation` element nested in `FunctionImport` and `Parameter` elements
+
 ## 0.8.0 2023-02-27
 
 ### Added
