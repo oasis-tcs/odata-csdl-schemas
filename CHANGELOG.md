@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.8.2 2023-06-15
+
+### Fixed
+
+- `xml2json`: Annotation targets for overloads with collection-typed parameters are now correctly normalized
+
 ## 0.8.1 2023-03-06
 
 ### Added
