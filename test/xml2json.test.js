@@ -381,17 +381,25 @@ describe("Edge cases", function () {
     const xml = `
     <Edmx Version="4.0" xmlns="http://docs.oasis-open.org/odata/ns/edmx">
       <DataServices>
-        <Schema Namespace="edge" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        <Schema Namespace="edge" xmlns="http://docs.oasis-open.org/odata/ns/edm" Alias="this">
           <Annotations Target="One.OddWaldos(Collection(One.Waldo), One.Waldo)">
             <Annotation Term="Org.OData.Core.V1.Description" String="Uploads a waldo" />
+          </Annotations>
+          <Annotations Target="edge.Func(Collection(edge.Type),edge.Type)">
+            <Annotation Term="Org.OData.Core.V1.Description" String="Collection types are also namespace-normalized" />
           </Annotations>
         </Schema>
       </DataServices>
     </Edmx>`;
     const schema = {
+      $Alias: "this",
       $Annotations: {
         "One.OddWaldos(Collection(One.Waldo),One.Waldo)": {
           "@Org.OData.Core.V1.Description": "Uploads a waldo",
+        },
+        "this.Func(Collection(this.Type),this.Type)": {
+          "@Org.OData.Core.V1.Description":
+            "Collection types are also namespace-normalized",
         },
       },
     };
