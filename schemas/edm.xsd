@@ -520,27 +520,13 @@
     container constructs
   -->
   <xs:complexType name="TEntityContainer">
-    <xs:sequence>
-      <xs:element ref="edm:Annotation" minOccurs="0" maxOccurs="unbounded" />
-      <xs:choice minOccurs="1" maxOccurs="unbounded">
-        <xs:sequence>
-          <xs:element name="EntitySet" type="edm:TEntitySet" />
-          <xs:element ref="edm:Annotation" minOccurs="0" maxOccurs="unbounded" />
-        </xs:sequence>
-        <xs:sequence>
-          <xs:element name="ActionImport" type="edm:TActionImport" />
-          <xs:element ref="edm:Annotation" minOccurs="0" maxOccurs="unbounded" />
-        </xs:sequence>
-        <xs:sequence>
-          <xs:element name="FunctionImport" type="edm:TFunctionImport" />
-          <xs:element ref="edm:Annotation" minOccurs="0" maxOccurs="unbounded" />
-        </xs:sequence>
-        <xs:sequence>
-          <xs:element name="Singleton" type="edm:TSingleton" />
-          <xs:element ref="edm:Annotation" minOccurs="0" maxOccurs="unbounded" />
-        </xs:sequence>
-      </xs:choice>
-    </xs:sequence>
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element name="EntitySet" type="edm:TEntitySet" />
+      <xs:element name="ActionImport" type="edm:TActionImport" />
+      <xs:element name="FunctionImport" type="edm:TFunctionImport" />
+      <xs:element name="Singleton" type="edm:TSingleton" />
+      <xs:element ref="edm:Annotation" />
+    </xs:choice>
     <xs:attribute name="Name" type="edm:TSimpleIdentifier" use="required" />
     <xs:attribute name="Extends" type="edm:TQualifiedName" use="optional" />
   </xs:complexType>
