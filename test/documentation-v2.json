@@ -78,6 +78,7 @@
       "a": {
         "$Collection": true,
         "$Type": "one.a",
+        "@Core.Description": "entity set summary",
         "$NavigationPropertyBinding": {
           "to_b": "b"
         }
