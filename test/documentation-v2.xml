@@ -67,7 +67,16 @@
       <EntityContainer Name="container" p7:LazyLoadingEnabled="true"
         m:IsDefaultEntityContainer="true"
         xmlns:p7="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
-        <EntitySet Name="a" EntityType="first.a" />
+        <EntitySet Name="a" EntityType="first.a">
+          <Documentation>
+            <Summary>entity set summary</Summary>
+            <LongDescription></LongDescription>
+            <tagcollection xmlns="http://foo.bar">
+              <tag></tag>
+              <tag></tag>
+            </tagcollection>
+          </Documentation>
+        </EntitySet>
         <EntitySet Name="b" EntityType="one.b" />
         <AssociationSet Name="a_b" Association="first.a_b">
           <End Role="a_role" EntitySet="a" />

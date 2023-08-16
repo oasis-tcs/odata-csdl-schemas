@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.8.3 2023-08-16
+
+### Fixed
+
+- `xml2json`: OData V2 EntitySet element may contain Documentation element
+
 ## 0.8.2 2023-06-15
 
 ### Fixed
