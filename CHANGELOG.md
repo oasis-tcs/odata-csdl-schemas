@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.8.4 2023-08-24
+
+### Added
+
+- OData Version 4.02
+
 ## 0.8.3 2023-08-16
 
 ### Fixed
