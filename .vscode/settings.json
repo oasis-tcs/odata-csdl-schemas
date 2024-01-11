@@ -12,6 +12,9 @@
   "[json]": {
     "editor.defaultFormatter": "vscode.json-language-features"
   },
+  "[xml]": {
+    "editor.defaultFormatter": "redhat.vscode-xml"
+  },
   "files.insertFinalNewline": true,
   "files.trimFinalNewlines": true,
   "cSpell.words": [
@@ -27,5 +30,6 @@
     "pageable",
     "schön",
     "SRID"
-  ]
+  ],
+  "xml.format.maxLineWidth": 200
 }
