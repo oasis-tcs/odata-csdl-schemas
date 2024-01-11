@@ -55,15 +55,10 @@
   prose specification document take precedence.
 
 -->
-<xs:schema elementFormDefault="qualified" attributeFormDefault="unqualified"
-  xmlns:xs="http://www.w3.org/2001/XMLSchema"
-  xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx"
-  xmlns:edm="http://docs.oasis-open.org/odata/ns/edm"
-  targetNamespace="http://docs.oasis-open.org/odata/ns/edmx"
->
+<xs:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" xmlns:edm="http://docs.oasis-open.org/odata/ns/edm"
+  targetNamespace="http://docs.oasis-open.org/odata/ns/edmx">
   <xs:annotation>
-    <xs:documentation xml:lang="en"> Entity Data Model Wrapper part of the Common Schema Definition
-      Language </xs:documentation>
+    <xs:documentation xml:lang="en">Entity Data Model Wrapper part of the Common Schema Definition Language</xs:documentation>
   </xs:annotation>
 
   <xs:import namespace="http://docs.oasis-open.org/odata/ns/edm" schemaLocation="edm.xsd" />
