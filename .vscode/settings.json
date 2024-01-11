@@ -1,11 +1,4 @@
 {
-  "json.schemas": [
-    {
-      "fileMatch": ["examples/*.json", "test/*.json"],
-      "url": "./schemas/csdl.schema.json"
-    }
-  ],
-  "xml.catalogs": ["./catalog.xml"],
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
@@ -15,8 +8,6 @@
   "[xml]": {
     "editor.defaultFormatter": "redhat.vscode-xml"
   },
-  "files.insertFinalNewline": true,
-  "files.trimFinalNewlines": true,
   "cSpell.words": [
     "annotatable",
     "csdl",
@@ -31,5 +22,14 @@
     "schön",
     "SRID"
   ],
-  "xml.format.maxLineWidth": 200
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+  "json.schemas": [
+    {
+      "fileMatch": ["examples/*.json", "test/*.json"],
+      "url": "./schemas/csdl.schema.json"
+    }
+  ],
+  "xml.catalogs": ["./catalog.xml"],
+  "xml.format.maxLineWidth": 230
 }
