@@ -347,8 +347,43 @@ describe("Examples", function () {
         "@Core.Description": "types win",
       },
     };
-    const json = csdl.xml2json(xml);
+    const messages = [];
+    const json = csdl.xml2json(xml, { messages });
     assert.deepStrictEqual(json.collision, schema, "schema");
+    assert.deepStrictEqual(messages, [
+      {
+        message: "action name collides with type name",
+        parser: {
+          line: 10,
+          column: 56,
+          construct: '<Action Name="foo" IsBound="true">',
+        },
+      },
+      {
+        message: "action name collides with type name",
+        parser: {
+          line: 14,
+          column: 56,
+          construct: '<Action Name="foo" IsBound="true">',
+        },
+      },
+      {
+        message: "function name collides with type name",
+        parser: {
+          line: 22,
+          column: 58,
+          construct: '<Function Name="foo" IsBound="true">',
+        },
+      },
+      {
+        message: "function name collides with type name",
+        parser: {
+          line: 27,
+          column: 58,
+          construct: '<Function Name="foo" IsBound="true">',
+        },
+      },
+    ]);
   });
 });
 
