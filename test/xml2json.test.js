@@ -293,98 +293,6 @@ describe("Examples", function () {
     const json = csdl.xml2json(xml);
     assert.deepStrictEqual(json.n, schema, "schema");
   });
-
-  it("Function with same name as type", function () {
-    const xml = `<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
-                  <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
-                    <edmx:Include Namespace="Org.OData.Core.V1" Alias="C" />
-                  </edmx:Reference>
-                  <edmx:DataServices>
-                    <Schema Namespace="collision" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                      <ComplexType Name="foo">
-                        <Annotation Term="Core.Description" String="types win" />
-                      </ComplexType>
-                      <Action Name="foo" IsBound="true">
-                        <Annotation Term="Core.Description" String="this one is ignored" />
-                        <Parameter Name="it" Type="collision.foo" />
-                      </Action>
-                      <Action Name="foo" IsBound="true">
-                        <Annotation Term="Core.Description" String="this one is ignored" />
-                        <Parameter Name="it" Type="collision.bar" />
-                      </Action>
-                      <Action Name="bar">
-                        <Annotation Term="Core.Description" String="this one is ignored" />
-                        <Parameter Name="it" Type="collision.bar" />
-                      </Action>
-                      <Function Name="foo" IsBound="true">
-                        <Annotation Term="Core.Description" String="this one is ignored" />
-                        <Parameter Name="it" Type="collision.foo" />
-                        <ReturnType Type="Edm.Boolean" />
-                      </Function>
-                      <Function Name="foo" IsBound="true">
-                        <Annotation Term="Core.Description" String="this one is ignored" />
-                        <Parameter Name="it" Type="collision.bar" />
-                        <ReturnType Type="Edm.Boolean" />
-                      </Function>
-                      <Function Name="bar">
-                        <Annotation Term="Core.Description" String="this one is ignored" />
-                        <Parameter Name="it" Type="collision.bar" />
-                        <ReturnType Type="Edm.Boolean" />
-                      </Function>
-                      <ComplexType Name="bar">
-                        <Annotation Term="Core.Description" String="types win" />
-                      </ComplexType>
-                    </Schema>
-                  </edmx:DataServices>
-                 </edmx:Edmx>`;
-    const schema = {
-      foo: {
-        $Kind: "ComplexType",
-        "@Core.Description": "types win",
-      },
-      bar: {
-        $Kind: "ComplexType",
-        "@Core.Description": "types win",
-      },
-    };
-    const messages = [];
-    const json = csdl.xml2json(xml, { messages });
-    assert.deepStrictEqual(json.collision, schema, "schema");
-    assert.deepStrictEqual(messages, [
-      {
-        message: "action name collides with type name",
-        parser: {
-          line: 10,
-          column: 56,
-          construct: '<Action Name="foo" IsBound="true">',
-        },
-      },
-      {
-        message: "action name collides with type name",
-        parser: {
-          line: 14,
-          column: 56,
-          construct: '<Action Name="foo" IsBound="true">',
-        },
-      },
-      {
-        message: "function name collides with type name",
-        parser: {
-          line: 22,
-          column: 58,
-          construct: '<Function Name="foo" IsBound="true">',
-        },
-      },
-      {
-        message: "function name collides with type name",
-        parser: {
-          line: 27,
-          column: 58,
-          construct: '<Function Name="foo" IsBound="true">',
-        },
-      },
-    ]);
-  });
 });
 
 describe("Edge cases", function () {
@@ -440,6 +348,149 @@ describe("Edge cases", function () {
     };
     const json = csdl.xml2json(xml);
     assert.deepStrictEqual(json.edge, schema, "schema");
+  });
+
+  it("Action with same name as type", function () {
+    const xml = `<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+                  <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
+                    <edmx:Include Namespace="Org.OData.Core.V1" Alias="C" />
+                  </edmx:Reference>
+                  <edmx:DataServices>
+                    <Schema Namespace="collision" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                      <ComplexType Name="foo">
+                        <Annotation Term="Core.Description" String="types win" />
+                      </ComplexType>
+                      <Action Name="foo" IsBound="true">
+                        <Annotation Term="Core.Description" String="this one is ignored" />
+                        <Parameter Name="it" Type="collision.foo" />
+                      </Action>
+                      <Action Name="foo">
+                        <Annotation Term="Core.Description" String="this one is ignored" />
+                        <Parameter Name="it" Type="collision.bar" />
+                      </Action>
+                      <Action Name="bar">
+                        <Annotation Term="Core.Description" String="this one is ignored" />
+                      </Action>
+                      <ComplexType Name="bar">
+                        <Annotation Term="Core.Description" String="types win" />
+                      </ComplexType>
+                    </Schema>
+                  </edmx:DataServices>
+                 </edmx:Edmx>`;
+    const schema = {
+      foo: {
+        $Kind: "ComplexType",
+        "@Core.Description": "types win",
+      },
+      bar: {
+        $Kind: "ComplexType",
+        "@Core.Description": "types win",
+      },
+    };
+    const messages = [];
+    const json = csdl.xml2json(xml, { messages });
+    assert.deepStrictEqual(json.collision, schema, "schema");
+    assert.deepStrictEqual(messages, [
+      {
+        message: "Action name collides with other schema child",
+        parser: {
+          line: 10,
+          column: 56,
+          construct: '<Action Name="foo" IsBound="true">',
+        },
+      },
+      {
+        message: "Action name collides with other schema child",
+        parser: {
+          line: 14,
+          column: 41,
+          construct: '<Action Name="foo">',
+        },
+      },
+      {
+        message: "Type name collides with other schema child",
+        parser: {
+          line: 21,
+          column: 46,
+          construct: '<ComplexType Name="bar">',
+        },
+      },
+    ]);
+
+    //TODO: call with strict:true and catch exception
+  });
+
+  it("Function with same name as type", function () {
+    const xml = `<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+                  <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
+                    <edmx:Include Namespace="Org.OData.Core.V1" Alias="C" />
+                  </edmx:Reference>
+                  <edmx:DataServices>
+                    <Schema Namespace="collision" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                      <EntityType Name="foo">
+                        <Annotation Term="Core.Description" String="types win" />
+                      </EntityType>
+                      <Function Name="foo" IsBound="true">
+                        <Annotation Term="Core.Description" String="this one is ignored" />
+                        <Parameter Name="it" Type="collision.foo" />
+                        <ReturnType Type="Edm.Boolean" />
+                      </Function>
+                      <Function Name="foo" IsBound="true">
+                        <Annotation Term="Core.Description" String="this one is ignored" />
+                        <Parameter Name="it" Type="collision.bar" />
+                        <ReturnType Type="Edm.Boolean" />
+                      </Function>
+                      <Function Name="bar">
+                        <Annotation Term="Core.Description" String="this one is ignored" />
+                        <Parameter Name="it" Type="collision.bar" />
+                        <ReturnType Type="Edm.Boolean" />
+                      </Function>
+                      <EntityType Name="bar">
+                        <Annotation Term="Core.Description" String="types win" />
+                      </EntityType>
+                    </Schema>
+                  </edmx:DataServices>
+                 </edmx:Edmx>`;
+    const schema = {
+      foo: {
+        $Kind: "EntityType",
+        "@Core.Description": "types win",
+      },
+      bar: {
+        $Kind: "EntityType",
+        "@Core.Description": "types win",
+      },
+    };
+    const messages = [];
+    const json = csdl.xml2json(xml, { messages });
+    assert.deepStrictEqual(json.collision, schema, "schema");
+    assert.deepStrictEqual(messages, [
+      {
+        message: "Function name collides with other schema child",
+        parser: {
+          line: 10,
+          column: 58,
+          construct: '<Function Name="foo" IsBound="true">',
+        },
+      },
+      {
+        message: "Function name collides with other schema child",
+        parser: {
+          line: 15,
+          column: 58,
+          construct: '<Function Name="foo" IsBound="true">',
+        },
+      },
+      {
+        message: "Type name collides with other schema child",
+        parser: {
+          line: 25,
+          column: 45,
+          construct: '<EntityType Name="bar">',
+        },
+      },
+    ]);
+    //TODO: call with strict:true and catch exception
   });
 });
 
