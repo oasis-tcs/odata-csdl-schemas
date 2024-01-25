@@ -555,6 +555,24 @@ describe("Error cases", function () {
     }
   });
 
+  it("unexpected root element", function () {
+    const xml = `<kaputt/>`;
+    try {
+      csdl.xml2json(xml);
+      assert.fail("should not get here");
+    } catch (e) {
+      assert.strictEqual(
+        e.message.split("\n")[0],
+        "Unexpected root element: kaputt"
+      );
+      assert.deepStrictEqual(e.parser, {
+        construct: "<kaputt/>",
+        column: 9,
+        line: 1,
+      });
+    }
+  });
+
   it("unexpected element", function () {
     const xml = `<Edmx Version="4.0" xmlns="http://docs.oasis-open.org/odata/ns/edmx">
       <DataServices>
