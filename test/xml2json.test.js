@@ -417,7 +417,20 @@ describe("Edge cases", function () {
       },
     ]);
 
-    //TODO: call with strict:true and catch exception
+    try {
+      csdl.xml2json(xml, { strict: true });
+      assert.fail("should not get here");
+    } catch (e) {
+      assert.strictEqual(
+        e.message.split("\n")[0],
+        "Action name collides with other schema child"
+      );
+      assert.deepStrictEqual(e.parser, {
+        construct: '<Action Name="foo" IsBound="true">',
+        line: 10,
+        column: 56,
+      });
+    }
   });
 
   it("Function with same name as type", function () {
@@ -490,7 +503,21 @@ describe("Edge cases", function () {
         },
       },
     ]);
-    //TODO: call with strict:true and catch exception
+
+    try {
+      csdl.xml2json(xml, { strict: true });
+      assert.fail("should not get here");
+    } catch (e) {
+      assert.strictEqual(
+        e.message.split("\n")[0],
+        "Function name collides with other schema child"
+      );
+      assert.deepStrictEqual(e.parser, {
+        construct: '<Function Name="foo" IsBound="true">',
+        line: 10,
+        column: 58,
+      });
+    }
   });
 });
 
