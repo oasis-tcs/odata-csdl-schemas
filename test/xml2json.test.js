@@ -599,10 +599,8 @@ describe("Error cases", function () {
   });
 
   it("unexpected text content", function () {
-    const xml = `<Edmx Version="4.0" xmlns="http://docs.oasis-open.org/odata/ns/edmx">X
-      <DataServices/>
-    </Edmx>`;
     try {
+      const xml = `<Edmx Version="4.0" xmlns="http://docs.oasis-open.org/odata/ns/edmx">X<DataServices/></Edmx>`;
       csdl.xml2json(xml);
       assert.fail("should not get here");
     } catch (e) {
@@ -612,8 +610,25 @@ describe("Error cases", function () {
       );
       assert.deepStrictEqual(e.parser, {
         construct: "<DataServices/",
-        line: 2,
-        column: 20,
+        line: 1,
+        column: 84,
+      });
+    }
+    try {
+      const xml = `<Edmx Version="4.0" xmlns="http://docs.oasis-open.org/odata/ns/edmx">
+      <DataServices/>Y
+    </Edmx>`;
+      csdl.xml2json(xml);
+      assert.fail("should not get here");
+    } catch (e) {
+      assert.strictEqual(
+        e.message.split("\n")[0],
+        "Element Edmx, unexpected text: Y"
+      );
+      assert.deepStrictEqual(e.parser, {
+        construct: "</Edmx>",
+        line: 3,
+        column: 11,
       });
     }
   });
