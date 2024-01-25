@@ -350,7 +350,7 @@ describe("Edge cases", function () {
     assert.deepStrictEqual(json.edge, schema, "schema");
   });
 
-  it("Action with same name as type", function () {
+  it("Actions and types with same name", function () {
     const xml = `<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
                   <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
                     <edmx:Include Namespace="Org.OData.Core.V1" Alias="C" />
@@ -371,8 +371,10 @@ describe("Edge cases", function () {
                       <Action Name="bar">
                         <Annotation Term="Core.Description" String="this one is ignored" />
                       </Action>
+                      <EnumType Name="bar"><Member Name="barBar"/></EnumType>
+                      <TypeDefinition Name="bar" UnderlyingType="Edm.String" />
                       <ComplexType Name="bar">
-                        <Annotation Term="Core.Description" String="types win" />
+                        <Annotation Term="Core.Description" String="last type wins" />
                       </ComplexType>
                     </Schema>
                   </edmx:DataServices>
@@ -384,7 +386,7 @@ describe("Edge cases", function () {
       },
       bar: {
         $Kind: "ComplexType",
-        "@Core.Description": "types win",
+        "@Core.Description": "last type wins",
       },
     };
     const messages = [];
@@ -411,6 +413,23 @@ describe("Edge cases", function () {
         message: "Type name collides with other schema child",
         parser: {
           line: 21,
+          column: 43,
+          construct: '<EnumType Name="bar">',
+        },
+      },
+      {
+        message: "Type name collides with other schema child",
+        parser: {
+          line: 22,
+          column: 79,
+          construct:
+            '<TypeDefinition Name="bar" UnderlyingType="Edm.String" />',
+        },
+      },
+      {
+        message: "Type name collides with other schema child",
+        parser: {
+          line: 23,
           column: 46,
           construct: '<ComplexType Name="bar">',
         },
@@ -433,7 +452,7 @@ describe("Edge cases", function () {
     }
   });
 
-  it("Function with same name as type", function () {
+  it("Functions and types with same", function () {
     const xml = `<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
                   <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
                     <edmx:Include Namespace="Org.OData.Core.V1" Alias="C" />
@@ -458,6 +477,7 @@ describe("Edge cases", function () {
                         <Parameter Name="it" Type="collision.bar" />
                         <ReturnType Type="Edm.Boolean" />
                       </Function>
+                      <Term Name="bar" Type="Edm.String" />
                       <EntityType Name="bar">
                         <Annotation Term="Core.Description" String="types win" />
                       </EntityType>
@@ -495,9 +515,17 @@ describe("Edge cases", function () {
         },
       },
       {
-        message: "Type name collides with other schema child",
+        message: "Term name collides with other schema child",
         parser: {
           line: 25,
+          column: 59,
+          construct: '<Term Name="bar" Type="Edm.String" />',
+        },
+      },
+      {
+        message: "Type name collides with other schema child",
+        parser: {
+          line: 26,
           column: 45,
           construct: '<EntityType Name="bar">',
         },
