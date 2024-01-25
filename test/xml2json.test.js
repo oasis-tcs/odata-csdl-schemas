@@ -523,16 +523,17 @@ describe("Edge cases", function () {
 
 describe("Error cases", function () {
   it("malformed xml", function () {
-    const xml = `<Edmx Version="4.0">`;
+    const xml = `<Edmx Version="4.0" xmlns="http://docs.oasis-open.org/odata/ns/edmx">`;
     try {
       csdl.xml2json(xml);
       assert.fail("should not get here");
     } catch (e) {
       assert.strictEqual(e.message.split("\n")[0], "Unclosed root tag");
       assert.deepStrictEqual(e.parser, {
-        construct: '<Edmx Version="4.0">',
+        construct:
+          '<Edmx Version="4.0" xmlns="http://docs.oasis-open.org/odata/ns/edmx">',
         line: 1,
-        column: 20,
+        column: 69,
       });
     }
   });
@@ -901,7 +902,9 @@ describe("Error cases", function () {
   });
 
   it("missing attribute: Reference/@Uri", function () {
-    const xml = `<Edmx Version="4.0"><Reference uri="foo"/></Edmx>`;
+    const xml = `<Edmx Version="4.0" xmlns="http://docs.oasis-open.org/odata/ns/edmx">
+      <Reference uri="foo"/>
+    </Edmx>`;
     try {
       csdl.xml2json(xml);
       assert.fail("should not get here");
@@ -912,8 +915,8 @@ describe("Error cases", function () {
       );
       assert.deepStrictEqual(e.parser, {
         construct: '<Reference uri="foo"/>',
-        line: 1,
-        column: 42,
+        line: 2,
+        column: 28,
       });
     }
   });
@@ -943,7 +946,8 @@ describe("Error cases", function () {
   it("unexpected attribute: Null/@version", function () {
     const xml = `<Edmx Version="4.0" xmlns="http://docs.oasis-open.org/odata/ns/edmx"><Reference Uri="foo">
       <Annotation Term="choc.bar" xmlns="http://docs.oasis-open.org/odata/ns/edm"><Null version="1" /></Annotation>
-    </Reference></Edmx>`;
+    </Reference>
+    <DataServices><Schema Namespace="foo" xmlns="http://docs.oasis-open.org/odata/ns/edm"/></DataServices></Edmx>`;
     try {
       csdl.xml2json(xml, { strict: true });
       assert.fail("should not get here");
@@ -965,6 +969,7 @@ describe("Error cases", function () {
       <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
         <edmx:Include Namespace="Org.OData.Core.V1" alias="C" />
       </edmx:Reference>
+      <edmx:DataServices><Schema Namespace="foo" xmlns="http://docs.oasis-open.org/odata/ns/edm"/></edmx:DataServices>
     </edmx:Edmx>`;
     try {
       csdl.xml2json(xml, { strict: true });
@@ -983,7 +988,8 @@ describe("Error cases", function () {
   });
 
   it("missing attribute: Schema/@Namespace", function () {
-    const xml = `<Edmx Version="4.0"><DataServices><Schema namespace="foo"/></DataServices></Edmx>`;
+    const xml = `<Edmx Version="4.0" xmlns="http://docs.oasis-open.org/odata/ns/edmx">
+      <DataServices><Schema namespace="foo"/></DataServices></Edmx>`;
     try {
       csdl.xml2json(xml);
       assert.fail("should not get here");
@@ -994,8 +1000,8 @@ describe("Error cases", function () {
       );
       assert.deepStrictEqual(e.parser, {
         construct: '<Schema namespace="foo"/>',
-        line: 1,
-        column: 59,
+        line: 2,
+        column: 45,
       });
     }
   });
@@ -1031,7 +1037,7 @@ describe("Error cases", function () {
                    </DataServices>
                  </Edmx>`;
     try {
-      console.dir(csdl.xml2json(xml));
+      csdl.xml2json(xml);
       assert.fail("should not get here");
     } catch (e) {
       assert.strictEqual(
@@ -1046,13 +1052,26 @@ describe("Error cases", function () {
     }
   });
 
-  it("missing XML namespace declaration on old Edmx - ignore everything", function () {
+  it("missing XML namespace declaration on Edmx", function () {
     const xml = `<Edmx Version="1.0">
                    <DataServices m:DataServiceVersion="0-sense" xmlns:m="wrong">
                      <Schema Namespace="n" />
                    </DataServices>
                  </Edmx>`;
-    assert.deepStrictEqual(csdl.xml2json(xml), { $Version: "0-sense" });
+    try {
+      csdl.xml2json(xml, { strict: true });
+      assert.fail("should not get here");
+    } catch (e) {
+      assert.strictEqual(
+        e.message.split("\n")[0],
+        "Element Edmx: invalid or missing XML namespace "
+      );
+      assert.deepStrictEqual(e.parser, {
+        construct: '<Edmx Version="1.0">',
+        line: 1,
+        column: 20,
+      });
+    }
   });
 
   it("wrong XML namespace declaration on old Schema", function () {
@@ -1062,7 +1081,7 @@ describe("Error cases", function () {
                    </DataServices>
                  </Edmx>`;
     try {
-      console.dir(csdl.xml2json(xml, { strict: true }));
+      csdl.xml2json(xml, { strict: true });
       assert.fail("should not get here");
     } catch (e) {
       assert.strictEqual(
