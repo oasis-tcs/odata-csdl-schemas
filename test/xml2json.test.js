@@ -716,8 +716,12 @@ describe("Error cases", function () {
         </Schema>
       </DataServices>
     </Edmx>`;
+
+    //TODO: non-strict with messages
+    //TODO: check that Nullable has been ignored
+
     try {
-      csdl.xml2json(xml);
+      csdl.xml2json(xml, { strict: true });
       assert.fail("should not get here");
     } catch (e) {
       assert.strictEqual(
@@ -742,8 +746,12 @@ describe("Error cases", function () {
         </Schema>
       </DataServices>
     </Edmx>`;
+
+    //TODO: non-strict with messages
+    //TODO: check that Nullable has been ignored
+
     try {
-      csdl.xml2json(xml);
+      csdl.xml2json(xml, { strict: true });
       assert.fail("should not get here");
     } catch (e) {
       assert.strictEqual(
@@ -1031,6 +1039,9 @@ describe("Error cases", function () {
       <Annotation Term="choc.bar" xmlns="http://docs.oasis-open.org/odata/ns/edm"><Null version="1" /></Annotation>
     </Reference>
     <DataServices><Schema Namespace="foo" xmlns="http://docs.oasis-open.org/odata/ns/edm"/></DataServices></Edmx>`;
+
+    //TODO: non-strict with messages
+
     try {
       csdl.xml2json(xml, { strict: true });
       assert.fail("should not get here");
@@ -1054,6 +1065,9 @@ describe("Error cases", function () {
       </edmx:Reference>
       <edmx:DataServices><Schema Namespace="foo" xmlns="http://docs.oasis-open.org/odata/ns/edm"/></edmx:DataServices>
     </edmx:Edmx>`;
+
+    //TODO: non-strict with messages
+
     try {
       csdl.xml2json(xml, { strict: true });
       assert.fail("should not get here");
