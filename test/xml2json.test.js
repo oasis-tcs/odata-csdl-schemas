@@ -586,8 +586,18 @@ describe("Error cases", function () {
 
   it("unexpected root element", function () {
     const xml = `<kaputt/>`;
+
+    const messages = [];
+    console.log(csdl.xml2json(xml, { messages }));
+    assert.deepStrictEqual(messages, [
+      {
+        message: "Unexpected root element: kaputt",
+        parser: { construct: "<kaputt/>", column: 9, line: 1 },
+      },
+    ]);
+
     try {
-      csdl.xml2json(xml);
+      csdl.xml2json(xml, { strict: true });
       assert.fail("should not get here");
     } catch (e) {
       assert.strictEqual(
@@ -610,8 +620,18 @@ describe("Error cases", function () {
         </Schema>
       </DataServices>
     </Edmx>`;
+
+    const messages = [];
+    csdl.xml2json(xml, { messages });
+    assert.deepStrictEqual(messages, [
+      {
+        message: "Element Schema, unexpected child: foo",
+        parser: { construct: "<foo/>", column: 16, line: 4 },
+      },
+    ]);
+
     try {
-      csdl.xml2json(xml);
+      csdl.xml2json(xml, { strict: true });
       assert.fail("should not get here");
     } catch (e) {
       assert.strictEqual(
@@ -669,8 +689,11 @@ describe("Error cases", function () {
         </Schema>
       </DataServices>
     </Edmx>`;
+
+    //TODO: non-strict with messages
+
     try {
-      csdl.xml2json(xml);
+      csdl.xml2json(xml, { strict: true });
       assert.fail("should not get here");
     } catch (e) {
       assert.strictEqual(
@@ -741,8 +764,11 @@ describe("Error cases", function () {
       <Schema Namespace="n">
       </Schema>
     </Edmx>`;
+
+    //TODO: non-strict with messages
+
     try {
-      csdl.xml2json(xml);
+      csdl.xml2json(xml, { strict: true });
       assert.fail("should not get here");
     } catch (e) {
       assert.strictEqual(
@@ -761,8 +787,11 @@ describe("Error cases", function () {
     const xml = `<Edmx Version="4.0" xmlns="http://docs.oasis-open.org/odata/ns/edmx">
       <Annotation />
     </Edmx>`;
+
+    //TODO: non-strict with messages
+
     try {
-      csdl.xml2json(xml);
+      csdl.xml2json(xml, { strict: true });
       assert.fail("should not get here");
     } catch (e) {
       assert.strictEqual(
@@ -782,8 +811,11 @@ describe("Error cases", function () {
       <DataServices><Schema Namespace="foo" xmlns="http://docs.oasis-open.org/odata/ns/edm"/></DataServices>
       <DataServices/>
     </Edmx>`;
+
+    //TODO: non-strict with messages
+
     try {
-      csdl.xml2json(xml);
+      csdl.xml2json(xml, { strict: true });
       assert.fail("should not get here");
     } catch (e) {
       assert.strictEqual(
@@ -810,6 +842,9 @@ describe("Error cases", function () {
         </Schema>
       </DataServices>
     </Edmx>`;
+
+    //TODO: non-strict with messages
+
     try {
       csdl.xml2json(xml, { strict: true });
       assert.fail("should not get here");
@@ -840,8 +875,11 @@ describe("Error cases", function () {
         </Schema>
       </DataServices>
     </Edmx>`;
+
+    //TODO: non-strict with messages
+
     try {
-      csdl.xml2json(xml);
+      csdl.xml2json(xml, { strict: true });
       assert.fail("should not get here");
     } catch (e) {
       assert.strictEqual(
@@ -897,6 +935,8 @@ describe("Error cases", function () {
       });
     }
   });
+
+  //TODO: multiple of the above problems
 
   it("element in V2 place in V4", function () {
     const xml = `<Edmx Version="4.0" xmlns="http://docs.oasis-open.org/odata/ns/edmx">
@@ -1055,8 +1095,11 @@ describe("Error cases", function () {
                      <Schema Namespace="foo"/>
                    </DataServices>
                  </Edmx>`;
+
+    //TODO: non-strict with messages
+
     try {
-      csdl.xml2json(xml);
+      csdl.xml2json(xml, { strict: true });
       assert.fail("should not get here");
     } catch (e) {
       assert.strictEqual(
@@ -1079,8 +1122,11 @@ describe("Error cases", function () {
                      </Schema>
                    </DataServices>
                  </Edmx>`;
+
+    //TODO: non-strict with messages
+
     try {
-      csdl.xml2json(xml);
+      csdl.xml2json(xml, { strict: true });
       assert.fail("should not get here");
     } catch (e) {
       assert.strictEqual(
