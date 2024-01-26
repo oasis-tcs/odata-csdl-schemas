@@ -50,24 +50,7 @@ describe("Examples", function () {
   });
 
   it("miscellaneous2", function () {
-    const messages = [];
-    assert.deepStrictEqual(
-      csdl.xml2json(example4, { messages }),
-      result4,
-      "CSDL JSON"
-    );
-    assert.deepStrictEqual(messages, [
-      {
-        message:
-          "Element NavigationProperty, Type=Collection(...) with Nullable attribute",
-        parser: {
-          construct:
-            '<NavigationProperty Name="Waldos" Type="Collection(Two.Waldo)" Nullable="true" />',
-          column: 89,
-          line: 90,
-        },
-      },
-    ]);
+    assert.deepStrictEqual(csdl.xml2json(example4), result4, "CSDL JSON");
   });
 
   it("v2-annotations", function () {
@@ -751,6 +734,37 @@ describe("Error cases", function () {
         construct: '<Term Name="Annotation" Type="Collection(Edm.String)"/>',
         line: 4,
         column: 65,
+      });
+    }
+  });
+
+  it("Collection-valued navigation property with Nullable", function () {
+    const xml = `<Edmx Version="4.01" xmlns="http://docs.oasis-open.org/odata/ns/edmx">
+      <DataServices>
+        <Schema Namespace="n" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+          <EntityType Name="Foo">
+            <NavigationProperty Name="bars" Type="Collection(n.Bar)" Nullable="true" />
+          </EntityType>
+        </Schema>
+      </DataServices>
+    </Edmx>`;
+
+    //TODO: non-strict with messages
+    //TODO: check that Nullable has been ignored
+
+    try {
+      csdl.xml2json(xml, { strict: true });
+      assert.fail("should not get here");
+    } catch (e) {
+      assert.strictEqual(
+        e.message.split("\n")[0],
+        "Element NavigationProperty, Type=Collection(...) with Nullable attribute"
+      );
+      assert.deepStrictEqual(e.parser, {
+        construct:
+          '<NavigationProperty Name="bars" Type="Collection(n.Bar)" Nullable="true" />',
+        column: 87,
+        line: 5,
       });
     }
   });
