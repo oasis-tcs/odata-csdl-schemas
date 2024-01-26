@@ -50,7 +50,24 @@ describe("Examples", function () {
   });
 
   it("miscellaneous2", function () {
-    assert.deepStrictEqual(csdl.xml2json(example4), result4, "CSDL JSON");
+    const messages = [];
+    assert.deepStrictEqual(
+      csdl.xml2json(example4, { messages }),
+      result4,
+      "CSDL JSON"
+    );
+    assert.deepStrictEqual(messages, [
+      {
+        message:
+          "Element NavigationProperty, Type=Collection(...) with Nullable attribute",
+        parser: {
+          construct:
+            '<NavigationProperty Name="Waldos" Type="Collection(Two.Waldo)" Nullable="true" />',
+          column: 89,
+          line: 90,
+        },
+      },
+    ]);
   });
 
   it("v2-annotations", function () {
@@ -588,7 +605,7 @@ describe("Error cases", function () {
     const xml = `<kaputt/>`;
 
     const messages = [];
-    console.log(csdl.xml2json(xml, { messages }));
+    csdl.xml2json(xml, { messages });
     assert.deepStrictEqual(messages, [
       {
         message: "Unexpected root element: kaputt",
@@ -927,8 +944,8 @@ describe("Error cases", function () {
       <DataServices>
         <Schema Namespace="n" xmlns="http://docs.oasis-open.org/odata/ns/edm">
           <Association Name="NotInV4">
-            <End Role="foo" Type="foo.bar" Multiplicity="*"/>
-            <End Role="foo" Type="foo.bar" Multiplicity="*"/>
+            <End Role="foo" Type="bar" Multiplicity="*"/>
+            <End Role="foo" Type="bar" Multiplicity="x"/>
           </Association>
         </Schema>
       </DataServices>
