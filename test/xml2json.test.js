@@ -585,19 +585,8 @@ describe("Error cases", function () {
 
   it("unexpected root element", function () {
     const xml = `<kaputt/>`;
-
-    const messages = [];
-    const json = csdl.xml2json(xml, { messages });
-    assert.deepStrictEqual(json, {});
-    assert.deepStrictEqual(messages, [
-      {
-        message: "Unexpected root element: kaputt",
-        parser: { construct: "<kaputt/>", column: 9, line: 1 },
-      },
-    ]);
-
     try {
-      csdl.xml2json(xml, { strict: true });
+      csdl.xml2json(xml);
       assert.fail("should not get here");
     } catch (e) {
       assert.strictEqual(
@@ -612,6 +601,65 @@ describe("Error cases", function () {
     }
   });
 
+  it("only Edmx root element", function () {
+    try {
+      const xml = `<Edmx/>`;
+      csdl.xml2json(xml);
+      assert.fail("should not get here");
+    } catch (e) {
+      assert.strictEqual(
+        e.message.split("\n")[0],
+        "Element Edmx, missing attribute: Version"
+      );
+      assert.deepStrictEqual(e.parser, {
+        construct: "<Edmx/>",
+        column: 7,
+        line: 1,
+      });
+    }
+
+    {
+      let messages = [];
+      let xml = `<Edmx Version="4.0"/>`;
+      const json = csdl.xml2json(xml, { messages });
+      assert.deepStrictEqual(json, {
+        $Version: "4.0",
+      });
+      assert.deepStrictEqual(messages, [
+        {
+          message: "Element Edmx: invalid or missing XML namespace: ",
+          parser: { construct: '<Edmx Version="4.0"/>', column: 21, line: 1 },
+        },
+        {
+          message:
+            "Element Edmx, child element DataServices: 0 occurrences instead of at least 1",
+          parser: { construct: '<Edmx Version="4.0"/>', column: 21, line: 1 },
+        },
+      ]);
+    }
+
+    {
+      const messages = [];
+      const xml = `<Edmx Version="4.0" xmlns="http://docs.oasis-open.org/odata/ns/edmx"/>`;
+      const json = csdl.xml2json(xml, { messages });
+      assert.deepStrictEqual(json, {
+        $Version: "4.0",
+      });
+      assert.deepStrictEqual(messages, [
+        {
+          message:
+            "Element Edmx, child element DataServices: 0 occurrences instead of at least 1",
+          parser: {
+            construct:
+              '<Edmx Version="4.0" xmlns="http://docs.oasis-open.org/odata/ns/edmx"/>',
+            column: 70,
+            line: 1,
+          },
+        },
+      ]);
+    }
+  });
+
   it("unexpected element", function () {
     const xml = `<Edmx Version="4.0" xmlns="http://docs.oasis-open.org/odata/ns/edmx">
       <DataServices>
@@ -623,7 +671,10 @@ describe("Error cases", function () {
 
     const messages = [];
     const json = csdl.xml2json(xml, { messages });
-    assert.deepStrictEqual(json, { $Version: "4.0", n: {} });
+    assert.deepStrictEqual(json, {
+      $Version: "4.0",
+      n: {},
+    });
     assert.deepStrictEqual(messages, [
       {
         message: "Element Schema, unexpected child: foo",
@@ -652,7 +703,10 @@ describe("Error cases", function () {
     <Schema Namespace="foo" xmlns="http://docs.oasis-open.org/odata/ns/edm">Y</Schema>Z</DataServices></Edmx>`;
     const messages = [];
     const json = csdl.xml2json(xml, { messages });
-    assert.deepStrictEqual(json, { $Version: "4.0", foo: {} });
+    assert.deepStrictEqual(json, {
+      $Version: "4.0",
+      foo: {},
+    });
     assert.deepStrictEqual(messages, [
       {
         message: "Element DataServices, unexpected text: X",
