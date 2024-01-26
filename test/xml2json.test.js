@@ -647,9 +647,12 @@ describe("Error cases", function () {
   });
 
   it("unexpected text content", function () {
+    //TODO: non-strict with messages, multiple unexpected texts
+
     try {
-      const xml = `<Edmx Version="4.0" xmlns="http://docs.oasis-open.org/odata/ns/edmx">X<DataServices/></Edmx>`;
-      csdl.xml2json(xml);
+      const xml = `<Edmx Version="4.0" xmlns="http://docs.oasis-open.org/odata/ns/edmx">X<DataServices>
+        <Schema Namespace="foo" xmlns="http://docs.oasis-open.org/odata/ns/edm"/></DataServices></Edmx>`;
+      csdl.xml2json(xml, { strict: true });
       assert.fail("should not get here");
     } catch (e) {
       assert.strictEqual(
@@ -657,16 +660,15 @@ describe("Error cases", function () {
         "Element DataServices, unexpected text: X"
       );
       assert.deepStrictEqual(e.parser, {
-        construct: "<DataServices/",
+        construct: "<DataServices>",
         line: 1,
         column: 84,
       });
     }
     try {
-      const xml = `<Edmx Version="4.0" xmlns="http://docs.oasis-open.org/odata/ns/edmx">
-      <DataServices/>Y
-    </Edmx>`;
-      csdl.xml2json(xml);
+      const xml = `<Edmx Version="4.0" xmlns="http://docs.oasis-open.org/odata/ns/edmx"><DataServices>
+        <Schema Namespace="foo" xmlns="http://docs.oasis-open.org/odata/ns/edm"/></DataServices>Y</Edmx>`;
+      csdl.xml2json(xml, { strict: true });
       assert.fail("should not get here");
     } catch (e) {
       assert.strictEqual(
@@ -675,8 +677,8 @@ describe("Error cases", function () {
       );
       assert.deepStrictEqual(e.parser, {
         construct: "</Edmx>",
-        line: 3,
-        column: 11,
+        line: 2,
+        column: 104,
       });
     }
   });
@@ -924,12 +926,19 @@ describe("Error cases", function () {
     const xml = `<Edmx Version="4.0" xmlns="http://docs.oasis-open.org/odata/ns/edmx">
       <DataServices>
         <Schema Namespace="n" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-          <Association Name="NotInV4" />
+          <Association Name="NotInV4">
+            <End Role="foo" Type="foo.bar" Multiplicity="*"/>
+            <End Role="foo" Type="foo.bar" Multiplicity="*"/>
+          </Association>
         </Schema>
       </DataServices>
     </Edmx>`;
+
+    //TODO: non-strict with messages
+    //TODO: check that Association has been ignored
+
     try {
-      csdl.xml2json(xml);
+      csdl.xml2json(xml, { strict: true });
       assert.fail("should not get here");
     } catch (e) {
       assert.strictEqual(
@@ -937,9 +946,9 @@ describe("Error cases", function () {
         "Unexpected element: Association"
       );
       assert.deepStrictEqual(e.parser, {
-        construct: '<Association Name="NotInV4" />',
+        construct: '<Association Name="NotInV4">',
         line: 4,
-        column: 40,
+        column: 38,
       });
     }
   });
@@ -958,8 +967,12 @@ describe("Error cases", function () {
         </Schema>
       </DataServices>
     </Edmx>`;
+
+    //TODO: non-strict with messages
+    //TODO: check that Parameter has  been ignored
+
     try {
-      csdl.xml2json(xml);
+      csdl.xml2json(xml, { strict: true });
       assert.fail("should not get here");
     } catch (e) {
       assert.strictEqual(
