@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.9.0 2024-01-24
+
+### Added
+
+- `xml2json`: option `messages` to collect all error messages in non-strict mode
+
 ## 0.8.3 2023-08-16
 
 ### Fixed
