@@ -6,7 +6,7 @@
   "bugs": "https://github.com/oasis-tcs/odata-csdl-schemas/issues",
   "repository": {
     "type": "git",
-    "url": "https://github.com/oasis-tcs/odata-csdl-schemas.git"
+    "url": "git+https://github.com/oasis-tcs/odata-csdl-schemas.git"
   },
   "files": [
     "lib/*",
