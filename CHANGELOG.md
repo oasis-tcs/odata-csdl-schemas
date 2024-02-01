@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.9.2 2024-01-24
+
+### Added
+
+- `xml2json`: detect name collisions of schemas, schema children, type children, and entity container children
+
 ## 0.9.0 2024-01-24
 
 ### Added
