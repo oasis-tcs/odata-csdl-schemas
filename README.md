@@ -1,3 +1,5 @@
+[![npm Downloads](https://img.shields.io/npm/dw/odata-csdl)](https://www.npmjs.com/package/odata-csdl)
+
 <div>
 <h2>README</h2>
 
@@ -34,8 +36,6 @@
 * [edm.xsd](schemas/edm.xsd) - sub-schema for CSDL XML documents
 
 This repository also contains a Node.js-based tool to [convert CDSL XML files into CSDL JSON files](lib).
-
-[![npm Downloads](https://img.shields.io/npm/dw/odata-csdl)](https://www.npmjs.com/package/odata-csdl)
 
 <div>
 <h3>Contact</h3>
