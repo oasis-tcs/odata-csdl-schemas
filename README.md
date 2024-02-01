@@ -35,6 +35,8 @@
 
 This repository also contains a Node.js-based tool to [convert CDSL XML files into CSDL JSON files](lib).
 
+[![npm Downloads](https://img.shields.io/npm/dw/odata-csdl)](https://www.npmjs.com/package/odata-csdl)
+
 <div>
 <h3>Contact</h3>
 <p>Please send questions or comments about <a href="https://www.oasis-open.org/resources/tcadmin/github-repositories-for-oasis-tc-members-chartered-work">OASIS TC GitHub repositories</a> to the OASIS <a href="mailto:tc-admin@oasis-open.org">TC Administrator</a>.  For questions about content in this repository, please contact the TC Chair or Co-Chairs as listed on the the OData TC's <a href="https://www.oasis-open.org/committees/odata/">home page</a>.</p>
