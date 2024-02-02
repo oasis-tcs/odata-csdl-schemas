@@ -666,6 +666,8 @@ describe("Error cases", function () {
       <DataServices>
         <Schema Namespace="n" xmlns="http://docs.oasis-open.org/odata/ns/edm">
           <foo/>
+          <String>misplaced constant expression</String>
+          <PropertyValue Property="foo"/>
         </Schema>
       </DataServices>
     </Edmx>`;
@@ -680,6 +682,18 @@ describe("Error cases", function () {
       {
         message: "Element Schema, unexpected child: foo",
         parser: { construct: "<foo/>", column: 16, line: 4 },
+      },
+      {
+        message: "Element Schema, unexpected child: String",
+        parser: { construct: "<String>", column: 18, line: 5 },
+      },
+      {
+        message: "Element Schema, unexpected child: PropertyValue",
+        parser: {
+          construct: '<PropertyValue Property="foo"/>',
+          column: 41,
+          line: 6,
+        },
       },
     ]);
 
@@ -1630,6 +1644,7 @@ describe("Error cases", function () {
                        <EnumType Name="qux">
                          <Member Name="quux"/>
                          <Member Name="quux" Value="42"/>
+                         <EnumMember Name="quux"/>
                        </EnumType>
                        <EntityContainer Name="container">
                          <EntitySet Name="bar" EntityType="foo.qux"/>
@@ -1646,6 +1661,14 @@ describe("Error cases", function () {
     const json = csdl.xml2json(xml, { messages });
 
     assert.deepStrictEqual(messages, [
+      {
+        message: "Element EnumType, unexpected child: EnumMember",
+        parser: {
+          construct: '<EnumMember Name="quux"/>',
+          line: 18,
+          column: 50,
+        },
+      },
       {
         message: "Schema namespace collides with other schema",
         parser: {
@@ -1703,11 +1726,12 @@ describe("Error cases", function () {
           column: 57,
         },
       },
+
       {
         message: "Entity set name collides with other container child",
         parser: {
           construct: '<EntitySet Name="bar" EntityType="foo.bar"/>',
-          line: 21,
+          line: 22,
           column: 69,
         },
       },
@@ -1715,7 +1739,7 @@ describe("Error cases", function () {
         message: "Singleton name collides with other container child",
         parser: {
           construct: '<Singleton Name="bar" Type="foo.bar"/>',
-          line: 22,
+          line: 23,
           column: 63,
         },
       },
@@ -1723,7 +1747,7 @@ describe("Error cases", function () {
         message: "Action import name collides with other container child",
         parser: {
           construct: '<ActionImport Name="bar" Action="foo.bar"/>',
-          line: 23,
+          line: 24,
           column: 68,
         },
       },
@@ -1731,7 +1755,7 @@ describe("Error cases", function () {
         message: "Function import name collides with other container child",
         parser: {
           construct: '<FunctionImport Name="bar" Function="foo.bar"/>',
-          line: 24,
+          line: 25,
           column: 72,
         },
       },
