@@ -660,7 +660,7 @@ describe("Error cases", function () {
     }
   });
 
-  it("unexpected element", function () {
+  it("unexpected elements", function () {
     const xml = `<Edmx Version="4.0" xmlns="http://docs.oasis-open.org/odata/ns/edmx">
       <DataServices>
         <Schema Namespace="n" xmlns="http://docs.oasis-open.org/odata/ns/edm">
@@ -668,6 +668,8 @@ describe("Error cases", function () {
           <String>misplaced constant expression</String>
           <PropertyValue Property="foo"/>
         </Schema>
+        <EntityType Name="misplaced" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        </EntityType>
       </DataServices>
     </Edmx>`;
 
@@ -692,6 +694,15 @@ describe("Error cases", function () {
           construct: '<PropertyValue Property="foo"/>',
           column: 41,
           line: 6,
+        },
+      },
+      {
+        message: "Element DataServices, unexpected child: EntityType",
+        parser: {
+          construct:
+            '<EntityType Name="misplaced" xmlns="http://docs.oasis-open.org/odata/ns/edm">',
+          column: 85,
+          line: 8,
         },
       },
     ]);
@@ -970,7 +981,6 @@ describe("Error cases", function () {
     const json = csdl.xml2json(xml, { messages });
     assert.deepStrictEqual(json, {
       $Version: "4.0",
-      n: {},
     });
     assert.deepStrictEqual(messages, [
       {
@@ -1063,11 +1073,6 @@ describe("Error cases", function () {
           column: 21,
         },
       },
-      {
-        message:
-          "Element DataServices, child element Schema: 0 occurrences instead of at least 1",
-        parser: { construct: "<DataServices/>", line: 3, column: 21 },
-      },
     ]);
 
     try {
@@ -1141,7 +1146,7 @@ describe("Error cases", function () {
             <Eq>
               <String>foo</String>
               <Bool>true</Bool>
-              <String>foo</String>
+              <String>bar</String>
             </Eq>
           </Annotation>
         </Schema>
@@ -1152,7 +1157,7 @@ describe("Error cases", function () {
     const json = csdl.xml2json(xml, { messages });
     assert.deepStrictEqual(json, {
       $Version: "4.0",
-      foo: { "@foo.bar": { $Eq: ["foo", true, "foo"] } },
+      foo: { "@foo.bar": { $Eq: ["foo", true] } },
     });
     assert.deepStrictEqual(messages, [
       {
