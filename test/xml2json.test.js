@@ -2,7 +2,6 @@
 // V2 service with alias, mix of namespace- and alias-qualified associations/sets
 // V2 service with HttpMethod=POST
 // UrlRef with nested annotation
-// <EnumMember> etc. outside of annotation
 
 const assert = require("assert");
 const fs = require("fs");
