@@ -1,3 +1,5 @@
+[![npm Downloads](https://img.shields.io/npm/dw/odata-csdl)](https://www.npmjs.com/package/odata-csdl)
+
 <div>
 <h2>README</h2>
 

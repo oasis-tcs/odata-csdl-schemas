@@ -31,5 +31,6 @@
     }
   ],
   "xml.catalogs": ["./catalog.xml"],
-  "xml.format.maxLineWidth": 230
+  "xml.format.maxLineWidth": 230,
+  "prettier.trailingComma": "es5"
 }

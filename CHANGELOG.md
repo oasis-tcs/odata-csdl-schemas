@@ -1,10 +1,22 @@
 # Changelog
 
-## 0.8.4 2023-08-24
+## 0.10.0 2023-08-24
 
 ### Added
 
 - OData Version 4.02
+
+## 0.9.2 2024-01-24
+
+### Added
+
+- `xml2json`: detect name collisions of schemas, schema children, type children, and entity container children
+
+## 0.9.0 2024-01-24
+
+### Added
+
+- `xml2json`: option `messages` to collect all error messages in non-strict mode
 
 ## 0.8.3 2023-08-16
 
