@@ -4,39 +4,44 @@
     "$Alias": "one",
     "a": {
       "$Kind": "EntityType",
-      "$Key": ["id"],
+      "$Key": [
+        "id"
+      ],
       "id": {
         "$MaxLength": 5,
-        "@Org.OData.Core.V1.Description": "a/id summary",
-        "@Org.OData.Core.V1.LongDescription": "a/id longdescription"
+        "@Core.Description": "a/id summary",
+        "@Core.LongDescription": "a/id longdescription"
       },
       "to_b": {
         "$Kind": "NavigationProperty",
         "$Type": "one.b",
         "$Collection": true,
         "$Partner": "to_a",
-        "@Org.OData.Core.V1.Description": "a/to_b summary",
-        "@Org.OData.Core.V1.LongDescription": "a/to_b longdescription"
+        "@Core.Description": "a/to_b summary",
+        "@Core.LongDescription": "a/to_b longdescription"
       }
     },
     "b": {
       "$Kind": "EntityType",
-      "$Key": ["id1", "id2"],
+      "$Key": [
+        "id1",
+        "id2"
+      ],
       "id1": {
         "$Type": "Edm.Int32",
-        "@Org.OData.Core.V1.Description": "b/id1 summary, empty longdescription"
+        "@Core.Description": "b/id1 summary, empty longdescription"
       },
       "id2": {
         "$MaxLength": 4,
-        "@Org.OData.Core.V1.LongDescription": "b/id2 longdescription, empty summary"
+        "@Core.LongDescription": "b/id2 longdescription, empty summary"
       },
       "b1": {
         "$Nullable": true,
-        "@Org.OData.Core.V1.Description": "b/b1 summary, no longdescription"
+        "@Core.Description": "b/b1 summary, no longdescription"
       },
       "b2": {
         "$Nullable": true,
-        "@Org.OData.Core.V1.LongDescription": "b/b2 longdescription, no summary"
+        "@Core.LongDescription": "b/b2 longdescription, no summary"
       },
       "to_a": {
         "$Kind": "NavigationProperty",
@@ -48,11 +53,32 @@
   },
   "second": {
     "$Alias": "two",
+    "action": [
+      {
+        "$Kind": "Action",
+        "$Parameter": [
+          {
+            "$Name": "withDoc",
+            "$Type": "Edm.DateTime",
+            "$Precision": 0,
+            "@Core.Description": "Point in local time"
+          },
+          {
+            "$Name": "noDoc",
+            "$MaxLength": 12
+          }
+        ],
+        "$ReturnType": {
+          "$Type": "one.a"
+        }
+      }
+    ],
     "container": {
       "$Kind": "EntityContainer",
       "a": {
         "$Collection": true,
         "$Type": "one.a",
+        "@Core.Description": "entity set summary",
         "$NavigationPropertyBinding": {
           "to_b": "b"
         }
@@ -63,6 +89,11 @@
         "$NavigationPropertyBinding": {
           "to_a": "a"
         }
+      },
+      "action": {
+        "$Action": "second.action",
+        "$EntitySet": "a",
+        "@Core.Description": "Action returning new entity"
       }
     }
   },
@@ -71,7 +102,8 @@
     "https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.json": {
       "$Include": [
         {
-          "$Namespace": "Org.OData.Core.V1"
+          "$Namespace": "Org.OData.Core.V1",
+          "$Alias": "Core"
         }
       ]
     }

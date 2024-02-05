@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx">
-  <edmx:DataServices xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" m:DataServiceVersion="2.0">
-    <Schema Namespace="first" Alias="one" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+  <edmx:DataServices xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata"
+    m:DataServiceVersion="2.0">
+    <Schema Namespace="first" Alias="one"
+      xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices"
+      xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata"
+      xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
       <EntityType Name="a">
         <foreign-markup xmlns="http://foo" />
         <Key>
           <PropertyRef Name="id" />
         </Key>
-        <Property Name="id" Type="Edm.String" Nullable="false" MaxLength="5" Unicode="true" FixedLength="true">
+        <Property Name="id" Type="Edm.String" Nullable="false" MaxLength="5" Unicode="true"
+          FixedLength="true">
           <Documentation>
             <Summary>a/id summary</Summary>
             <LongDescription>a/id longdescription</LongDescription>
@@ -25,7 +30,8 @@
           <PropertyRef Name="id1" />
           <PropertyRef Name="id2" />
         </Key>
-        <Property Name="id1" Type="Edm.Int32" Nullable="false" p8:StoreGeneratedPattern="Identity" xmlns:p8="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+        <Property Name="id1" Type="Edm.Int32" Nullable="false" p8:StoreGeneratedPattern="Identity"
+          xmlns:p8="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
           <Documentation>
             <Summary>b/id1 summary, empty longdescription</Summary>
             <LongDescription />
@@ -54,14 +60,41 @@
         <End Role="b_role" Type="one.b" Multiplicity="*" />
       </Association>
     </Schema>
-    <Schema Namespace="second" Alias="two" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
-      <EntityContainer Name="container" p7:LazyLoadingEnabled="true" m:IsDefaultEntityContainer="true" xmlns:p7="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
-        <EntitySet Name="a" EntityType="first.a" />
+    <Schema Namespace="second" Alias="two"
+      xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices"
+      xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata"
+      xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+      <EntityContainer Name="container" p7:LazyLoadingEnabled="true"
+        m:IsDefaultEntityContainer="true"
+        xmlns:p7="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+        <EntitySet Name="a" EntityType="first.a">
+          <Documentation>
+            <Summary>entity set summary</Summary>
+            <LongDescription></LongDescription>
+            <tagcollection xmlns="http://foo.bar">
+              <tag></tag>
+              <tag></tag>
+            </tagcollection>
+          </Documentation>
+        </EntitySet>
         <EntitySet Name="b" EntityType="one.b" />
         <AssociationSet Name="a_b" Association="first.a_b">
           <End Role="a_role" EntitySet="a" />
           <End Role="b_role" EntitySet="b" />
         </AssociationSet>
+        <FunctionImport Name="action" ReturnType="first.a"
+          EntitySet="a" m:HttpMethod="POST"
+        >
+          <Documentation>
+            <Summary>Action returning new entity</Summary>
+          </Documentation>
+          <Parameter Name="withDoc" Type="Edm.DateTime" Mode="In" Precision="0">
+            <Documentation>
+              <Summary>Point in local time</Summary>
+            </Documentation>
+          </Parameter>
+          <Parameter Name="noDoc" Type="Edm.String" Mode="In" MaxLength="12" />
+        </FunctionImport>
       </EntityContainer>
     </Schema>
   </edmx:DataServices>

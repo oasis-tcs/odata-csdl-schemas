@@ -2,6 +2,14 @@
   "$Version": "2.0",
   "$EntityContainer": "V2.Annotations.Container",
   "$Reference": {
+    "https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.json": {
+      "$Include": [
+        {
+          "$Alias": "OASIS_Core",
+          "$Namespace": "Org.OData.Core.V1"
+        }
+      ]
+    },
     "https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Capabilities.V1.json": {
       "$Include": [
         {
@@ -9,10 +17,19 @@
           "$Namespace": "Org.OData.Capabilities.V1"
         }
       ]
+    },
+    "https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Validation.V1.json": {
+      "$Include": [
+        {
+          "$Alias": "Validation",
+          "$Namespace": "Org.OData.Validation.V1"
+        }
+      ]
     }
   },
   "V2.Annotations": {
     "$Alias": "self",
+    "@OASIS_Core.SchemaVersion": "s.v",
     "Container": {
       "$Kind": "EntityContainer",
       "ReadOnly": {
@@ -48,6 +65,74 @@
         "@Capabilities.DeleteRestrictions": {
           "Deletable": false
         }
+      },
+      "NoTopSkip": {
+        "$Collection": true,
+        "$Type": "self.TypeOne",
+        "@Capabilities.TopSupported": false,
+        "@Capabilities.SkipSupported": false
+      },
+      "NoCount": {
+        "$Collection": true,
+        "$Type": "self.TypeOne",
+        "@Capabilities.CountRestrictions": {
+          "Countable": false
+        }
+      },
+      "FilterSortRestrictions": {
+        "$Collection": true,
+        "$Type": "self.TypeTwo",
+        "@Capabilities.FilterRestrictions": {
+          "NonFilterableProperties": [
+            "noFilter",
+            "noFilterNoSort"
+          ]
+        },
+        "@Capabilities.SortRestrictions": {
+          "NonSortableProperties": [
+            "noSort",
+            "noFilterNoSort"
+          ]
+        }
+      },
+      "FilterExpressionRestrictions": {
+        "$Collection": true,
+        "$Type": "self.TypeThree",
+        "@Capabilities.FilterRestrictions": {
+          "FilterExpressionRestrictions": [
+            {
+              "Property": "single",
+              "AllowedExpressions": "SingleValue"
+            },
+            {
+              "Property": "multi",
+              "AllowedExpressions": "MultiValue"
+            },
+            {
+              "Property": "range",
+              "AllowedExpressions": "SingleRange"
+            }
+          ]
+        }
+      },
+      "RequiredFilterProperties": {
+        "$Collection": true,
+        "$Type": "self.TypeFour",
+        "@Capabilities.FilterRestrictions": {
+          "RequiredProperties": [
+            "mustFilter"
+          ]
+        }
+      },
+      "RequiresFilter": {
+        "$Collection": true,
+        "$Type": "self.TypeFour",
+        "@Capabilities.FilterRestrictions": {
+          "RequiredProperties": [
+            "mustFilter"
+          ],
+          "RequiresFilter": true
+        }
       }
     },
     "TypeOne": {
@@ -55,8 +140,75 @@
       "$Key": [
         "id"
       ],
+      "id": {
+        "@OASIS_Core.Computed": true
+      },
+      "pattern": {
+        "$Nullable": true,
+        "@Validation.Pattern": "^(foo)+$"
+      },
+      "readonly": {
+        "$Nullable": true,
+        "@OASIS_Core.Computed": true
+      },
+      "immutable": {
+        "$Nullable": true,
+        "@OASIS_Core.Immutable": true
+      },
+      "date": {
+        "$Type": "Edm.Date",
+        "$Nullable": true,
+        "$Precision": 0
+      },
+      "decfloat": {
+        "$Type": "Edm.Decimal",
+        "$Nullable": true,
+        "$Precision": 34,
+        "$Scale": "floating"
+      }
+    },
+    "TypeTwo": {
+      "$Kind": "EntityType",
+      "$Key": [
+        "id"
+      ],
       "id": {},
-      "data": {
+      "normal": {
+        "$Nullable": true
+      },
+      "noFilter": {
+        "$Nullable": true
+      },
+      "noSort": {
+        "$Nullable": true
+      },
+      "noFilterNoSort": {
+        "$Nullable": true
+      }
+    },
+    "TypeThree": {
+      "$Kind": "EntityType",
+      "$Key": [
+        "id"
+      ],
+      "id": {},
+      "single": {
+        "$Nullable": true
+      },
+      "multi": {
+        "$Nullable": true
+      },
+      "range": {
+        "$Nullable": true
+      }
+    },
+    "TypeFour": {
+      "$Kind": "EntityType",
+      "$Key": [
+        "id"
+      ],
+      "id": {},
+      "mustFilter": {
         "$Nullable": true
       }
     }

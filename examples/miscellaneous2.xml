@@ -1,26 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<edmx:Edmx xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" xmlns="http://docs.oasis-open.org/odata/ns/edm" Version="4.0">
+<edmx:Edmx xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx"
+  xmlns="http://docs.oasis-open.org/odata/ns/edm" Version="4.0">
   <edmx:Reference Uri="SomeOther.xml">
     <edmx:Include Namespace="Some.Other.Schema" />
   </edmx:Reference>
-  <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
+  <edmx:Reference
+    Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
     <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1" />
   </edmx:Reference>
 
   <edmx:DataServices>
     <Schema Namespace="org.example2">
       <!--
-        Example 34: the entity container Extending will contain all child elements that it defines itself, plus all child
+        Example 34: the entity container Extending will contain all child elements that it defines itself,
+      plus all child
         elements of the Base entity container located in SomeOtherSchema
       -->
       <EntityContainer Name="Extending" Extends="Some.Other.Schema.Base">
-        <FunctionImport Name="Bar" Function="One.Foo" IncludeInServiceDocument="true" EntitySet="Model.Extending/Freds" />
-        <FunctionImport Name="CreatedEntities" Function="Model.CreatedEntities" EntitySet="org.example2.Extending/Waldos" IncludeInServiceDocument="true" />
+        <FunctionImport Name="Bar" Function="One.Foo" IncludeInServiceDocument="true"
+          EntitySet="Model.Extending/Freds" />
+        <FunctionImport Name="CreatedEntities" Function="Model.CreatedEntities"
+          EntitySet="org.example2.Extending/Waldos" IncludeInServiceDocument="true" />
         <EntitySet Name="Waldos" EntityType="Two.Waldo" />
         <EntitySet Name="Freds" EntityType="Two.Fred">
           <NavigationPropertyBinding Target="Waldos" Path="Waldos" />
           <NavigationPropertyBinding Target="org.example.Container/Freds" Path="MoreWaldos" />
-          <NavigationPropertyBinding Target="org.example.Container/Orders/Items/Model.E/Nav" Path="EvenMoreWaldos" />
+          <NavigationPropertyBinding Target="org.example.Container/Orders/Items/Model.E/Nav"
+            Path="EvenMoreWaldos" />
         </EntitySet>
       </EntityContainer>
     </Schema>
@@ -61,7 +67,8 @@
       </Annotations>
 
       <Annotations Target="One.OddWaldos(Collection(One.Waldo),One.Waldo)">
-        <Annotation Term="Core.Description" String="Function bound to a collection of Waldos with an additional parameter" />
+        <Annotation Term="Core.Description"
+          String="Function bound to a collection of Waldos with an additional parameter" />
       </Annotations>
       <Annotations Target="One.OddWaldos(Collection(One.Waldo))">
         <Annotation Term="Core.Description" String="Function bound to a collection of Waldos" />
@@ -87,7 +94,7 @@
           <PropertyRef Name="ID" />
         </Key>
         <Property Name="ID" Type="Edm.String" Nullable="false" />
-        <NavigationProperty Name="Waldos" Type="Collection(Two.Waldo)" Nullable="true" />
+        <NavigationProperty Name="Waldos" Type="Collection(Two.Waldo)" />
       </EntityType>
     </Schema>
 

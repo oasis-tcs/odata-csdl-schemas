@@ -17,13 +17,16 @@
   "cSpell.words": [
     "annotatable",
     "csdl",
+    "decfloat",
     "Edmx",
     "Insertable",
     "odata",
     "onclosetag",
     "onopentag",
     "ontext",
+    "pageable",
     "schön",
     "SRID"
-  ]
+  ],
+  "prettier.trailingComma": "es5"
 }
