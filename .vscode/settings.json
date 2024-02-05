@@ -27,5 +27,6 @@
     "pageable",
     "schön",
     "SRID"
-  ]
+  ],
+  "prettier.trailingComma": "es5"
 }

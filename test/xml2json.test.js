@@ -667,12 +667,16 @@ describe("Error cases", function () {
     }
   });
 
-  it("unexpected element", function () {
+  it("unexpected elements", function () {
     const xml = `<Edmx Version="4.0" xmlns="http://docs.oasis-open.org/odata/ns/edmx">
       <DataServices>
         <Schema Namespace="n" xmlns="http://docs.oasis-open.org/odata/ns/edm">
           <foo/>
+          <String>misplaced constant expression</String>
+          <PropertyValue Property="foo"/>
         </Schema>
+        <EntityType Name="misplaced" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+        </EntityType>
       </DataServices>
     </Edmx>`;
 
@@ -686,6 +690,27 @@ describe("Error cases", function () {
       {
         message: "Element Schema, unexpected child: foo",
         parser: { construct: "<foo/>", column: 16, line: 4 },
+      },
+      {
+        message: "Element Schema, unexpected child: String",
+        parser: { construct: "<String>", column: 18, line: 5 },
+      },
+      {
+        message: "Element Schema, unexpected child: PropertyValue",
+        parser: {
+          construct: '<PropertyValue Property="foo"/>',
+          column: 41,
+          line: 6,
+        },
+      },
+      {
+        message: "Element DataServices, unexpected child: EntityType",
+        parser: {
+          construct:
+            '<EntityType Name="misplaced" xmlns="http://docs.oasis-open.org/odata/ns/edm">',
+          column: 85,
+          line: 8,
+        },
       },
     ]);
 
@@ -963,7 +988,6 @@ describe("Error cases", function () {
     const json = csdl.xml2json(xml, { messages });
     assert.deepStrictEqual(json, {
       $Version: "4.0",
-      n: {},
     });
     assert.deepStrictEqual(messages, [
       {
@@ -1056,11 +1080,6 @@ describe("Error cases", function () {
           column: 21,
         },
       },
-      {
-        message:
-          "Element DataServices, child element Schema: 0 occurrences instead of at least 1",
-        parser: { construct: "<DataServices/>", line: 3, column: 21 },
-      },
     ]);
 
     try {
@@ -1134,7 +1153,7 @@ describe("Error cases", function () {
             <Eq>
               <String>foo</String>
               <Bool>true</Bool>
-              <String>foo</String>
+              <String>bar</String>
             </Eq>
           </Annotation>
         </Schema>
@@ -1145,7 +1164,7 @@ describe("Error cases", function () {
     const json = csdl.xml2json(xml, { messages });
     assert.deepStrictEqual(json, {
       $Version: "4.0",
-      foo: { "@foo.bar": { $Eq: ["foo", true, "foo"] } },
+      foo: { "@foo.bar": { $Eq: ["foo", true] } },
     });
     assert.deepStrictEqual(messages, [
       {
@@ -1616,5 +1635,161 @@ describe("Error cases", function () {
         column: 34,
       });
     }
+  });
+
+  it("Name collisions: namespaces, types, (navigation) properties, enum members - last one wins", function () {
+    const xml = `<Edmx Version="4.0" xmlns="http://docs.oasis-open.org/odata/ns/edmx">
+                   <DataServices>
+                     <Schema Namespace="foo" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                       <EntityType Name="ignore"/>
+                     </Schema>
+                     <Schema Namespace="foo" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                       <ComplexType Name="bar"/>
+                       <ComplexType Name="bar"/>
+                       <EntityContainer Name="bar"/>
+                       <EntityType Name="bar">
+                         <Property Name="baz" Type="Edm.String"/>
+                         <Property Name="baz" Type="Edm.String"/>
+                         <NavigationProperty Name="baz" Type="foo.bar"/>
+                       </EntityType>
+                       <EnumType Name="qux">
+                         <Member Name="quux"/>
+                         <Member Name="quux" Value="42"/>
+                         <EnumMember Name="quux"/>
+                       </EnumType>
+                       <EntityContainer Name="container">
+                         <EntitySet Name="bar" EntityType="foo.qux"/>
+                         <EntitySet Name="bar" EntityType="foo.bar"/>
+                         <Singleton Name="bar" Type="foo.bar"/>
+                         <ActionImport Name="bar" Action="foo.bar"/>
+                         <FunctionImport Name="bar" Function="foo.bar"/>
+                       </EntityContainer>
+                     </Schema>
+                   </DataServices>
+                 </Edmx>`;
+
+    const messages = [];
+    const json = csdl.xml2json(xml, { messages });
+
+    assert.deepStrictEqual(messages, [
+      {
+        message: "Element EnumType, unexpected child: EnumMember",
+        parser: {
+          construct: '<EnumMember Name="quux"/>',
+          line: 18,
+          column: 50,
+        },
+      },
+      {
+        message: "Schema namespace collides with other schema",
+        parser: {
+          construct:
+            '<Schema Namespace="foo" xmlns="http://docs.oasis-open.org/odata/ns/edm">',
+          line: 6,
+          column: 93,
+        },
+      },
+      {
+        message: "Type name collides with other schema child",
+        parser: {
+          construct: '<ComplexType Name="bar"/>',
+          line: 8,
+          column: 48,
+        },
+      },
+      {
+        message: "Entity container name collides with other schema child",
+        parser: {
+          construct: '<EntityContainer Name="bar"/>',
+          line: 9,
+          column: 52,
+        },
+      },
+      {
+        message: "Type name collides with other schema child",
+        parser: {
+          construct: '<EntityType Name="bar">',
+          line: 10,
+          column: 46,
+        },
+      },
+      {
+        message: "Property name collides with other property",
+        parser: {
+          construct: '<Property Name="baz" Type="Edm.String"/>',
+          line: 12,
+          column: 65,
+        },
+      },
+      {
+        message: "Navigation property name collides with other property",
+        parser: {
+          construct: '<NavigationProperty Name="baz" Type="foo.bar"/>',
+          line: 13,
+          column: 72,
+        },
+      },
+      {
+        message: "Enumeration member name collides with other member",
+        parser: {
+          construct: '<Member Name="quux" Value="42"/>',
+          line: 17,
+          column: 57,
+        },
+      },
+
+      {
+        message: "Entity set name collides with other container child",
+        parser: {
+          construct: '<EntitySet Name="bar" EntityType="foo.bar"/>',
+          line: 22,
+          column: 69,
+        },
+      },
+      {
+        message: "Singleton name collides with other container child",
+        parser: {
+          construct: '<Singleton Name="bar" Type="foo.bar"/>',
+          line: 23,
+          column: 63,
+        },
+      },
+      {
+        message: "Action import name collides with other container child",
+        parser: {
+          construct: '<ActionImport Name="bar" Action="foo.bar"/>',
+          line: 24,
+          column: 68,
+        },
+      },
+      {
+        message: "Function import name collides with other container child",
+        parser: {
+          construct: '<FunctionImport Name="bar" Function="foo.bar"/>',
+          line: 25,
+          column: 72,
+        },
+      },
+    ]);
+
+    assert.deepStrictEqual(json, {
+      $Version: "4.0",
+      $EntityContainer: "foo.container",
+      foo: {
+        bar: {
+          $Kind: "EntityType",
+          baz: {
+            $Kind: "NavigationProperty",
+            $Type: "foo.bar",
+            $Nullable: true,
+          },
+        },
+        qux: { $Kind: "EnumType", quux: 42 },
+        container: {
+          $Kind: "EntityContainer",
+          bar: { $Function: "foo.bar" },
+        },
+      },
+    });
   });
 });
