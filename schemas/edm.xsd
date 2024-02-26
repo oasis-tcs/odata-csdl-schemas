@@ -15,16 +15,17 @@
 
   Additional artifacts:
   This XML schema is one component of a Work Product which consists of:
-  - OData Common Schema Definition Language (CSDL) XML Representation Version 4.01
-  - OData EDMX XML Schema Version 4.01
-  - OData EDM XML Schema Version 4.01 (this document)
+  - OData Common Schema Definition Language (CSDL) XML Representation Version 4.02
+  - OData EDMX XML Schema Version 4.02
+  - OData EDM XML Schema Version 4.02 (this document)
 
   Related work:
   This specification replaces or supersedes:
   - OData EDM XML Schema Version 4.0
+  - OData EDM XML Schema Version 4.01
   This work product is related to
-  - OData Version 4.01
-  - OData JSON Format Version 4.01
+  - OData Version 4.02
+  - OData JSON Format Version 4.02
 
   Declared XML namespaces:
   - http://docs.oasis-open.org/odata/ns/edmx
@@ -46,8 +47,8 @@
   but are not descriptive enough to define what a correct CSDL document MUST be
   in every imaginable use case. The prose specification document
 
-  OData Common Schema Definition Language (CSDL) XML Representation Version 4.01
-  http://docs.oasis-open.org/odata/odata-csdl-xml/v4.01/odata-csdl-xml-v4.01.docx
+  OData Common Schema Definition Language (CSDL) XML Representation Version 4.02
+  http://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.docx
 
   defines additional rules that correct CSDL XML documents MUST fulfill.
   In case of doubt on what makes a CSDL XML document correct the rules defined in the
@@ -56,9 +57,7 @@
 -->
 <xs:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:edm="http://docs.oasis-open.org/odata/ns/edm" targetNamespace="http://docs.oasis-open.org/odata/ns/edm">
   <xs:annotation>
-    <xs:documentation xml:lang="en">
-      Entity Data Model part of the Common Schema Definition Language
-    </xs:documentation>
+    <xs:documentation xml:lang="en">Entity Data Model part of the Common Schema Definition Language</xs:documentation>
   </xs:annotation>
 
   <xs:element name="Schema">
@@ -616,8 +615,7 @@
   </xs:simpleType>
   <xs:simpleType name="TCollQualifiedName">
     <xs:restriction base="xs:string">
-      <!-- The below pattern represents the allowed identifiers in the ECMAScript specification plus the '.' for namespace qualification
-        and the Collection() wrapper -->
+      <!-- The below pattern represents the allowed identifiers in the ECMAScript specification plus the '.' for namespace qualification and the Collection() wrapper -->
       <xs:pattern value="Collection\([\p{L}\p{Nl}_][\p{L}\p{Nl}\p{Nd}\p{Mn}\p{Mc}\p{Pc}\p{Cf}]{0,}(\.[\p{L}\p{Nl}_][\p{L}\p{Nl}\p{Nd}\p{Mn}\p{Mc}\p{Pc}\p{Cf}]{0,}){1,}\)" />
     </xs:restriction>
   </xs:simpleType>
@@ -641,28 +639,24 @@
   </xs:simpleType>
   <xs:simpleType name="TPath">
     <xs:restriction base="xs:string">
-      <!-- The below pattern represents the allowed identifiers in the ECMAScript specification plus the '.' for namespace qualification
-        and the '/' for path segment separation -->
+      <!-- The below pattern represents the allowed identifiers in the ECMAScript specification plus the '.' for namespace qualification and the '/' for path segment separation -->
       <xs:pattern value="[\p{L}\p{Nl}_][\p{L}\p{Nl}\p{Nd}\p{Mn}\p{Mc}\p{Pc}\p{Cf}]{0,}([\./][\p{L}\p{Nl}_][\p{L}\p{Nl}\p{Nd}\p{Mn}\p{Mc}\p{Pc}\p{Cf}]{0,}){0,}" />
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name="TInstancePath">
-    <!-- Note: this type is overly generous, for the strict definition see http://docs.oasis-open.org/odata/odata-csdl-xml/v4.01/odata-csdl-xml-v4.01.html#sec_PathSyntax -->
+    <!-- Note: this type is overly generous, for the strict definition see http://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#PathSyntax -->
     <xs:restriction base="xs:string" />
   </xs:simpleType>
   <xs:simpleType name="TModelPath">
-    <!-- Note: this type is overly generous, for the strict definition see http://docs.oasis-open.org/odata/odata-csdl-xml/v4.01/odata-csdl-xml-v4.01.html#sec_PathSyntax -->
+    <!-- Note: this type is overly generous, for the strict definition see http://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.html#PathSyntax -->
     <xs:restriction base="xs:string">
-      <!-- The below pattern represents the allowed identifiers in the ECMAScript specification plus the '/' for path segment separation
-        and
-        the '.' for namespace qualification inside the segments. -->
+      <!-- The below pattern represents the allowed identifiers in the ECMAScript specification plus the '/' for path segment separation and the '.' for namespace qualification inside the segments. -->
       <xs:pattern value="(/?@?[\p{L}\p{Nl}_][\p{L}\p{Nl}\p{Nd}\p{Mn}\p{Mc}\p{Pc}\p{Cf}]{0,}(([\./#@]|/@)[\p{L}\p{Nl}_][\p{L}\p{Nl}\p{Nd}\p{Mn}\p{Mc}\p{Pc}\p{Cf}]{0,}){0,}(/$count)?)?" />
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name="TTarget">
     <xs:restriction base="xs:string">
-      <!-- The below pattern represents the allowed identifiers in the ECMAScript specification plus the '.' for namespace qualification,
-        the '/' for path segment separation, and parentheses and comma for overload targeting -->
+      <!-- The below pattern represents the allowed identifiers in the ECMAScript specification plus the '.' for namespace qualification, the '/' for path segment separation, and parentheses and comma for overload targeting -->
       <xs:pattern value="[\p{L}\p{Nl}_][\p{L}\p{Nl}\p{Nd}\p{Mn}\p{Mc}\p{Pc}\p{Cf}]{0,}(([.,#(]|/@?|\(?\){1,}((,|/@?))?)[\p{L}\p{Nl}_][\p{L}\p{Nl}\p{Nd}\p{Mn}\p{Mc}\p{Pc}\p{Cf}]{0,}){0,}\(?\){0,}(/$ReturnType)?" />
     </xs:restriction>
   </xs:simpleType>
@@ -911,7 +905,7 @@
       <xs:pattern value="([A-Za-z0-9_\-]{4})*([A-Za-z0-9_\-]{3}[A-Za-z0-9_\-]|[A-Za-z0-9_\-]{2}[AEIMQUYcgkosw048]=?|[A-Za-z0-9_\-][AQgw](==)?)?" />
     </xs:restriction>
   </xs:simpleType>
-  <!--boolean without 0 and 1 -->
+  <!-- boolean without 0 and 1 -->
   <xs:simpleType name="boolean">
     <xs:restriction base="xs:boolean">
       <xs:pattern value="true|false" />
