@@ -242,7 +242,7 @@ describe("Examples", function () {
                     <Schema Namespace="n" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                       <Annotations Target="Something.Else">
                         <Annotation Term="J.Schema">
-                          <String>{"type":"object","additionalProperties":false,"patternProperties":{"^[0-9]{3}$":{"type":"string"}}}</String>
+                          <String>{"type":"object","additionalProperties":false,"patternProperties":{"^[0-9]{3}$":{"type":"string","examples":["foo&amp;bar"]}}}</String>
                         </Annotation>
                         <Annotation Term="Some.PrimitiveTerm">
                           <Annotation Term="C.MediaType" String="application/json" />
@@ -272,6 +272,7 @@ describe("Examples", function () {
             patternProperties: {
               "^[0-9]{3}$": {
                 type: "string",
+                examples: ["foo&bar"],
               },
             },
           },
