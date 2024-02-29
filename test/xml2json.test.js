@@ -248,6 +248,14 @@ describe("Examples", function () {
                           <Annotation Term="C.MediaType" String="application/json" />
                           <String>{"a-b":"not a property name"}</String>
                         </Annotation>
+                        <Annotation Term="Some.PrimitiveTerm" Qualifier="usingCDATA">
+                          <Annotation Term="C.MediaType" String="application/json" />
+                          <String><![CDATA[
+                            {
+                              "c-data": "goes here"
+                            }
+                          ]]></String>
+                        </Annotation>
                         <Annotation Term="C.MediaType" String="application/json" />
                         <Annotation Term="Some.StructuredTerm">
                           <Record>
@@ -280,6 +288,10 @@ describe("Examples", function () {
           "@Some.PrimitiveTerm": {
             "a-b": "not a property name",
           },
+          "@Some.PrimitiveTerm#usingCDATA": {
+            "c-data": "goes here",
+          },
+          "@Some.PrimitiveTerm#usingCDATA@C.MediaType": "application/json",
           "@Some.StructuredTerm": {
             "@C.MediaType": "application/json",
             someStream: {
