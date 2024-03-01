@@ -4,7 +4,7 @@
 
 ### Added
 
-- `xml2json`: support `<![CDATA[...]]>` in "free-text" constructs
+- `xml2json`: support `<![CDATA[...]]>` in "free-text" elements, for example `<edm:String>`
 
 ## 0.9.2 2024-01-24
 
