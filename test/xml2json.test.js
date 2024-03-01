@@ -242,19 +242,41 @@ describe("Examples", function () {
                     <Schema Namespace="n" xmlns="http://docs.oasis-open.org/odata/ns/edm">
                       <Annotations Target="Something.Else">
                         <Annotation Term="J.Schema">
-                          <String>{"type":"object","additionalProperties":false,"patternProperties":{"^[0-9]{3}$":{"type":"string"}}}</String>
+                          <String>{"type":"object","additionalProperties":false,"patternProperties":{"^[0-9]{3}$":{"type":"string","examples":["foo&amp;bar"]}}}</String>
                         </Annotation>
                         <Annotation Term="Some.PrimitiveTerm">
                           <Annotation Term="C.MediaType" String="application/json" />
                           <String>{"a-b":"not a property name"}</String>
                         </Annotation>
-                        <Annotation Term="C.MediaType" String="application/json" />
+                        <Annotation Term="Some.PrimitiveTerm" Qualifier="usingCDATA">
+                          <Annotation Term="C.MediaType" String="application/json" />
+                          <String><![CDATA[
+                            {
+                              "c-data": "goes here"
+                            }
+                          ]]></String>
+                        </Annotation>
+                        <Annotation Term="Some.PrimitiveTerm" Qualifier="notJSON">
+                          <Annotation Term="C.MediaType" String="application/json" />
+                          <String>not JSON</String>
+                        </Annotation>
                         <Annotation Term="Some.StructuredTerm">
                           <Record>
-                            <Annotation Term="C.MediaType" String="application/json" />
                             <PropertyValue Property="someStream">
                               <Annotation Term="C.MediaType" String="application/json" />
                               <String>{"a-b":"not a property name"}</String>
+                            </PropertyValue>
+                            <PropertyValue Property="someCDATA">
+                              <Annotation Term="C.MediaType" String="application/json" />
+                              <String><![CDATA[
+                                {
+                                  "c-data": "goes here"
+                                }
+                              ]]></String>
+                            </PropertyValue>
+                            <PropertyValue Property="notJSON">
+                              <Annotation Term="C.MediaType" String="application/json" />
+                              <String>not JSON</String>
                             </PropertyValue>
                           </Record>
                         </Annotation>
@@ -265,13 +287,13 @@ describe("Examples", function () {
     const schema = {
       $Annotations: {
         "Something.Else": {
-          "@C.MediaType": "application/json",
           "@J.Schema": {
             type: "object",
             additionalProperties: false,
             patternProperties: {
               "^[0-9]{3}$": {
                 type: "string",
+                examples: ["foo&bar"],
               },
             },
           },
@@ -279,18 +301,40 @@ describe("Examples", function () {
           "@Some.PrimitiveTerm": {
             "a-b": "not a property name",
           },
+          "@Some.PrimitiveTerm#notJSON@C.MediaType": "application/json",
+          "@Some.PrimitiveTerm#notJSON": "not JSON",
+          "@Some.PrimitiveTerm#usingCDATA@C.MediaType": "application/json",
+          "@Some.PrimitiveTerm#usingCDATA": {
+            "c-data": "goes here",
+          },
           "@Some.StructuredTerm": {
-            "@C.MediaType": "application/json",
+            "someStream@C.MediaType": "application/json",
             someStream: {
               "a-b": "not a property name",
             },
-            "someStream@C.MediaType": "application/json",
+            "someCDATA@C.MediaType": "application/json",
+            someCDATA: {
+              "c-data": "goes here",
+            },
+            "notJSON@C.MediaType": "application/json",
+            notJSON: "not JSON",
           },
         },
       },
     };
-    const json = csdl.xml2json(xml);
+    const messages = [];
+    const json = csdl.xml2json(xml, { messages });
     assert.deepStrictEqual(json.n, schema, "schema");
+    assert.deepStrictEqual(messages, [
+      {
+        message: "Element Annotation, invalid JSON",
+        parser: { line: 29, column: 37, construct: "</Annotation>" },
+      },
+      {
+        message: "Element PropertyValue, invalid JSON",
+        parser: { line: 47, column: 44, construct: "</PropertyValue>" },
+      },
+    ]);
   });
 });
 
@@ -725,7 +769,7 @@ describe("Error cases", function () {
 
   it("unexpected text content", function () {
     const xml = `<Edmx Version="4.0" xmlns="http://docs.oasis-open.org/odata/ns/edmx">X<DataServices>
-    <Schema Namespace="foo" xmlns="http://docs.oasis-open.org/odata/ns/edm">Y</Schema>Z</DataServices></Edmx>`;
+    <Schema Namespace="foo" xmlns="http://docs.oasis-open.org/odata/ns/edm">Y</Schema>Z</DataServices><![CDATA[A]]></Edmx>`;
     const messages = [];
     const json = csdl.xml2json(xml, { messages });
     assert.deepStrictEqual(json, {
@@ -744,6 +788,10 @@ describe("Error cases", function () {
       {
         message: "Element DataServices, unexpected text: Z",
         parser: { line: 2, column: 102, construct: "</DataServices>" },
+      },
+      {
+        message: "Element DataServices, unexpected CDATA: A",
+        parser: { line: 2, column: 115, construct: "<![CDATA[A]]>" },
       },
     ]);
 

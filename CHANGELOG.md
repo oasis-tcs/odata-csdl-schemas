@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.10.0 2024-03-01
+
+### Added
+
+- `xml2json`: support `<![CDATA[...]]>` in "free-text" elements, for example `<edm:String>`
+
 ## 0.9.2 2024-01-24
 
 ### Added
