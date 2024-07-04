@@ -156,9 +156,14 @@
         "@OASIS_Core.Immutable": true
       },
       "date": {
-        "$Type": "Edm.Date",
+        "$Type": "Edm.DateTime",
         "$Nullable": true,
         "$Precision": 0
+      },
+      "time": {
+        "$Type": "Edm.Time",
+        "$Nullable": true,
+        "$Precision": 3
       },
       "decfloat": {
         "$Type": "Edm.Decimal",
