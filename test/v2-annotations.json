@@ -156,7 +156,7 @@
         "@OASIS_Core.Immutable": true
       },
       "date": {
-        "$Type": "Edm.Date",
+        "$Type": "Edm.DateTime",
         "$Nullable": true,
         "$Precision": 0
       },
