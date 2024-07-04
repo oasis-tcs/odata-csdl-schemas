@@ -160,6 +160,11 @@
         "$Nullable": true,
         "$Precision": 0
       },
+      "time": {
+        "$Type": "Edm.Time",
+        "$Nullable": true,
+        "$Precision": 3
+      },
       "decfloat": {
         "$Type": "Edm.Decimal",
         "$Nullable": true,
