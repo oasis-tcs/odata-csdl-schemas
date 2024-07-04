@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.10.1 2024-07-04
+
+### Changed
+
+- `xml2json`: ignore V2 annotation sap:display-format="Date" and preserve original type
+
 ## 0.10.0 2024-03-01
 
 ### Added
