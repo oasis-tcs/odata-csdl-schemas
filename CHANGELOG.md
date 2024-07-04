@@ -2,7 +2,7 @@
 
 ## 0.10.1 2024-07-04
 
-### Changed
+### Fixed
 
 - `xml2json`: ignore V2 annotation `display-format="Date"` and preserve original type
 
