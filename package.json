@@ -1,6 +1,6 @@
 {
   "name": "odata-csdl",
-  "version": "0.10.0",
+  "version": "0.10.1",
   "description": "Convert CSDL XML to CSDL JSON",
   "homepage": "https://github.com/oasis-tcs/odata-csdl-schemas/blob/master/lib/README.md",
   "bugs": "https://github.com/oasis-tcs/odata-csdl-schemas/issues",
