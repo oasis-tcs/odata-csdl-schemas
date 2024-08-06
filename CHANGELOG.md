@@ -1,10 +1,16 @@
 # Changelog
 
+## 0.11.0 - 2024-08-06
+
+### Added
+
+- `xml2json`: accept [V2 annotations](https://github.com/SAP/odata-vocabularies/blob/main/docs/v2-annotations.md) `label` and `quickinfo` and turn them into `Core.Description`, `quickinfo` wins if both are present
+
 ## 0.10.1 - 2024-07-04
 
 ### Fixed
 
-- `xml2json`: ignore V2 annotation `display-format="Date"` and preserve original type
+- `xml2json`: ignore [V2 annotation](https://github.com/SAP/odata-vocabularies/blob/main/docs/v2-annotations.md) `display-format="Date"` and preserve original type
 
 ## 0.10.0 - 2024-03-01
 
@@ -28,7 +34,7 @@
 
 ### Fixed
 
-- `xml2json`: OData V2 EntitySet element may contain Documentation element
+- `xml2json`: OData V2 `EntitySet` element may contain `Documentation` element
 
 ## 0.8.2 - 2023-06-15
 
