@@ -141,14 +141,17 @@
         "id"
       ],
       "id": {
-        "@OASIS_Core.Computed": true
+        "@OASIS_Core.Computed": true,
+        "@OASIS_Core.Description": "Identifier"
       },
       "pattern": {
         "$Nullable": true,
+        "@OASIS_Core.Description": "Quick Info",
         "@Validation.Pattern": "^(foo)+$"
       },
       "readonly": {
         "$Nullable": true,
+        "@OASIS_Core.Description": "Quick Info",
         "@OASIS_Core.Computed": true
       },
       "immutable": {
