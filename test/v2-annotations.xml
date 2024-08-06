@@ -16,9 +16,11 @@
           <PropertyRef Name="id" />
         </Key>
         <Property Name="id" Type="Edm.String" Nullable="false" sap:creatable="false"
-          sap:updatable="false" />
-        <Property Name="pattern" Type="Edm.String" sap:validation-regexp="^(foo)+$" />
-        <Property Name="readonly" Type="Edm.String" sap:creatable="false" sap:updatable="false" />
+          sap:updatable="false" sap:label="Identifier" />
+        <Property Name="pattern" Type="Edm.String" sap:validation-regexp="^(foo)+$"
+          sap:label="Label" sap:quickinfo="Quick Info" />
+        <Property Name="readonly" Type="Edm.String" sap:creatable="false" sap:updatable="false"
+          sap:quickinfo="Quick Info" sap:label="Label" />
         <Property Name="immutable" Type="Edm.String" sap:updatable="false" />
         <Property Name="date" Type="Edm.DateTime" sap:display-format="Date" />
         <Property Name="time" Type="Edm.Time" Precision="3" />
