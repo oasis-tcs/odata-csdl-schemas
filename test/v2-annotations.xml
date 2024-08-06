@@ -21,7 +21,12 @@
           sap:label="Label" sap:quickinfo="Quick Info" />
         <Property Name="readonly" Type="Edm.String" sap:creatable="false" sap:updatable="false"
           sap:quickinfo="Quick Info" sap:label="Label" />
-        <Property Name="immutable" Type="Edm.String" sap:updatable="false" />
+        <Property Name="immutable" Type="Edm.String" sap:updatable="false"
+          sap:label="ignore this label" sap:quickinfo="ignore this quickinfo">
+          <Documentation>
+            <Summary>Documentation-Summary</Summary>
+          </Documentation>
+        </Property>
         <Property Name="date" Type="Edm.DateTime" sap:display-format="Date" />
         <Property Name="time" Type="Edm.Time" Precision="3" />
         <Property Name="decfloat" Type="Edm.Decimal" Precision="34" sap:variable-scale="true" />

@@ -156,6 +156,7 @@
       },
       "immutable": {
         "$Nullable": true,
+        "@OASIS_Core.Description": "Documentation-Summary",
         "@OASIS_Core.Immutable": true
       },
       "date": {
