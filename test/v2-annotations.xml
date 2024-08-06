@@ -11,7 +11,7 @@
     <Schema Namespace="V2.Annotations" Alias="self" sap:schema-version="s.v" sap:foo="bar"
       xmlns="http://schemas.microsoft.com/ado/2008/09/edm"
       xmlns:sap="http://www.sap.com/Protocols/SAPData">
-      <EntityType Name="TypeOne">
+      <EntityType Name="TypeOne" sap:label="First Type">
         <Key>
           <PropertyRef Name="id" />
         </Key>

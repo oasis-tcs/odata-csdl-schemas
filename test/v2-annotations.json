@@ -137,6 +137,7 @@
     },
     "TypeOne": {
       "$Kind": "EntityType",
+      "@OASIS_Core.Description": "First Type",
       "$Key": [
         "id"
       ],
