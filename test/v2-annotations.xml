@@ -74,6 +74,9 @@
         <EntitySet Name="FilterExpressionRestrictions" EntityType="self.TypeThree" />
         <EntitySet Name="RequiredFilterProperties" EntityType="self.TypeFour" />
         <EntitySet Name="RequiresFilter" EntityType="self.TypeFour" sap:requires-filter="true" />
+        <FunctionImport Name="GetOne" ReturnType="self.TypeOne" m:HttpMethod="GET">
+          <Parameter Name="par" Type="Edm.String" Mode="In" sap:label="Parameter Label" />
+        </FunctionImport>
       </EntityContainer>
     </Schema>
   </edmx:DataServices>
