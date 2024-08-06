@@ -1,10 +1,10 @@
 # Changelog
 
-## 0.11.0 - 2024-08-06
+## 0.11.1 - 2024-08-06
 
 ### Added
 
-- `xml2json`: accept [V2 annotations](https://github.com/SAP/odata-vocabularies/blob/main/docs/v2-annotations.md) `label` and `quickinfo` and turn them into `Core.Description`, `quickinfo` wins if both are present
+- `xml2json`: accept [V2 annotations](https://github.com/SAP/odata-vocabularies/blob/main/docs/v2-annotations.md) `label` and `quickinfo` on properties, entity types, and parameters, and turn them into `Core.Description`, `quickinfo` wins if both are present on a property
 
 ## 0.10.1 - 2024-07-04
 

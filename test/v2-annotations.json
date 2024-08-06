@@ -133,10 +133,28 @@
           ],
           "RequiresFilter": true
         }
+      },
+      "GetOne": {
+        "$Function": "V2.Annotations.GetOne"
       }
     },
+    "GetOne": [
+      {
+        "$Kind": "Function",
+        "$Parameter": [
+          {
+            "$Name": "par",
+            "@OASIS_Core.Description": "Parameter Label"
+          }
+        ],
+        "$ReturnType": {
+          "$Type": "self.TypeOne"
+        }
+      }
+    ],
     "TypeOne": {
       "$Kind": "EntityType",
+      "@OASIS_Core.Description": "First Type",
       "$Key": [
         "id"
       ],
@@ -156,6 +174,7 @@
       },
       "immutable": {
         "$Nullable": true,
+        "@OASIS_Core.Description": "Documentation-Summary",
         "@OASIS_Core.Immutable": true
       },
       "date": {
