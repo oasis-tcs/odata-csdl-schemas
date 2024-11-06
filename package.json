@@ -17,6 +17,10 @@
     "odata-csdl-xml2json": "lib/cli.js"
   },
   "main": "lib/xml2json.js",
+  "exports": {
+    ".": "./lib/xml2json.js",
+    "./metamodel": "./lib/metamodel.js"
+  },
   "dependencies": {
     "colors": "^1.4.0",
     "sax": "^1.4.1"

@@ -5,7 +5,6 @@
 
 const assert = require("assert");
 const fs = require("fs");
-const { CSDL } = require("../lib/metamodel");
 
 const csdl = require("../lib/xml2json");
 
@@ -1814,7 +1813,7 @@ describe("Error cases", function () {
       },
     ]);
 
-    assert.deepStrictEqual(json, new CSDL({
+    assert.deepStrictEqual(json, {
       $Version: "4.0",
       $EntityContainer: "foo.container",
       foo: {
@@ -1832,6 +1831,6 @@ describe("Error cases", function () {
           bar: { $Function: "foo.bar" },
         },
       },
-    }));
+    });
   });
 });

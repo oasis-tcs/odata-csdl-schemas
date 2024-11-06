@@ -1,212 +1,212 @@
 {
-    "$Version": "4.0",
-    "$Reference": {
-        "https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.json": {
-            "$Include": [
-                {
-                    "$Namespace": "Org.OData.Core.V1",
-                    "$Alias": "Core",
-                    "@Core.DefaultNamespace": true
-                }
-            ]
-        },
-        "https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Measures.V1.json": {
-            "$Include": [
-                {
-                    "$Namespace": "Org.OData.Measures.V1",
-                    "$Alias": "Measures"
-                }
-            ]
+  "$Version": "4.0",
+  "$Reference": {
+    "https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.json": {
+      "$Include": [
+        {
+          "$Namespace": "Org.OData.Core.V1",
+          "$Alias": "Core",
+          "@Core.DefaultNamespace": true
         }
+      ]
     },
-    "ODataDemo": {
-        "Product": {
-            "$Kind": "EntityType",
-            "$HasStream": true,
-            "$Key": [
-                "ID"
-            ],
-            "ID": {
-                "$Type": "Edm.Int32"
-            },
-            "Description": {
-                "$Nullable": true,
-                "@Core.IsLanguageDependent": true
-            },
-            "ReleaseDate": {
-                "$Type": "Edm.Date",
-                "$Nullable": true
-            },
-            "DiscontinuedDate": {
-                "$Type": "Edm.Date",
-                "$Nullable": true
-            },
-            "Rating": {
-                "$Type": "Edm.Int32",
-                "$Nullable": true
-            },
-            "Price": {
-                "$Type": "Edm.Decimal",
-                "$Nullable": true,
-                "@Measures.ISOCurrency": {
-                    "$Path": "Currency"
-                }
-            },
-            "Currency": {
-                "$Nullable": true,
-                "$MaxLength": 3
-            },
-            "Category": {
-                "$Kind": "NavigationProperty",
-                "$Type": "ODataDemo.Category",
-                "$Partner": "Products"
-            },
-            "Supplier": {
-                "$Kind": "NavigationProperty",
-                "$Type": "ODataDemo.Supplier",
-                "$Nullable": true,
-                "$Partner": "Products"
-            }
+    "https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Measures.V1.json": {
+      "$Include": [
+        {
+          "$Namespace": "Org.OData.Measures.V1",
+          "$Alias": "Measures"
+        }
+      ]
+    }
+  },
+  "ODataDemo": {
+    "Product": {
+      "$Kind": "EntityType",
+      "$HasStream": true,
+      "$Key": ["ID", { "CatID": "Category/ID" }],
+      "ID": {
+        "$Type": "Edm.Int32"
+      },
+      "Description": {
+        "$Nullable": true,
+        "@Core.IsLanguageDependent": true
+      },
+      "ReleaseDate": {
+        "$Type": "Edm.Date",
+        "$Nullable": true
+      },
+      "DiscontinuedDate": {
+        "$Type": "Edm.Date",
+        "$Nullable": true
+      },
+      "Rating": {
+        "$Type": "Edm.Int32",
+        "$Nullable": true
+      },
+      "Price": {
+        "$Type": "Edm.Decimal",
+        "$Nullable": true,
+        "@Measures.ISOCurrency": {
+          "$Path": "Currency",
+          "@Core.Description": "Y"
         },
-        "Category": {
-            "$Kind": "EntityType",
-            "$Key": [
-                "ID"
-            ],
-            "ID": {
-                "$Type": "Edm.Int32"
-            },
-            "Name": {
-                "@Core.IsLanguageDependent": true
-            },
-            "Products": {
-                "$Kind": "NavigationProperty",
-                "$Collection": true,
-                "$Type": "ODataDemo.Product",
-                "$Partner": "Category",
-                "$OnDelete": "Cascade"
-            }
-        },
-        "Supplier": {
-            "$Kind": "EntityType",
-            "$Key": [
-                "ID"
-            ],
-            "ID": {},
-            "Name": {
-                "$Nullable": true
-            },
-            "Address": {
-                "$Type": "ODataDemo.Address"
-            },
-            "Concurrency": {
-                "$Type": "Edm.Int32"
-            },
-            "Products": {
-                "$Kind": "NavigationProperty",
-                "$Collection": true,
-                "$Type": "ODataDemo.Product",
-                "$Partner": "Supplier"
-            }
-        },
-        "Country": {
-            "$Kind": "EntityType",
-            "$Key": [
-                "Code"
-            ],
-            "Code": {
-                "$MaxLength": 2
-            },
-            "Name": {
-                "$Nullable": true
-            }
-        },
-        "Address": {
-            "$Kind": "ComplexType",
-            "Street": {
-                "$Nullable": true
-            },
-            "City": {
-                "$Nullable": true
-            },
-            "State": {
-                "$Nullable": true
-            },
-            "ZipCode": {
-                "$Nullable": true
-            },
-            "CountryName": {
-                "$Nullable": true
-            },
-            "Country": {
-                "$Kind": "NavigationProperty",
-                "$Type": "ODataDemo.Country",
-                "$Nullable": true,
-                "$ReferentialConstraint": {
-                    "CountryName": "Name"
-                }
-            }
-        },
-        "ProductsByRating": [
-            {
-                "$Kind": "Function",
-                "$Parameter": [
-                    {
-                        "$Name": "Rating",
-                        "$Type": "Edm.Int32",
-                        "$Nullable": true
-                    }
-                ],
-                "$ReturnType": {
-                    "$Collection": true,
-                    "$Type": "ODataDemo.Product"
-                }
-            }
+        "@Measures.ISOCurrency@Core.Description": "Z"
+      },
+      "Currency": {
+        "$Nullable": true,
+        "$MaxLength": 3
+      },
+      "Category": {
+        "$Kind": "NavigationProperty",
+        "$Type": "ODataDemo.Category",
+        "$Partner": "Products"
+      },
+      "Supplier": {
+        "$Kind": "NavigationProperty",
+        "$Type": "ODataDemo.Supplier",
+        "$Nullable": true,
+        "$Partner": "Products"
+      }
+    },
+    "EdibleProduct": {
+      "$Kind": "EntityType",
+      "$BaseType": "ODataDemo.Product",
+      "Rating": { "$Nullable": true }
+    },
+    "Category": {
+      "$Kind": "EntityType",
+      "$Key": ["ID"],
+      "ID": {
+        "$Type": "Edm.Int32"
+      },
+      "Name": {
+        "@Core.IsLanguageDependent": true
+      },
+      "Products": {
+        "$Kind": "NavigationProperty",
+        "$Collection": true,
+        "$Type": "ODataDemo.Product",
+        "$Partner": "Category",
+        "$OnDelete": "Cascade"
+      }
+    },
+    "Supplier": {
+      "$Kind": "EntityType",
+      "$Key": ["ID"],
+      "ID": {},
+      "Name": {
+        "$Nullable": true
+      },
+      "Address": {
+        "$Type": "ODataDemo.Address"
+      },
+      "Concurrency": {
+        "$Type": "Edm.Int32"
+      },
+      "Products": {
+        "$Kind": "NavigationProperty",
+        "$Collection": true,
+        "$Type": "ODataDemo.Product",
+        "$Partner": "Supplier"
+      }
+    },
+    "Country": {
+      "$Kind": "EntityType",
+      "$Key": ["Code"],
+      "Code": {
+        "$MaxLength": 2
+      },
+      "Name": {
+        "$Nullable": true
+      }
+    },
+    "Address": {
+      "$Kind": "ComplexType",
+      "Street": {
+        "$Nullable": true
+      },
+      "City": {
+        "$Nullable": true
+      },
+      "State": {
+        "$Nullable": true
+      },
+      "ZipCode": {
+        "$Nullable": true
+      },
+      "CountryName": {
+        "$Nullable": true
+      },
+      "Country": {
+        "$Kind": "NavigationProperty",
+        "$Type": "ODataDemo.Country",
+        "$Nullable": true,
+        "$ReferentialConstraint": {
+          "CountryName": "Name",
+          "CountryName@Core.Description": "X",
+          "CountryName@Core.Description@Core.IsLanguageDependent": false
+        }
+      }
+    },
+    "ProductsByRating": [
+      {
+        "$Kind": "Function",
+        "$Parameter": [
+          {
+            "$Name": "Rating",
+            "$Type": "Edm.Int32",
+            "$Nullable": true
+          }
         ],
-        "DemoService": {
-            "$Kind": "EntityContainer",
-            "Products": {
-                "$Collection": true,
-                "$Type": "ODataDemo.Product",
-                "$NavigationPropertyBinding": {
-                    "Category": "Categories"
-                }
-            },
-            "Categories": {
-                "$Collection": true,
-                "$Type": "ODataDemo.Category",
-                "$NavigationPropertyBinding": {
-                    "Products": "Products"
-                },
-                "@Core.Description": "Product Categories"
-            },
-            "Suppliers": {
-                "$Collection": true,
-                "$Type": "ODataDemo.Supplier",
-                "$NavigationPropertyBinding": {
-                    "Products": "Products",
-                    "Address/Country": "Countries"
-                },
-                "@Core.OptimisticConcurrency": [
-                    "Concurrency"
-                ]
-            },
-            "MainSupplier": {
-                "$Type": "ODataDemo.Supplier",
-                "$NavigationPropertyBinding": {
-                    "Products": "Products"
-                },
-                "@Core.Description": "Primary Supplier"
-            },
-            "Countries": {
-                "$Collection": true,
-                "$Type": "ODataDemo.Country"
-            },
-            "ProductsByRating": {
-                "$Function": "ODataDemo.ProductsByRating",
-                "$EntitySet": "Products"
-            }
+        "$ReturnType": {
+          "$Collection": true,
+          "$Type": "ODataDemo.Product"
         }
-    },
-    "$EntityContainer": "ODataDemo.DemoService"
+      }
+    ],
+    "DemoService": {
+      "$Kind": "EntityContainer",
+      "Products": {
+        "$Collection": true,
+        "$Type": "ODataDemo.Product",
+        "$NavigationPropertyBinding": {
+          "Category": "Categories"
+        }
+      },
+      "Categories": {
+        "$Collection": true,
+        "$Type": "ODataDemo.Category",
+        "$NavigationPropertyBinding": {
+          "Products": "Products"
+        },
+        "@Core.Description": "Product Categories",
+        "@Core.Description@Core.IsLanguageDependent": true
+      },
+      "Suppliers": {
+        "$Collection": true,
+        "$Type": "ODataDemo.Supplier",
+        "$NavigationPropertyBinding": {
+          "Products": "Products",
+          "Address/Country": "Countries"
+        },
+        "@Core.OptimisticConcurrency": ["Concurrency"]
+      },
+      "MainSupplier": {
+        "$Type": "ODataDemo.Supplier",
+        "$NavigationPropertyBinding": {
+          "Products": "Products"
+        },
+        "@Core.Description": "Primary Supplier"
+      },
+      "Countries": {
+        "$Collection": true,
+        "$Type": "ODataDemo.Country"
+      },
+      "ProductsByRating": {
+        "$Function": "ODataDemo.ProductsByRating",
+        "$EntitySet": "Products"
+      }
+    }
+  },
+  "$EntityContainer": "ODataDemo.DemoService"
 }
