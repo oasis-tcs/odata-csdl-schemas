@@ -590,6 +590,44 @@ describe("Edge cases", function () {
       });
     }
   });
+
+  it("Nullable collection of entities in ReturnType", function () {
+    const xml = `<Edmx Version="4.01" xmlns="http://docs.oasis-open.org/odata/ns/edmx">
+      <DataServices>
+        <Schema Namespace="n" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+          <Function Name="f">
+            <ReturnType Type="Collection(Edm.EntityType)" Nullable="false"/>
+          </Function>
+          <Function Name="g">
+            <ReturnType Type="Collection(n.bar)" Nullable="false"/>
+          </Function>
+          <EntityType Name="bar" />
+        </Schema>
+      </DataServices>
+    </Edmx>`;
+
+    const messages = [];
+    const json = csdl.xml2json(xml, { messages });
+    assert.deepStrictEqual(json, {
+      $Version: "4.01",
+      n: {
+        f: [
+          {
+            $Kind: "Function",
+            $ReturnType: { $Collection: true, $Type: "Edm.EntityType" },
+          },
+        ],
+        g: [
+          {
+            $Kind: "Function",
+            $ReturnType: { $Collection: true, $Type: "n.bar" },
+          },
+        ],
+        bar: { $Kind: "EntityType" },
+      },
+    });
+    assert.deepStrictEqual(messages, []);
+  });
 });
 
 describe("Error cases", function () {
@@ -961,60 +999,6 @@ describe("Error cases", function () {
           '<NavigationProperty Name="bars" Type="Collection(n.Bar)" Nullable="true" />',
         column: 87,
         line: 5,
-      });
-    }
-  });
-
-  it("forbidden Nullable in ReturnType", function () {
-    const xml = `<Edmx Version="4.01" xmlns="http://docs.oasis-open.org/odata/ns/edmx">
-      <DataServices>
-        <Schema Namespace="n" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-          <Function Name="f">
-            <ReturnType Type="Collection(Edm.EntityType)" Nullable="false"/>
-          </Function>
-        </Schema>
-      </DataServices>
-    </Edmx>`;
-
-    const messages = [];
-    const json = csdl.xml2json(xml, { messages });
-    assert.deepStrictEqual(json, {
-      $Version: "4.01",
-      n: {
-        f: [
-          {
-            $Kind: "Function",
-            $ReturnType: { $Collection: true, $Type: "Edm.EntityType" },
-          },
-        ],
-      },
-    });
-    assert.deepStrictEqual(messages, [
-      {
-        message:
-          "Element ReturnType, Type=Collection(Edm.EntityType) with Nullable attribute",
-        parser: {
-          construct:
-            '<ReturnType Type="Collection(Edm.EntityType)" Nullable="false"/>',
-          line: 5,
-          column: 76,
-        },
-      },
-    ]);
-
-    try {
-      csdl.xml2json(xml, { strict: true });
-      assert.fail("should not get here");
-    } catch (e) {
-      assert.strictEqual(
-        e.message.split("\n")[0],
-        "Element ReturnType, Type=Collection(Edm.EntityType) with Nullable attribute"
-      );
-      assert.deepStrictEqual(e.parser, {
-        construct:
-          '<ReturnType Type="Collection(Edm.EntityType)" Nullable="false"/>',
-        line: 5,
-        column: 76,
       });
     }
   });
