@@ -15,16 +15,18 @@
 
   Additional artifacts:
   This XML schema is one component of a Work Product which consists of:
-  - OData Common Schema Definition Language (CSDL) XML Representation Version 4.01
-  - OData EDMX XML Schema Version 4.01 (this document)
-  - OData EDM XML Schema Version 4.01
+  - OData Common Schema Definition Language (CSDL) XML Representation Version 4.02
+  - OData EDMX XML Schema Version 4.02 (this document)
+  - OData EDM XML Schema Version 4.02
 
   Related work:
   This specification replaces or supersedes:
   - OData EDMX XML Schema Version 4.0
+  - OData EDMX XML Schema Version 4.01
   This work product is related to
-  - OData Version 4.01
-  - OData JSON Format Version 4.01
+  - OData Version 4.02
+  - OData Common Schema Definition Language (CSDL) JSON Representation Version 4.02
+  - OData JSON Format Version 4.02
 
   Declared XML namespaces:
   - http://docs.oasis-open.org/odata/ns/edmx
@@ -46,21 +48,18 @@
   but are not descriptive enough to define what a correct CSDL document MUST be
   in every imaginable use case. The prose specification document
 
-  OData Common Schema Definition Language (CSDL) XML Representation Version 4.01
-  http://docs.oasis-open.org/odata/odata-csdl-xml/v4.01/odata-csdl-xml-v4.01.docx
+  OData Common Schema Definition Language (CSDL) XML Representation Version 4.02
+  http://docs.oasis-open.org/odata/odata-csdl-xml/v4.02/odata-csdl-xml-v4.02.docx
 
   defines additional rules that correct CSDL XML documents MUST fulfill.
   In case of doubt on what makes a CSDL XML document correct the rules defined in the
   prose specification document take precedence.
 
 -->
-<xs:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xs="http://www.w3.org/2001/XMLSchema"
-  xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" xmlns:edm="http://docs.oasis-open.org/odata/ns/edm" targetNamespace="http://docs.oasis-open.org/odata/ns/edmx"
->
+<xs:schema elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" xmlns:edm="http://docs.oasis-open.org/odata/ns/edm"
+  targetNamespace="http://docs.oasis-open.org/odata/ns/edmx">
   <xs:annotation>
-    <xs:documentation xml:lang="en">
-      Entity Data Model Wrapper part of the Common Schema Definition Language
-    </xs:documentation>
+    <xs:documentation xml:lang="en">Entity Data Model Wrapper part of the Common Schema Definition Language</xs:documentation>
   </xs:annotation>
 
   <xs:import namespace="http://docs.oasis-open.org/odata/ns/edm" schemaLocation="edm.xsd" />
@@ -110,6 +109,7 @@
     <xs:restriction base="xs:decimal">
       <xs:enumeration value="4.0" />
       <xs:enumeration value="4.01" />
+      <xs:enumeration value="4.02" />
     </xs:restriction>
   </xs:simpleType>
 </xs:schema>
