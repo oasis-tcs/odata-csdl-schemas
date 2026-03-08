@@ -1,0 +1,9 @@
+{
+    "$Version": "4.01",
+    "org.example": {
+        "Empty": {
+            "$Kind": "EntityContainer"
+        }
+    },
+    "$EntityContainer": "org.example.Empty"
+}
