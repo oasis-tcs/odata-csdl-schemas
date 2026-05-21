@@ -21,6 +21,10 @@
     "colors": "^1.4.0",
     "sax": "^1.4.3"
   },
+  "overrides": {
+    "diff": "^8.0.3",
+    "serialize-javascript": "^7.0.5"
+  },
   "devDependencies": {
     "ajv": "^8.17.1",
     "c8": "^10.1.3",
