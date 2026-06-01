@@ -133,32 +133,59 @@
           ],
           "RequiresFilter": true
         }
+      },
+      "GetOne": {
+        "$Function": "V2.Annotations.GetOne"
       }
     },
+    "GetOne": [
+      {
+        "$Kind": "Function",
+        "$Parameter": [
+          {
+            "$Name": "par",
+            "@OASIS_Core.Description": "Parameter Label"
+          }
+        ],
+        "$ReturnType": {
+          "$Type": "self.TypeOne"
+        }
+      }
+    ],
     "TypeOne": {
       "$Kind": "EntityType",
+      "@OASIS_Core.Description": "First Type",
       "$Key": [
         "id"
       ],
       "id": {
-        "@OASIS_Core.Computed": true
+        "@OASIS_Core.Computed": true,
+        "@OASIS_Core.Description": "Identifier"
       },
       "pattern": {
         "$Nullable": true,
+        "@OASIS_Core.Description": "Quick Info",
         "@Validation.Pattern": "^(foo)+$"
       },
       "readonly": {
         "$Nullable": true,
+        "@OASIS_Core.Description": "Quick Info",
         "@OASIS_Core.Computed": true
       },
       "immutable": {
         "$Nullable": true,
+        "@OASIS_Core.Description": "Documentation-Summary",
         "@OASIS_Core.Immutable": true
       },
       "date": {
-        "$Type": "Edm.Date",
+        "$Type": "Edm.DateTime",
         "$Nullable": true,
         "$Precision": 0
+      },
+      "time": {
+        "$Type": "Edm.Time",
+        "$Nullable": true,
+        "$Precision": 3
       },
       "decfloat": {
         "$Type": "Edm.Decimal",

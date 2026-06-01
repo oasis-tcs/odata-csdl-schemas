@@ -11,16 +11,24 @@
     <Schema Namespace="V2.Annotations" Alias="self" sap:schema-version="s.v" sap:foo="bar"
       xmlns="http://schemas.microsoft.com/ado/2008/09/edm"
       xmlns:sap="http://www.sap.com/Protocols/SAPData">
-      <EntityType Name="TypeOne">
+      <EntityType Name="TypeOne" sap:label="First Type">
         <Key>
           <PropertyRef Name="id" />
         </Key>
         <Property Name="id" Type="Edm.String" Nullable="false" sap:creatable="false"
-          sap:updatable="false" />
-        <Property Name="pattern" Type="Edm.String" sap:validation-regexp="^(foo)+$" />
-        <Property Name="readonly" Type="Edm.String" sap:creatable="false" sap:updatable="false" />
-        <Property Name="immutable" Type="Edm.String" sap:updatable="false" />
+          sap:updatable="false" sap:label="Identifier" />
+        <Property Name="pattern" Type="Edm.String" sap:validation-regexp="^(foo)+$"
+          sap:label="Label" sap:quickinfo="Quick Info" />
+        <Property Name="readonly" Type="Edm.String" sap:creatable="false" sap:updatable="false"
+          sap:quickinfo="Quick Info" sap:label="Label" />
+        <Property Name="immutable" Type="Edm.String" sap:updatable="false"
+          sap:label="ignore this label" sap:quickinfo="ignore this quickinfo">
+          <Documentation>
+            <Summary>Documentation-Summary</Summary>
+          </Documentation>
+        </Property>
         <Property Name="date" Type="Edm.DateTime" sap:display-format="Date" />
+        <Property Name="time" Type="Edm.Time" Precision="3" />
         <Property Name="decfloat" Type="Edm.Decimal" Precision="34" sap:variable-scale="true" />
       </EntityType>
 
@@ -66,6 +74,9 @@
         <EntitySet Name="FilterExpressionRestrictions" EntityType="self.TypeThree" />
         <EntitySet Name="RequiredFilterProperties" EntityType="self.TypeFour" />
         <EntitySet Name="RequiresFilter" EntityType="self.TypeFour" sap:requires-filter="true" />
+        <FunctionImport Name="GetOne" ReturnType="self.TypeOne" m:HttpMethod="GET">
+          <Parameter Name="par" Type="Edm.String" Mode="In" sap:label="Parameter Label" />
+        </FunctionImport>
       </EntityContainer>
     </Schema>
   </edmx:DataServices>
