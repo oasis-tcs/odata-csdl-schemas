@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "description": "OData Common Schema Definition Language (CSDL) JSON Representation Version 4.01",
+  "description": "OData Common Schema Definition Language (CSDL) JSON Representation Version 4.02",
   "type": "object",
   "additionalProperties": false,
   "patternProperties": {
@@ -18,7 +18,8 @@
         "2.0",
         "3.0",
         "4.0",
-        "4.01"
+        "4.01",
+        "4.02"
       ]
     },
     "$EntityContainer": {
