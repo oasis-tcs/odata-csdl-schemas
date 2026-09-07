@@ -1,0 +1,15 @@
+{
+    "$Version": "4.01",
+    "foo": {
+        "bar": {
+            "$Kind": "Term",
+            "$Type": "foo.record",
+            "$Nullable": true
+        },
+        "record": {
+            "$Kind": "ComplexType",
+            "@foo.bar#WithRecord": {},
+            "@foo.bar#WithoutRecord": true
+        }
+    }
+}
