@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "description": "OData Common Schema Definition Language (CSDL) JSON Representation Version 4.02",
+  "description": "OData Common Schema Definition Language (CSDL) JSON Representation Version 4.02, 19 August 2026",
   "type": "object",
   "additionalProperties": false,
   "patternProperties": {
