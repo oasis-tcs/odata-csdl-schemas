@@ -816,7 +816,7 @@ describe("Error cases", function () {
     });
     assert.deepStrictEqual(messages, [
       {
-        message: "Element DataServices, unexpected text: X",
+        message: "Element Edmx, unexpected text: X",
         parser: { line: 1, column: 84, construct: "<DataServices>" },
       },
       {
@@ -828,7 +828,7 @@ describe("Error cases", function () {
         parser: { line: 2, column: 102, construct: "</DataServices>" },
       },
       {
-        message: "Element DataServices, unexpected CDATA: A",
+        message: "Element Edmx, unexpected CDATA: A",
         parser: { line: 2, column: 115, construct: "<![CDATA[A]]>" },
       },
     ]);
@@ -841,7 +841,7 @@ describe("Error cases", function () {
     } catch (e) {
       assert.strictEqual(
         e.message.split("\n")[0],
-        "Element DataServices, unexpected text: X"
+        "Element Edmx, unexpected text: X"
       );
       assert.deepStrictEqual(e.parser, {
         construct: "<DataServices>",
